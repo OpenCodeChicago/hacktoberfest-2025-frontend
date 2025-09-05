@@ -1,0 +1,16 @@
+# CODEOWNERS
+# This file defines individuals or teams that are responsible for code in this repository.
+# When someone opens a pull request that modifies code, GitHub will automatically request
+# a review from the listed owner(s).
+
+# Default owner for everything in the repository:
+*       @Alexandrbig1
+
+# Example: You can add specific owners for directories or files:
+# docs/*  @Alexandrbig1
+# api/*   @Alexandrbig1
+# *.md    @Alexandrbig1
+
+# Note:
+# - Multiple owners can be listed (e.g., @Alexandrbig1 @AnotherUser)
+# - Teams can also be assigned if your org creates GitHub teams (e.g., @OpenCodeChicago/core-team)
