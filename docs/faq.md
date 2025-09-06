@@ -29,13 +29,14 @@ Contributions aren’t just coding — design ideas, docs, and bug reports all m
 
 ### ❓ Can I suggest a new feature?
 
-Absolutely. Open an [Issue](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend) with your idea.  
-Or join our [Discussions](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/discussions) to brainstorm with others.
+Absolutely. Open an [Issue](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/issues/new/choose) with your idea.  
+Or join our [main Discussion](https://github.com/orgs/OpenCodeChicago/discussions/2) to brainstorm with others.
 
 ---
 
 ### ❓ Where can I ask questions?
 
-- In GitHub [Discussions](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/discussions)
-- On our [Discord](https://discord.gg/t6MGsCqdFX)
+- In our [main Hacktoberfest Discussion](https://github.com/orgs/OpenCodeChicago/discussions/2)  
+- On our [Discord](https://discord.gg/t6MGsCqdFX)  
 - Or email us: 📧 info@opencodechicago.org
+
