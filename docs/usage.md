@@ -16,7 +16,7 @@ This guide will help you run the project locally and understand the basic workfl
 1. **Clone the repository**
    ```bash
    git clone https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend.git
-   cd hacktoberfest-frontend-2025
+   cd hacktoberfest-2025-frontend
    ```
 
 2. **Install dependencies**
