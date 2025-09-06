@@ -15,26 +15,27 @@ In short:
 npm install
 npm run dev
 ```
-> Make sure you have Node.js installed before running the commands.
+> Make sure you have **Node.js** installed before running the commands.
 
 ---
 
 ### ❓ What if I only know a little React?
 
 That’s perfectly fine. There are issues for all skill levels, and we’ll tag beginner-friendly ones with `good first issue`.
+
 Contributions aren’t just coding — design ideas, docs, and bug reports all matter.
 
 ---
 
 ### ❓ Can I suggest a new feature?
 
-Absolutely. Open an [Issue](../../issues) with your idea.  
-Or join our [Discussions](../../discussions) to brainstorm with others.
+Absolutely. Open an [Issue](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend) with your idea.  
+Or join our [Discussions](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/discussions) to brainstorm with others.
 
 ---
 
 ### ❓ Where can I ask questions?
 
-- In GitHub [Discussions](../../discussions)
+- In GitHub [Discussions](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/discussions)
 - On our [Discord](https://discord.gg/t6MGsCqdFX)
 - Or email us: 📧 info@opencodechicago.org
