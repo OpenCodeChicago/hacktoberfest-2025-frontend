@@ -1,7 +1,7 @@
 ---
 name: Feature Request
-about: Suggest a new idea or improvement for this template
-description: Suggest an idea for this template
+about: Suggest a new idea or improvement for Hacktoberfest-frontend-2025
+description: Suggest an idea for this project
 labels: enhancement
 ---
 
