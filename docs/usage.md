@@ -59,4 +59,4 @@ For more details, see [CONTRIBUTING.md](../CONTRIBUTING.md)
 
 - If you see an error like **command not found: npm**, make sure **Node.js** and **npm** are installed.
 - If the dev server doesn’t start, try deleting `node_modules` and `package-lock.json`, then run `npm install` again.
-- Still stuck? Ask in [Discussions](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/discussions) or on [Discord](https://discord.gg/t6MGsCqdFX)
+- Still stuck? Ask in [main Hacktoberfest Discussion](https://github.com/orgs/OpenCodeChicago/discussions/2) or on [Discord](https://discord.gg/t6MGsCqdFX)
