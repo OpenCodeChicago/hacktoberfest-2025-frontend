@@ -49,12 +49,13 @@ This guide will help you run the project locally and understand the basic workfl
 2. Create a new branch for your feature or fix
 3. Commit your changes
 4. Open a Pull Request (PR) with a clear description of what you did
+
 For more details, see [CONTRIBUTING.md](../CONTRIBUTING.md)
 
 ---
 
 ## Troubleshooting
 
-If you see an error like command not found: npm, make sure Node.js and npm are installed.
-If the dev server doesn’t start, try deleting node_modules and package-lock.json, then run npm install again.
-Still stuck? Ask in [Discussions](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/discussions) or on [Discord](https://discord.gg/t6MGsCqdFX)
+- If you see an error like **command not found: npm**, make sure **Node.js** and **npm** are installed.
+- If the dev server doesn’t start, try deleting `node_modules` and `package-lock.json`, then run `npm install` again.
+- Still stuck? Ask in [Discussions](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/discussions) or on [Discord](https://discord.gg/t6MGsCqdFX)
