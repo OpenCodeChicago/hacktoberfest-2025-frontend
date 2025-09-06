@@ -1,13 +1,40 @@
 # Frequently Asked Questions (FAQ)
 
-## What is this project repository for?
+### ❓ I'm new to open source, how do I get started?
 
-This is a **hacktoberfest 2025** repository for Open Code Chicago.
+Welcome! Check out our [CONTRIBUTING.md](../CONTRIBUTING.md) for step-by-step guidance.  
+You don’t need to be an expert — even fixing typos, improving docs, or giving feedback counts!
 
-## How do I contribute?
+---
 
-See `docs/setup.md` and `docs/usage.md` for instructions on creating and customizing a new project.
+### ❓ How do I run the project locally?
 
-## Who maintains this template?
+See [usage.md](usage.md) for detailed setup instructions.  
+In short:  
+```bash
+npm install
+npm run dev
+```
+> Make sure you have Node.js installed before running the commands.
 
-This project is maintained by @Alexandrbig1. For feedback or suggestions, email us: 📧 info@opencodechicago.org
+---
+
+### ❓ What if I only know a little React?
+
+That’s perfectly fine. There are issues for all skill levels, and we’ll tag beginner-friendly ones with `good first issue`.
+Contributions aren’t just coding — design ideas, docs, and bug reports all matter.
+
+---
+
+### ❓ Can I suggest a new feature?
+
+Absolutely. Open an [Issue](../../issues) with your idea.  
+Or join our [Discussions](../../discussions) to brainstorm with others.
+
+---
+
+### ❓ Where can I ask questions?
+
+- In GitHub [Discussions](../../discussions)
+- On our [Discord](https://discord.gg/t6MGsCqdFX)
+- Or email us: 📧 info@opencodechicago.org
