@@ -31,7 +31,7 @@ This guide will help you run the project locally and understand the basic workfl
 
 4. **Open your browser and navigate to the URL printed in the terminal**
 
-(usually `http://localhost:5173`)
+   (usually `http://localhost:5173`)
 
 ---
 
