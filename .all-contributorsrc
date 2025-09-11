@@ -8,5 +8,21 @@
   ],
   "imageSize": 100,
   "commit": false,
-  "contributors": []
+  "contributors": [
+    {
+      "login": "Alexandrbig1",
+      "name": "Alex Smagin",
+      "avatar_url": "https://avatars.githubusercontent.com/u/107826794?v=4",
+      "profile": "https://alexsmagin.dev",
+      "contributions": [
+        "doc",
+        "infra",
+        "maintenance",
+        "projectManagement"
+      ]
+    }
+  ],
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributorsPerLine": 7
 }
