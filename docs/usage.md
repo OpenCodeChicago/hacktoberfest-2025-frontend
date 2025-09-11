@@ -4,6 +4,15 @@ This guide will help you run the project locally and understand the basic workfl
 
 ---
 
+## Tech Stack (planned)
+- React + Vite (frontend framework & build tool)
+- TypeScript (strongly-typed JavaScript)
+- ESLint + Prettier (code quality and formatting)
+
+> This may evolve as the project grows. Any proposed changes will be discussed in [Discussions](https://github.com/orgs/OpenCodeChicago/discussions/2).
+
+---
+
 ## Prerequisites
 - Install [Node.js](https://nodejs.org/) (LTS version recommended).  
 - Install [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) (comes with Node.js).  
