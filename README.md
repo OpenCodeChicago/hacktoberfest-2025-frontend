@@ -62,10 +62,14 @@ See the [Usage Guide](docs/usage.md) for detailed setup.
 # Clone the repo
 git clone https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend.git
 cd hacktoberfest-2025-frontend
+```
 
+```bash
 # Install dependencies
 npm install
+```
 
+```bash
 # Start dev server
 npm run dev
 ```
@@ -124,6 +128,10 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://allcontributors.org) specification.  
@@ -140,7 +148,7 @@ This project is licensed under the [MIT License](LICENSE).
 ## Feedback
 
 We welcome feedback and suggestions to improve the template’s functionality and usability.  
-Feel free to [open an issue](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/issues) or [start a discussion](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/discussions/2).  
+Feel free to [open an issue](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/issues) or [start a discussion](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/discussions).  
 
 ---
 
