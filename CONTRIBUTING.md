@@ -31,6 +31,18 @@ We welcome contributions of all skill levels.
 
 ---
 
+## Recognition with All Contributors
+We use the [All Contributors](https://allcontributors.org) bot to recognize and celebrate all types of contributions.  
+After your Pull Request is merged, you can add yourself by commenting:
+
+`@all-contributors please add <your-username> for <contribution-type>`
+
+Contribution types include `code`, `doc`, `design`, `infra`, `ideas`, `maintenance`, and more (see the [emoji key](https://allcontributors.org/docs/en/emoji-key)).  
+
+The bot will then open a PR to **update** the **README automatically with your profile**.  
+
+---
+
 ## Issues
 - Use issues to report bugs, request features, or ask questions  
 - Before opening a new issue, check if it already exists  
