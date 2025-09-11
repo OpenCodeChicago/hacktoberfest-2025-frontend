@@ -40,3 +40,9 @@ Or join our [main Discussion](https://github.com/orgs/OpenCodeChicago/discussion
 - On our [Discord](https://discord.gg/t6MGsCqdFX)  
 - Or email us: 📧 info@opencodechicago.org
 
+---
+
+### ❓ Do I need to claim an issue before working on it?
+
+Yes. Please comment on the issue you’d like to work on before starting, so others know it’s in progress.  
+If you’re not sure, ask in [Discussions](https://github.com/orgs/OpenCodeChicago/discussions/2).
