@@ -3,8 +3,9 @@
 <img align="right" src="https://media.giphy.com/media/du3J3cXyzhj75IOgvA/giphy.gif" width="100"/>
 
 [![GitHub last commit](https://img.shields.io/github/last-commit/OpenCodeChicago/hacktoberfest-2025-frontend)](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/commits/main)
-[![CI](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/actions/workflows/ci.yml/badge.svg?style=for-the-badge)](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/github/license/OpenCodeChicago/hacktoberfest-2025-frontend)](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/blob/main/LICENSE)
+[![CI](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/actions/workflows/ci.yml/badge.svg?style=for-the-badge)](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/actions/workflows/ci.yml)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/OpenCodeChicago/hacktoberfest-2025-frontend/badge)](https://securityscorecards.dev/viewer/?uri=github.com/OpenCodeChicago/hacktoberfest-2025-frontend)
 [![Open Issues](https://img.shields.io/github/issues/OpenCodeChicago/hacktoberfest-2025-frontend)](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/issues)
 [![Pull Requests](https://img.shields.io/github/issues-pr/OpenCodeChicago/hacktoberfest-2025-frontend)](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/pulls)
 [![Contributors](https://img.shields.io/github/contributors/OpenCodeChicago/hacktoberfest-2025-frontend)](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/graphs/contributors)
@@ -161,6 +162,18 @@ Thanks goes to these wonderful people:
 
 This project follows the [all-contributors](https://allcontributors.org) specification.  
 Contributions of any kind welcome!
+
+---
+
+## Security
+
+This repository has the following security features enabled:
+
+- ✅ **Dependency Review Action** – warns/block PRs introducing vulnerable or malicious packages  
+- ✅ **OpenSSF Scorecard** – weekly scans for open-source best practices and supply-chain risks  
+- ✅ **Dependabot** – automated dependency updates  
+
+For details, see our [Security Policy](SECURITY.md).
 
 ---
 
