@@ -87,6 +87,7 @@ npm run dev
 
 ## Project Structure
 
+```bash
 hacktoberfest-2025-frontend/                     # GitHub hacktoberfest-2025-frontend
 ├── .github/
 │   ├── ISSUE_TEMPLATE/
@@ -116,6 +117,7 @@ hacktoberfest-2025-frontend/                     # GitHub hacktoberfest-2025-fro
 ├── README.md
 ├── SECURITY.md
 └── index.html
+```
 
 ---
 
