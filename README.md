@@ -24,6 +24,7 @@
 - [Contributing](#contributing)
 - [Documentation](#documentation)
 - [Contributors](#contributors)
+- [Security](#security)
 - [License](#license)
 - [Feedback](#feedback)
 - [Support](#support)
@@ -89,35 +90,35 @@ npm run dev
 ## Project Structure
 
 ```bash
-hacktoberfest-2025-frontend/                     # GitHub hacktoberfest-2025-frontend
-├── .github/
-│   ├── ISSUE_TEMPLATE/
+hacktoberfest-2025-frontend/                     # Main project root
+├── .github/                                     # GitHub configuration
+│   ├── ISSUE_TEMPLATE/                          # Predefined issue templates
 │   │   ├── bug_report.md
 │   │   └── feature_request.md
-│   ├── workflow/
+│   ├── workflow/                                # GitHub Actions workflows
 │   │   └── ci.yml
-│   ├── CODEOWNERS
-│   ├── dependabot.yml
-│   └── PULL_REQUEST_TEMPLATE.md
+│   ├── CODEOWNERS                               # Defines code reviewers
+│   ├── dependabot.yml                           # Automated dependency updates
+│   └── PULL_REQUEST_TEMPLATE.md                 # Standard PR template
 │
-├── docs/
-│   ├── images/
+├── docs/                                        # Project documentation
+│   ├── images/                                  # Images and assets for docs
 │   ├── faq.md
 │   └── usage.md
 │
-├── src/
-│   ├── components/
-│   └── main.js
+├── src/                                         # Application source code
+│   ├── components/                              # React components
+│   └── main.js                                  # Entry point
 │
-├── .all-contributorsrc
-├── .gitignore
-├── .prettierrc
-├── CODE_OF_CONDUCT.md
-├── CONTRIBUTING.md
-├── LICENSE
-├── README.md
-├── SECURITY.md
-└── index.html
+├── .all-contributorsrc                          # Config for all-contributors bot
+├── .gitignore                                   # Ignored files
+├── .prettierrc                                  # Code formatting config
+├── CODE_OF_CONDUCT.md                           # Community standards
+├── CONTRIBUTING.md                              # Contribution guidelines
+├── LICENSE                                      # License file
+├── README.md                                    # Project overview
+├── SECURITY.md                                  # Security policy
+└── index.html                                   # Main HTML file
 ```
 
 ---
@@ -169,9 +170,9 @@ Contributions of any kind welcome!
 
 This repository has the following security features enabled:
 
-- ✅ **Dependency Review Action** – warns/block PRs introducing vulnerable or malicious packages  
-- ✅ **OpenSSF Scorecard** – weekly scans for open-source best practices and supply-chain risks  
-- ✅ **Dependabot** – automated dependency updates  
+- **Dependency Review Action** – warns/block PRs introducing vulnerable or malicious packages  
+- **OpenSSF Scorecard** – weekly scans for open-source best practices and supply-chain risks  
+- **Dependabot** – automated dependency updates  
 
 For details, see our [Security Policy](SECURITY.md).
 
