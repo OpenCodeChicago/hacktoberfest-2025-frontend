@@ -41,6 +41,8 @@ Contribution types include `code`, `doc`, `design`, `infra`, `ideas`, `maintenan
 
 The bot will then open a PR to **update** the **README automatically with your profile**.  
 
+For detailed instructions, see the [All Contributors bot usage guide](https://allcontributors.org/docs/en/bot/usage).
+
 ---
 
 ## Issues
