@@ -87,19 +87,35 @@ npm run dev
 
 ## Project Structure
 
-.
-├── .github/              # Workflows, templates, CODEOWNERS
+hacktoberfest-2025-frontend/                     # GitHub hacktoberfest-2025-frontend
+├── .github/
 │   ├── ISSUE_TEMPLATE/
-│   ├── workflows/
-│   └── ...
-├── docs/                 # Usage guide, FAQ
-├── src/                  # React source code (main.jsx, components, etc.)
-├── .prettierrc           # Prettier config
-├── CONTRIBUTING.md        # How to contribute
-├── CODE_OF_CONDUCT.md     # Code of conduct
-├── SECURITY.md            # Security policy
-├── LICENSE                # MIT License
-└── README.md              # This file
+│   │   ├── bug_report.md
+│   │   └── feature_request.md
+│   ├── workflow/
+│   │   └── ci.yml
+│   ├── CODEOWNERS
+│   ├── dependabot.yml
+│   └── PULL_REQUEST_TEMPLATE.md
+│
+├── docs/
+│   ├── images/
+│   ├── faq.md
+│   └── usage.md
+│
+├── src/
+│   ├── components/
+│   └── main.js
+│
+├── .all-contributorsrc
+├── .gitignore
+├── .prettierrc
+├── CODE_OF_CONDUCT.md
+├── CONTRIBUTING.md
+├── LICENSE
+├── README.md
+├── SECURITY.md
+└── index.html
 
 ---
 
