@@ -6,10 +6,10 @@ export default defineConfig({
   plugins: [react()],
   root: "src",
   base: '/',
-  publicDir: path.resolve(__dirname, "public"),
+  publicDir: "../public", 
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src"),
+      "@": "./src",
     },
   },
   server: {
@@ -17,11 +17,11 @@ export default defineConfig({
     open: true,
   },
   build: {
-    outDir: 'dist',
+    outDir: "../dist", 
     cssCodeSplit: true,
     sourcemap: false,
   },
   css: {
-    postcss: path.resolve(__dirname, 'postcss.config.js'),
+    postcss: "../postcss.config.js",
   },
 });
