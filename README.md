@@ -49,10 +49,10 @@ It’s designed for **community collaboration** and provides a structured way fo
 
 ## Tech Stack
 
-- **React** (with Vite for fast dev/build)
-- **TypeScript** (for type safety and scalability)
+- **React + Vite** (fast dev server & build)
+- **Tailwind CSS** (utility-first styling)
 - **ESLint + Prettier** (code style and linting)
-- **GitHub Actions** (CI/CD with tests and builds)
+- **GitHub Actions** (CI/CD with linting & builds)
 
 ---
 
@@ -80,9 +80,10 @@ npm run dev
 
 ## Features
 
-- Developer-friendly setup with Vite
-- Preconfigured linting & formatting
-- Ready-to-use GitHub Actions for CI/CD
+- Developer-friendly setup with **React + Vite**
+- Utility-first styling with **Tailwind CSS**
+- Preconfigured **linting & formatting** (ESLint + Prettier)
+- Automated checks via **GitHub Actions CI**
 - Community-driven with **issues & PR templates**
 
 ---
