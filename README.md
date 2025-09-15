@@ -21,6 +21,8 @@ Whether it’s your **first pull request** or your **50th**, you are welcome her
 
 Contribute to real-world open source code, learn frontend development, and collaborate with a global community.
 
+![Hacktoberfest 2025 - Open Code Chicago](./docs/assets/hacktoberfest2025.png)
+
 ---
 
 ## Table of Contents
