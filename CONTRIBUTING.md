@@ -17,7 +17,7 @@ We welcome contributions of all skill levels.
 
 ## How to Contribute
 1. **Fork** the repository
-2. **Pick a task** from the [Project Board](https://github.com/orgs/OpenCodeChicago/projects/2/views/1) or from [open issues](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/issues)  
+2. **Pick a task** from the [Project Board](https://github.com/orgs/OpenCodeChicago/projects/2) or from [open issues](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/issues)  
    - Comment to claim it before starting work 
 3. **Create a branch** for your work (e.g. `feature/awesome-feature` or `fix/typo`)  
 4. **Make your changes** and commit with clear, descriptive messages  
