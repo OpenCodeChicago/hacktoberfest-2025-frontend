@@ -9,14 +9,19 @@ We welcome contributions of all skill levels.
 - Please read our [Code of Conduct](./CODE_OF_CONDUCT.md)
 - Check out the [Usage Guide](./docs/usage.md) to run the project locally
 - Look at [open issues](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/issues) to see where you can help
+- Review our [Project Board](https://github.com/orgs/OpenCodeChicago/projects/2) to see **available tasks**  
+  - Comment on the task you’d like to work on so a maintainer can assign it to you  
+  - This helps avoid duplicate work and keeps efforts coordinated 
 
 ---
 
 ## How to Contribute
-1. **Fork** the repository  
-2. **Create a branch** for your work (e.g. `feature/awesome-feature` or `fix/typo`)  
-3. **Make your changes** and commit with clear, descriptive messages  
-4. **Open a Pull Request (PR)** to the `main` branch  
+1. **Fork** the repository
+2. **Pick a task** from the [Project Board](https://github.com/orgs/OpenCodeChicago/projects/2/views/1) or from [open issues](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/issues)  
+   - Comment to claim it before starting work 
+3. **Create a branch** for your work (e.g. `feature/awesome-feature` or `fix/typo`)  
+4. **Make your changes** and commit with clear, descriptive messages  
+5. **Open a Pull Request (PR)** to the `main` branch  
    - Reference any related issues (e.g. `Closes #123`)  
    - Keep PRs small and focused — easier to review and merge  
 
@@ -25,7 +30,8 @@ We welcome contributions of all skill levels.
 ## Guidelines
 - Use clear, descriptive commit messages  
 - Keep your PR focused on a single change  
-- Follow code style (Prettier config is included in the project)  
+- Follow code style (Prettier config is included in the project)
+- Run `npm run lint` before pushing 
 - Write clean, well-documented code  
 - Add/update tests if relevant  
 
