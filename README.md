@@ -31,7 +31,7 @@ Contribute to real-world open source code, learn frontend development, and colla
 - [Features](#features)
 - [Project Structure](#project-structure)
 - [Contributing](#contributing)
-- [Hacktoberfest Contribution Guide](#-hacktoberfest-contribution-guide)
+- [Hacktoberfest Contribution Guide](#hacktoberfest-contribution-guide)
 - [Documentation](#documentation)
 - [Contributors](#contributors)
 - [Security](#security)
