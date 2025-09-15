@@ -44,8 +44,9 @@ Contribute to real-world open source code, learn frontend development, and colla
 
 ## Description
 
-This is the **frontend template** for [Open Code Chicago](https://opencodechicago.org)’s Hacktoberfest 2025 project.  
-It’s designed for **community collaboration** and provides a structured way for developers of all levels to contribute.  
+This is the **frontend project** for [Open Code Chicago](https://opencodechicago.org)’s Hacktoberfest 2025 initiative.  
+It’s built with **React, Vite, and TailwindCSS**, and designed for **community collaboration**.  
+Contributors of all levels are welcome to help improve UI, components, and user experience.
 
 ---
 
