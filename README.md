@@ -147,13 +147,17 @@ Please see our [Contributing Guidelines](CONTRIBUTING.md) for details on how to 
 ## Hacktoberfest Contribution Guide
 
 1. Fork this repository
-2. Create a new branch:
+2. Check our [Project Board](https://github.com/orgs/OpenCodeChicago/projects/2)  
+   - Look for an issue you’d like to work on  
+   - Comment on the issue to let others know you’re taking it  
+   - Maintainers may assign you to it (to avoid duplicates)
+3. Create a new branch:
    ```bash
    git checkout -b my-new-feature
    ```
-3. Make your changes (small, clear commits)
-4. Run `npm run lint` before pushing
-5. Push your branch and open a Pull Request
+4. Make your changes (small, clear commits)
+5. Run `npm run lint` before pushing
+6. Push your branch and open a Pull Request
    - All PRs are automatically checked for linting in CI
    - Tip: Start with [Good First Issues](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/labels/good%20first%20issue)
 
