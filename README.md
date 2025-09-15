@@ -14,6 +14,15 @@
 
 ---
 
+## Welcome Hacktoberfest Contributors!
+
+This repo is part of [Open Code Chicago](https://opencodechicago.org)’s Hacktoberfest 2025 initiative.  
+Whether it’s your **first pull request** or your **50th**, you are welcome here!
+
+Contribute to real-world open source code, learn frontend development, and collaborate with a global community.
+
+---
+
 ## Table of Contents
 - [Description](#description)
 - [Who is this for?](#who-is-this-for)
@@ -22,6 +31,7 @@
 - [Features](#features)
 - [Project Structure](#project-structure)
 - [Contributing](#contributing)
+- [Hacktoberfest Contribution Guide](#-hacktoberfest-contribution-guide)
 - [Documentation](#documentation)
 - [Contributors](#contributors)
 - [Security](#security)
@@ -128,6 +138,20 @@ hacktoberfest-2025-frontend/                     # Main project root
 
 We welcome contributions from everyone!
 Please see our [Contributing Guidelines](CONTRIBUTING.md) for details on how to get started.  
+
+---
+
+## Hacktoberfest Contribution Guide
+
+1. Fork this repository
+2. Create a new branch:
+   ```bash
+   git checkout -b my-new-feature
+   ```
+3. Make your changes (small, clear commits)
+4. Run npm run lint before pushing
+5. Open a Pull Request
+   Tip: Start with [Good First Issues](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/labels/good%20first%20issue)
 
 ---
 
