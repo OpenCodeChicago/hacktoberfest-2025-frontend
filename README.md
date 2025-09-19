@@ -14,6 +14,17 @@
 
 ---
 
+## Welcome Hacktoberfest Contributors!
+
+This repo is part of [Open Code Chicago](https://opencodechicago.org)’s Hacktoberfest 2025 initiative.  
+Whether it’s your **first pull request** or your **50th**, you are welcome here!
+
+Contribute to real-world open source code, learn frontend development, and collaborate with a global community.
+
+![Hacktoberfest 2025 - Open Code Chicago](./docs/assets/hacktoberfest2025.png)
+
+---
+
 ## Table of Contents
 - [Description](#description)
 - [Who is this for?](#who-is-this-for)
@@ -22,6 +33,7 @@
 - [Features](#features)
 - [Project Structure](#project-structure)
 - [Contributing](#contributing)
+- [Hacktoberfest Contribution Guide](#hacktoberfest-contribution-guide)
 - [Documentation](#documentation)
 - [Contributors](#contributors)
 - [Security](#security)
@@ -34,8 +46,9 @@
 
 ## Description
 
-This is the **frontend template** for [Open Code Chicago](https://opencodechicago.org)’s Hacktoberfest 2025 project.  
-It’s designed for **community collaboration** and provides a structured way for developers of all levels to contribute.  
+This is the **frontend project** for [Open Code Chicago](https://opencodechicago.org)’s Hacktoberfest 2025 initiative.  
+It’s built with **React, Vite, and TailwindCSS**, and designed for **community collaboration**.  
+Contributors of all levels are welcome to help improve UI, components, and user experience.
 
 ---
 
@@ -128,6 +141,25 @@ hacktoberfest-2025-frontend/                     # Main project root
 
 We welcome contributions from everyone!
 Please see our [Contributing Guidelines](CONTRIBUTING.md) for details on how to get started.  
+
+---
+
+## Hacktoberfest Contribution Guide
+
+1. Fork this repository
+2. Check our [Project Board](https://github.com/orgs/OpenCodeChicago/projects/2)  
+   - Look for an issue you’d like to work on  
+   - Comment on the issue to let others know you’re taking it  
+   - Maintainers may assign you to it (to avoid duplicates)
+3. Create a new branch:
+   ```bash
+   git checkout -b my-new-feature
+   ```
+4. Make your changes (small, clear commits)
+5. Run `npm run lint` before pushing
+6. Push your branch and open a Pull Request
+   - All PRs are automatically checked for linting in CI
+   - Tip: Start with [Good First Issues](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/labels/good%20first%20issue)
 
 ---
 
