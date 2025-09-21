@@ -25,6 +25,16 @@ Contribute to real-world open source code, learn frontend development, and colla
 
 ---
 
+## Project Preview
+
+Here’s a sneak peek of the **frontend design (hero section)**:  
+
+![Project Hero Screenshot](./docs/assets/corex-hero-section.png)  
+
+More designs coming soon — and later we’ll share the **Figma link** for contributors.
+
+---
+
 ## Table of Contents
 - [Description](#description)
 - [Who is this for?](#who-is-this-for)
