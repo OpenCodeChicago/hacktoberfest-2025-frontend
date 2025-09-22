@@ -31,7 +31,7 @@ Here’s a sneak peek of the **frontend design (hero section)**:
 
 ![Project Hero Screenshot](./docs/assets/corex-hero-section.png)  
 
-More designs coming soon — and later we’ll share the **Figma link** for contributors.
+We’re currently finalizing design in **Figma**. Hacktoberfest tasks will be ready starting **October 1**. Stay tuned!
 
 ---
 
