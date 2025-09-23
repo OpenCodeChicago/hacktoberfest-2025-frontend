@@ -1,26 +1,23 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
+
 export default defineConfig({
-  plugins: [react()],
-  root: "src",
   base: '/',
-  publicDir: "../public", 
+  plugins: [react()],
+  publicDir: "../public",
   resolve: {
     alias: {
       "@": "./src",
     },
   },
   server: {
-    port: 5173,
+    port: 3000,
     open: true,
   },
   build: {
-    outDir: "../dist", 
+    outDir: "../dist",
     cssCodeSplit: true,
     sourcemap: false,
-  },
-  css: {
-    postcss: "../postcss.config.js",
-  },
+  }
 });
