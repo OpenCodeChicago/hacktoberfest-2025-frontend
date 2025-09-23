@@ -21,6 +21,12 @@ Whether it’s your **first pull request** or your **50th**, you are welcome her
 
 Contribute to real-world open source code, learn frontend development, and collaborate with a global community.
 
+### ⭐ Support the Project!
+If you like this project, please consider giving it a ⭐ on GitHub!
+More stars help us reach a wider audience, attract new contributors, and make your contributions even more visible and valuable for your portfolio or employer.
+Thank you for helping our open source community grow!
+
+
 ![Hacktoberfest 2025 - Open Code Chicago](./docs/assets/hacktoberfest2025.png)
 
 ---
