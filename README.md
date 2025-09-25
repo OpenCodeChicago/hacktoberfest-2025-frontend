@@ -35,7 +35,7 @@ Thank you for helping our open source community grow!
 
 Here’s a sneak peek of the **frontend design (hero section)**:  
 
-![Project Hero Screenshot](./docs/assets/corex-hero-section.png)  
+![Project Hero Screenshot](./docs/assets/corex-hero-section.jpg)  
 
 We’re currently finalizing design in **Figma**. Hacktoberfest tasks will be ready starting **October 1**. Stay tuned!
 
