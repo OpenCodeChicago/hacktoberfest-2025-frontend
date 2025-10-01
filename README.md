@@ -37,13 +37,17 @@ Here’s a sneak peek of the **frontend design (hero section)**:
 
 ![Project Hero Screenshot](./docs/assets/corex-hero-section.jpg)  
 
-### Design:
+---
 
-Explore our creative Figma design [here](https://www.figma.com/design/XeX3NqT6LPTWrCuj8syMMK/CoreX?node-id=0-1&t=oHdbozLQfS2cLefT-1).
+## Design
+
+You can explore our creative Figma design and UI references here:  
+[Open in Figma](https://www.figma.com/design/XeX3NqT6LPTWrCuj8syMMK/CoreX?node-id=0-1&t=oHdbozLQfS2cLefT-1)
 
 ---
 
 ## Table of Contents
+- [Design](#design)
 - [Description](#description)
 - [Who is this for?](#who-is-this-for)
 - [Tech Stack](#tech-stack)
@@ -158,7 +162,9 @@ hacktoberfest-2025-frontend/                     # Main project root
 ## Contributing
 
 We welcome contributions from everyone!
-Please see our [Contributing Guidelines](CONTRIBUTING.md) for details on how to get started.  
+Please see our [Contributing Guidelines](CONTRIBUTING.md) for details on how to get started.
+
+💡 **Tip:** Before working on UI-related issues, please refer to the [Design section](#design) for Figma files and UI guidelines.
 
 ---
 

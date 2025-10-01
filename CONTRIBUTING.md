@@ -77,5 +77,12 @@ If you’re stuck or unsure:
 
 ---
 
+## ⭐ Support the Project
+
+If you find this project helpful or enjoy contributing, please consider giving us a ⭐ on GitHub!  
+Starring the repo helps increase its visibility, attracts more contributors, and makes your contributions more visible and valuable for your portfolio or employer. Thank you for supporting open source!
+
+---
+
 Every contribution matters — big or small. ❤️  
 Thank you for helping make Open Code Chicago better!
