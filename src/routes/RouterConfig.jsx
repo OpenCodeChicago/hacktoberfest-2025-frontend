@@ -9,6 +9,7 @@ const Accessibility = lazy(
 const PrivacyPolicy = lazy(
   () => import('../pages/PrivacyPolicy/PrivacyPolicyPage')
 );
+const ReturnPolicy = lazy(() => import('../pages/ReturnPolicy/ReturnPolicy'));
 
 export const RouterConfig = () =>
   createRoutesFromElements(
@@ -16,5 +17,6 @@ export const RouterConfig = () =>
       <Route index element={<Home />} />
       <Route path="accessibility" element={<Accessibility />} />
       <Route path="privacy-policy" element={<PrivacyPolicy />} />
+      <Route path="returns-policy" element={<ReturnPolicy />} />
     </Route>
   );

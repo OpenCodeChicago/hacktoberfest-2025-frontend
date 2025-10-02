@@ -1,4 +1,4 @@
-export default function Return() {
+export default function ReturnPolicy() {
   return (
     <main
       className="min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8"
