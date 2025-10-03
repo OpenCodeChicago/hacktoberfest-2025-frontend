@@ -1,3 +1,4 @@
+import CollectionSection from "../../components/CollectionSection";
 import SEO from "../../components/SEO";
 
 export default function Home() {
@@ -39,6 +40,8 @@ export default function Home() {
           </p>
         </section>
       </main>
+      {/* Shop Collection Component */}
+      <CollectionSection />
     </>
   );
 }

@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
+
+/* Shop by Collection Section */
+.shop-by-collection {
+  padding: 20px 20px;
+  max-width: auto;
+  margin: 0 auto;
+  background-color: #fafafa;
+  padding: 85px;
+}
+
+/* Heading Styles */
+.collection-heading {
+  text-align: center;
+  font-size: 64px;
+  font-weight: 700;
+  margin-bottom: 60px;
+  letter-spacing: -2%;
+  line-height: 64px;
+  text-transform: uppercase;
+}
+
+.heading-shop,
+.heading-collection {
+  color: #000;
+  font-weight: 900;
+  font-family: 'Montserrat', sans-serif;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.heading-by {
+  color: transparent;
+  -webkit-text-stroke: 1px #000;
+  text-stroke: 1px #000;
+  font-weight: 700;
+  padding: 0 8px;
+}
+
+/* Collection Grid */
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* Collection Card */
+.collection-card {
+  cursor: pointer;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.collection-card-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.collection-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Image Wrapper */
+.collection-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.collection-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.collection-card:hover .collection-image {
+  transform: scale(1.05);
+}
+
+/* Content Section */
+.collection-content {
+  padding: 24px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.collection-title {
+  font-size: 25px;
+  font-family: 'Inter';
+  font-weight: 700;
+  color: rgba(23, 23, 23, 1);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: -1.5px;
+  line-height: 30px;
+  flex: 1;
+}
+
+.collection-arrow {
+  flex-shrink: 0;
+  color: rgba(23, 23, 23, 1);
+  border: 1.71px;
+  transition: transform 0.3s ease;
+}
+
+.collection-card:hover .collection-arrow {
+  transform: translateX(4px);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .collection-heading {
+    font-size: 3rem;
+  }
+
+  .collection-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .shop-by-collection {
+    padding: 60px 16px;
+  }
+
+  .collection-heading {
+    font-size: 2rem;
+    margin-bottom: 40px;
+  }
+
+  .heading-by {
+    -webkit-text-stroke: 1.5px #000;
+    text-stroke: 1.5px #000;
+  }
+
+  .collection-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .collection-title {
+    font-size: 1rem;
+  }
+
+  .collection-content {
+    padding: 20px 16px;
+  }
+}
+
+/* Animation for scroll entrance */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
