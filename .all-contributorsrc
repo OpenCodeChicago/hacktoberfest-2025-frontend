@@ -20,6 +20,15 @@
         "maintenance",
         "projectManagement"
       ]
+    },
+    {
+      "login": "amilliiee",
+      "name": "amilliiee",
+      "avatar_url": "https://avatars.githubusercontent.com/u/94198758?v=4",
+      "profile": "https://github.com/amilliiee",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitType": "docs",
