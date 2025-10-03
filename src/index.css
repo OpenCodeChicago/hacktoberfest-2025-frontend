@@ -1,1 +1,15 @@
-@import 'tailwindcss'
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;1,700&family=Poppins&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  /* Accent Fonts */
+  --font-montserrat: 'Montserrat', sans-serif;
+  --font-poppins: 'Poppins', sans-serif;
+
+  /* Custom Font Sizes */
+  --text-heading-xxl: 4rem; /* 64px */
+}
+
+.text-outline {
+  -webkit-text-stroke: 2px black;
+}
