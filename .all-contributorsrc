@@ -29,6 +29,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Soham-0047",
+      "name": "SOHAM",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87080389?v=4",
+      "profile": "https://sohamroy.netlify.app",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitType": "docs",
