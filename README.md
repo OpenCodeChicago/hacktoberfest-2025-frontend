@@ -263,6 +263,7 @@ Thanks goes to these wonderful people:
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/amilliiee"><img src="https://avatars.githubusercontent.com/u/94198758?v=4?s=100" width="100px;" alt="amilliiee"/><br /><sub><b>amilliiee</b></sub></a><br /><a href="https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/commits?author=amilliiee" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://sohamroy.netlify.app"><img src="https://avatars.githubusercontent.com/u/87080389?v=4?s=100" width="100px;" alt="SOHAM"/><br /><sub><b>SOHAM</b></sub></a><br /><a href="https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/commits?author=Soham-0047" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Ankit-Kum-ar"><img src="https://avatars.githubusercontent.com/u/111765525?v=4?s=100" width="100px;" alt="Ankit Kumar"/><br /><sub><b>Ankit Kumar</b></sub></a><br /><a href="https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/commits?author=Ankit-Kum-ar" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/a-woodworth"><img src="https://avatars.githubusercontent.com/u/10478733?v=4?s=100" width="100px;" alt="a-woodworth"/><br /><sub><b>a-woodworth</b></sub></a><br /><a href="https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/commits?author=a-woodworth" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
