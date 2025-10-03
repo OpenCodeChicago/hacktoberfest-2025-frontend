@@ -1,5 +1,6 @@
-import CollectionSection from "../../components/CollectionSection";
-import SEO from "../../components/SEO";
+import CollectionSection from '../../components/CollectionSection';
+import SEO from '../../components/SEO';
+import WhyChoose from '../../components/WhyChoose';
 
 export default function Home() {
   return (
@@ -40,6 +41,7 @@ export default function Home() {
           </p>
         </section>
       </main>
+      <WhyChoose />
       {/* Shop Collection Component */}
       <CollectionSection />
     </>
