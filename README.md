@@ -101,6 +101,12 @@ git clone https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend.git
 cd hacktoberfest-2025-frontend
 ```
 
+2. Copy `.env.example` to `.env`:
+```bash
+# Copy .env.example to .env
+cp .env.example .env
+```
+
 ```bash
 # Install dependencies
 npm install
@@ -110,6 +116,51 @@ npm install
 # Start dev server
 npm run dev
 ```
+
+---
+
+## Backend API Access
+
+Our backend is now live!
+Contributors can connect to the deployed API to retrieve product data for their tasks.
+
+**Base URL:**  
+`https://corexshoptest.onrender.com`
+
+**API URL is available as the environment variable `VITE_API_URL`.**
+
+### Available Endpoints
+
+- `GET /api/products`  
+  Retrieve all products (supports pagination and filtering).
+
+- `GET /api/products/:id`  
+  Retrieve a single product by its ID.
+
+- `GET /api/products?category=Protein`  
+  Filter products by category.
+
+- `GET /api/products?goals=Weight Loss`  
+  Filter products by goal.
+
+- `GET /api/products?minPrice=20&maxPrice=50`  
+  Filter products by price range.
+
+- `GET /api/products?search=whey`  
+  Search products by keyword.
+
+- `GET /api/products?category=Protein&goals=Muscle Growth&minPrice=30`  
+  Combine multiple filters.
+
+- `GET /api/products?page=1&limit=10`  
+  Pagination support.
+
+**Example usage:**
+```http
+GET https://corexshoptest.onrender.com/api/products?category=Protein&minPrice=20&maxPrice=50&page=1&limit=10
+```
+
+**Feel free to use these endpoints in your components and features! If you have questions about the API, open an issue or ask in our Discord.**
 
 ---
 

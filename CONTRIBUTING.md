@@ -27,6 +27,19 @@ We welcome contributions of all skill levels.
 
 ---
 
+## Backend API & Environment Variables
+
+- The backend API is available at:  
+  `https://corexshoptest.onrender.com/api`
+- The frontend uses the environment variable `VITE_API_URL` to connect to the backend.
+- Before running the project, copy `.env.example` to `.env`:
+  ```bash
+  cp .env.example .env
+  ```
+- You can then use `import.meta.env.VITE_API_URL` in your code to access the API URL.
+
+---
+
 ## Guidelines
 - Use clear, descriptive commit messages  
 - Keep your PR focused on a single change  
