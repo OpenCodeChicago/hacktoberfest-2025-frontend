@@ -1,39 +1,37 @@
-import { useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { useState } from 'react';
+import { ArrowRight } from 'lucide-react';
 
 const customerCare = [
-  { name: "My Account", href: "/login" },
-  { name: "My Orders", href: "/login" },
-  { name: "Email Support", href: "mailto:info@opencodechicago.org" },
-  { name: "Call Support", href: "tel:+13125551234" },
+  { name: 'My Account', href: '/login' },
+  { name: 'My Orders', href: '/login' },
+  { name: 'Email Support', href: 'mailto:info@opencodechicago.org' },
+  { name: 'Call Support', href: 'tel:+13125551234' },
 ];
 
 const information = [
-  { name: "Shipping Policy", href: "/shipping-policy" },
-  { name: "Returns Policy", href: "/returns-policy" },
-  { name: "Privacy Policy", href: "/privacy-policy" },
-  { name: "Accessibility", href: "/accessibility" },
-  { name: "Do Not Sell My Personal Information", href: "/do-not-sell" },
-  { name: "Terms of Service", href: "/terms-of-service" },
+  { name: 'Shipping Policy', href: '/shipping-policy' },
+  { name: 'Return Policy', href: '/return-policy' },
+  { name: 'Privacy Policy', href: '/privacy-policy' },
+  { name: 'Accessibility', href: '/accessibility' },
+  { name: 'Terms of Service', href: '/terms-of-service' },
 ];
 
 export default function TopFooter() {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      console.log("Subscribed:", email);
-      setEmail("");
+      console.log('Subscribed:', email);
+      setEmail('');
     } else {
-      alert("Enter a valid email.");
+      alert('Enter a valid email.');
     }
   };
 
   return (
     <footer className="bg-neutral-900 text-neutral-200 px-6 py-12">
       <div className="max-w-7xl mx-auto grid gap-12 md:grid-cols-3">
-        
         {/* Logo + Address */}
         <div>
           <img
@@ -49,27 +47,11 @@ export default function TopFooter() {
                 rel="noopener noreferrer"
                 className="text-neutral-300 hover:text-red-500 transition"
               >
-                <img src="/images/youtube_icon.png" alt="YouTube" className="w-6 h-6"/>
-              </a>
-            </li>
-            <li>
-                <a
-                    href="#"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-neutral-300 hover:text-red-500 transition"
-                >
-                    <img src="/images/linkedin_icon.png" alt="LinkedIn" className="w-6 h-6"/>
-                </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-neutral-300 hover:text-red-500 transition"
-              >
-                <img src="/images/x_icon.png" alt="Twitter" className="w-6 h-6"/>
+                <img
+                  src="/images/youtube_icon.png"
+                  alt="YouTube"
+                  className="w-6 h-6"
+                />
               </a>
             </li>
             <li>
@@ -79,7 +61,39 @@ export default function TopFooter() {
                 rel="noopener noreferrer"
                 className="text-neutral-300 hover:text-red-500 transition"
               >
-                <img src="/images/facebook_icon.png" alt="Facebook" className="w-6 h-6"/>
+                <img
+                  src="/images/linkedin_icon.png"
+                  alt="LinkedIn"
+                  className="w-6 h-6"
+                />
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-neutral-300 hover:text-red-500 transition"
+              >
+                <img
+                  src="/images/x_icon.png"
+                  alt="Twitter"
+                  className="w-6 h-6"
+                />
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-neutral-300 hover:text-red-500 transition"
+              >
+                <img
+                  src="/images/facebook_icon.png"
+                  alt="Facebook"
+                  className="w-6 h-6"
+                />
               </a>
             </li>
           </ul>
