@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import preWorkoutImg from '../../../public/images/pre-workout.png';
-import buildMuscleImg from '../../../public/images/build-muscle.png';
-import weightManagementImg from '../../../public/images/weight-management.png';
-import healthWellnessImg from '../../../public/images/health-wellness.png';
+import preWorkoutImg from '../../public/images/pre-workout.png';
+import buildMuscleImg from '../../public/images/build-muscle.png';
+import weightManagementImg from '../../public/images/weight-management.png';
+import healthWellnessImg from '../../public/images/health-wellness.png';
 import './collection.css';
 
 const collections = [

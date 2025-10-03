@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
+
 /* Shop by Collection Section */
 .shop-by-collection {
-  padding: 80px 20px;
+  padding: 20px 20px;
   max-width: auto;
   margin: 0 auto;
   background-color: #fafafa;
