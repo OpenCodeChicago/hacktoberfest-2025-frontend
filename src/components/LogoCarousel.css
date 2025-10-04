@@ -1,0 +1,71 @@
+/* Main section styling */
+.carousel-section {
+  background-color: #ffffff;
+  padding: 5rem 0;
+  overflow: hidden;
+}
+
+/* Wrapper for both ribbons */
+.carousel-ribbon-wrapper {
+  position: relative;
+}
+
+/* Shared ribbon styles */
+.carousel-ribbon {
+  background-color: #0b61cd;
+  padding: 1rem 0;
+  width: 100%;
+  position: relative;
+}
+
+/* Main ribbon styling */
+.main-ribbon {
+  transform: scale(1.1) rotate(-2deg);
+  z-index: 2;
+}
+
+/* Reflection ribbon styling */
+.reflection-ribbon {
+  transform: scale(1.1) rotate(2deg);
+  opacity: 0.4;
+  margin-top: 0.75rem;
+  z-index: 1;
+}
+
+/* Carousel track animates the logos */
+.carousel-track {
+  display: inline-flex;
+  white-space: nowrap;
+  will-change: transform;
+  animation: scroll 30s linear infinite;
+}
+
+/* Scroll animation */
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-30%);
+  }
+}
+
+/* Pause animation on hover */
+.carousel-container:hover .carousel-track {
+  animation-play-state: paused;
+}
+
+/* Logo item container */
+.carousel-item {
+  flex-shrink: 0;
+  padding: 0 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Logo images */
+.logo-image {
+  height: 64px;
+  width: auto;
+}
