@@ -11,6 +11,8 @@ const PrivacyPolicy = lazy(
   () => import('../pages/PrivacyPolicy/PrivacyPolicyPage')
 );
 const ReturnPolicy = lazy(() => import('../pages/ReturnPolicy/ReturnPolicy'));
+const TermsOfService = lazy(() => import('../pages/TermsOfService/TermsOfService'));
+const ShippingPolicy = lazy(() => import('../pages/ShippingPolicy/ShippingPolicy'));
 const About = lazy(() => import('../pages/About/About'));
 
 // Router configuration
@@ -20,8 +22,9 @@ export const RouterConfig = () =>
       <Route index element={<Home />} />
       <Route path="accessibility" element={<Accessibility />} />
       <Route path="privacy-policy" element={<PrivacyPolicy />} />
-      <Route path="return-policy" element={<ReturnPolicy />} />{' '}
-      {/* changed to singular for clarity */}
+      <Route path="return-policy" element={<ReturnPolicy />} />
+      <Route path="terms-of-service" element={<TermsOfService />} />
+      <Route path="shipping-policy" element={<ShippingPolicy />} />
       <Route path="about-corex" element={<About />} />
     </Route>
   );
