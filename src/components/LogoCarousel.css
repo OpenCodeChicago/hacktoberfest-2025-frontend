@@ -1,6 +1,6 @@
 /* Main section styling */
 .carousel-section {
-  background-color: #ffffff;
+  background-color: #f7faff;
   padding: 5rem 0;
   overflow: hidden;
 }
@@ -45,6 +45,7 @@
   from {
     transform: translateX(0);
   }
+
   to {
     transform: translateX(-30%);
   }
