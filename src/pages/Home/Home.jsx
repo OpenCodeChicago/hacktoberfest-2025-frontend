@@ -1,6 +1,7 @@
 import CollectionSection from '../../components/CollectionSection';
 import SEO from '../../components/SEO';
 import WhyChoose from '../../components/WhyChoose';
+import HacktoberfestBanner from '../../components/HacktoberfestBanner';
 
 export default function Home() {
   return (
@@ -40,6 +41,8 @@ export default function Home() {
             contributions, and engage with the community.
           </p>
         </section>
+        {/* Hacktoberfest promotional banner */}
+        <HacktoberfestBanner />
       </main>
       <WhyChoose />
       {/* Shop Collection Component */}

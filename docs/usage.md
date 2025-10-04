@@ -81,3 +81,14 @@ For more details, see [CONTRIBUTING.md](../CONTRIBUTING.md)
 ## ⭐ Support the Project
 
 If you find this project helpful, please consider starring it on GitHub! It helps us grow and reach more contributors.
+
+---
+
+## What's new: Hacktoberfest banner
+
+We've added a small promotional banner on the Home page to highlight Hacktoberfest 2025. It appears on the main Hacktoberfest page and includes a link to this guide. To preview it locally:
+
+1. Start the dev server (`npm run dev`).
+2. Open `http://localhost:5173` and navigate to the Hacktoberfest page (home route).
+
+If Tailwind CSS isn't active in your environment, there are fallback styles in `src/index.css` that ensure the banner remains readable.
