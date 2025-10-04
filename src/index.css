@@ -14,7 +14,7 @@
   -webkit-text-stroke: 2px black;
 }
 
-/* Fallback styles for HacktoberfestBanner in case Tailwind isn't loaded */
+
 .hacktoberfest-banner {
   display: flex;
   align-items: center;
