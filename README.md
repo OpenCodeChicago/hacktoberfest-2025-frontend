@@ -265,6 +265,7 @@ Thanks goes to these wonderful people:
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Ankit-Kum-ar"><img src="https://avatars.githubusercontent.com/u/111765525?v=4?s=100" width="100px;" alt="Ankit Kumar"/><br /><sub><b>Ankit Kumar</b></sub></a><br /><a href="https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/commits?author=Ankit-Kum-ar" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/a-woodworth"><img src="https://avatars.githubusercontent.com/u/10478733?v=4?s=100" width="100px;" alt="a-woodworth"/><br /><sub><b>a-woodworth</b></sub></a><br /><a href="https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/commits?author=a-woodworth" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/mensonones"><img src="https://avatars.githubusercontent.com/u/5387202?v=4?s=100" width="100px;" alt="Emerson Vieira"/><br /><sub><b>Emerson Vieira</b></sub></a><br /><a href="https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/commits?author=mensonones" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/AparAgarwal"><img src="https://avatars.githubusercontent.com/u/61222846?v=4?s=100" width="100px;" alt="Apar Agarwal"/><br /><sub><b>Apar Agarwal</b></sub></a><br /><a href="https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/commits?author=AparAgarwal" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
