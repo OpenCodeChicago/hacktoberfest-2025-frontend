@@ -2,12 +2,13 @@ import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import SEO from '../components/SEO';
 import TopFooter from '../components/Footer';
+import MainHeader from '../components/Header';
 
 function RootLayout() {
   return (
     <>
       {/* <TopHeader /> */}
-      {/* <Header /> */}
+      <MainHeader />
       <main>
         <SEO
           title="CoreX Nutrition"
