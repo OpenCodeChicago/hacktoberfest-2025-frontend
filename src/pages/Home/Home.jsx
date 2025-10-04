@@ -1,6 +1,7 @@
 import CollectionSection from '../../components/CollectionSection';
 import SEO from '../../components/SEO';
 import WhyChoose from '../../components/WhyChoose';
+import LogoCarousel from '../../components/LogoCarousel';
 
 export default function Home() {
   return (
@@ -42,6 +43,7 @@ export default function Home() {
         </section>
       </main>
       <WhyChoose />
+      <LogoCarousel />
       {/* Shop Collection Component */}
       <CollectionSection />
     </>
