@@ -2,11 +2,11 @@
 @import 'tailwindcss';
 
 @theme {
-  /* Accent Fonts */
+ 
   --font-montserrat: 'Montserrat', sans-serif;
   --font-poppins: 'Poppins', sans-serif;
 
-  /* Custom Font Sizes */
+  
   --text-heading-xxl: 4rem; /* 64px */
 }
 
