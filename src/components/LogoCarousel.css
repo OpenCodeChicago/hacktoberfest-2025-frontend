@@ -1,30 +1,31 @@
-/* Main section styling */
 .carousel-section {
   background-color: #ffffff;
   padding: 5rem 0;
   overflow: hidden;
 }
 
-/* Wrapper for both ribbons */
 .carousel-ribbon-wrapper {
   position: relative;
 }
 
-/* Shared ribbon styles */
 .carousel-ribbon {
   background-color: #0b61cd;
   padding: 1rem 0;
   width: 100%;
   position: relative;
+  overflow: hidden;
 }
 
-/* Main ribbon styling */
+.main-ribbon:hover .carousel-track,
+.reflection-ribbon:hover .carousel-track {
+  animation-play-state: paused;
+}
+
 .main-ribbon {
   transform: scale(1.1) rotate(-2deg);
   z-index: 2;
 }
 
-/* Reflection ribbon styling */
 .reflection-ribbon {
   transform: scale(1.1) rotate(2deg);
   opacity: 0.4;
@@ -32,39 +33,49 @@
   z-index: 1;
 }
 
-/* Carousel track animates the logos */
 .carousel-track {
-  display: inline-flex;
-  white-space: nowrap;
+  display: flex;
+  width: calc(250px * 14);
   will-change: transform;
-  animation: scroll 30s linear infinite;
 }
 
-/* Scroll animation */
-@keyframes scroll {
+.track-forward {
+  animation: scroll-forward 60s linear infinite;
+}
+
+.track-reverse {
+  animation: scroll-reverse 60s linear infinite;
+}
+
+@keyframes scroll-forward {
   from {
     transform: translateX(0);
   }
+
   to {
-    transform: translateX(-30%);
+    transform: translateX(-50%);
   }
 }
 
-/* Pause animation on hover */
-.carousel-container:hover .carousel-track {
-  animation-play-state: paused;
+@keyframes scroll-reverse {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
 }
 
-/* Logo item container */
 .carousel-item {
   flex-shrink: 0;
+  width: 250px;
   padding: 0 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Logo images */
 .logo-image {
   height: 64px;
   width: auto;
