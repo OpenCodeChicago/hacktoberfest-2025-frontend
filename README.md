@@ -11,6 +11,7 @@
 [![Contributors](https://img.shields.io/github/contributors/OpenCodeChicago/hacktoberfest-2025-frontend)](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/graphs/contributors)
 [![GitHub stars](https://img.shields.io/github/stars/OpenCodeChicago/hacktoberfest-2025-frontend?style=for-the-badge)](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/OpenCodeChicago/hacktoberfest-2025-frontend?style=for-the-badge)](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/network/members)
+[![All Contributors](https://img.shields.io/github/all-contributors/OpenCodeChicago/hacktoberfest-2025-frontend?color=023e8a&style=flat-square)](#contributors)
 
 ---
 
@@ -52,6 +53,7 @@ You can explore our creative Figma design and UI references here:
 - [Who is this for?](#who-is-this-for)
 - [Tech Stack](#tech-stack)
 - [Quick Start](#quick-start)
+- [Backend API Access](#backend-api-access)
 - [Features](#features)
 - [Project Structure](#project-structure)
 - [Contributing](#contributing)
