@@ -1,125 +1,131 @@
-import axios from 'axios';
+/**
+ * @deprecated This file is deprecated. Use the new centralized API services from @/api instead.
+ * 
+ * New usage:
+ * import { getProducts, getProductById } from '@/api/productService';
+ * import { getCart, addToCart } from '@/api/cartService';
+ * 
+ * Or import everything from the centralized index:
+ * import { getProducts, getProductById, getCart } from '@/api';
+ */
 
-// Base API URL from environment variables
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://corexshoptest.onrender.com';
+import { 
+  getProducts as newGetProducts, 
+  getProductById as newGetProductById 
+} from '../api/productService.js';
 
-// Create axios instance with base configuration
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  timeout: 10000,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+import { 
+  getCart as newGetCart,
+  addToCart as newAddToCart,
+  removeFromCart as newRemoveFromCart,
+  updateCartItemQuantity as newUpdateCartItemQuantity,
+  clearCart as newClearCart
+} from '../api/cartService.js';
 
-// Request interceptor for adding auth tokens (when authentication is implemented)
-api.interceptors.request.use(
-  (config) => {
-    // Add auth token if available
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+import { axiosInstance } from '../api/axiosInstance.js';
 
-// Response interceptor for handling common errors
-api.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  (error) => {
-    // Handle common errors
-    if (error.response?.status === 401) {
-      // Handle unauthorized access
-      localStorage.removeItem('authToken');
-      // Optionally redirect to login page
-    }
-    return Promise.reject(error);
-  }
-);
+const api = axiosInstance;
 
-// Product API services
 export const productServices = {
-  // Get all products with optional query parameters
-  getProducts: (params = {}) => {
-    const queryParams = new URLSearchParams();
+  getProducts: async (params = {}) => {
+    console.warn('⚠️  Using deprecated productServices.getProducts. Use getProducts from @/api/productService instead.');
+    const result = await newGetProducts(params);
     
-    Object.keys(params).forEach(key => {
-      if (params[key] !== undefined && params[key] !== null && params[key] !== '') {
-        queryParams.append(key, params[key]);
-      }
-    });
-    
-    const queryString = queryParams.toString();
-    const url = `/api/products${queryString ? `?${queryString}` : ''}`;
-    
-    return api.get(url);
+    if (result.success) {
+      return { data: result.data };
+    } else {
+      throw new Error(result.error);
+    }
   },
 
-  // Get product by ID
-  getProductById: (id) => {
-    return api.get(`/api/products/${id}`);
+  getProductById: async (id) => {
+    console.warn('⚠️  Using deprecated productServices.getProductById. Use getProductById from @/api/productService instead.');
+    const result = await newGetProductById(id);
+    
+    if (result.success) {
+      return { data: result.data };
+    } else {
+      throw new Error(result.error);
+    }
   },
-
-  // Future methods for when backend supports them:
-  // createProduct: (productData) => api.post('/api/products', productData),
-  // updateProduct: (id, productData) => api.put(`/api/products/${id}`, productData),
-  // deleteProduct: (id) => api.delete(`/api/products/${id}`),
 };
 
-// Auth API services (stubs for future implementation)
 export const authServices = {
   login: (credentials) => {
-    // TODO: Implement when backend auth is ready
+    console.warn('⚠️  authServices not yet implemented. Use new API services from @/api when available.');
     return api.post('/api/auth/login', credentials);
   },
   
   register: (userData) => {
-    // TODO: Implement when backend auth is ready
+    console.warn('⚠️  authServices not yet implemented. Use new API services from @/api when available.');
     return api.post('/api/auth/register', userData);
   },
   
   logout: () => {
-    // TODO: Implement when backend auth is ready
+    console.warn('⚠️  authServices not yet implemented. Use new API services from @/api when available.');
     return api.post('/api/auth/logout');
   },
   
   refreshToken: () => {
-    // TODO: Implement when backend auth is ready
+    console.warn('⚠️  authServices not yet implemented. Use new API services from @/api when available.');
     return api.post('/api/auth/refresh');
   },
 };
 
-// Cart API services (stubs for future implementation)
 export const cartServices = {
-  getCart: () => {
-    // TODO: Implement when backend cart is ready
-    return api.get('/api/cart');
+  getCart: async () => {
+    console.warn('⚠️  Using deprecated cartServices.getCart. Use getCart from @/api/cartService instead.');
+    const result = await newGetCart();
+    
+    if (result.success) {
+      return { data: result.data };
+    } else {
+      throw new Error(result.error);
+    }
   },
   
-  addToCart: (productId, quantity) => {
-    // TODO: Implement when backend cart is ready
-    return api.post('/api/cart/add', { productId, quantity });
+  addToCart: async (productId, quantity) => {
+    console.warn('⚠️  Using deprecated cartServices.addToCart. Use addToCart from @/api/cartService instead.');
+    const result = await newAddToCart({ productId, quantity });
+    
+    if (result.success) {
+      return { data: result.data };
+    } else {
+      throw new Error(result.error);
+    }
   },
   
-  updateCartItem: (itemId, quantity) => {
-    // TODO: Implement when backend cart is ready
-    return api.put(`/api/cart/items/${itemId}`, { quantity });
+  updateCartItem: async (itemId, quantity) => {
+    console.warn('⚠️  Using deprecated cartServices.updateCartItem. Use updateCartItemQuantity from @/api/cartService instead.');
+    const result = await newUpdateCartItemQuantity(itemId, quantity);
+    
+    if (result.success) {
+      return { data: result.data };
+    } else {
+      throw new Error(result.error);
+    }
   },
   
-  removeFromCart: (itemId) => {
-    // TODO: Implement when backend cart is ready
-    return api.delete(`/api/cart/items/${itemId}`);
+  removeFromCart: async (itemId) => {
+    console.warn('⚠️  Using deprecated cartServices.removeFromCart. Use removeFromCart from @/api/cartService instead.');
+    const result = await newRemoveFromCart(itemId);
+    
+    if (result.success) {
+      return { data: result.data };
+    } else {
+      throw new Error(result.error);
+    }
   },
   
-  clearCart: () => {
-    // TODO: Implement when backend cart is ready
-    return api.delete('/api/cart');
+  clearCart: async () => {
+    console.warn('⚠️  Using deprecated cartServices.clearCart. Use clearCart from @/api/cartService instead.');
+    const result = await newClearCart();
+    
+    if (result.success) {
+      return { data: result.data };
+    } else {
+      throw new Error(result.error);
+    }
   },
 };
 

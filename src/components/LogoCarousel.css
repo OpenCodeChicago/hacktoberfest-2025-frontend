@@ -1,0 +1,82 @@
+.carousel-section {
+  background-color: #f7faff;
+  padding: 5rem 0;
+  overflow: hidden;
+}
+
+.carousel-ribbon-wrapper {
+  position: relative;
+}
+
+.carousel-ribbon {
+  background-color: #0b61cd;
+  padding: 1rem 0;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.main-ribbon:hover .carousel-track,
+.reflection-ribbon:hover .carousel-track {
+  animation-play-state: paused;
+}
+
+.main-ribbon {
+  transform: scale(1.1) rotate(-2deg);
+  z-index: 2;
+}
+
+.reflection-ribbon {
+  transform: scale(1.1) rotate(2deg);
+  opacity: 0.4;
+  margin-top: 0.75rem;
+  z-index: 1;
+}
+
+.carousel-track {
+  display: flex;
+  width: calc(250px * 14);
+  will-change: transform;
+}
+
+.track-forward {
+  animation: scroll-forward 60s linear infinite;
+}
+
+.track-reverse {
+  animation: scroll-reverse 60s linear infinite;
+}
+
+@keyframes scroll-forward {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-reverse {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.carousel-item {
+  flex-shrink: 0;
+  width: 250px;
+  padding: 0 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-image {
+  height: 64px;
+  width: auto;
+}

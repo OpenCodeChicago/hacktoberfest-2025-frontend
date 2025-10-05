@@ -45,12 +45,12 @@ export default function TopFooter() {
                 href="#"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-neutral-300 hover:text-red-500 transition"
+                className="text-neutral-300 transition-transform duration-300 ease-in-out"
               >
                 <img
                   src="/images/youtube_icon.png"
                   alt="YouTube"
-                  className="w-6 h-6"
+                  className="w-6 h-6 hover:scale-110 transform hover:rotate-2 hover:shadow-lg"
                 />
               </a>
             </li>
@@ -59,12 +59,12 @@ export default function TopFooter() {
                 href="#"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-neutral-300 hover:text-red-500 transition"
+                className="text-neutral-300 transition-transform duration-300 ease-in-out"
               >
                 <img
                   src="/images/linkedin_icon.png"
                   alt="LinkedIn"
-                  className="w-6 h-6"
+                  className="w-6 h-6 hover:scale-110 transform hover:rotate-2 hover:shadow-lg"
                 />
               </a>
             </li>
@@ -73,12 +73,12 @@ export default function TopFooter() {
                 href="#"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-neutral-300 hover:text-red-500 transition"
+                className="text-neutral-300 transition-transform duration-300 ease-in-out"
               >
                 <img
                   src="/images/x_icon.png"
                   alt="Twitter"
-                  className="w-6 h-6"
+                  className="w-6 h-6 hover:scale-110 transform hover:rotate-2 hover:shadow-lg"
                 />
               </a>
             </li>
@@ -87,17 +87,17 @@ export default function TopFooter() {
                 href="#"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-neutral-300 hover:text-red-500 transition"
+                className="text-neutral-300 transition-transform duration-300 ease-in-out"
               >
                 <img
                   src="/images/facebook_icon.png"
                   alt="Facebook"
-                  className="w-6 h-6"
+                  className="w-6 h-6 hover:scale-110 transform hover:rotate-2 hover:shadow-lg"
                 />
               </a>
             </li>
           </ul>
-          <address className="not-italic text-sm leading-relaxed">
+          <address className="underline not-italic text-sm leading-relaxed">
             1234 N Main St,
             <br /> Chicago, IL 60607
           </address>
@@ -112,7 +112,7 @@ export default function TopFooter() {
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-neutral-300 hover:text-red-500 transition"
+                    className="text-neutral-300 hover:text-[#1054ab] transition"
                   >
                     {link.name}
                   </a>
@@ -127,7 +127,7 @@ export default function TopFooter() {
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-neutral-300 hover:text-red-500 transition"
+                    className="text-neutral-300 hover:text-[#1054ab] transition"
                   >
                     {link.name}
                   </a>
@@ -139,7 +139,7 @@ export default function TopFooter() {
 
         {/* Newsletter Form */}
         <form onSubmit={handleSubmit} className="flex flex-col justify-center">
-          <h3 className="text-lg font-bold mb-4">
+          <h3 className="text-4xl uppercase font-bold mb-4">
             Get our latest deals and discounts!
           </h3>
           <div className="flex bg-neutral-800 rounded-lg overflow-hidden">
@@ -153,14 +153,14 @@ export default function TopFooter() {
             />
             <button
               type="submit"
-              className="p-3 hover:bg-neutral-700 transition"
+              className="p-3 rounded-full bg-white hover:bg-neutral-400 text-neutral-900 transition"
               aria-label="Subscribe"
             >
-              <ArrowRight className="w-5 h-5 text-white" />
+              <ArrowRight className="w-5 h-5 text-neutral-900" />
             </button>
           </div>
           <p className="mt-2 text-xs">
-            Become a <span className="text-red-500">CoreX</span> Insider!
+            Become a Core<span className="text-red-500">X</span> Insider!
           </p>
         </form>
       </div>

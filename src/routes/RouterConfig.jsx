@@ -14,6 +14,7 @@ const ReturnPolicy = lazy(() => import('../pages/ReturnPolicy/ReturnPolicy'));
 const TermsOfService = lazy(() => import('../pages/TermsOfService/TermsOfService'));
 const ShippingPolicy = lazy(() => import('../pages/ShippingPolicy/ShippingPolicy'));
 const About = lazy(() => import('../pages/About/About'));
+const ShippingPolicy = lazy(()=>import('../pages/ShippingPolicy/ShippingPage') );
 
 // Router configuration
 export const RouterConfig = () =>
@@ -26,5 +27,6 @@ export const RouterConfig = () =>
       <Route path="terms-of-service" element={<TermsOfService />} />
       <Route path="shipping-policy" element={<ShippingPolicy />} />
       <Route path="about-corex" element={<About />} />
+      <Route path="shipping-policy" element={<ShippingPolicy />} />
     </Route>
   );

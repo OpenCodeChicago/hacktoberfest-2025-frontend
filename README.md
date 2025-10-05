@@ -11,6 +11,7 @@
 [![Contributors](https://img.shields.io/github/contributors/OpenCodeChicago/hacktoberfest-2025-frontend)](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/graphs/contributors)
 [![GitHub stars](https://img.shields.io/github/stars/OpenCodeChicago/hacktoberfest-2025-frontend?style=for-the-badge)](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/OpenCodeChicago/hacktoberfest-2025-frontend?style=for-the-badge)](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/network/members)
+[![All Contributors](https://img.shields.io/github/all-contributors/OpenCodeChicago/hacktoberfest-2025-frontend?color=023e8a&style=flat-square)](#contributors)
 
 ---
 
@@ -52,6 +53,7 @@ You can explore our creative Figma design and UI references here:
 - [Who is this for?](#who-is-this-for)
 - [Tech Stack](#tech-stack)
 - [Quick Start](#quick-start)
+- [Backend API Access](#backend-api-access)
 - [Features](#features)
 - [Project Structure](#project-structure)
 - [Contributing](#contributing)
@@ -265,6 +267,10 @@ Thanks goes to these wonderful people:
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Ankit-Kum-ar"><img src="https://avatars.githubusercontent.com/u/111765525?v=4?s=100" width="100px;" alt="Ankit Kumar"/><br /><sub><b>Ankit Kumar</b></sub></a><br /><a href="https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/commits?author=Ankit-Kum-ar" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/a-woodworth"><img src="https://avatars.githubusercontent.com/u/10478733?v=4?s=100" width="100px;" alt="a-woodworth"/><br /><sub><b>a-woodworth</b></sub></a><br /><a href="https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/commits?author=a-woodworth" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/mensonones"><img src="https://avatars.githubusercontent.com/u/5387202?v=4?s=100" width="100px;" alt="Emerson Vieira"/><br /><sub><b>Emerson Vieira</b></sub></a><br /><a href="https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/commits?author=mensonones" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/AparAgarwal"><img src="https://avatars.githubusercontent.com/u/61222846?v=4?s=100" width="100px;" alt="Apar Agarwal"/><br /><sub><b>Apar Agarwal</b></sub></a><br /><a href="https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/commits?author=AparAgarwal" title="Code">💻</a></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/mitaliiiiii"><img src="https://avatars.githubusercontent.com/u/141233593?v=4?s=100" width="100px;" alt="mitaliiiiii"/><br /><sub><b>mitaliiiiii</b></sub></a><br /><a href="https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/commits?author=mitaliiiiii" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
