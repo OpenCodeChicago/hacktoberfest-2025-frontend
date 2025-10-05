@@ -269,6 +269,7 @@ Thanks goes to these wonderful people:
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/mitaliiiiii"><img src="https://avatars.githubusercontent.com/u/141233593?v=4?s=100" width="100px;" alt="mitaliiiiii"/><br /><sub><b>mitaliiiiii</b></sub></a><br /><a href="https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/commits?author=mitaliiiiii" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/byteninja01"><img src="https://avatars.githubusercontent.com/u/141233593?v=4?s=100" width="100px;" alt="byteninja01"/><br /><sub><b>Ujjwal-Sharma</b></sub></a><br /><a href="https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/commits?author=byteninja01" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

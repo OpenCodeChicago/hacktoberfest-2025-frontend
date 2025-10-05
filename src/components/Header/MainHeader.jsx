@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Menu,
   X,
@@ -7,6 +8,7 @@ import {
   Heart,
   User,
   ShoppingCart,
+  LogIn,
 } from 'lucide-react';
 
 export default function Header() {
@@ -19,11 +21,13 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           {/* Left: Logo */}
           <div className="flex-shrink-0">
-            <img
-              src="/images/official-logo-core-x.svg"
-              alt="CoreX Logo"
-              className="h-8 w-auto"
-            />
+            <Link to="/">
+              <img
+                src="/images/official-logo-core-x.svg"
+                alt="CoreX Logo"
+                className="h-8 w-auto"
+              />
+            </Link>
           </div>
 
           {/* Center: Desktop Navigation */}
@@ -47,15 +51,15 @@ export default function Header() {
               )}
             </div>
 
-            <a href="#" className="text-gray-700 hover:text-black">
+            <Link to="/garage-sale" className="text-gray-700 hover:text-black">
               Garage Sale
-            </a>
-            <a href="#" className="text-gray-700 hover:text-black">
+            </Link>
+            <Link to="/products" className="text-gray-700 hover:text-black">
               All Products
-            </a>
-            <a href="#" className="text-gray-700 hover:text-black">
+            </Link>
+            <Link to="/about" className="text-gray-700 hover:text-black">
               About CoreX
-            </a>
+            </Link>
           </nav>
 
           {/* Right: Icons (desktop) + Mobile Hamburger */}
@@ -74,6 +78,15 @@ export default function Header() {
               <a href="#" aria-label="Shopping Cart">
                 <ShoppingCart className="h-5 w-5 hover:text-black" />
               </a>
+              
+              {/* Login Button */}
+              <Link 
+                to="/login" 
+                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg hover:from-purple-700 hover:to-purple-800 transition-all duration-300 shadow-md hover:shadow-lg"
+              >
+                <LogIn className="h-4 w-4" />
+                Login
+              </Link>
             </div>
 
             {/* Mobile Hamburger */}
@@ -116,15 +129,24 @@ export default function Header() {
                 </a>
               </div>
             )}
-            <a href="#" className="text-gray-700 hover:text-black">
+            <Link to="/garage-sale" className="text-gray-700 hover:text-black">
               Garage Sale
-            </a>
-            <a href="#" className="text-gray-700 hover:text-black">
+            </Link>
+            <Link to="/products" className="text-gray-700 hover:text-black">
               All Products
-            </a>
-            <a href="#" className="text-gray-700 hover:text-black">
+            </Link>
+            <Link to="/about" className="text-gray-700 hover:text-black">
               About CoreX
-            </a>
+            </Link>
+            
+            {/* Mobile Login Button */}
+            <Link 
+              to="/login" 
+              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg hover:from-purple-700 hover:to-purple-800 transition-all duration-300 mt-2"
+            >
+              <LogIn className="h-4 w-4" />
+              Login
+            </Link>
           </nav>
         </div>
       )}
