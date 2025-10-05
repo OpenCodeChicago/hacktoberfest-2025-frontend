@@ -13,7 +13,7 @@ import {
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [shopOpen, setShopOpen] = useState(false);
-  const navigate = useNavigate();
+  const _navigate = useNavigate();
 
   return (
     <header className="bg-white shadow-md w-full fixed top-0 left-0 z-50">
