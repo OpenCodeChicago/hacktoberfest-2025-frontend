@@ -5,7 +5,17 @@ export default {
     "./src/**/*.{js,jsx,ts,tsx}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'montserrat': ['Montserrat', 'sans-serif'],
+        'poppins': ['Poppins', 'sans-serif'],
+      },
+      fontSize: {
+        'heading-xxl': '4rem', // 64px
+      },
+    },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar'),
+  ],
 };
