@@ -7,10 +7,10 @@ import TopHeader from '../components/TopHeader';
 
 function RootLayout() {
   return (
-    <>
+    <div className="min-h-screen bg-gray-50">
       <TopHeader />
       <MainHeader />
-      <main>
+      <main className="pt-24">
         <SEO
           title="CoreX Nutrition"
           description="CoreX Nutrition official site — explore accessibility, policies, and open-source projects."
@@ -22,8 +22,9 @@ function RootLayout() {
             <div
               role="status"
               aria-live="polite"
-              className="text-center py-8 text-gray-500"
+              className="text-center py-16 text-gray-500"
             >
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
               Loading content...
             </div>
           }
@@ -33,7 +34,7 @@ function RootLayout() {
       </main>
       <TopFooter />
       {/* <Footer /> */}
-    </>
+    </div>
   );
 }
 
