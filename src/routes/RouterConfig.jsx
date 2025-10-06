@@ -13,12 +13,14 @@ const PrivacyPolicy = lazy(
 const ReturnPolicy = lazy(() => import('../pages/ReturnPolicy/ReturnPolicy'));
 const About = lazy(() => import('../pages/About/About'));
 const ShippingPolicy = lazy(()=>import('../pages/ShippingPolicy/ShippingPage') );
+const ProductPage = lazy(() => import('../pages/Products/ProductPage'));
 
 // Router configuration
 export const RouterConfig = () =>
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
+      <Route path="product/:id" element={<ProductPage />} />
       <Route path="accessibility" element={<Accessibility />} />
       <Route path="privacy-policy" element={<PrivacyPolicy />} />
       <Route path="return-policy" element={<ReturnPolicy />} />{' '}
