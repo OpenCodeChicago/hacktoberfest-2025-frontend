@@ -2,16 +2,16 @@
 
 <img align="right" src="https://media.giphy.com/media/du3J3cXyzhj75IOgvA/giphy.gif" width="100"/>
 
-[![GitHub last commit](https://img.shields.io/github/last-commit/OpenCodeChicago/hacktoberfest-2025-frontend)](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/commits/main)
-[![License: MIT](https://img.shields.io/github/license/OpenCodeChicago/hacktoberfest-2025-frontend)](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/blob/main/LICENSE)
-[![CI](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/actions/workflows/ci.yml/badge.svg?style=for-the-badge)](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/actions/workflows/ci.yml)
-[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/OpenCodeChicago/hacktoberfest-2025-frontend/badge)](https://securityscorecards.dev/viewer/?uri=github.com/OpenCodeChicago/hacktoberfest-2025-frontend)
-[![Open Issues](https://img.shields.io/github/issues/OpenCodeChicago/hacktoberfest-2025-frontend)](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/issues)
-[![Pull Requests](https://img.shields.io/github/issues-pr/OpenCodeChicago/hacktoberfest-2025-frontend)](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/pulls)
-[![Contributors](https://img.shields.io/github/contributors/OpenCodeChicago/hacktoberfest-2025-frontend)](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/graphs/contributors)
-[![GitHub stars](https://img.shields.io/github/stars/OpenCodeChicago/hacktoberfest-2025-frontend?style=for-the-badge)](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/OpenCodeChicago/hacktoberfest-2025-frontend?style=for-the-badge)](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/network/members)
-[![All Contributors](https://img.shields.io/github/all-contributors/OpenCodeChicago/hacktoberfest-2025-frontend?color=023e8a&style=flat-square)](#contributors)
+[![GitHub last commit](https://img.shields.io/github/last-commit/JHAJI01/hacktoberfest-2025-frontend)](https://github.com/JHAJI01/hacktoberfest-2025-frontend/commits/main)
+[![License: MIT](https://img.shields.io/github/license/JHAJI01/hacktoberfest-2025-frontend)](https://github.com/JHAJI01/hacktoberfest-2025-frontend/blob/main/LICENSE)
+[![CI](https://github.com/JHAJI01/hacktoberfest-2025-frontend/actions/workflows/ci.yml/badge.svg?style=for-the-badge)](https://github.com/JHAJI01/hacktoberfest-2025-frontend/actions/workflows/ci.yml)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/JHAJI01/hacktoberfest-2025-frontend/badge)](https://securityscorecards.dev/viewer/?uri=github.com/JHAJI01/hacktoberfest-2025-frontend)
+[![Open Issues](https://img.shields.io/github/issues/JHAJI01/hacktoberfest-2025-frontend)](https://github.com/JHAJI01/hacktoberfest-2025-frontend/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/JHAJI01/hacktoberfest-2025-frontend)](https://github.com/JHAJI01/hacktoberfest-2025-frontend/pulls)
+[![Contributors](https://img.shields.io/github/contributors/JHAJI01/hacktoberfest-2025-frontend)](https://github.com/JHAJI01/hacktoberfest-2025-frontend/graphs/contributors)
+[![GitHub stars](https://img.shields.io/github/stars/JHAJI01/hacktoberfest-2025-frontend?style=for-the-badge)](https://github.com/JHAJI01/hacktoberfest-2025-frontend/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/JHAJI01/hacktoberfest-2025-frontend?style=for-the-badge)](https://github.com/JHAJI01/hacktoberfest-2025-frontend/network/members)
+[![All Contributors](https://img.shields.io/github/all-contributors/JHAJI01/hacktoberfest-2025-frontend?color=023e8a&style=flat-square)](#contributors)
 
 ---
 
@@ -34,9 +34,24 @@ Thank you for helping our open source community grow!
 
 ## Project Preview
 
-Here’s a sneak peek of the **frontend design (hero section)**:  
+Here’s a sneak peek of the **frontend design (hero section)**:
 
-![Project Hero Screenshot](./docs/assets/corex-hero-section.jpg)  
+![Project Hero Screenshot](./docs/assets/corex-hero-section.jpg)
+
+---
+
+## Screenshots
+
+Explore more visuals of the application:
+
+- **Hacktoberfest Banner**:  
+  ![Hacktoberfest 2025 Banner](./docs/assets/hacktoberfest2025.png)
+
+- **Product Collection Example**:  
+  ![Product Banner](./public/images/products_banner.svg)
+
+- **Brand Logos**:  
+  ![Core Mass](./public/images/brand-logos/core-mass.png) ![Primal Fuel](./public/images/brand-logos/primal-fuel.png) ![Pulse](./public/images/brand-logos/pulse.png)
 
 ---
 
@@ -97,27 +112,65 @@ Contributors of all levels are welcome to help improve UI, components, and user 
 
 See the [Usage Guide](docs/usage.md) for detailed setup.
 
-```bash
-# Clone the repo
-git clone https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend.git
-cd hacktoberfest-2025-frontend
-```
+### Prerequisites
+- **Node.js** (version 18 or higher) – [Download here](https://nodejs.org/)
+- **npm** (comes with Node.js) or **yarn**
+- A code editor like VS Code
 
-2. Copy `.env.example` to `.env`:
-```bash
-# Copy .env.example to .env
-cp .env.example .env
-```
+### Installation Steps
 
-```bash
-# Install dependencies
-npm install
-```
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend.git
+   cd hacktoberfest-2025-frontend
+   ```
 
-```bash
-# Start dev server
-npm run dev
-```
+2. **Set up environment variables**:
+   Copy `.env.example` to `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+   Edit `.env` to add your API keys or configurations if needed. The backend API URL is already configured.
+
+3. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+4. **Start the development server**:
+   ```bash
+   npm run dev
+   ```
+   The app will be available at `http://localhost:5173` (default Vite port).
+
+### Connecting to the Backend
+The app is configured to connect to the live backend API at `https://corexshoptest.onrender.com`. No additional setup is required for basic functionality. See the [Backend API Access](#backend-api-access) section for more details.
+
+---
+
+## Troubleshooting
+
+### Common Issues
+
+- **Port 5173 already in use**: If you see an error that the port is busy, try changing the port:
+  ```bash
+  npm run dev -- --port 3000
+  ```
+
+- **Build errors**: Ensure you have the correct Node.js version (18+). Clear node_modules and reinstall:
+  ```bash
+  rm -rf node_modules package-lock.json
+  npm install
+  ```
+
+- **API connection issues**: Check your internet connection and ensure the backend API is up. You can test the API directly at `https://corexshoptest.onrender.com/api/products`.
+
+- **ESLint errors**: Run the linter to check for issues:
+  ```bash
+  npm run lint
+  ```
+
+If you encounter other issues, check the [FAQ](docs/faq.md) or open an issue on GitHub.
 
 ---
 
@@ -168,6 +221,13 @@ GET https://corexshoptest.onrender.com/api/products?category=Protein&minPrice=20
 
 ## Features
 
+- **Product Browsing & Filtering**: Explore a wide range of products with advanced filtering options by category, goals, price, and search keywords.
+- **Shopping Cart Management**: Add, remove, and manage items in your cart with real-time updates.
+- **User Reviews & Ratings**: View and contribute to product reviews to help others make informed decisions.
+- **Responsive Design**: Optimized for mobile, tablet, and desktop devices using Tailwind CSS.
+- **SEO Optimization**: Built-in SEO components for better search engine visibility.
+- **Accessibility Features**: Designed with accessibility in mind, including proper ARIA labels and keyboard navigation.
+- **Multi-Page Navigation**: Seamless navigation between Home, About, Products, Privacy Policy, Return Policy, Shipping Policy, and Accessibility pages.
 - Developer-friendly setup with **React + Vite**
 - Utility-first styling with **Tailwind CSS**
 - Preconfigured **linting & formatting** (ESLint + Prettier)
