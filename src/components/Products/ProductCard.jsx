@@ -34,7 +34,7 @@ const ProductCard = forwardRef(({ product }, ref) => {
   const [isWishlisted, setIsWishlisted] = useState(false);
 
   const handleProductClick = () => {
-    navigate(`/products/${product.id}`);
+    navigate(`/product/${product.id}`);
   };
 
   const formatPrice = (price) => {
