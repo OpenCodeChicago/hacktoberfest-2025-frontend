@@ -83,6 +83,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "anasfarock",
+      "name": "Muhammad Anas Farooq",
+      "avatar_url": "https://avatars.githubusercontent.com/u/173719230?v=4",
+      "profile": "https://www.anasfarooq.com/",
+      "contributions": [
+        "code",
+        "test"
+      ]
     }
   ],
   "commitType": "docs",
