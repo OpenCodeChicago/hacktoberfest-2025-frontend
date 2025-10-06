@@ -1,23 +1,29 @@
 import { useState, forwardRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const HeartIcon = ({ isWishlisted }) => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    className={`h-6 w-6 transition-colors duration-300 ${isWishlisted ? 'text-red-500 fill-current' : 'text-gray-600'}`} 
-    fill="none" 
-    viewBox="0 0 24 24" 
-    stroke="currentColor" 
-    strokeWidth={2}
+const HeartIcon = ({ isWishlisted = false, className = 'h-6 w-6' }) => (
+  <svg
+    width="18"
+    height="17"
+    viewBox="0 0 18 17"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={`${className} transition-transform duration-150 ${isWishlisted ? 'scale-110' : ''}`}
+    aria-hidden="true"
+    focusable="false"
   >
-    <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.672l1.318-1.354a4.5 4.5 0 116.364 6.364L12 21.364l-7.682-7.682a4.5 4.5 0 010-6.364z" />
+    <path
+      d="M8.08268 2.49235L9.00002 3.41744L9.91735 2.49235C10.2918 2.10997 10.7397 1.8046 11.2351 1.59399C11.7304 1.38337 12.2633 1.2717 12.8028 1.26545C13.3424 1.25919 13.8778 1.35849 14.378 1.55757C14.8782 1.75665 15.3333 2.05155 15.7168 2.42515L15.7851 2.49235C17.383 4.10523 17.4043 6.70724 15.8512 8.34742L15.7851 8.41672L9.00002 15.2651L2.216 8.41462C0.594666 6.7797 0.594666 4.12728 2.216 2.4913C2.59625 2.10348 3.05195 1.79504 3.55592 1.58438C4.0599 1.37371 4.60182 1.26514 5.14934 1.26514C5.69687 1.26514 6.23879 1.37371 6.74276 1.58438C7.24674 1.79504 7.70244 2.10453 8.08268 2.49235Z"
+      fill="currentColor"
+      stroke="currentColor"
+      strokeWidth={1.667}
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
-const CartIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-  </svg>
+const CartIcon = ({ className = 'h-6 w-6' }) => (
+  <img src="/images/cart-icon.svg" alt="Add to cart" className={className} />
 );
 
 const ProductCard = forwardRef(({ product }, ref) => {
@@ -115,7 +121,7 @@ const ProductCard = forwardRef(({ product }, ref) => {
         <div className="absolute inset-0 bg-transparent group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
           <button
             onClick={(e) => handleActionClick(e, handleProductClick)}
-            className="opacity-0 group-hover:opacity-100 bg-blue-800 text-white px-6 py-2 rounded-full font-bold transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 text-sm shadow-lg"
+            className="opacity-0 group-hover:opacity-80 bg-blue-800 text-white px-6 py-3 rounded-lg font-semibold transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 text-md shadow-lg"
           >
             VIEW PRODUCT
           </button>
@@ -123,7 +129,7 @@ const ProductCard = forwardRef(({ product }, ref) => {
       </div>
 
       <div className="flex flex-col flex-grow">
-        <div className="flex justify-between items-center mb-2">
+        <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
             <div className="flex">
               {[...Array(5)].map((_, i) => (
@@ -142,22 +148,28 @@ const ProductCard = forwardRef(({ product }, ref) => {
           </div>
         </div>
         
-        <div className="min-h-[40px] mb-2">
-          <h3 className="font-semibold text-base text-gray-800 leading-tight line-clamp-2">{product.name}</h3>
+        <div className="mb-2">
+          <h3 className="font-bold text-2xl text-gray-800 leading-tight line-clamp-2">{product.name}</h3>
         </div>
 
-        <div className="min-h-[40px] mb-2">
-          <p className="text-sm text-gray-600 line-clamp-2">{product.description}</p>
+        <div className="mb-2">
+          <p className="text-md text-blue-500">
+            {product.flavors && product.flavors.length > 0 ? (
+              `Available in flavours: ${product.flavors.length}`
+            ) : (
+              'No flavors available'
+            )}
+          </p>
         </div>
 
-        <div className="min-h-[48px] mb-4">
+        <div className="mb-3">
           {product.flavors && product.flavors.length > 0 && (
             <div className="relative">
               <select
                 value={selectedFlavor}
                 onChange={(e) => setSelectedFlavor(e.target.value)}
                 onClick={(e) => e.stopPropagation()}
-                className="w-full appearance-none bg-white border border-gray-300 rounded-lg py-2.5 px-3 pr-8 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 hover:border-gray-400"
+                className="w-full appearance-none bg-gray-200 border border-gray-300 rounded-lg py-2.5 px-3 pr-8 text-md uppercase text-bold text-gray-800 focus:outline-none focus:border-blue-500 transition-all duration-200 hover:border-gray-400"
                 aria-label="Select flavor"
               >
                 {product.flavors.map((flavor) => (
@@ -176,20 +188,33 @@ const ProductCard = forwardRef(({ product }, ref) => {
         </div>
         
         <div className="flex items-center gap-3 mt-auto">
-          <button 
+          <button
             onClick={(e) => handleActionClick(e, handleWishlistToggle)}
-            className="border border-gray-300 rounded-md p-2 hover:bg-gray-100 transition-colors"
-            aria-label="Add to wishlist"
+            className={`
+              flex items-center justify-center px-4 py-3 rounded-l-xl border-2 transition-colors
+              ${isWishlisted ? 'bg-blue-800 border-blue-800 text-white hover:bg-blue-900' : 'bg-white border-blue-800 text-blue-800 hover:bg-blue-50'}
+            `}
+            aria-label={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
+            aria-pressed={isWishlisted}
           >
-            <HeartIcon isWishlisted={isWishlisted} />
+            <HeartIcon isWishlisted={isWishlisted} className="h-5 w-5" />
           </button>
-          <button 
-            onClick={(e) => handleActionClick(e, handleAddToCart)}
-            className="flex-grow flex items-center justify-center gap-2 bg-blue-800 text-white font-bold py-2.5 px-4 rounded-md hover:bg-blue-900 transition-colors"
-          >
-            <CartIcon />
-            ADD TO CART
-          </button>
+
+      {/* --- Add to Cart Button --- */}
+      <button 
+        onClick={(e) => handleActionClick(e, handleAddToCart)}
+        className="
+          -ml-px flex-grow flex items-center justify-center gap-2 
+          bg-blue-800 text-white font-bold 
+          py-3 px-4 rounded-r-xl 
+          hover:bg-blue-900 transition-colors
+          focus:outline-none focus:ring-2 focus:ring-blue-500 focus:z-10
+        "
+      >
+        <CartIcon />
+        <span>ADD TO CART</span>
+      </button>
+
         </div>
       </div>
     </div>
