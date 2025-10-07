@@ -1,4 +1,4 @@
-name: CI
+name: CI/CD
 
 on:
   push:
@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  build-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,5 +29,12 @@ jobs:
       - name: Lint
         run: npm run lint --if-present
 
-      - name: Run build
+      - name: Build
         run: npm run build
+
+      - name: Deploy to Netlify
+        if: github.ref == 'refs/heads/main'
+        run: npx netlify-cli deploy --dir=dist --site=$NETLIFY_SITE_ID --prod
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
