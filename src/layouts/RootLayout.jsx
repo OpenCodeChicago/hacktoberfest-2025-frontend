@@ -3,11 +3,12 @@ import { Outlet } from 'react-router-dom';
 import SEO from '../components/SEO';
 import TopFooter from '../components/Footer';
 import MainHeader from '../components/Header';
+import TopHeader from '../components/TopHeader';
 
 function RootLayout() {
   return (
     <>
-      {/* <TopHeader /> */}
+      <TopHeader />
       <MainHeader />
       <main>
         <SEO

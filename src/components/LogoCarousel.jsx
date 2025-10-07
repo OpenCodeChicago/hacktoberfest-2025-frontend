@@ -2,13 +2,13 @@ import './LogoCarousel.css';
 
 const LogoCarousel = () => {
   const logos = [
-    { name: 'Pulse', imgSrc: '/images/brand-logos/pulse.png' },
-    { name: 'Zen Mode', imgSrc: '/images/brand-logos/zen-mode.png' },
-    { name: 'Core Mass', imgSrc: '/images/brand-logos/core-mass.png' },
-    { name: 'Storm', imgSrc: '/images/brand-logos/storm.png' },
-    { name: 'Primal Fuel', imgSrc: '/images/brand-logos/primal-fuel.png' },
-    { name: 'Revive', imgSrc: '/images/brand-logos/revive.png' },
-    { name: 'Vital Edge', imgSrc: '/images/brand-logos/vital-edge.png' },
+    { name: 'Pulse', imgSrc: '/images/brand-logos/pulse.svg' },
+    { name: 'Zen Mode', imgSrc: '/images/brand-logos/zen-mode.svg' },
+    { name: 'Core Mass', imgSrc: '/images/brand-logos/core-mass.svg' },
+    { name: 'Storm', imgSrc: '/images/brand-logos/storm.svg' },
+    { name: 'Primal Fuel', imgSrc: '/images/brand-logos/primal-fuel.svg' },
+    { name: 'Revive', imgSrc: '/images/brand-logos/revive.svg' },
+    { name: 'Vital Edge', imgSrc: '/images/brand-logos/vital-edge.svg' },
   ];
 
   const duplicatedLogos = [...logos, ...logos];

@@ -1,17 +1,21 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { productServices } from '../services/api';
+import { getProducts as apiGetProducts, getProductById as apiGetProductById } from '../api/productService.js';
 
 // Async thunk for fetching products with optional parameters
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
   async (params = {}, { rejectWithValue }) => {
     try {
-      const response = await productServices.getProducts(params);
-      return response.data;
+      const result = await apiGetProducts(params);
+
+      if (!result || result.success === false) {
+        // normalize error shape
+        throw new Error(result?.error || 'Failed to fetch products');
+      }
+
+      return result.data;
     } catch (error) {
-      return rejectWithValue(
-        error.response?.data?.message || error.message || 'Failed to fetch products'
-      );
+      return rejectWithValue(error.message || 'Failed to fetch products');
     }
   }
 );
@@ -21,12 +25,15 @@ export const fetchProductById = createAsyncThunk(
   'products/fetchProductById',
   async (id, { rejectWithValue }) => {
     try {
-      const response = await productServices.getProductById(id);
-      return response.data;
+      const result = await apiGetProductById(id);
+
+      if (!result || result.success === false) {
+        throw new Error(result?.error || 'Failed to fetch product');
+      }
+
+      return result.data;
     } catch (error) {
-      return rejectWithValue(
-        error.response?.data?.message || error.message || 'Failed to fetch product'
-      );
+      return rejectWithValue(error.message || 'Failed to fetch product');
     }
   }
 );

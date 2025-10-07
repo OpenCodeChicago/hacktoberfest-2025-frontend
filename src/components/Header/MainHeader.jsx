@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Menu,
   X,
@@ -14,16 +15,18 @@ export default function Header() {
   const [shopOpen, setShopOpen] = useState(false);
 
   return (
-    <header className="bg-white shadow-md w-full fixed top-0 left-0 z-50">
+    <header className="bg-white shadow-md w-full fixed top-8 left-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Left: Logo */}
           <div className="flex-shrink-0">
-            <img
-              src="/images/official-logo-core-x.svg"
-              alt="CoreX Logo"
-              className="h-8 w-auto"
-            />
+            <Link to="/">
+              <img
+                src="/images/official-logo-core-x.svg"
+                alt="CoreX Logo"
+                className="h-8 w-auto"
+              />
+            </Link>
           </div>
 
           {/* Center: Desktop Navigation */}
@@ -50,12 +53,12 @@ export default function Header() {
             <a href="#" className="text-gray-700 hover:text-black">
               Garage Sale
             </a>
-            <a href="#" className="text-gray-700 hover:text-black">
+            <Link to="/products" className="text-gray-700 hover:text-black">
               All Products
-            </a>
-            <a href="#" className="text-gray-700 hover:text-black">
+            </Link>
+            <Link to="/about-corex" className="text-gray-700 hover:text-black">
               About CoreX
-            </a>
+            </Link>
           </nav>
 
           {/* Right: Icons (desktop) + Mobile Hamburger */}
@@ -119,12 +122,20 @@ export default function Header() {
             <a href="#" className="text-gray-700 hover:text-black">
               Garage Sale
             </a>
-            <a href="#" className="text-gray-700 hover:text-black">
+            <Link 
+              to="/products" 
+              className="text-gray-700 hover:text-black"
+              onClick={() => setMobileOpen(false)}
+            >
               All Products
-            </a>
-            <a href="#" className="text-gray-700 hover:text-black">
+            </Link>
+            <Link 
+              to="/about-corex" 
+              className="text-gray-700 hover:text-black"
+              onClick={() => setMobileOpen(false)}
+            >
               About CoreX
-            </a>
+            </Link>
           </nav>
         </div>
       )}
