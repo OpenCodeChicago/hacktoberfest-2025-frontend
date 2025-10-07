@@ -12,14 +12,10 @@ const PrivacyPolicy = lazy(
 );
 const ReturnPolicy = lazy(() => import('../pages/ReturnPolicy/ReturnPolicy'));
 const TermsOfService = lazy(() => import('../pages/TermsOfService/TermsOfService'));
-const ShippingPolicy = lazy(() => import('../pages/ShippingPolicy/ShippingPolicy'));
+const ShippingPolicy = lazy(() => import('../pages/ShippingPolicy/ShippingPage'));
 const About = lazy(() => import('../pages/About/About'));
-const ShippingPolicy = lazy(()=>import('../pages/ShippingPolicy/ShippingPage') );
 const Products = lazy(() => import('../pages/Products/Products'));
 const ProductPage = lazy(() => import('../pages/Products/ProductPage'));
-const TermsOfService = lazy(
-  () => import('../pages/TermsOfService/TermsOfService')
-);
 // Router configuration
 export const RouterConfig = () =>
   createRoutesFromElements(
@@ -30,10 +26,8 @@ export const RouterConfig = () =>
       <Route path="accessibility" element={<Accessibility />} />
       <Route path="privacy-policy" element={<PrivacyPolicy />} />
       <Route path="return-policy" element={<ReturnPolicy />} />
-      <Route path="terms-of-service" element={<TermsOfService />} />
-      <Route path="shipping-policy" element={<ShippingPolicy />} />
-      <Route path="about-corex" element={<About />} />
-      <Route path="shipping-policy" element={<ShippingPolicy />} />
-      <Route path="terms-of-service" element={<TermsOfService />} />
+  <Route path="terms-of-service" element={<TermsOfService />} />
+  <Route path="shipping-policy" element={<ShippingPolicy />} />
+  <Route path="about-corex" element={<About />} />
     </Route>
   );
