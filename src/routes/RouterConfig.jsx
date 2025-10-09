@@ -20,6 +20,7 @@ const ProductPage = lazy(() => import('../pages/Products/ProductPage'));
 const TermsOfService = lazy(
   () => import('../pages/TermsOfService/TermsOfService')
 );
+const GarageSale = lazy(() => import('../pages/GarageSale/GarageSale'));
 
 const Register = lazy(() => import('../pages/Register'));
 
@@ -32,6 +33,7 @@ export const RouterConfig = () =>
         <Route index element={<Home />} />
         <Route path="products" element={<Products />} />
         <Route path="product/:id" element={<ProductPage />} />
+        <Route path="garage-sale" element={<GarageSale />} />
         <Route path="accessibility" element={<Accessibility />} />
         <Route path="privacy-policy" element={<PrivacyPolicy />} />
         <Route path="return-policy" element={<ReturnPolicy />} />{' '}
