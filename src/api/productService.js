@@ -1,9 +1,10 @@
 import axiosInstance from './axiosInstance.js';
 
 const transformProduct = (apiProduct) => {
-  const originalPrice = apiProduct.sale > 0 
-    ? Number((apiProduct.price / (1 - apiProduct.sale / 100)).toFixed(2))
-    : null;
+  const originalPrice =
+    apiProduct.sale > 0
+      ? Number((apiProduct.price / (1 - apiProduct.sale / 100)).toFixed(2))
+      : null;
 
   return {
     id: apiProduct._id,
@@ -24,7 +25,7 @@ const transformProduct = (apiProduct) => {
     sizes: apiProduct.sizes || [],
     salePercentage: apiProduct.sale,
     longDescription: apiProduct.longDescription,
-    usageTips: apiProduct.usageTips
+    usageTips: apiProduct.usageTips,
   };
 };
 
@@ -34,7 +35,7 @@ const transformApiResponse = (apiResponse) => {
     totalCount: apiResponse.total,
     currentPage: apiResponse.page,
     hasNextPage: apiResponse.page < apiResponse.pages,
-    totalPages: apiResponse.pages
+    totalPages: apiResponse.pages,
   };
 };
 
@@ -42,7 +43,7 @@ export const getProducts = async (params = {}) => {
   try {
     // Map our filter names to API parameter names
     const apiParams = {};
-    
+
     if (params.page) apiParams.page = params.page;
     if (params.limit) apiParams.limit = params.limit;
     if (params.category) apiParams.category = params.category;
@@ -53,8 +54,10 @@ export const getProducts = async (params = {}) => {
     if (params.sortBy) apiParams.sortBy = params.sortBy;
     if (params.sortOrder) apiParams.sortOrder = params.sortOrder;
 
-    const response = await axiosInstance.get('/products', { params: apiParams });
-    
+    const response = await axiosInstance.get('/products', {
+      params: apiParams,
+    });
+
     return {
       success: true,
       data: transformApiResponse(response.data),
@@ -76,7 +79,7 @@ export const getProductById = async (id) => {
     }
 
     const response = await axiosInstance.get(`/products/${id}`);
-    
+
     return {
       success: true,
       data: transformProduct(response.data),
@@ -99,7 +102,7 @@ export const searchProducts = async (query, params = {}) => {
         ...params,
       },
     });
-    
+
     return {
       success: true,
       data: response.data,
@@ -117,7 +120,7 @@ export const searchProducts = async (query, params = {}) => {
 export const getProductCategories = async () => {
   try {
     const response = await axiosInstance.get('/products/categories');
-    
+
     return {
       success: true,
       data: response.data,

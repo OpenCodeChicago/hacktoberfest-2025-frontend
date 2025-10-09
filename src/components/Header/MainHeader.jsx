@@ -50,9 +50,9 @@ export default function Header() {
               )}
             </div>
 
-            <a href="#" className="text-gray-700 hover:text-black">
+            <Link to="/garage-sale" className="text-gray-700 hover:text-black">
               Garage Sale
-            </a>
+            </Link>
             <Link to="/products" className="text-gray-700 hover:text-black">
               All Products
             </Link>
@@ -119,9 +119,13 @@ export default function Header() {
                 </a>
               </div>
             )}
-            <a href="#" className="text-gray-700 hover:text-black">
+            <Link 
+              to="/garage-sale" 
+              className="text-gray-700 hover:text-black"
+              onClick={() => setMobileOpen(false)}
+            >
               Garage Sale
-            </a>
+            </Link>
             <Link 
               to="/products" 
               className="text-gray-700 hover:text-black"

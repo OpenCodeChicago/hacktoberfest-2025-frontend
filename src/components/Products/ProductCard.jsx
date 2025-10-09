@@ -178,11 +178,13 @@ const ProductCard = forwardRef(({ product }, ref) => {
             </div>
             <span className="text-xs text-gray-500">({product.reviewCount || 0})</span>
           </div>
-          <div className="flex items-center gap-2">
-            {product.originalPrice && (
-              <span className="text-sm text-gray-500 line-through">{formatPrice(product.originalPrice)}</span>
-            )}
-            <span className="font-bold text-lg text-gray-800">{formatPrice(product.price)}</span>
+          <div className="flex items-center justify-between gap-2 mb-2">
+            <div className="flex flex-col">
+              {product.originalPrice && (
+                <span className="text-xs text-gray-500 line-through leading-none">{formatPrice(product.originalPrice)}</span>
+              )}
+              <span className="font-bold text-lg text-gray-800 leading-none">{formatPrice(product.price)}</span>
+            </div>
           </div>
         </div>
         
@@ -242,33 +244,35 @@ const ProductCard = forwardRef(({ product }, ref) => {
       <button
         onClick={(e) => handleActionClick(e, handleAddToCart)}
         className={`
-          -ml-px flex-grow flex items-center justify-center gap-2 
+          -ml-px flex-grow flex items-center justify-center gap-1 
           bg-[#023e8a] text-white font-medium 
-          py-3 px-4 rounded-r-xl 
+          py-3 px-2 sm:px-3 rounded-r-xl 
           hover:bg-[#1054ab] transition-colors duration-150 hover:shadow-lg cursor-pointer
           focus:outline-none focus:z-10
+          min-w-0
         `}
         aria-live="polite"
       >
         {cartLoading ? (
-          <span className="ml-2 flex items-center gap-2 font-semibold">
-            <svg className="w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+          <span className="flex items-center gap-1 font-semibold text-xs sm:text-sm">
+            <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
               <circle cx="12" cy="12" r="10" strokeWidth="3" stroke="currentColor" opacity="0.25" />
               <path d="M22 12a10 10 0 00-10-10" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-            <span>ADDING...</span>
+            <span className="hidden sm:inline">ADDING...</span>
+            <span className="sm:hidden">ADD...</span>
           </span>
         ) : cartAdded ? (
-          <span className="ml-2 flex items-center gap-2 font-semibold">
-            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+          <span className="flex items-center gap-1 font-semibold text-xs sm:text-sm">
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
               <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
             </svg>
             <span>ADDED</span>
           </span>
         ) : (
           <>
-            <CartIcon />
-            <span className="ml-2">ADD TO CART</span>
+            <CartIcon className="w-4 h-4 flex-shrink-0" />
+            <span className="text-xs sm:text-sm font-semibold whitespace-nowrap">ADD TO CART</span>
           </>
         )}
       </button>
