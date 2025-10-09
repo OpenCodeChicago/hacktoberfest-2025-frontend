@@ -1,0 +1,83 @@
+@reference "../index.css";
+
+@layer components {
+  .supplement-goal-label {
+    background-color: var(--color-white-back);
+    color: var(--color-black);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+}
+
+@layer utilities {
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fadeInUp {
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  .card-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    will-change: transform, opacity;
+  }
+
+  .card-reveal img {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .card-reveal.animate-fadeInUp img {
+    opacity: 1;
+  }
+
+  .card-elevate {
+    will-change: box-shadow;
+    transition: box-shadow 0.28s ease;
+  }
+
+  .card-inner {
+    transition: transform 0.28s ease;
+    transform-origin: center center;
+  }
+
+  .card-elevate:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .card-elevate:hover .card-inner {
+    transform: translateY(-8px) scale(1.05);
+  }
+
+  .card-elevate:focus-visible {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    outline: 3px solid rgba(99, 102, 241, 0.95);
+    outline-offset: 4px;
+  }
+
+  .card-elevate:focus-visible .card-inner {
+    transform: translateY(-8px) scale(1.03);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fadeInUp {
+      animation: none !important;
+    }
+
+    .card-elevate {
+      transition: none !important;
+    }
+  }
+}

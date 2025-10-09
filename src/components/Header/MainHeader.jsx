@@ -51,6 +51,7 @@ export default function Header() {
             </div>
 
             <Link to="/garage-sale" className="text-gray-700 hover:text-black">
+            <Link to="garage-sale" className="text-gray-700 hover:text-black">
               Garage Sale
             </Link>
             <Link to="/products" className="text-gray-700 hover:text-black">
@@ -119,6 +120,10 @@ export default function Header() {
                 </a>
               </div>
             )}
+            <Link 
+              to="/garage-sale" className="text-gray-700 hover:text-black">
+              Garage Sale
+            </Link>
             <Link 
               to="/garage-sale" 
               className="text-gray-700 hover:text-black"

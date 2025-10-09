@@ -12,6 +12,20 @@
   
   --color-white-light: #fafaf9;
   --color-main: #023e8a;
+  --color-white-back: #F7FAFF;
+  --color-black: #010409;
+}
+
+@layer components {
+  .section-title {
+    @apply text-4xl lg:text-heading-xxl font-montserrat font-bold leading-none uppercase text-center tracking-tight;
+
+    & span {
+      color: white;
+  -webkit-text-stroke: 3px black;
+  paint-order: stroke fill;
+    }
+  }
 }
 
 .text-outline {

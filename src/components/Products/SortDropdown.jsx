@@ -1,14 +1,16 @@
 import { useState, useRef, useEffect } from 'react';
 
 const SORT_OPTIONS = [
-  { label: 'Featured', field: '', order: 'asc' },
-  { label: 'Best Selling', field: 'popularity', order: 'desc' },
-  { label: 'Price: Low to High', field: 'price', order: 'asc' },
-  { label: 'Price: High to Low', field: 'price', order: 'desc' },
-  { label: 'Best Rating', field: 'rating', order: 'desc' },
+  { label: 'Best Selling', field: 'best_selling', order: 'desc' },
+  { label: 'A - Z', field: 'title', order: 'asc' },
+  { label: 'Z - A', field: 'title', order: 'desc' },
+  { label: 'Price - Low to High', field: 'price', order: 'asc' },
+  { label: 'Price - High to Low', field: 'price', order: 'desc' },
+  { label: 'Rating - Low to High', field: 'rating', order: 'asc' },
+  { label: 'Rating - High to Low', field: 'rating', order: 'desc' },
 ];
 
-export default function SortDropdown({ sortBy, sortOrder, onSortChange }) {
+export default function SortDropdown({ sortBy = 'best_selling', sortOrder = 'desc', onSortChange = () => {} }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 

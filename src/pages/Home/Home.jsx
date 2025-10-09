@@ -3,6 +3,7 @@ import {
   HeroSection,
   LogoCarousel,
   SEO,
+  SupplementForGoalsSection,
   WhyChoose
 } from '../../components';
 
@@ -29,10 +30,12 @@ export default function Home() {
       >
         <HeroSection />
         <WhyChoose />
+        <SupplementForGoalsSection />
         <LogoCarousel />
         {/* Shop Collection Component */}
         <CollectionSection />
       </main >
     </>
   )
+
 }

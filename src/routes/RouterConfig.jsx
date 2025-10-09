@@ -41,6 +41,7 @@ export const RouterConfig = () =>
         <Route path="about-corex" element={<About />} />
         <Route path="shipping-policy" element={<ShippingPolicy />} />
         <Route path="terms-of-service" element={<TermsOfService />} />
+        <Route path="garage-sale" element={<GarageSale />} />
       </Route>
     </>
   );
