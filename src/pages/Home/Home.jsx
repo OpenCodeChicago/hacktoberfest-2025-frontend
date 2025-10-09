@@ -25,7 +25,7 @@ export default function Home() {
 
       <main
         id="main-content"
-        className="min-h-screen bg-gray-50 -mt-16 pt-16"
+        className="min-h-screen bg-gray-50 pt-16"
       >
         <HeroSection />
         <WhyChoose />

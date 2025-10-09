@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 
 export default function TopHeader() {
-  const messages = ['Buy 1 get 1 50% off', 'Free shipping on orders over $110'];
+  const messages = [<>Buy 1 get 1 <u>50% off</u></>,
+    <> <u>Free shipping</u> on orders over $110</>,];
 
   const [index, setIndex] = useState(0);
 
@@ -14,7 +15,7 @@ export default function TopHeader() {
   }, [messages.length]);
 
   return (
-    <header className="w-full bg-[#0D1B2A] text-white text-sm fixed py-2 px-4 flex items-center justify-between">
+    <header className="w-full bg-[#0D1B2A] text-white text-sm fixed py-2 px-4 flex items-center justify-between z-50">
       {/* Center Promo Message */}
       <div className="flex-1 text-center font-medium">
         <p className="transition-opacity duration-500 ease-in-out">
