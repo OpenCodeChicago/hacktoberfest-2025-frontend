@@ -238,41 +238,40 @@ const ProductCard = forwardRef(({ product }, ref) => {
             <HeartIcon isWishlisted={isWishlisted} animate={animateLike} className="h-5 w-5" />
           </button>
 
-      {/* --- Add to Cart Button --- */}
-      <button
-        onClick={(e) => handleActionClick(e, handleAddToCart)}
-        className={`
-          -ml-px flex-grow flex items-center justify-center gap-2 
-          bg-[#023e8a] text-white font-medium 
-          py-3 px-4 rounded-r-xl 
-          hover:bg-[#1054ab] transition-colors duration-150 hover:shadow-lg cursor-pointer
-          focus:outline-none focus:z-10
-        `}
-        aria-live="polite"
-      >
-        {cartLoading ? (
-          <span className="ml-2 flex items-center gap-2 font-semibold">
-            <svg className="w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-              <circle cx="12" cy="12" r="10" strokeWidth="3" stroke="currentColor" opacity="0.25" />
-              <path d="M22 12a10 10 0 00-10-10" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <span>ADDING...</span>
-          </span>
-        ) : cartAdded ? (
-          <span className="ml-2 flex items-center gap-2 font-semibold">
-            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-              <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-            </svg>
-            <span>ADDED</span>
-          </span>
-        ) : (
-          <>
-            <CartIcon />
-            <span className="ml-2">ADD TO CART</span>
-          </>
-        )}
-      </button>
-
+          {/* Add to Cart Button */}
+          <button
+            onClick={(e) => handleActionClick(e, handleAddToCart)}
+            className={`
+              flex-grow flex items-center justify-center gap-2 
+              bg-[#023e8a] text-white font-medium 
+              py-3 px-4 rounded-r-xl 
+              hover:bg-[#1054ab] transition-colors duration-150 hover:shadow-lg cursor-pointer
+              focus:outline-none focus:z-10
+            `}
+            aria-live="polite"
+          >
+            {cartLoading ? (
+              <span className="flex items-center gap-2 font-semibold">
+                <svg className="w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10" strokeWidth="3" stroke="currentColor" opacity="0.25" />
+                  <path d="M22 12a10 10 0 00-10-10" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <span>ADDING...</span>
+              </span>
+            ) : cartAdded ? (
+              <span className="flex items-center gap-2 font-semibold">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                  <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>ADDED</span>
+              </span>
+            ) : (
+              <>
+                <CartIcon />
+                <span>ADD TO CART</span>
+              </>
+            )}
+          </button>
         </div>
       </div>
     </div>
