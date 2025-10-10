@@ -129,6 +129,17 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "ashishgit10",
+      "name": "Ashish Kumar Sharma",
+      "avatar_url": "https://avatars.githubusercontent.com/u/68439493?v=4",
+      "profile": "https://github.com/ashishgit10",
+      "contributions": [
+        "code",
+        "bug",
+        "maintenance"
+      ]
     }
   ],
   "commitType": "docs",
