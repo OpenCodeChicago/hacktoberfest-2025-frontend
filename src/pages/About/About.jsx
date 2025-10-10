@@ -104,7 +104,7 @@ const AboutAccordion = () => {
     >
       <Accordion.Item className="AccordionItem" value="item-1">
         <Accordion.Header>
-        <Accordion.Trigger className="flex w-full justify-between text-xl uppercase data-[state=open]:text-blue-800 data-[state=closed]:text-blue-950 data-[state=open]:opacity-80">
+        <Accordion.Trigger className="flex w-full justify-between text-xl uppercase data-[state=open]:text-blue-800 data-[state=closed]:text-blue-950 data-[state=open]:opacity-80 cursor-pointer">
             <span>1. Access the website</span>
             {isOpen('item-1') ? <X className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
           </Accordion.Trigger>
@@ -120,7 +120,7 @@ const AboutAccordion = () => {
 
       <Accordion.Item className="AccordionItem" value="item-2">
         <Accordion.Header>
-        <Accordion.Trigger className="flex w-full justify-between text-xl uppercase data-[state=open]:text-blue-800 data-[state=closed]:text-blue-950 data-[state=open]:opacity-80">
+        <Accordion.Trigger className="flex w-full justify-between text-xl uppercase data-[state=open]:text-blue-800 data-[state=closed]:text-blue-950 data-[state=open]:opacity-80 cursor-pointer">
             <span>2. Browse Products</span>
             {isOpen('item-2') ? <X className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
           </Accordion.Trigger>
@@ -135,7 +135,7 @@ const AboutAccordion = () => {
 
       <Accordion.Item className="AccordionItem" value="item-3">
         <Accordion.Header>
-        <Accordion.Trigger className="flex w-full justify-between text-xl uppercase data-[state=open]:text-blue-800 data-[state=closed]:text-blue-950 data-[state=open]:opacity-80">
+        <Accordion.Trigger className="flex w-full justify-between text-xl uppercase data-[state=open]:text-blue-800 data-[state=closed]:text-blue-950 data-[state=open]:opacity-80 cursor-pointer">
             <span className="text-xl uppercase">3. Add to cart</span>
             {isOpen('item-3') ? <X className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
           </Accordion.Trigger>
@@ -150,7 +150,7 @@ const AboutAccordion = () => {
       
       <Accordion.Item className="AccordionItem" value="item-4">
         <Accordion.Header>
-          <Accordion.Trigger className="flex w-full justify-between text-xl uppercase data-[state=open]:text-blue-800 data-[state=closed]:text-blue-950 data-[state=open]:opacity-80">
+          <Accordion.Trigger className="flex w-full justify-between text-xl uppercase data-[state=open]:text-blue-800 data-[state=closed]:text-blue-950 data-[state=open]:opacity-80 cursor-pointer">
             <span>4. Checkout (Demo)</span>
             {isOpen('item-4') ? <X className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
           </Accordion.Trigger>
@@ -165,7 +165,7 @@ const AboutAccordion = () => {
       
       <Accordion.Item className="AccordionItem" value="item-5">
         <Accordion.Header>
-        <Accordion.Trigger className="flex w-full justify-between text-xl uppercase data-[state=open]:text-blue-800 data-[state=closed]:text-blue-950 data-[state=open]:opacity-80">
+        <Accordion.Trigger className="flex w-full justify-between text-xl uppercase data-[state=open]:text-blue-800 data-[state=closed]:text-blue-950 data-[state=open]:opacity-80 cursor-pointer">
             <span>5. Contribute & Collaborate</span>
             {isOpen('item-5') ? <X className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
           </Accordion.Trigger>

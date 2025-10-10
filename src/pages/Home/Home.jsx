@@ -1,9 +1,11 @@
+import FeaturedProductImage from '../../components/NewProductsBanner/NewProductsBanner';
 import {
   CollectionSection,
   HeroSection,
   LogoCarousel,
   SEO,
-  WhyChoose
+  WhyChoose,
+  SupplementForGoalsSection,
 } from '../../components';
 
 export default function Home() {
@@ -23,16 +25,19 @@ export default function Home() {
         keywords="Hacktoberfest 2025, CoreX Nutrition, Open Source, Contributions"
       />
 
-      <main
-        id="main-content"
-        className="min-h-screen bg-gray-50 -mt-16 pt-16"
-      >
+      <main id="main-content" className="min-h-screen bg-gray-50 -mt-16 pt-16">
         <HeroSection />
         <WhyChoose />
+        <SupplementForGoalsSection />
         <LogoCarousel />
+        <FeaturedProductImage
+          imageUrl="/images/test-product-image.jpg"
+          productId="68e7dc29bdf0349b226db12a"
+          alt="Featured Product - CoreX Whey Protein"
+        />
         {/* Shop Collection Component */}
         <CollectionSection />
-      </main >
+      </main>
     </>
-  )
+  );
 }

@@ -102,6 +102,33 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "shiv7shukla",
+      "name": "shiv7shukla",
+      "avatar_url": "https://avatars.githubusercontent.com/u/185540301?v=4",
+      "profile": "https://github.com/shiv7shukla",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "rmbarley",
+      "name": "Ryan Barley",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3730559?v=4",
+      "profile": "http://ryanbarley.dev",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "PriscaTonia",
+      "name": "Onwudebelu Prisca Ebubechukwu",
+      "avatar_url": "https://avatars.githubusercontent.com/u/60774343?v=4",
+      "profile": "http://prisca.vercel.app",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitType": "docs",

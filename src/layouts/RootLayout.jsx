@@ -5,14 +5,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import SEO from '../components/SEO';
 import TopFooter from '../components/Footer';
 import MainHeader from '../components/Header';
-import TopHeader from '../components/TopHeader';
+
 
 function RootLayout() {
   return (
     <>
-      <TopHeader />
       <MainHeader />
-      <main>
+      <main className="mt-[84px]">
         <SEO
           title="CoreX Nutrition"
           description="CoreX Nutrition official site — explore accessibility, policies, and open-source projects."

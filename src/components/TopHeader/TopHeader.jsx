@@ -14,7 +14,7 @@ export default function TopHeader() {
   }, [messages.length]);
 
   return (
-    <header className="w-full bg-[#0D1B2A] text-white text-sm fixed py-2 px-4 flex items-center justify-between">
+    <header className="w-full bg-[#0D1B2A] py-2.5 text-white top-0 text-sm fixed z-50 px-4 flex items-center justify-between">
       {/* Center Promo Message */}
       <div className="flex-1 text-center font-medium">
         <p className="transition-opacity duration-500 ease-in-out">

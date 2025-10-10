@@ -2,9 +2,21 @@ import PropTypes from 'prop-types';
 
 // Static icons for quality section (fixed visuals, dynamic labels)
 const ICONS = [
-  { src: '/images/no-flavors.webp', alt: 'No Artificial Flavors', fallback: '/images/no-flavors.jpg' },
-  { src: '/images/non-gmo.webp', alt: 'Non GMO', fallback: '/images/non-gmo.jpg' },
-  { src: '/images/gluten-free.webp', alt: 'Gluten Free', fallback: '/images/gluten-free.jpg' },
+  {
+    src: '/images/no-flavors.webp',
+    alt: 'No Artificial Flavors',
+    fallback: '/images/no-flavors.jpg',
+  },
+  {
+    src: '/images/non-gmo.webp',
+    alt: 'Non GMO',
+    fallback: '/images/non-gmo.jpg',
+  },
+  {
+    src: '/images/gluten-free.webp',
+    alt: 'Gluten Free',
+    fallback: '/images/gluten-free.jpg',
+  },
 ];
 
 // Static banner image (shared across products)
@@ -30,7 +42,7 @@ export default function ProductDetails({ product }) {
   };
 
   return (
-    <section className="w-full py-12">
+    <section className="w-full py-12 mt-12">
       {/* Section Title */}
       <h2 className="text-center text-[#010409] text-2xl md:text-3xl font-bold font-montserrat mb-10">
         {title}
