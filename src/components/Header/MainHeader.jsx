@@ -143,13 +143,13 @@ export default function Header() {
                   <Heart className="h-5 w-5" />
                 </a>
                 
-                <a
-                  href="#"
+                <Link
+                  to="/auth"
                   aria-label="User Account"
                   className="transform transition-transform duration-200 hover:scale-110 hover:text-black"
                 >
                   <User className="h-5 w-5" />
-                </a>
+                </Link>
                 
                 <a
                   href="#"
@@ -340,14 +340,14 @@ export default function Header() {
               <Heart className="h-5 w-5" />
               <span>Wishlist</span>
             </a>
-            <a
-              href="#"
+            <Link
+              to="/auth"
               className="flex items-center space-x-2 text-gray-700 hover:text-black"
               onClick={() => setMobileOpen(false)}
             >
               <User className="h-5 w-5" />
               <span>Account</span>
-            </a>
+            </Link>
             <a
               href="#"
               className="flex items-center space-x-2 text-gray-700 hover:text-black"
