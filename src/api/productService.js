@@ -1,7 +1,7 @@
 import axiosInstance from './axiosInstance.js';
 
 const transformProduct = (apiProduct) => {
-  const originalPrice = apiProduct.sale > 0 
+  const originalPrice = apiProduct.sale > 0
     ? Number((apiProduct.price / (1 - apiProduct.sale / 100)).toFixed(2))
     : null;
 
@@ -42,7 +42,7 @@ export const getProducts = async (params = {}) => {
   try {
     // Map our filter names to API parameter names
     const apiParams = {};
-    
+
     if (params.page) apiParams.page = params.page;
     if (params.limit) apiParams.limit = params.limit;
     if (params.category) apiParams.category = params.category;
@@ -54,7 +54,7 @@ export const getProducts = async (params = {}) => {
     if (params.sortOrder) apiParams.sortOrder = params.sortOrder;
 
     const response = await axiosInstance.get('/products', { params: apiParams });
-    
+
     return {
       success: true,
       data: transformApiResponse(response.data),
@@ -76,7 +76,7 @@ export const getProductById = async (id) => {
     }
 
     const response = await axiosInstance.get(`/products/${id}`);
-    
+
     return {
       success: true,
       data: transformProduct(response.data),
@@ -99,7 +99,7 @@ export const searchProducts = async (query, params = {}) => {
         ...params,
       },
     });
-    
+
     return {
       success: true,
       data: response.data,
@@ -117,7 +117,7 @@ export const searchProducts = async (query, params = {}) => {
 export const getProductCategories = async () => {
   try {
     const response = await axiosInstance.get('/products/categories');
-    
+
     return {
       success: true,
       data: response.data,
@@ -131,3 +131,26 @@ export const getProductCategories = async () => {
     };
   }
 };
+
+export const getRecommendedProducts = async (id, limit = 3) => {
+  try {
+    if (!id) {
+      throw new Error('Product ID is required');
+    }
+
+    const response = await axiosInstance.get(`/products/recommended/${id}?limit=${limit}`);
+
+    return {
+      success: true,
+      data: response.data.products.map(transformProduct),
+      status: response.status,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: error.response?.data?.message || 'Failed to fetch product',
+      status: error.response?.status || 500,
+    };
+  }
+};
+

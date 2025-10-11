@@ -10,7 +10,7 @@ const SORT_OPTIONS = [
   { label: 'Rating - High to Low', field: 'rating', order: 'desc' },
 ];
 
-export default function SortDropdown({ sortBy = 'featured', sortOrder = 'desc', onSortChange = () => {} }) {
+export default function SortDropdown({ sortBy = 'featured', sortOrder = 'desc', onSortChange = () => {}, className = '' }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -50,24 +50,27 @@ export default function SortDropdown({ sortBy = 'featured', sortOrder = 'desc', 
   };
 
   return (
-    <div className="flex items-center gap-4">
-      <div className="relative">
+    <div className={`flex items-center gap-2 sm:gap-4 ${className}`}>
+      <div className="relative flex-shrink-0">
         <span className="font-semibold text-lg text-gray-800">Sort by:</span>
         <div className="absolute -bottom-1 left-0 w-12 h-0.5 bg-gray-800" />
       </div>
 
-      <div className="relative" ref={dropdownRef}>
+      <div className="relative flex-1 sm:flex-initial" ref={dropdownRef}>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center gap-2 bg-transparent text-gray-700 px-6 py-3 rounded-lg font-semibold border-2 border-gray-300 hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300"
+          className="w-full sm:w-[240px] flex items-center justify-between gap-2 bg-transparent text-gray-700 px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-semibold border-2 border-gray-300 hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300"
           aria-haspopup="true"
           aria-expanded={isOpen}
         >
-          {currentSort.label}
+          <span className="truncate text-left">{currentSort.label}</span>
+          <svg className="w-4 h-4 ml-2 text-gray-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
         </button>
 
         {isOpen && (
-          <div className="absolute right-0 z-50 w-56 mt-2 origin-top-right bg-white border border-gray-200 rounded-lg shadow-xl">
+          <div className="absolute left-0 z-50 w-full sm:w-64 mt-2 origin-top-left sm:origin-top-right bg-white border border-gray-200 rounded-lg shadow-xl">
             <div className="py-2">
               {SORT_OPTIONS.map((option, index) => (
                 <button

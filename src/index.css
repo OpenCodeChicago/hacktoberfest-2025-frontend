@@ -28,30 +28,6 @@
   }
 }
 
-.text-outline {
-  -webkit-text-stroke: 2px black;
-}
-
-/* Black text stroke utility (explicit name used in RecentlyViewed)Use multiple text-shadow layers to create an outer-only outline so the stroke doesn't bleed into inner counters of glyphs.*/
-.text-stroke-black {
-  /* multiple offsets around the glyph to simulate an even outline */
-  text-shadow:
-    -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000,
-    0 -2px 0 #000,
-    2px 0 0 #000,
-    0 2px 0 #000,
-    -2px 0 0 #000,
-    -2px -2px 0 #000,
-    2px -2px 0 #000,
-    2px 2px 0 #000,
-    -2px 2px 0 #000;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 /* Product Card Action Button Animations */
 @keyframes double-pop {
   0% { transform: scale(1); }

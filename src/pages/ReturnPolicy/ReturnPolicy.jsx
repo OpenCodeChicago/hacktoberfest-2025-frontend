@@ -1,4 +1,4 @@
-import SEO from "../../components/SEO";
+import SEO from '../../components/SEO';
 
 export default function ReturnPolicy() {
   return (
@@ -19,7 +19,7 @@ export default function ReturnPolicy() {
 
       <main
         id="main-content"
-        className="min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8"
+        className="min-h-screen bg-white font-inter py-12 px-4 sm:px-6 lg:px-8"
         role="main"
         aria-labelledby="return-policy-title"
       >
@@ -28,20 +28,20 @@ export default function ReturnPolicy() {
           <header className="mb-8">
             <h1
               id="return-policy-title"
-              className="text-4xl font-bold text-gray-900 mb-4"
+              className="text-5xl md:text-6xl text-gray-900 mb-4"
             >
               Return Policy
             </h1>
           </header>
-          <hr />
+          <hr className="text-slate-400" />
 
           {/* Main Content */}
-          <article className="prose prose-lg max-w-none text-gray-700 space-y-8">
+          <article className="prose prose-lg max-w-none space-y-8">
             {/* Our Approach */}
             <section aria-labelledby="our-approach-section">
               <h2
                 id="our-approach-section"
-                className="text-2xl font-semibold text-gray-900 mb-4"
+                className="text-3xl font-bold text-gray-900 mt-8 mb-8"
               >
                 OUR APPROACH
               </h2>
@@ -54,13 +54,13 @@ export default function ReturnPolicy() {
                 would look in a production e-commerce environment.
               </p>
             </section>
-            <hr />
+            <hr className="text-slate-400" />
 
             {/* Refunds & Returns */}
             <section aria-labelledby="refunds-returns-section">
               <h2
                 id="refunds-returns-section"
-                className="text-2xl font-semibold text-gray-900 mb-4"
+                className="text-3xl font-bold text-gray-900 mb-8"
               >
                 REFUNDS & RETURNS
               </h2>
@@ -72,13 +72,13 @@ export default function ReturnPolicy() {
                 unused and in good condition.
               </p>
             </section>
-            <hr />
+            <hr className="text-slate-400" />
 
             {/* Damaged or Defective Products */}
             <section aria-labelledby="damaged-defective-section">
               <h2
                 id="damaged-defective-section"
-                className="text-2xl font-semibold text-gray-900 mb-4"
+                className="text-3xl font-bold text-gray-900 mb-8"
               >
                 DAMAGED OR DEFECTIVE PRODUCTS
               </h2>
@@ -88,13 +88,13 @@ export default function ReturnPolicy() {
                 a replacement or refund would be issued accordingly.
               </p>
             </section>
-            <hr />
+            <hr className="text-slate-400" />
 
             {/* Important Note */}
             <section aria-labelledby="important-note-section">
               <h2
                 id="important-note-section"
-                className="text-2xl font-semibold text-gray-900 mb-4"
+                className="text-3xl font-bold text-gray-900 mb-8"
               >
                 IMPORTANT NOTE
               </h2>
@@ -105,10 +105,16 @@ export default function ReturnPolicy() {
                 to showcase what a professional supplement store might include.
               </p>
             </section>
-            <hr />
+            <hr className="text-slate-400" />
 
             {/* Disclaimer */}
             <section aria-labelledby="disclaimer-section">
+              <h2
+                id="disclaimer-section"
+                className="text-3xl font-bold text-gray-900 mb-8"
+              >
+                DISCLAIMER
+              </h2>
               <div className="flex">
                 <div className="flex-shrink-0">
                   <svg
@@ -125,16 +131,11 @@ export default function ReturnPolicy() {
                   </svg>
                 </div>
                 <div className="ml-3">
-                  <h2
-                    id="disclaimer-section"
-                    className="text-lg font-semibold mb-2"
-                  >
-                    DISCLAIMER
-                  </h2>
-                  <p className="text-yellow-700">
-                    CoreX Nutrition is a community-driven, open-source project.
-                    No real transactions, shipments, or returns are processed.
-                    This content is for educational and portfolio purposes only.
+                  <p>
+                    Core<span className="text-red-600">X</span> Nutrition is a
+                    community-driven, open-source project. No real transactions,
+                    shipments, or returns are processed. This content is for
+                    educational and portfolio purposes only.
                   </p>
                 </div>
               </div>

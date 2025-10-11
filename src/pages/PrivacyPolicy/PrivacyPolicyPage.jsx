@@ -1,4 +1,4 @@
-import SEO from "../../components/SEO";
+import SEO from '../../components/SEO';
 
 export default function PrivacyPolicyPage() {
   return (
@@ -19,7 +19,7 @@ export default function PrivacyPolicyPage() {
 
       <main
         id="main-content"
-        className="min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8"
+        className="min-h-screen bg-white font-inter py-12 px-4 sm:px-6 lg:px-8"
         role="main"
         aria-labelledby="privacy-policy-title"
       >
@@ -28,7 +28,7 @@ export default function PrivacyPolicyPage() {
           <header className="mb-8">
             <h1
               id="privacy-policy-title"
-              className="text-4xl font-bold text-gray-900 mb-4"
+              className="text-5xl text-gray-900 mb-4"
             >
               Privacy Policy
             </h1>
@@ -37,21 +37,21 @@ export default function PrivacyPolicyPage() {
           <hr />
 
           {/* Main Content */}
-          <article className="prose prose-lg max-w-none text-gray-700 space-y-8">
+          <article className="prose prose-lg max-w-none space-y-8">
             {/* Introduction Section */}
             <section aria-labelledby="introduction-section">
               <h2
                 id="introduction-section"
-                className="text-2xl font-semibold text-gray-900 mb-4"
+                className="text-2xl font-bold text-gray-900 my-8"
               >
                 INTRODUCTION
               </h2>
               <p className="mb-4">
                 At CoreX Nutrition, we care about your privacy and are committed
-                to transparency. This project is an open-source demo, but to
-                simulate the experience of a real e-commerce supplement store.
-                Please note: no real transactions, payments, or sensitive
-                personal data are processed on this site.
+                to transparency. This project is an open-source demo, built by
+                Open Code Chicago, designed to simulate the experience of a real
+                e-commerce supplements store. Please note: no real transactions,
+                payments, or sensitive personal data are processed on this site.
               </p>
             </section>
             <hr />
@@ -66,16 +66,18 @@ export default function PrivacyPolicyPage() {
               </h2>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>
-                  <strong>Basic usage data:</strong> Browser type, device type,
-                  and pages visited.
+                  Basic usage data: When you visit our site, we may collect
+                  general information such as browser type, device type, and
+                  pages visited.
                 </li>
                 <li>
-                  <strong>Account data (demo only):</strong> Name, email, or
-                  other info provided. Demo purposes only.
+                  Account data (demo only): If you create an account, we may
+                  store your name, email, or other information you provide. This
+                  data is for demonstration purposes only
                 </li>
                 <li>
-                  <strong>No financial information:</strong> Payment details are
-                  not stored.
+                  No financial information: We do not process or store payment
+                  details (e.g., credit cards, bank accounts).
                 </li>
               </ul>
             </section>
@@ -97,7 +99,8 @@ export default function PrivacyPolicyPage() {
                 <li>Send promotional emails</li>
               </ul>
               <p className="mt-4">
-                For this demo, any data is used only to showcase functionality.
+                Here at CoreX Nutrition (demo project), any data is used only to
+                showcase how a real store might function.
               </p>
             </section>
             <hr />
@@ -111,8 +114,9 @@ export default function PrivacyPolicyPage() {
                 DO WE SHARE INFORMATION?
               </h2>
               <p>
-                No. Data remains internal. We do not sell, trade, or share your
-                personal data with third parties.
+                No. We do not sell, trade, or share your personal data with
+                third parties. Since this project is not a live store, all
+                collected data remains internal to the demo.
               </p>
             </section>
             <hr />
@@ -127,7 +131,9 @@ export default function PrivacyPolicyPage() {
               </h2>
               <p>
                 Our site may use cookies to simulate cart functionality and user
-                sessions. Disabling cookies may affect demo features.
+                sessions. These cookies do not track you beyond this demo
+                website. You can disable cookies in your browser, but some demo
+                features may stop working.
               </p>
             </section>
             <hr />
@@ -141,23 +147,22 @@ export default function PrivacyPolicyPage() {
                 CHILDREN'S PRIVACY
               </h2>
               <p>
-                Not directed at children under 13; no data knowingly collected
-                from minors.
+                This project is not directed at children under the age of 13,
+                and we do not knowingly collect data from minors.
               </p>
             </section>
             <hr />
 
             {/* Security */}
             <section aria-labelledby="security-section">
-              <h2
-                id="security-section"
-                className="text-2xl font-semibold mb-4"
-              >
+              <h2 id="security-section" className="text-2xl font-semibold mb-4">
                 SECURITY
               </h2>
               <p>
-                No financial transactions or sensitive data stored. For
-                production, implement SSL and modern security best practices.
+                As an open-source demo, no financial transactions or sensitive
+                personal data are stored. However, if you fork or deploy this
+                project, we recommend implementing SSL encryption and modern
+                security best practices for production use.
               </p>
             </section>
             <hr />
@@ -166,15 +171,33 @@ export default function PrivacyPolicyPage() {
             <section aria-labelledby="disclaimer-section">
               <h2
                 id="disclaimer-section"
-                className="text-2xl font-semibold mb-4"
+                className="text-2xl font-extrabold mb-2"
               >
                 DISCLAIMER
               </h2>
-              <p>
-                CoreX Nutrition is not a real company. This Privacy Policy is for
-                educational/demo purposes only. No actual personal, payment, or
-                shipping data is collected or shared.
-              </p>
+              <div className="flex">
+                <div className="flex-shrink-0">
+                  <svg
+                    className="h-5 w-5 text-yellow-400"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <div className="ml-3">
+                  <p>
+                    CoreX Nutrition is a community-driven, open-source project.
+                    No real transactions, shipments, or returns are processed.
+                    This content is for educational and portfolio purposes only.
+                  </p>
+                </div>
+              </div>
             </section>
           </article>
         </div>

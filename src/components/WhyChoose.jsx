@@ -3,11 +3,11 @@ function WhyChoose() {
     <section aria-labelledby="why-choose" className="bg-black">
       <h2
         id="why-choose"
-        className="bg-white text-4xl lg:text-heading-xxl font-montserrat font-bold leading-none uppercase text-center -tracking-widest py-16"
+        className="bg-white text-4xl lg:text-heading-xxl uppercase py-16 section-title"
       >
-        Why <span className="text-white text-outline">Choose</span>
-        <span className="capitalize"> Core</span>
-        <span className="text-red-500 text-outline">X</span> Products
+        <span className="text-[#000]">Why </span><span>Choose</span>
+        <span className="capitalize text-[#000]"> Core</span>
+        <span className="text-red-500">X</span><span className="text-[#000]"> Products</span>
       </h2>
       <div className="grid grid-cols-1 gap-y-16 lg:grid-cols-3 max-w-5xl mx-auto text-white text-center py-23 leading-normal">
         <div className="flex flex-col items-center space-y-2">

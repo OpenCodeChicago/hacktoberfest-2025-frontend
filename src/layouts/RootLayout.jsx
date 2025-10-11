@@ -5,30 +5,21 @@ import 'react-toastify/dist/ReactToastify.css';
 import SEO from '../components/SEO';
 import TopFooter from '../components/Footer';
 import MainHeader from '../components/Header';
+import Loader from '../components/Loader';
 
 
 function RootLayout() {
   return (
     <>
       <MainHeader />
-      <main className="mt-[84px]">
+      <main className="mt-[84px] min-h-screen">
         <SEO
           title="CoreX Nutrition"
           description="CoreX Nutrition official site — explore accessibility, policies, and open-source projects."
           keywords="CoreX Nutrition, Open Source, Accessibility"
         />
         {/* Sets page-specific title/meta */}
-        <Suspense
-          fallback={
-            <div
-              role="status"
-              aria-live="polite"
-              className="text-center py-8 text-gray-500"
-            >
-              Loading content...
-            </div>
-          }
-        >
+        <Suspense fallback={<Loader />}>
           <Outlet />
         </Suspense>
       </main>

@@ -24,7 +24,7 @@ export default function SupplementForGoalsSection() {
     return (
         <section id="goals" ref={goalsRef} className="px-10 py-24 flex flex-col gap-16">
             <h2 id="why-choose" className="section-title">
-                Supplements for <span>every</span> goal
+                <span className="text-[#000]">Supplements for </span><span className="text-[#f7faff]">every</span> <span className="text-[#000]">goal</span>
             </h2>
 
             <div className="space-y-10">

@@ -7,6 +7,7 @@ export {
   getProductById,
   searchProducts,
   getProductCategories,
+  getRecommendedProducts,
 } from './productService.js';
 
 export {

@@ -33,7 +33,7 @@ export default function Products() {
     garageSaleOnly: false,
   });
   // Sorting state (client-side)
-  const [sortBy, setSortBy] = useState('best_selling');
+  const [sortBy, setSortBy] = useState('featured');
   const [sortOrder, setSortOrder] = useState('desc');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const productListKey = allProducts[0]?._id || 'no-products';
@@ -106,7 +106,7 @@ export default function Products() {
         break;
       case 'featured:desc':
       default:
-        // Featured is a placeholder - keep original order (assumed backend order)
+        // Featured (placeholder) - keep backend/default ordering
         break;
     }
 
@@ -172,9 +172,11 @@ export default function Products() {
 
         {/* Toolbar Section */}
         <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex justify-between items-center">
-            {/* Left: All Filters button */}
-            <button onClick={() => setIsFilterOpen(true)} className="flex items-center gap-2 bg-transparent text-gray-700 px-6 py-3 rounded-lg font-medium border border-gray-300 hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+            {/* Left: All Filters button (full width on mobile) */}
+            <button onClick={() => setIsFilterOpen(true)} className="w-full sm:w-auto flex items-center justify-center gap-2 bg-transparent text-gray-700 px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-medium border border-gray-300 hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300">
+              <span className="hidden sm:inline">All Filters</span>
+              <span className="sm:hidden">Filters</span>
               <svg
                 width="19"
                 height="15"
@@ -188,19 +190,21 @@ export default function Products() {
                   strokeLinecap="round"
                 />
               </svg>
-              All Filters
             </button>
-            <SortDropdown
-              sortBy={sortBy}
-              sortOrder={sortOrder}
-              onSortChange={(field, order) => {
-                // If user chooses Best Selling (placeholder), map empty or best_selling
-                setSortBy(field || 'best_selling');
-                setSortOrder(order || 'desc');
-                // reset displayed count to show top results
-                setDisplayedCount(12);
-              }}
-            />
+            <div className="self-end sm:self-auto w-full sm:w-auto">
+              <SortDropdown
+                className="w-full sm:w-auto"
+                sortBy={sortBy}
+                sortOrder={sortOrder}
+                onSortChange={(field, order) => {
+                    // If user chooses Featured (placeholder), map empty or featured
+                    setSortBy(field || 'featured');
+                  setSortOrder(order || 'desc');
+                  // reset displayed count to show top results
+                  setDisplayedCount(12);
+                }}
+              />
+            </div>
           </div>
         </section>
 

@@ -5,6 +5,7 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/OpenCodeChicago/hacktoberfest-2025-frontend)](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/commits/main)
 [![License: MIT](https://img.shields.io/github/license/OpenCodeChicago/hacktoberfest-2025-frontend)](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/blob/main/LICENSE)
 [![CI/CD](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/actions/workflows/ci-cd.yml)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a92a1b14-e57c-49d5-b7a2-2894b5c64b87/deploy-status)](https://app.netlify.com/projects/corexshop/deploys)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/OpenCodeChicago/hacktoberfest-2025-frontend/badge)](https://securityscorecards.dev/viewer/?uri=github.com/OpenCodeChicago/hacktoberfest-2025-frontend)
 [![Open Issues](https://img.shields.io/github/issues/OpenCodeChicago/hacktoberfest-2025-frontend)](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/issues)
 [![Pull Requests](https://img.shields.io/github/issues-pr/OpenCodeChicago/hacktoberfest-2025-frontend)](https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/pulls)

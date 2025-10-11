@@ -9,7 +9,7 @@ const HeartIcon = ({ isWishlisted = false, animate = false, className = 'h-6 w-6
     viewBox="0 0 18 17"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-  className={`${className} transition-transform duration-200 ease-out ${animate ? 'animate-double-pop' : (isWishlisted ? 'scale-110' : '')} ${isWishlisted ? 'text-white' : 'text-current'}`}
+    className={`${className} transition-transform duration-200 ease-out ${animate ? 'animate-double-pop' : (isWishlisted ? 'scale-110' : '')} ${isWishlisted ? 'text-white' : 'text-current'}`}
     aria-hidden="true"
     focusable="false"
   >
@@ -96,20 +96,21 @@ const ProductCard = forwardRef(({ product }, ref) => {
   }
 
   return (
-    <div 
+    <div
       ref={ref}
-      className="bg-white rounded-2xl p-4 transition-all duration-300 shadow-[0_8px_30px_rgb(0,0,0,0.15)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.25)] flex flex-col select-none"
+      className="bg-white rounded-2xl p-3 sm:p-4 transition-all duration-300 shadow-[0_8px_30px_rgb(0,0,0,0.15)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.25)] flex flex-col select-none max-w-full"
     >
       {/* --- IMAGE CONTAINER --- */}
-  <div
-    className="relative aspect-square overflow-hidden rounded-xl mb-4 bg-gray-100 group cursor-pointer"
-    role="button"
-    tabIndex={0}
-    aria-label={`View details for ${product.name}`}
-    onClick={handleProductClick}
-    onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleProductClick()}
-  >
-        
+      <div
+        className="relative w-full overflow-hidden rounded-xl mb-3 bg-gray-100 group cursor-pointer"
+        style={{ paddingTop: '100%' }}
+        role="button"
+        tabIndex={0}
+        aria-label={`View details for ${product.name}`}
+        onClick={handleProductClick}
+        onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleProductClick()}
+      >
+
         {/* Badges for NEW and SALE */}
         <div className="absolute top-3 left-3 z-10 flex flex-col gap-2">
           {product.isNew && (
@@ -123,7 +124,7 @@ const ProductCard = forwardRef(({ product }, ref) => {
             </span>
           )}
         </div>
-        
+
         {/* State 1: Image is loading */}
         {!imageLoaded && !imageError && (
           <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 animate-pulse flex items-center justify-center">
@@ -146,7 +147,7 @@ const ProductCard = forwardRef(({ product }, ref) => {
         <img
           src={product.imageUrl || 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDMwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xMjUgMTI1SDEzNVYxMzVIMTI1VjEyNVpNMTM1IDEyNUgxNDVWMTM1SDEzNVYxMjVaTTE0NSAxMjVIMTU1VjEzNUgxNDVWMTI1Wk0xNTUgMTI1SDE2NVYxMzVIMTU1VjEyNVpNMTY1IDEyNUgxNzVWMTM1SDE2NVYxMjVaIiBmaWxsPSIjOUI5QkEzIi8+CjxwYXRoIGQ9Ik0xMzUgMTQ1SDE0NVYxNTVIMTM1VjE0NVpNMTQ1IDE0NUgxNTVWMTU1SDE0NVYxNDVaTTE1NSAxNDVIMTY1VjE1NUgxNTVWMTQ1WiIgZmlsbD0iIzlCOUJBMyIvPgo8L3N2Zz4K'}
           alt={product.name}
-          className={`w-full h-full object-contain transition-opacity duration-500 ${imageLoaded && !imageError ? 'opacity-100' : 'opacity-0'}`}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${imageLoaded && !imageError ? 'opacity-100' : 'opacity-0'}`}
           onLoad={() => setImageLoaded(true)}
           onError={() => {
             setImageLoaded(true);
@@ -185,7 +186,7 @@ const ProductCard = forwardRef(({ product }, ref) => {
             <span className="font-bold text-lg text-gray-800">{formatPrice(product.price)}</span>
           </div>
         </div>
-        
+
         <div className="mb-2">
           <h3 className="font-bold text-2xl text-gray-800 leading-tight line-clamp-2">{product.name}</h3>
         </div>
@@ -216,15 +217,15 @@ const ProductCard = forwardRef(({ product }, ref) => {
                   </option>
                 ))}
               </select>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+                <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </div>
             </div>
           )}
         </div>
-        
+
         <div className="flex items-center gap-3 mt-auto">
           <button
             onClick={(e) => handleActionClick(e, handleWishlistToggle)}
@@ -252,6 +253,20 @@ const ProductCard = forwardRef(({ product }, ref) => {
           >
             {cartLoading ? (
               <span className="flex items-center gap-2 font-semibold">
+          {/* --- Add to Cart Button --- */}
+          <button
+            onClick={(e) => handleActionClick(e, handleAddToCart)}
+            className={`
+          -ml-px flex-grow flex items-center justify-center gap-2 
+          bg-[#023e8a] text-white font-medium 
+          py-3 px-4 rounded-r-xl 
+          hover:bg-[#1054ab] transition-colors duration-150 hover:shadow-lg cursor-pointer
+          focus:outline-none focus:z-10
+        `}
+            aria-live="polite"
+          >
+            {cartLoading ? (
+              <span className="ml-2 flex items-center gap-2 font-semibold">
                 <svg className="w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
                   <circle cx="12" cy="12" r="10" strokeWidth="3" stroke="currentColor" opacity="0.25" />
                   <path d="M22 12a10 10 0 00-10-10" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
@@ -260,6 +275,7 @@ const ProductCard = forwardRef(({ product }, ref) => {
               </span>
             ) : cartAdded ? (
               <span className="flex items-center gap-2 font-semibold">
+              <span className="ml-2 flex items-center gap-2 font-semibold">
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
                   <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
@@ -272,6 +288,11 @@ const ProductCard = forwardRef(({ product }, ref) => {
               </>
             )}
           </button>
+                <span className="ml-2">ADD TO CART</span>
+              </>
+            )}
+          </button>
+
         </div>
       </div>
     </div>

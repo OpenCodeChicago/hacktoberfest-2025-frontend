@@ -31,7 +31,7 @@ export const RouterConfig = () =>
       <Route path="/register" element={<Register />} />
       <Route path="/" element={<RootLayout />}>
         <Route index element={<Home />} />
-        <Route path="products" element={<Products />} />
+        <Route path="/products" element={<Products />} />
         <Route path="product/:id" element={<ProductPage />} />
         <Route path="garage-sale" element={<GarageSale />} />
         <Route path="accessibility" element={<Accessibility />} />

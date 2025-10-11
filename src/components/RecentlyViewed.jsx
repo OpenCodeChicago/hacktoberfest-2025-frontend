@@ -15,7 +15,6 @@ const ChevronRightIcon = (props) => (
   </svg>
 );
 
-
 export default function RecentlyViewed() {
   const [items] = useState(() => getRecentlyViewed());
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -31,7 +30,7 @@ export default function RecentlyViewed() {
     const newIndex = Math.max(currentIndex - itemsPerPage, 0);
     setCurrentIndex(newIndex);
   };
-  
+
   if (!items || items.length === 0) {
     return null;
   }
@@ -42,12 +41,12 @@ export default function RecentlyViewed() {
   const visibleItems = items.slice(currentIndex, currentIndex + itemsPerPage);
 
   return (
-    <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <section className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 py-8">
       {/* Header section with title and navigation arrows */}
-      <div className="flex items-center justify-between mb-8">
-        <h2 className="text-5xl lg:text-heading-xxl font-montserrat text-black leading-none uppercase text-center tracking-tight py-10 text-stroke-black">
-          RECENTLY
-          <span className="ml-5 text-[#f7faff]">VIEWED</span>
+      <div className="flex items-center justify-between mb-6 flex-col sm:flex-row gap-4 sm:gap-0">
+        <h2 className="section-title text-center w-full sm:w-auto mb-0">
+          <span className="text-[#000]">RECENTLY </span>
+          <span className="text-[#f7faff]">VIEWED</span>
         </h2>
 
         {/* Navigation Buttons */}
@@ -55,30 +54,33 @@ export default function RecentlyViewed() {
           <button
             onClick={prevSlide}
             disabled={!canGoPrev}
-            className="flex h-15 w-15 items-center justify-center rounded-full border border-gray-300 text-gray-500 hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40 transition-all duration-200"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 text-gray-500 hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40 transition-all duration-200"
             aria-label="Previous"
           >
             <ChevronLeftIcon className="h-5 w-5" />
           </button>
+
           <button
             onClick={nextSlide}
             disabled={!canGoNext}
-            className="flex h-15 w-15 items-center justify-center rounded-full border border-gray-300 text-gray-500 hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40 transition-all duration-200"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 text-gray-500 hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40 transition-all duration-200"
             aria-label="Next"
           >
             <ChevronRightIcon className="h-5 w-5" />
           </button>
         </div>
       </div>
-      {/* Recently Viewed Products Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 transition-all duration-500 ease-in-out">
-        {visibleItems.map((product) => (
-          <div key={product.id} className="opacity-100">
-            <ProductCard product={product} />
-          </div>
-        ))}
+
+      {/* Recently Viewed Products: grid on desktop, horizontal scroll on mobile */}
+      <div className="transition-all duration-500 ease-in-out">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {visibleItems.map((product) => (
+            <div key={product.id} className="opacity-100">
+              <ProductCard product={product} />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
-
 }

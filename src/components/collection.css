@@ -10,33 +10,6 @@
   padding: 85px;
 }
 
-/* Heading Styles */
-.collection-heading {
-  text-align: center;
-  font-size: 64px;
-  font-weight: 700;
-  margin-bottom: 60px;
-  letter-spacing: -2%;
-  line-height: 64px;
-  text-transform: uppercase;
-}
-
-.heading-shop,
-.heading-collection {
-  color: #000;
-  font-weight: 900;
-  font-family: 'Montserrat', sans-serif;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.heading-by {
-  color: transparent;
-  -webkit-text-stroke: 1px #000;
-  text-stroke: 1px #000;
-  font-weight: 700;
-  padding: 0 8px;
-}
-
 /* Collection Grid */
 .collection-grid {
   display: grid;
@@ -118,10 +91,6 @@
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .collection-heading {
-    font-size: 3rem;
-  }
-
   .collection-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
@@ -131,16 +100,6 @@
 @media (max-width: 640px) {
   .shop-by-collection {
     padding: 60px 16px;
-  }
-
-  .collection-heading {
-    font-size: 2rem;
-    margin-bottom: 40px;
-  }
-
-  .heading-by {
-    -webkit-text-stroke: 1.5px #000;
-    text-stroke: 1.5px #000;
   }
 
   .collection-grid {

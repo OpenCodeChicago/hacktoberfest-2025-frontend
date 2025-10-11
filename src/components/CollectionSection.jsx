@@ -61,10 +61,10 @@ const CollectionSection = () => {
 
   return (
     <section className="shop-by-collection">
-      <h2 className="collection-heading">
-        <span className="heading-shop">SHOP</span>{' '}
-        <span className="heading-by">BY</span>{' '}
-        <span className="heading-collection">COLLECTION</span>
+      <h2 className="section-title mb-12">
+        <span className="text-[#000]">SHOP </span>
+        <span>BY </span>
+        <span className="text-[#000]">COLLECTION</span>
       </h2>
 
       <div className="collection-grid">
