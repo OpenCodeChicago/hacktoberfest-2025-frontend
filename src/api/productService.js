@@ -53,11 +53,32 @@ export const getProducts = async (params = {}) => {
     if (params.sortBy) apiParams.sortBy = params.sortBy;
     if (params.sortOrder) apiParams.sortOrder = params.sortOrder;
 
-    const response = await axiosInstance.get('/products', { params: apiParams });
+    let response;
+    if (params.sort) {
+      const sortKey = encodeURIComponent(params.sort);
+      response = await axiosInstance.get(`/products/sort/${sortKey}`, { params: apiParams });
+    } else {
+      response = await axiosInstance.get('/products', { params: apiParams });
+    }
 
+    const data = response.data;
+
+    if (Array.isArray(data)) {
+      return {
+        success: true,
+        data: {
+          products: data,
+          total: data.length,
+          page: 1,
+          pages: 1,
+        },
+        status: response.status,
+      };
+    }
+    
     return {
       success: true,
-      data: transformApiResponse(response.data),
+      data: transformApiResponse(data),
       status: response.status,
     };
   } catch (error) {
