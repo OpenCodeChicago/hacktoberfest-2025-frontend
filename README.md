@@ -198,7 +198,21 @@ hacktoberfest-2025-frontend/                     # Main project root
 │
 ├── src/                                         # Application source code
 │   ├── components/                              # React components
-│   └── main.js                                  # Entry point
+│   │   ├── Header/                              # Header component with user icon
+│   │   ├── Footer/                              # Footer component
+│   │   ├── Search/                              # Search functionality
+│   │   └── ui/                                  # UI components
+│   ├── pages/                                   # Page components
+│   │   ├── Auth/                                # Authentication modal (login/register)
+│   │   ├── Home/                                # Homepage
+│   │   ├── Products/                            # Product pages
+│   │   └── About/                               # About page
+│   ├── routes/                                  # Routing configuration
+│   ├── store/                                   # Redux state management
+│   ├── hooks/                                   # Custom React hooks
+│   ├── utils/                                   # Utility functions
+│   ├── services/                                # API services
+│   └── main.jsx                                 # Entry point
 │
 ├── .all-contributorsrc                          # Config for all-contributors bot
 ├── .gitignore                                   # Ignored files
