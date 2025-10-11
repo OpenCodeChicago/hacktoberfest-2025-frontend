@@ -7,6 +7,8 @@ import {
   WhyChoose,
   SupplementForGoalsSection,
 } from '../../components';
+import BestOfCoreX from '../../components/BestOfCoreX';
+
 
 export default function Home() {
   return (
@@ -37,7 +39,8 @@ export default function Home() {
         />
         {/* Shop Collection Component */}
         <CollectionSection />
-      </main>
+        <BestOfCoreX/>
+      </main >
     </>
   );
 }

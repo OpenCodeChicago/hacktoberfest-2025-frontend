@@ -59,6 +59,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.9.0",
     "axios": "^1.12.2",
+    "framer-motion": "^12.23.24",
     "lucide-react": "^0.545.0",
     "radix-ui": "^1.4.3",
     "react": "19.1.1",
