@@ -3,10 +3,10 @@ import { Outlet } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SEO from '../components/SEO';
-import TopFooter from '../components/Footer';
+import TopFooter from '../components/TopFooter';
 import MainHeader from '../components/Header';
 import Loader from '../components/Loader';
-
+import BottomFooter from '../components/BottomFooter';
 
 function RootLayout() {
   return (
@@ -24,7 +24,7 @@ function RootLayout() {
         </Suspense>
       </main>
       <TopFooter />
-      {/* <Footer /> */}
+      <BottomFooter />
 
       <ToastContainer
         position="top-right"
