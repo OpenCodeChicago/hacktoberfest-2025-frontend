@@ -35,6 +35,7 @@ export const RouterConfig = () =>
         <Route index element={<Home />} />
         <Route path="/products" element={<Products />} />
         <Route path="product/:id" element={<ProductPage />} />
+        <Route path="garage-sale" element={<GarageSale />} />
         <Route path="accessibility" element={<Accessibility />} />
         <Route path="privacy-policy" element={<PrivacyPolicy />} />
         <Route path="return-policy" element={<ReturnPolicy />} />{' '}

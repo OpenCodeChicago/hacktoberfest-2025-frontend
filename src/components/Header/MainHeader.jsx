@@ -185,6 +185,52 @@ export default function Header() {
           </div>
         </div>
 
+      {/* Mobile Menu */}
+      {mobileOpen && (
+        <div className="md:hidden fixed inset-0 z-40 bg-black/50">
+          <div className="bg-white w-64 h-full shadow-lg">
+            <div className="p-4 border-b">
+              <button
+                onClick={() => setMobileOpen(false)}
+                className="text-gray-600 hover:text-black"
+              >
+                <X className="h-6 w-6" />
+              </button>
+            </div>
+            <nav className="p-4 space-y-4">
+              <Link 
+                to="/garage-sale" 
+                className="block text-gray-700 hover:text-black"
+                onClick={() => setMobileOpen(false)}
+              >
+                Garage Sale
+              </Link>
+              <Link
+                to="/products"
+                className="block text-gray-700 hover:text-black"
+                onClick={() => setMobileOpen(false)}
+              >
+                All Products
+              </Link>
+              <Link 
+                to="/about-corex" 
+                className="block text-gray-700 hover:text-black"
+                onClick={() => setMobileOpen(false)}
+              >
+                About CoreX
+              </Link>
+            </nav>
+          </div>
+        </div>
+      )}
+
+      {/* 🔍 Right Slide Search Drawer */}
+      {search && (
+        <div className="fixed inset-0 z-[9999] flex justify-end bg-black/40">
+          {/* Drawer */}
+          <div className="relative w-full sm:w-[580px] bg-white h-full shadow-2xl transform transition-transform duration-300 ease-in-out translate-x-0">
+            <div className="flex justify-between items-center p-6 border-b">
+              <h2 className="text-lg font-bold text-gray-900">SEARCH</h2>
         {/* Mobile Menu */}
         {mobileOpen && (
           <div className="md:hidden bg-white shadow-md animate-fadeIn">
