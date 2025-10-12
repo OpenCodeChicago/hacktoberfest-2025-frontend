@@ -1,8 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedinIn,
+} from 'react-icons/fa';
 
 export default function TopHeader() {
-  const messages = ['Buy 1 get 1 50% off', 'Free shipping on orders over $110'];
+  const messages = [
+    <>
+      Buy 1 get 1{' '}
+      <span className="underline decoration-red-500 decoration-2 underline-offset-4 text-white">
+        50% off
+      </span>
+    </>,
+    <>
+      <span className="underline decoration-red-500 decoration-2 underline-offset-4 text-white">
+        Free shipping
+      </span>{' '}
+      on orders over $110
+    </>,
+  ];
 
   const [index, setIndex] = useState(0);
 
@@ -21,26 +39,27 @@ export default function TopHeader() {
           {messages[index]}
         </p>
       </div>
+      {/* Right Side Icons */}
       <div className="flex space-x-4 ml-4">
         <a href="#" aria-label="Facebook" className="hover:text-gray-300">
-          <Facebook
+          <FaFacebookF
             size={18}
             className="fill-current text-white hover:text-gray-300"
             stroke="none"
           />
         </a>
         <a href="#" aria-label="Twitter" className="hover:text-gray-300">
-          <Twitter
+          <FaTwitter
             size={18}
             className="fill-current text-white hover:text-gray-300"
             stroke="none"
           />
         </a>
         <a href="#" aria-label="Instagram" className="hover:text-gray-300">
-          <Instagram size={18} />
+          <FaInstagram size={18} />
         </a>
         <a href="#" aria-label="LinkedIn" className="hover:text-gray-300">
-          <Linkedin
+          <FaLinkedinIn
             size={18}
             className="fill-current text-white hover:text-gray-300"
             stroke="none"

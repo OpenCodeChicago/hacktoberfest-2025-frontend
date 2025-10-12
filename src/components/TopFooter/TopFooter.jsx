@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router';
-import { toast } from 'react-toastify'; 
+import { toast } from 'react-toastify';
 
 const customerCare = [
   { name: 'My Account', href: '/login' },
@@ -131,7 +131,7 @@ export default function TopFooter() {
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-neutral-300 hover:text-[#1054ab] transition"
+                    className="text-neutral-300 link-underline transition"
                   >
                     {link.name}
                   </a>
@@ -146,7 +146,7 @@ export default function TopFooter() {
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-neutral-300 hover:text-[#1054ab] transition"
+                    className="text-neutral-300 link-underline transition"
                   >
                     {link.name}
                   </a>

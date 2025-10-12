@@ -143,13 +143,13 @@ export default function Header() {
                   <Heart className="h-5 w-5" />
                 </a>
                 
-                <a
-                  href="#"
+                <Link
+                  to="/login"
                   aria-label="User Account"
                   className="transform transition-transform duration-200 hover:scale-110 hover:text-black"
                 >
                   <User className="h-5 w-5" />
-                </a>
+                </Link>
                 
                 <a
                   href="#"

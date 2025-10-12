@@ -114,13 +114,20 @@ export default function SearchBox({ onClose, isOpen }) {
             <div className="relative w-full">
               <input
                 type="text"
+                id="search"
+                class="w-full px-4 py-3 pr-16 bg-gray-100 border border-gray-200 rounded-md
+                         text-gray-700 appearance-none focus:outline-none focus:ring-2
+                         focus:ring-blue-600 peer hover:shadow-sm focus:shadow-md"
+                placeholder=" "
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Searching for..."
-                className="w-full px-4 py-3 pr-16 bg-gray-100 border border-gray-200 rounded-md
-                         text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2
-                         focus:ring-blue-600 hover:shadow-sm focus:shadow-md transition-all duration-200"
               />
+              <label
+                for="search"
+                class="absolute text-sm text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 left-3 z-10 origin-[0] px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:text-gray-400 peer-focus:top-3 peer-focus:scale-75 peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
+              >
+                Search for...
+              </label>
 
               {/* Clear button */}
               {searchQuery && !loading && (

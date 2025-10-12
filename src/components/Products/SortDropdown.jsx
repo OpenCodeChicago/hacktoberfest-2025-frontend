@@ -18,7 +18,7 @@ export default function SortDropdown({ sortBy = 'featured', sortOrder = 'desc', 
     option => option.field === sortBy && option.order === sortOrder
   ) || SORT_OPTIONS[0];
 
-  // This hook now handles clicks outside AND page scrolling
+  // Handle clicks outside to close the dropdown. Do NOT close on scroll — UX requires it remain open until user closes.
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -26,21 +26,12 @@ export default function SortDropdown({ sortBy = 'featured', sortOrder = 'desc', 
       }
     };
 
-    // A simple function to close the dropdown
-    const handleScroll = () => {
-      setIsOpen(false);
-    };
-
-    // Add event listeners only when the dropdown is open
     if (isOpen) {
       document.addEventListener('mousedown', handleClickOutside);
-      document.addEventListener('scroll', handleScroll, true); // Added scroll listener
     }
 
-    // Cleanup: remove both event listeners
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('scroll', handleScroll, true); // Removed scroll listener
     };
   }, [isOpen]);
 
@@ -50,16 +41,16 @@ export default function SortDropdown({ sortBy = 'featured', sortOrder = 'desc', 
   };
 
   return (
-    <div className={`flex items-center gap-2 sm:gap-4 ${className}`}>
-      <div className="relative flex-shrink-0">
+    <div ref={dropdownRef} className={`relative flex items-center gap-2 sm:gap-4 ${className}`}>
+      <div className="flex-shrink-0">
         <span className="font-semibold text-lg text-gray-800">Sort by:</span>
-        <div className="absolute -bottom-1 left-0 w-12 h-0.5 bg-gray-800" />
+        <div className="absolute left-0 w-12 h-0.5 bg-gray-800" />
       </div>
 
-      <div className="relative flex-1 sm:flex-initial" ref={dropdownRef}>
+      <div className="flex-1 sm:flex-initial">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="w-full sm:w-[240px] flex items-center justify-between gap-2 bg-transparent text-gray-700 px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-semibold border-2 border-gray-300 hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300"
+          className="w-full sm:w-[240px] flex items-center justify-between gap-2 bg-transparent text-gray-700 px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-semibold border-2 border-gray-300 hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300 cursor-pointer"
           aria-haspopup="true"
           aria-expanded={isOpen}
         >
@@ -69,8 +60,26 @@ export default function SortDropdown({ sortBy = 'featured', sortOrder = 'desc', 
           </svg>
         </button>
 
-        {isOpen && (
-          <div className="absolute left-0 z-50 w-full sm:w-64 mt-2 origin-top-left sm:origin-top-right bg-white border border-gray-200 rounded-lg shadow-xl">
+        <div
+          className={`absolute top-0 left-0 right-0 z-20 w-full bg-white border border-gray-200 rounded-lg shadow-xl overflow-hidden transition-[max-height,opacity] duration-300 ease-out ${
+            isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          }`}
+          aria-hidden={!isOpen}
+        >
+            {/* Header with title and X close button */}
+            <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
+              <div className="text-xs font-semibold text-gray-800 uppercase">Sort by</div>
+              <button
+                onClick={() => setIsOpen(false)}
+                aria-label="Close sort menu"
+                className="text-gray-500 hover:text-gray-800 focus:outline-none ml-2 cursor-pointer border rounded-full p-1"
+                >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
             <div className="py-2">
               {SORT_OPTIONS.map((option, index) => (
                 <button
@@ -80,7 +89,7 @@ export default function SortDropdown({ sortBy = 'featured', sortOrder = 'desc', 
                     option.field === sortBy && option.order === sortOrder
                       ? 'bg-blue-50 text-blue-700 font-semibold'
                       : 'text-gray-700'
-                  }`}
+                  } cursor-pointer`}
                   role="menuitem"
                 >
                   <span>{option.label}</span>
@@ -93,8 +102,8 @@ export default function SortDropdown({ sortBy = 'featured', sortOrder = 'desc', 
               ))}
             </div>
           </div>
-        )}
       </div>
     </div>
   );
+
 }

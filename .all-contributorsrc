@@ -72,7 +72,8 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/61222846?v=4",
       "profile": "https://github.com/AparAgarwal",
       "contributions": [
-        "code"
+        "code",
+        "bug"
       ]
     },
     {
@@ -126,6 +127,33 @@
       "name": "Onwudebelu Prisca Ebubechukwu",
       "avatar_url": "https://avatars.githubusercontent.com/u/60774343?v=4",
       "profile": "http://prisca.vercel.app",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "shourya2006",
+      "name": "Shourya",
+      "avatar_url": "https://avatars.githubusercontent.com/u/75479705?v=4",
+      "profile": "https://github.com/shourya2006",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "codervipul775",
+      "name": "Vipul",
+      "avatar_url": "https://avatars.githubusercontent.com/u/184411035?v=4",
+      "profile": "https://github.com/codervipul775",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Turbash",
+      "name": "Turbash Negi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/170945289?v=4",
+      "profile": "https://github.com/Turbash",
       "contributions": [
         "code"
       ]
