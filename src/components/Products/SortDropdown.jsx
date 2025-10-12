@@ -10,7 +10,7 @@ const SORT_OPTIONS = [
   { label: 'Rating - High to Low', field: 'rating', order: 'desc' },
 ];
 
-export default function SortDropdown({ sortBy = 'featured', sortOrder = 'desc', onSortChange = () => {}, className = '' }) {
+export default function SortDropdown({ sortBy = 'featured', sortOrder = 'desc', onSortChange = () => { }, className = '' }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -61,49 +61,46 @@ export default function SortDropdown({ sortBy = 'featured', sortOrder = 'desc', 
         </button>
 
         <div
-          className={`absolute top-0 left-0 right-0 z-20 w-full bg-white border border-gray-200 rounded-lg shadow-xl overflow-hidden transition-[max-height,opacity] duration-300 ease-out ${
-            isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-          }`}
+          className={`absolute top-0 left-0 right-0 z-20 w-full bg-white border border-gray-200 rounded-lg shadow-xl overflow-hidden transition-[max-height,opacity] duration-300 ease-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+            }`}
           aria-hidden={!isOpen}
         >
-            {/* Header with title and X close button */}
-            <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
-              <div className="text-xs font-semibold text-gray-800 uppercase">Sort by</div>
-              <button
-                onClick={() => setIsOpen(false)}
-                aria-label="Close sort menu"
-                className="text-gray-500 hover:text-gray-800 focus:outline-none ml-2 cursor-pointer border rounded-full p-1"
-                >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-
-            <div className="py-2">
-              {SORT_OPTIONS.map((option, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleSortSelect(option)}
-                  className={`w-full px-4 py-2 text-left text-sm flex items-center justify-between hover:bg-gray-100 focus:bg-gray-100 focus:outline-none transition-colors ${
-                    option.field === sortBy && option.order === sortOrder
-                      ? 'bg-blue-50 text-blue-700 font-semibold'
-                      : 'text-gray-700'
-                  } cursor-pointer`}
-                  role="menuitem"
-                >
-                  <span>{option.label}</span>
-                  {option.field === sortBy && option.order === sortOrder && (
-                    <svg className="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  )}
-                </button>
-              ))}
-            </div>
+          {/* Header with title and X close button */}
+          <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
+            <div className="text-xs font-semibold text-gray-800 uppercase">Sort by</div>
+            <button
+              onClick={() => setIsOpen(false)}
+              aria-label="Close sort menu"
+              className="text-gray-500 hover:text-gray-800 focus:outline-none ml-2 cursor-pointer border rounded-full p-1"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
           </div>
+
+          <div className="py-2">
+            {SORT_OPTIONS.map((option, index) => (
+              <button
+                key={index}
+                onClick={() => handleSortSelect(option)}
+                className={`w-full px-4 py-2 text-left text-sm flex items-center justify-between hover:bg-gray-100 focus:bg-gray-100 focus:outline-none transition-colors ${option.field === sortBy && option.order === sortOrder
+                  ? 'bg-blue-50 text-blue-700 font-semibold'
+                  : 'text-gray-700'
+                  } cursor-pointer`}
+                role="menuitem"
+              >
+                <span>{option.label}</span>
+                {option.field === sortBy && option.order === sortOrder && (
+                  <svg className="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
-
 }

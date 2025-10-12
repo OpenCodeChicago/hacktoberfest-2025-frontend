@@ -5,21 +5,21 @@ export default function RangeSlider({ min, max, value, onChange }) {
   const [maxValue, setMaxValue] = useState(value[1]);
   const [isDragging, setIsDragging] = useState(null);
   const sliderRef = useRef(null);
-  
+
   useEffect(() => {
     setMinValue(value[0]);
     setMaxValue(value[1]);
   }, [value]);
 
   const getPercentage = (val) => ((val - min) / (max - min)) * 100;
-  
+
   const handleMouseMove = useCallback((e) => {
     if (!isDragging || !sliderRef.current) return;
-    
+
     const rect = sliderRef.current.getBoundingClientRect();
     const percentage = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
     const newValue = min + (percentage / 100) * (max - min);
-    
+
     if (isDragging === 'min') {
       const newMin = Math.max(min, Math.min(newValue, maxValue - 1));
       setMinValue(newMin);
@@ -33,12 +33,12 @@ export default function RangeSlider({ min, max, value, onChange }) {
 
   const handleTouchMove = useCallback((e) => {
     if (!isDragging || !sliderRef.current) return;
-    
+
     const rect = sliderRef.current.getBoundingClientRect();
     const touch = e.touches[0];
     const percentage = Math.max(0, Math.min(100, ((touch.clientX - rect.left) / rect.width) * 100));
     const newValue = min + (percentage / 100) * (max - min);
-    
+
     if (isDragging === 'min') {
       const newMin = Math.max(min, Math.min(newValue, maxValue - 1));
       setMinValue(newMin);
@@ -103,39 +103,39 @@ export default function RangeSlider({ min, max, value, onChange }) {
 
   return (
     <div className="relative px-1">
-      <div 
+      <div
         ref={sliderRef}
         className="relative h-1 bg-gray-200 rounded-full mb-4 cursor-pointer"
         style={{ userSelect: 'none' }}
       >
         {/* Active range track */}
-        <div 
+        <div
           className="absolute h-1 bg-black rounded-full"
           style={{ left: `${minPos}%`, width: `${maxPos - minPos}%` }}
         />
-        
+
         {/* Min value handle */}
-        <div 
+        <div
           className="absolute w-4 h-4 bg-black rounded-full shadow-lg -top-1.5 transform -translate-x-1/2 cursor-grab active:cursor-grabbing"
           style={{ left: `${minPos}%`, zIndex: isDragging === 'min' ? 10 : 2 }}
           onMouseDown={handleMouseDown('min')}
           onTouchStart={handleTouchStart('min')}
         />
-        
+
         {/* Max value handle */}
-        <div 
+        <div
           className="absolute w-4 h-4 bg-black rounded-full shadow-lg -top-1.5 transform -translate-x-1/2 cursor-grab active:cursor-grabbing"
           style={{ left: `${maxPos}%`, zIndex: isDragging === 'max' ? 10 : 2 }}
           onMouseDown={handleMouseDown('max')}
           onTouchStart={handleTouchStart('max')}
         />
       </div>
-      
+
       <div className="flex justify-between items-center">
         <div className="relative">
           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-xs">$</span>
-          <input 
-            type="text" 
+          <input
+            type="text"
             value={Math.round(minValue)}
             onChange={handleMinInputChange}
             className="w-20 pl-6 pr-2 py-2 border border-gray-300 rounded-full text-right text-xs price-input"
@@ -146,8 +146,8 @@ export default function RangeSlider({ min, max, value, onChange }) {
         <span className="text-gray-500 text-xs mx-2">to</span>
         <div className="relative">
           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-xs">$</span>
-          <input 
-            type="text" 
+          <input
+            type="text"
             value={Math.round(maxValue)}
             onChange={handleMaxInputChange}
             className="w-20 pl-6 pr-2 py-2 border border-gray-300 rounded-full text-right text-xs price-input"

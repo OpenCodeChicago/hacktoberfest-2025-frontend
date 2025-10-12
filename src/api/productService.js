@@ -75,7 +75,7 @@ export const getProducts = async (params = {}) => {
         status: response.status,
       };
     }
-    
+
     return {
       success: true,
       data: transformApiResponse(data),
@@ -174,4 +174,3 @@ export const getRecommendedProducts = async (id, limit = 3) => {
     };
   }
 };
-

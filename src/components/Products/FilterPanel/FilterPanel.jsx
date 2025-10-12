@@ -14,7 +14,7 @@ export default function FilterPanel({
     const catMap = new Map();
     const goalMap = new Map();
     const prices = [];
-    
+
     (products || []).forEach((p) => {
       if (p.category) {
         catMap.set(p.category, (catMap.get(p.category) || 0) + 1);
@@ -31,7 +31,7 @@ export default function FilterPanel({
     });
 
     const maxProductPrice = prices.length > 0 ? Math.ceil(Math.max(...prices)) : 100;
-    
+
     return {
       categories: Array.from(catMap.entries()),
       goals: Array.from(goalMap.entries()),
@@ -60,9 +60,8 @@ export default function FilterPanel({
     });
   };
 
-  const panelClass = `fixed top-0 left-0 h-full w-full sm:w-80 bg-white shadow-2xl z-50 transform transition-transform duration-300 ${
-    open ? 'translate-x-0' : '-translate-x-full'
-  }`;
+  const panelClass = `fixed top-0 left-0 h-full w-full sm:w-80 bg-white shadow-2xl z-50 transform transition-transform duration-300 ${open ? 'translate-x-0' : '-translate-x-full'
+    }`;
 
   return (
     <div aria-hidden={!open}>
@@ -83,7 +82,7 @@ export default function FilterPanel({
 
           <div className="flex-grow custom-scrollbar px-1">
             <Accordion title="Price" defaultOpen={true}>
-              <RangeSlider 
+              <RangeSlider
                 min={0}
                 max={maxPrice}
                 value={effectivePriceRange}

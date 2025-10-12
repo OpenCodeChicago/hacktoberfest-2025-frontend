@@ -29,7 +29,7 @@ export const getCart = async () => {
  */
 export const addToCart = async (item) => {
   console.log('addToCart called with:', item);
-  
+
   return {
     success: true,
     data: {},
@@ -44,7 +44,7 @@ export const addToCart = async (item) => {
  */
 export const removeFromCart = async (itemId) => {
   console.log('removeFromCart called with itemId:', itemId);
-  
+
   return {
     success: true,
     data: {},
@@ -60,7 +60,7 @@ export const removeFromCart = async (itemId) => {
  */
 export const updateCartItemQuantity = async (itemId, quantity) => {
   console.log('updateCartItemQuantity called with:', { itemId, quantity });
-  
+
   return {
     success: true,
     data: {},

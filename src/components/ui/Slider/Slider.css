@@ -14,7 +14,6 @@
   --dot-color: white;
   --dot-bottom-min: 1rem;
   --dot-bottom-max: 4.5rem;
-  
   height: auto;
   max-height: calc(100vh - 4rem);
   container-type: inline-size;
@@ -23,8 +22,8 @@
 .hero-slider .slick-list,
 .hero-slider .slick-track,
 .hero-slider .slick-slide,
-.hero-slider .slick-slide > div,
-.hero-slider .slick-slide > div > div {
+.hero-slider .slick-slide>div,
+.hero-slider .slick-slide>div>div {
   height: auto;
   max-height: calc(100vh - 4rem);
 }
@@ -95,6 +94,7 @@
   0% {
     transform: scale(0);
   }
+
   100% {
     transform: scale(1);
   }

@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 export default function Accordion({ title, children, defaultOpen = false }) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
-  
+
   return (
     <div className="p-2 border-b border-gray-200">
       <button

@@ -139,7 +139,7 @@ const styles = {
     marginBottom: '1.5rem',
     letterSpacing: '-0.02em',
     lineHeight: 1.2,
-    
+
   },
   section: {
     marginBottom: '2rem',

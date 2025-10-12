@@ -74,7 +74,7 @@ const productSlice = createSlice({
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        
+
         // Handle different response structures
         if (action.payload.products) {
           // If response has products array and metadata

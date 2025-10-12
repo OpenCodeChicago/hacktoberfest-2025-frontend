@@ -333,11 +333,10 @@ const ProductCard = forwardRef(
           -ml-px flex-grow flex items-center justify-center gap-2 font-medium 
           py-3 px-4 rounded-r-xl transition-colors duration-150 hover:shadow-lg cursor-pointer
           focus:outline-none focus:z-10
-          ${
-            itemIsInCart
-              ? 'bg-green-600 text-white hover:bg-green-700'
-              : 'bg-[#023e8a] text-white hover:bg-[#1054ab]'
-          }
+          ${itemIsInCart
+                  ? 'bg-green-600 text-white hover:bg-green-700'
+                  : 'bg-[#023e8a] text-white hover:bg-[#1054ab]'
+                }
         `}
               aria-live="polite"
             >

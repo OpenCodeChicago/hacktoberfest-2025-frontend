@@ -18,8 +18,6 @@ export default function ProductPage() {
 
   const [recommendedProducts, setRecommendedProducts] = useState([])
 
-
-
   useEffect(() => {
     if (!id) return;
     dispatch(fetchProductById(id));

@@ -75,9 +75,8 @@ export default function Header() {
                     Shop
                   </span>
                   <ChevronDown
-                    className={`h-4 w-4 transition-transform duration-300 ${
-                      shopOpen ? 'rotate-180' : 'rotate-0'
-                    }`}
+                    className={`h-4 w-4 transition-transform duration-300 ${shopOpen ? 'rotate-180' : 'rotate-0'
+                      }`}
                   />
                 </button>
 
@@ -105,7 +104,7 @@ export default function Header() {
                 Garage Sale
                 <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-black transition-all duration-300 group-hover:w-full"></span>
               </Link>
-              
+
               <Link
                 to="/products"
                 className="relative text-gray-700 hover:text-black transition group"
@@ -113,7 +112,7 @@ export default function Header() {
                 All Products
                 <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-black transition-all duration-300 group-hover:w-full"></span>
               </Link>
-              
+
               <Link
                 to="/about-corex"
                 className="relative text-gray-700 hover:text-black transition group"
@@ -142,7 +141,7 @@ export default function Header() {
                 >
                   <Heart className="h-5 w-5" />
                 </a>
-                
+
                 <Link
                   to="/login"
                   aria-label="User Account"
@@ -150,7 +149,7 @@ export default function Header() {
                 >
                   <User className="h-5 w-5" />
                 </Link>
-                
+
                 <a
                   href="#"
                   aria-label="Shopping Cart"
@@ -195,9 +194,8 @@ export default function Header() {
               >
                 <span>Shop</span>
                 <ChevronDown
-                  className={`h-4 w-4 transition-transform duration-300 ${
-                    shopOpen ? 'rotate-180' : 'rotate-0'
-                  }`}
+                  className={`h-4 w-4 transition-transform duration-300 ${shopOpen ? 'rotate-180' : 'rotate-0'
+                    }`}
                 />
               </button>
 
@@ -221,14 +219,14 @@ export default function Header() {
               >
                 Garage Sale
               </Link>
-              
+
               <Link
                 to="/products"
                 className="text-gray-700 hover:text-black transition"
               >
                 All Products
               </Link>
-              
+
               <Link
                 to="/about-corex"
                 className="text-gray-700 hover:text-black transition"
@@ -242,17 +240,15 @@ export default function Header() {
 
       {/* Overlay for Mobile Menu */}
       <div
-        className={`fixed inset-0 bg-black/30 backdrop-blur-sm transition-opacity duration-300 ${
-          mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        } z-[998]`}
+        className={`fixed inset-0 bg-black/30 backdrop-blur-sm transition-opacity duration-300 ${mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          } z-[998]`}
       />
 
       {/* Mobile Menu Drawer */}
       <div
         ref={mobileMenuRef}
-        className={`fixed top-0 right-0 w-full sm:w-[280px] h-full bg-white shadow-2xl border-l border-gray-200 z-[999] transform transition-all duration-300 ease-in-out ${
-          mobileOpen ? "translate-x-0 scale-100" : "translate-x-full scale-95"
-        } flex flex-col`}
+        className={`fixed top-0 right-0 w-full sm:w-[280px] h-full bg-white shadow-2xl border-l border-gray-200 z-[999] transform transition-all duration-300 ease-in-out ${mobileOpen ? "translate-x-0 scale-100" : "translate-x-full scale-95"
+          } flex flex-col`}
       >
         {/* Mobile Menu Header */}
         <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
@@ -275,9 +271,8 @@ export default function Header() {
             >
               Shop
               <ChevronDown
-                className={`h-4 w-4 transition-transform duration-200 ${
-                  shopOpen ? "rotate-180" : ""
-                }`}
+                className={`h-4 w-4 transition-transform duration-200 ${shopOpen ? "rotate-180" : ""
+                  }`}
               />
             </button>
             {shopOpen && (
