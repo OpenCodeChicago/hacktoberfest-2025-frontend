@@ -123,8 +123,8 @@ const Register = () => {
           <button
             type="submit"
             className={`w-full px-4 py-2.5 text-base text-white rounded-md font-medium transition ${isFormFilled
-                ? 'bg-[#023e8a] hover:bg-[#1054ab] cursor-pointer'
-                : 'bg-gray-300 cursor-not-allowed'
+              ? 'bg-[#023e8a] hover:bg-[#1054ab] cursor-pointer'
+              : 'bg-gray-300 cursor-not-allowed'
               }`}
             disabled={!isFormFilled}
           >

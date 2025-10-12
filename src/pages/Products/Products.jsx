@@ -18,7 +18,7 @@ export default function Products() {
   const observer = useRef();
 
   const [displayedCount, setDisplayedCount] = useState(12);
-  
+
   // Get max price from products
   const maxProductPrice = useMemo(() => {
     if (!allProducts || allProducts.length === 0) return 100;
@@ -45,9 +45,8 @@ export default function Products() {
     return allProducts.filter((p) => {
       const price = Number(p.price || 0);
       if (Number.isNaN(price)) return false;
-      
-      if (price < minPrice || price > maxPrice) return false;
 
+      if (price < minPrice || price > maxPrice) return false;
 
       if (filters.garageSaleOnly) {
         // consider sale fields: sale > 0 or onSale flag
@@ -105,7 +104,7 @@ export default function Products() {
       <main className={`min-h-screen bg-[#F7FAFF] ${isFilterOpen ? 'relative' : ''}`}>
         {/* Filter Panel Backdrop - covers entire viewport including header */}
         {isFilterOpen && (
-          <div 
+          <div
             className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300"
             style={{ zIndex: 9998 }}
             onClick={() => setIsFilterOpen(false)}
