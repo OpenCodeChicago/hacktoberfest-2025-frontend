@@ -9,16 +9,8 @@ import './collection.css';
 const collections = [
   { id: 'pre-workout', title: 'PRE-WORKOUT', image: preWorkoutImg },
   { id: 'build-muscle', title: 'BUILD MUSCLE', image: buildMuscleImg },
-  {
-    id: 'weight-management',
-    title: 'WEIGHT MANAGEMENT',
-    image: weightManagementImg,
-  },
-  {
-    id: 'health-wellness',
-    title: 'HEALTH & WELLNESS SUPPLEMENTS',
-    image: healthWellnessImg,
-  },
+  { id: 'weight-management', title: 'WEIGHT MANAGEMENT', image: weightManagementImg, },
+  { id: 'health-wellness', title: 'HEALTH & WELLNESS SUPPLEMENTS', image: healthWellnessImg },
 ];
 
 const CollectionSection = () => {

@@ -46,8 +46,8 @@ export default function BottomFooter() {
   return (
     <footer className="bg-[#071827] text-neutral-200">
       {/* Top disclaimer bar */}
-      <div className="max-w-7xl mx-auto px-6 py-6 text-center text-sm text-neutral-200/90">
-        <p className="max-w-4l mx-auto">
+      <div className=" px-6 py-6 text-center text-sm text-neutral-200/90">
+        <p className="max-w-5xl mx-auto font-bold">
           **The Food and Drug Administration has not evaluated these statements.
           This product is not meant to diagnose, treat, cure, or prevent any
           illness.
@@ -55,8 +55,8 @@ export default function BottomFooter() {
       </div>
 
       {/* Bottom footer area */}
-      <div className="max-w-7xl mx-auto px-6 py-12 border-t border-neutral-800">
-        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-10">
+      <div className="px-6 py-12 border-t border-white/20">
+        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-10 px-27">
           {/* Left block: copyright + powered by + links */}
           <div className="flex-1">
             <div className="mb-6">
@@ -97,25 +97,29 @@ export default function BottomFooter() {
           </div>
 
           {/* Right block: payment icons */}
-          <div className="flex items-center justify-end gap-4">
-            {paymentLogos.length > 0 &&
-              paymentLogos.map((logo) => (
-                <a
-                  key={logo.name}
-                  href={logo.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={logo.name}
-                  className="inline-flex items-center"
-                >
-                  <img
-                    src={logo.src}
-                    alt={logo.name}
-                    className="h-6 w-auto object-contain bg-white rounded-sm p-1"
-                    loading="lazy"
-                  />
-                </a>
-              ))}
+          <div className="">
+            <h2 className="text-[22px] font-bold text-white mb-3">Payment methods</h2>
+
+            <div className="grid grid-cols-4 gap-3">
+              {paymentLogos.length > 0 &&
+                paymentLogos.map((logo) => (
+                  <a
+                    key={logo.name}
+                    href={logo.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={logo.name}
+                    className="inline-flex items-center"
+                  >
+                    <img
+                      src={logo.src}
+                      alt={logo.name}
+                      className="h-7 w-14 object-contain bg-white rounded-sm p-1"
+                      loading="lazy"
+                    />
+                  </a>
+                ))}
+            </div>
           </div>
         </div>
       </div>

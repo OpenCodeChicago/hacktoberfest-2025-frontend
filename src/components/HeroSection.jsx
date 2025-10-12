@@ -56,7 +56,7 @@ function HeroSection() {
 
                         <LinkButton
                             href={slide.href}
-                            className="absolute bottom-10 right-8 md:bottom-21 md:right-21"
+                            className="absolute bottom-10 right-8 md:bottom-21 md:right-21 border-2 border-white"
                         >
                             {slide.buttonLabel}
                         </LinkButton>

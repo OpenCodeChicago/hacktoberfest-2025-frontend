@@ -44,24 +44,24 @@ export default function TopHeader() {
         <a href="#" aria-label="Facebook" className="hover:text-gray-300">
           <FaFacebookF
             size={18}
-            className="fill-current text-white hover:text-gray-300"
+            className="fill-current text-white hover:text-[#415CA0]"
             stroke="none"
           />
         </a>
         <a href="#" aria-label="Twitter" className="hover:text-gray-300">
           <FaTwitter
             size={18}
-            className="fill-current text-white hover:text-gray-300"
+            className="fill-current text-white hover:text-[#1DBBED]"
             stroke="none"
           />
         </a>
-        <a href="#" aria-label="Instagram" className="hover:text-gray-300">
+        <a href="#" aria-label="Instagram" className="hover:text-[#e1306c]">
           <FaInstagram size={18} />
         </a>
         <a href="#" aria-label="LinkedIn" className="hover:text-gray-300">
           <FaLinkedinIn
             size={18}
-            className="fill-current text-white hover:text-gray-300"
+            className="fill-current text-white hover:text-[#2980b0]"
             stroke="none"
           />
         </a>
