@@ -17,6 +17,21 @@ export default function Header() {
   const [shopOpen, setShopOpen] = useState(false);
   const [search, setSearch] = useState(false);
   const mobileMenuRef = useRef(null);
+  const ShopOpenRef=useRef(null);
+
+  //Close Shop menu when clicked outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (ShopOpenRef.current && !ShopOpenRef.current.contains(e.target)) {
+        setShopOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
 
   // Close mobile menu on outside click
   useEffect(() => {
@@ -66,8 +81,9 @@ export default function Header() {
             {/* Desktop Navigation */}
             <nav className="hidden md:flex space-x-8">
               {/* Shop Dropdown */}
-              <div className="relative">
+              <div className="relative" ref={ShopOpenRef} >
                 <button
+
                   onClick={() => setShopOpen(!shopOpen)}
                   className="group flex items-center gap-1 text-gray-700 hover:text-black transition"
                 >
@@ -105,7 +121,7 @@ export default function Header() {
                 Garage Sale
                 <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-black transition-all duration-300 group-hover:w-full"></span>
               </Link>
-              
+
               <Link
                 to="/products"
                 className="relative text-gray-700 hover:text-black transition group"
@@ -113,7 +129,7 @@ export default function Header() {
                 All Products
                 <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-black transition-all duration-300 group-hover:w-full"></span>
               </Link>
-              
+
               <Link
                 to="/about-corex"
                 className="relative text-gray-700 hover:text-black transition group"
@@ -142,7 +158,7 @@ export default function Header() {
                 >
                   <Heart className="h-5 w-5" />
                 </a>
-                
+
                 <Link
                   to="/login"
                   aria-label="User Account"
@@ -150,7 +166,7 @@ export default function Header() {
                 >
                   <User className="h-5 w-5" />
                 </Link>
-                
+
                 <a
                   href="#"
                   aria-label="Shopping Cart"
@@ -221,14 +237,14 @@ export default function Header() {
               >
                 Garage Sale
               </Link>
-              
+
               <Link
                 to="/products"
                 className="text-gray-700 hover:text-black transition"
               >
                 All Products
               </Link>
-              
+
               <Link
                 to="/about-corex"
                 className="text-gray-700 hover:text-black transition"
