@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Menu,
   X,
@@ -8,9 +8,10 @@ import {
   Heart,
   User,
   ShoppingCart,
-} from "lucide-react";
-import SearchBox from "../Search/SearchBox";
+} from 'lucide-react';
+import SearchBox from '../Search/SearchBox';
 import TopHeader from "../TopHeader/TopHeader";
+import ShopMenu from '../ShopMenu';
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -18,31 +19,18 @@ export default function Header() {
   const [search, setSearch] = useState(false);
   const mobileMenuRef = useRef(null);
 
-  // Close mobile menu on outside click
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (mobileMenuRef.current && !mobileMenuRef.current.contains(e.target)) {
-        setMobileOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  // Handle shop button click
+  const handleShopClick = () => {
+    setShopOpen(!shopOpen);
+  };
 
-  // Close mobile menu on Escape key
-  useEffect(() => {
-    const handleEscape = (e) => {
-      if (e.key === "Escape") {
-        setMobileOpen(false);
-      }
-    };
-    document.addEventListener("keydown", handleEscape);
-    return () => {
-      document.removeEventListener("keydown", handleEscape);
-    };
-  }, []);
+  // Handle shop button keyboard events
+  const handleShopButtonKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleShopClick();
+    }
+  };
 
   return (
     <>
@@ -63,9 +51,8 @@ export default function Header() {
               </Link>
             </div>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex space-x-8">
-              {/* Shop Dropdown */}
+            {/* Center: Desktop Navigation */}
+            <nav className="hidden md:flex space-x-8 items-center">
               <div className="relative">
                 <button
                   onClick={() => setShopOpen(!shopOpen)}

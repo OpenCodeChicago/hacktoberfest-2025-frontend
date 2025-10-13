@@ -2,21 +2,44 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const Login = () => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
+  const [formData, setFormData] = useState({ email: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
+  const [errors, setErrors] = useState({ email: '', password: '' });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    // Clear errors when user starts typing
+    setErrors((prev) => ({ ...prev, [name]: '' }));
+  };
+
+  const validateForm = () => {
+    let valid = true;
+    const newErrors = { email: '', password: '' };
+
+    if (!EMAIL_REGEX.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address.';
+      valid = false;
+    }
+    if (formData.password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters.';
+      valid = false;
+    }
+
+    setErrors(newErrors);
+    return valid;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission
     setFormData({ email: '', password: '' });
+    setShowPassword(false);
   };
 
   const togglePasswordVisibility = () => {
@@ -59,17 +82,19 @@ const Login = () => {
         {/* Google Sign In */}
         <button
           type="button"
-          className="w-full flex items-center cursor-pointer justify-center gap-2 px-4 py-2 bg-[#B4C2CF] text-[#0B1A2C] text-sm font-medium rounded-md mb-6 hover:bg-[#c1d0dd] transition"
+          aria-label="Sign in with Google"
+          className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[#B4C2CF] text-[#0B1A2C] text-sm font-medium rounded-md mb-6 hover:bg-[#c1d0dd] transition"
         >
           <img
             src="/assets/google-icon.svg"
             alt="Google Icon"
             className="w-5 h-5"
           />
+          Sign in with Google
         </button>
 
         {/* Divider */}
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-4" aria-hidden="true">
           <hr className="border-t bg-[#B4C2CF] w-full" />
           <span className="px-2 text-sm text-[#89949F] font-poppins">or</span>
           <hr className="border-t bg-[#B4C2CF] w-full" />
@@ -80,33 +105,56 @@ const Login = () => {
           onSubmit={handleSubmit}
           className="space-y-4"
           style={{ fontFamily: 'var(--font-inter)' }}
+          noValidate
         >
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            className="w-full px-4 py-2.5 border border-[#D7DDE9] text-base placeholder:text-[#767676] rounded-md focus:outline-none focus:ring-2 focus:ring-[#CBD5E1]"
-            onChange={handleChange}
-            value={formData.email}
-          />
+          <div>
+            <input
+              type="email"
+              name="email"
+              aria-label="Email address"
+              placeholder="Email"
+              className={`w-full px-4 py-2.5 border rounded-md text-base placeholder:text-[#767676] focus:outline-none focus:ring-2 ${
+                errors.email
+                  ? 'border-red-500 focus:ring-red-500'
+                  : 'border-[#D7DDE9] focus:ring-[#CBD5E1]'
+              }`}
+              onChange={handleChange}
+              value={formData.email}
+              required
+            />
+            {errors.email && (
+              <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+            )}
+          </div>
 
           <div className="relative">
             <input
               type={showPassword ? 'text' : 'password'}
               name="password"
+              aria-label="Password"
               placeholder="Password"
-              className="w-full px-4 py-2.5 pr-12 border border-[#D7DDE9] text-base placeholder:text-[#767676] rounded-md focus:outline-none focus:ring-2 focus:ring-[#CBD5E1]"
+              className={`w-full px-4 py-2.5 pr-12 border rounded-md text-base placeholder:text-[#767676] focus:outline-none focus:ring-2 ${
+                errors.password
+                  ? 'border-red-500 focus:ring-red-500'
+                  : 'border-[#D7DDE9] focus:ring-[#CBD5E1]'
+              }`}
               onChange={handleChange}
               value={formData.password}
+              required
+              minLength={6}
             />
             <button
               type="button"
               onClick={togglePasswordVisibility}
-              className="absolute cursor-pointer inset-y-0 right-3 flex items-center text-gray-500"
+              className="absolute inset-y-0 right-3 flex items-center text-gray-500"
+              aria-label={showPassword ? 'Hide password' : 'Show password'}
               tabIndex={-1}
             >
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
+            {errors.password && (
+              <p className="text-red-500 text-xs mt-1">{errors.password}</p>
+            )}
           </div>
 
           <button

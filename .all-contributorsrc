@@ -3,9 +3,7 @@
   "projectOwner": "OpenCodeChicago",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "files": [
-    "README.md"
-  ],
+  "files": ["README.md"],
   "imageSize": 100,
   "commit": false,
   "contributors": [
@@ -14,140 +12,119 @@
       "name": "Alex Smagin",
       "avatar_url": "https://avatars.githubusercontent.com/u/107826794?v=4",
       "profile": "https://alexsmagin.dev",
-      "contributions": [
-        "doc",
-        "infra",
-        "maintenance",
-        "projectManagement"
-      ]
+      "contributions": ["doc", "infra", "maintenance", "projectManagement"]
     },
     {
       "login": "amilliiee",
       "name": "amilliiee",
       "avatar_url": "https://avatars.githubusercontent.com/u/94198758?v=4",
       "profile": "https://github.com/amilliiee",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "Soham-0047",
       "name": "SOHAM",
       "avatar_url": "https://avatars.githubusercontent.com/u/87080389?v=4",
       "profile": "https://sohamroy.netlify.app",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "Ankit-Kum-ar",
       "name": "Ankit Kumar",
       "avatar_url": "https://avatars.githubusercontent.com/u/111765525?v=4",
       "profile": "https://github.com/Ankit-Kum-ar",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "a-woodworth",
       "name": "a-woodworth",
       "avatar_url": "https://avatars.githubusercontent.com/u/10478733?v=4",
       "profile": "https://github.com/a-woodworth",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "mensonones",
       "name": "Emerson Vieira",
       "avatar_url": "https://avatars.githubusercontent.com/u/5387202?v=4",
       "profile": "https://github.com/mensonones",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "AparAgarwal",
       "name": "Apar Agarwal",
       "avatar_url": "https://avatars.githubusercontent.com/u/61222846?v=4",
       "profile": "https://github.com/AparAgarwal",
-      "contributions": [
-        "code",
-        "bug"
-      ]
+      "contributions": ["code", "bug"]
     },
     {
       "login": "mitaliiiiii",
       "name": "mitaliiiiii",
       "avatar_url": "https://avatars.githubusercontent.com/u/141233593?v=4",
       "profile": "https://github.com/mitaliiiiii",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "anasfarock",
       "name": "Muhammad Anas Farooq",
       "avatar_url": "https://avatars.githubusercontent.com/u/173719230?v=4",
       "profile": "https://www.anasfarooq.com/",
-      "contributions": [
-        "code",
-        "test"
-      ]
+      "contributions": ["code", "test"]
     },
     {
       "login": "anantjain-afk",
       "name": "anantjain-afk",
       "avatar_url": "https://avatars.githubusercontent.com/u/188947462?v=4",
       "profile": "https://github.com/anantjain-afk",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "shiv7shukla",
       "name": "shiv7shukla",
       "avatar_url": "https://avatars.githubusercontent.com/u/185540301?v=4",
       "profile": "https://github.com/shiv7shukla",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "rmbarley",
       "name": "Ryan Barley",
       "avatar_url": "https://avatars.githubusercontent.com/u/3730559?v=4",
       "profile": "http://ryanbarley.dev",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "PriscaTonia",
       "name": "Onwudebelu Prisca Ebubechukwu",
       "avatar_url": "https://avatars.githubusercontent.com/u/60774343?v=4",
       "profile": "http://prisca.vercel.app",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "shourya2006",
       "name": "Shourya",
       "avatar_url": "https://avatars.githubusercontent.com/u/75479705?v=4",
       "profile": "https://github.com/shourya2006",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "codervipul775",
       "name": "Vipul",
       "avatar_url": "https://avatars.githubusercontent.com/u/184411035?v=4",
       "profile": "https://github.com/codervipul775",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
+    },
+    {
+      "login": "Turbash",
+      "name": "Turbash Negi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/170945289?v=4",
+      "profile": "https://github.com/Turbash",
+      "contributions": ["code"]
+    },
+    {
+      "login": "NirajDN",
+      "name": "Niraj Nillawar",
+      "avatar_url": "https://avatars.githubusercontent.com/u/149431848?v=4",
+      "profile": "https://github.com/NirajDN",
+      "contributions": ["code"]
     }
   ],
   "commitType": "docs",

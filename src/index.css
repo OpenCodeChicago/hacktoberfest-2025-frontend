@@ -2,54 +2,46 @@
 @import 'tailwindcss';
 
 @theme {
-  /* Accent Fonts */
+  /* Fonts */
   --font-montserrat: 'Montserrat', sans-serif;
   --font-poppins: 'Poppins', sans-serif;
   --font-inter: 'Inter', sans-serif;
 
-  /* Custom Font Sizes */
-  --text-heading-xxl: 4rem;
-  /* 64px */
+  /* Font Sizes */
+  --text-heading-xxl: 4rem; /* 64px */
 
+  /* Colors */
   --color-white-light: #fafaf9;
   --color-main: #023e8a;
-  --color-white-back: #F7FAFF;
+  --color-white-back: #f7faff;
   --color-black: #010409;
 }
 
+/* ==========================
+   COMPONENTS
+========================== */
 @layer components {
+  /* Section Title */
   .section-title {
     @apply text-4xl lg:text-heading-xxl font-montserrat font-bold leading-none uppercase text-center tracking-tight;
+  }
 
-    & span {
-      color: white;
-      -webkit-text-stroke: 3px black;
-      paint-order: stroke fill;
-    }
+  .section-title span {
+    color: var(--color-white-light);
+    -webkit-text-stroke: 3px var(--color-black);
+    paint-order: stroke fill;
   }
 }
 
-/* Product Card Action Button Animations */
+/* ==========================
+   BUTTON ANIMATIONS
+========================== */
 @keyframes double-pop {
-  0% {
-    transform: scale(1);
-  }
-
-  30% {
-    transform: scale(1.18);
-  }
-
-  55% {
-    transform: scale(0.96);
-  }
-
-  80% {
-    transform: scale(1.06);
-  }
-
-  100% {
-    transform: scale(1);
-  }
+  0% { transform: scale(1); }
+  30% { transform: scale(1.18); }
+  55% { transform: scale(0.96); }
+  80% { transform: scale(1.06); }
+  100% { transform: scale(1); }
 }
 
 .animate-double-pop {
@@ -57,13 +49,18 @@
   animation: double-pop 520ms cubic-bezier(.22, 1, .36, 1) both;
 }
 
-.link-underline {
+/* ==========================
+   LINK UNDERLINE EFFECTS
+========================== */
+.link-underline,
+.link-underline-inverse {
   position: relative;
   display: inline-block;
   text-decoration: none;
   color: inherit;
 }
 
+/* Regular underline */
 .link-underline::after {
   content: '';
   position: absolute;
@@ -77,19 +74,13 @@
   transition: transform 260ms ease;
 }
 
-.link-underline:hover::after {
+.link-underline:hover::after,
+.link-underline:focus::after {
   transform-origin: left;
   transform: scaleX(1);
 }
 
-.link-underline-inverse {
-  position: relative;
-  display: inline-block;
-  text-decoration: none;
-  color: inherit;
-}
-
-/* start full (100%) — expand/contract direction controlled by transform-origin */
+/* Inverse underline */
 .link-underline-inverse::after {
   content: '';
   position: absolute;
@@ -99,23 +90,24 @@
   height: 2px;
   background: currentColor;
   transform: scaleX(1);
-  /* visible by default */
   transform-origin: left;
-  /* collapse/expand will use left as origin when returning */
   transition: transform 260ms ease;
 }
 
-/* on hover collapse toward the right (animate to 0%) */
 .link-underline-inverse:hover::after,
 .link-underline-inverse:focus::after {
   transform-origin: right;
-  /* collapse toward right */
   transform: scaleX(0);
 }
 
-/* respect reduced motion */
+/* ==========================
+   ACCESSIBILITY
+========================== */
 @media (prefers-reduced-motion: reduce) {
-  .link-underline-inverse::after {
-    transition: none;
+  .link-underline::after,
+  .link-underline-inverse::after,
+  .animate-double-pop {
+    animation: none !important;
+    transition: none !important;
   }
 }
