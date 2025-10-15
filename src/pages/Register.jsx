@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
+import GoogleLoginButton from '../components/GoogleLoginButton';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -59,16 +60,7 @@ const Register = () => {
         </p>
 
         {/* Google Sign In */}
-        <button
-          type="button"
-          className="w-full flex items-center cursor-pointer justify-center gap-2 px-4 py-2 bg-[#B4C2CF] text-[#0B1A2C] text-sm font-medium rounded-md mb-6 hover:bg-[#c1d0dd] transition"
-        >
-          <img
-            src="/assets/google-icon.svg"
-            alt="Google Icon"
-            className="w-5 h-5"
-          />
-        </button>
+        <GoogleLoginButton />
 
         {/* Divider */}
         <div className="flex items-center justify-between mb-4">

@@ -21,6 +21,7 @@ const TermsOfService = lazy(
   () => import('../pages/TermsOfService/TermsOfService')
 );
 const GarageSale = lazy(() => import('../pages/GarageSale/GarageSale'));
+const AuthCallback = lazy(() => import('../pages/AuthCallback'));
 
 const Register = lazy(() => import('../pages/Register'));
 const Login = lazy(() => import('../pages/Login'));
@@ -33,6 +34,7 @@ export const RouterConfig = () =>
     <>
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/auth/google/callback" element={<AuthCallback />} />
       <Route path="/" element={<RootLayout />}>
         <Route index element={<Home />} />
         <Route path="/products" element={<Products />} />

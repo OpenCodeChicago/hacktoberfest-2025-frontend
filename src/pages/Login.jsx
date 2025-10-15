@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
+import GoogleLoginButton from '../components/GoogleLoginButton';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -84,18 +85,7 @@ const Login = () => {
         </p>
 
         {/* Google Sign In */}
-        <button
-          type="button"
-          aria-label="Sign in with Google"
-          className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[#B4C2CF] text-[#0B1A2C] text-sm font-medium rounded-md mb-6 hover:bg-[#c1d0dd] transition"
-        >
-          <img
-            src="/assets/google-icon.svg"
-            alt="Google Icon"
-            className="w-5 h-5"
-          />
-          Sign in with Google
-        </button>
+        <GoogleLoginButton />
 
         {/* Divider */}
         <div className="flex items-center justify-between mb-4" aria-hidden="true">
