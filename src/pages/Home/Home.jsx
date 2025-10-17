@@ -1,4 +1,5 @@
 import FeaturedProductImage from '../../components/NewProductsBanner/NewProductsBanner';
+import ReviewsSection from '../../components/ReviewsSection/ReviewsSection';
 import {
   CollectionSection,
   HeroSection,
@@ -35,6 +36,7 @@ export default function Home() {
           alt="Featured Product - CoreX Whey Protein"
         />
         <CollectionSection />
+        <ReviewsSection />
       </main>
     </>
   );
