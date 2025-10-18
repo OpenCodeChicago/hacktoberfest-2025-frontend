@@ -50,6 +50,43 @@
 }
 
 /* ==========================
+   SHOP MENU ANIMATIONS
+========================== */
+@keyframes slide-down {
+  0% { 
+    opacity: 0;
+    transform: translateY(-20px) scaleY(0.95);
+  }
+  100% { 
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
+}
+
+@keyframes slide-up {
+  0% { 
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
+  100% { 
+    opacity: 0;
+    transform: translateY(-20px) scaleY(0.95);
+  }
+}
+
+.animate-slide-down {
+  animation: slide-down 0.5s ease-out forwards;
+  opacity: 0;
+  transform: translateY(-20px) scaleY(0.95);
+}
+
+.animate-slide-up {
+  animation: slide-up 0.5s ease-in forwards;
+  opacity: 1;
+  transform: translateY(0) scaleY(1);
+}
+
+/* ==========================
    LINK UNDERLINE EFFECTS
 ========================== */
 .link-underline,
@@ -106,7 +143,9 @@
 @media (prefers-reduced-motion: reduce) {
   .link-underline::after,
   .link-underline-inverse::after,
-  .animate-double-pop {
+  .animate-double-pop,
+  .animate-slide-down,
+  .animate-slide-up {
     animation: none !important;
     transition: none !important;
   }

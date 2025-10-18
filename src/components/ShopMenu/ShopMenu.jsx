@@ -3,18 +3,75 @@ import { ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
 
 const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
   const [focusedIndex, setFocusedIndex] = useState(-1);
+  const [animationState, setAnimationState] = useState('closed'); // 'closed', 'opening', 'open', 'closing'
+  const [showScrollToTop, setShowScrollToTop] = useState(false);
   const menuItemsRef = useRef([]);
   const shopButtonRef = useRef(null);
+
+  // Handle opening animation
+  const handleOpenMenu = () => {
+    setAnimationState('opening');
+    setTimeout(() => {
+      setAnimationState('open');
+    }, 500); // Match animation duration
+  };
+
+  // Handle closing animation
+  const handleCloseMenu = () => {
+    if (animationState === 'closing') return; // Prevent multiple close calls
+    setAnimationState('closing');
+    setTimeout(() => {
+      setShopOpen(false);
+      setAnimationState('closed');
+      setFocusedIndex(-1);
+    }, 500); // Match animation duration
+  };
+
+  // Prevent background scrolling when menu is open
+  useEffect(() => {
+    if (shopOpen || animationState === 'opening' || animationState === 'open' || animationState === 'closing') {
+      // Add overflow-hidden to body
+      document.body.style.overflow = 'hidden';
+      
+      // Make main content inert for screen readers
+      const mainContent = document.querySelector('main');
+      if (mainContent) {
+        mainContent.setAttribute('inert', 'true');
+        mainContent.setAttribute('aria-hidden', 'true');
+      }
+    } else {
+      // Restore scrolling
+      document.body.style.overflow = '';
+      
+      // Restore main content accessibility
+      const mainContent = document.querySelector('main');
+      if (mainContent) {
+        mainContent.removeAttribute('inert');
+        mainContent.removeAttribute('aria-hidden');
+      }
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = '';
+      const mainContent = document.querySelector('main');
+      if (mainContent) {
+        mainContent.removeAttribute('inert');
+        mainContent.removeAttribute('aria-hidden');
+      }
+    };
+  }, [shopOpen, animationState]);
 
   // Close shop menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
         shopButtonRef.current &&
-        !shopButtonRef.current.contains(event.target)
+        !shopButtonRef.current.contains(event.target) &&
+        shopOpen &&
+        animationState !== 'closing'
       ) {
-        setShopOpen(false);
-        setFocusedIndex(-1);
+        handleCloseMenu();
       }
     };
 
@@ -22,7 +79,32 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [setShopOpen]);
+  }, [setShopOpen, shopOpen, animationState]);
+
+  // Handle opening animation when shopOpen changes
+  useEffect(() => {
+    if (shopOpen && animationState === 'closed') {
+      handleOpenMenu();
+    }
+  }, [shopOpen, animationState]);
+
+  // Handle scroll to top functionality
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      setShowScrollToTop(scrollTop > 300); // Show arrow when scrolled down 300px
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
 
   // Keyboard accessibility
   useEffect(() => {
@@ -31,8 +113,7 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
 
       switch (event.key) {
         case 'Escape':
-          setShopOpen(false);
-          setFocusedIndex(-1);
+          handleCloseMenu();
           shopButtonRef.current?.focus();
           break;
         case 'ArrowDown':
@@ -103,10 +184,10 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
 
   // Handle navigation to collection
   const handleCollectionClick = (collectionName) => {
-    const url = `https://corexshoptest.onrender.com/api/collections/${collectionName.toLowerCase()}`;
+    const encodedName = encodeURIComponent(collectionName.toLowerCase());
+    const url = `https://corexshoptest.onrender.com/api/collections/${encodedName}`;
     window.open(url, '_blank');
-    setShopOpen(false);
-    setFocusedIndex(-1);
+    handleCloseMenu();
   };
 
   // Helper function to create menu item with accessibility
@@ -137,7 +218,11 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
-          onShopClick();
+          if (shopOpen || animationState === 'opening' || animationState === 'open') {
+            handleCloseMenu();
+          } else {
+            onShopClick();
+          }
         }}
         onKeyDown={onShopKeyDown}
         className={`px-5 py-2 rounded-full font-medium transition-all duration-300 cursor-pointer flex items-center ${
@@ -157,9 +242,11 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
       </button>
 
       {/* Mega Menu */}
-      {shopOpen && (
+      {(shopOpen || animationState === 'opening' || animationState === 'open' || animationState === 'closing') && (
         <div
-          className="fixed left-0 w-screen shadow-lg transition-all duration-300 ease-in-out transform origin-top opacity-100 translate-y-0 scale-y-100 z-40 overflow-y-auto"
+          className={`fixed left-0 w-screen shadow-lg transform origin-top z-40 overflow-y-auto ${
+            animationState === 'closing' ? 'animate-slide-up' : 'animate-slide-down'
+          }`}
           style={{
             top: '104px',
             backgroundColor: '#F7FAFF',
@@ -174,18 +261,23 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
             {/* SHOP ALL Section */}
             <div className="mb-8">
               <div className="flex items-center justify-between mb-4">
-                <h2
-                  className="font-bold text-black uppercase"
-                  style={{
-                    fontSize: '28px',
-                    lineHeight: '28px',
-                    letterSpacing: '-1.5px',
-                    fontWeight: '700',
-                  }}
+                <button
+                  onClick={() => handleCollectionClick('all-products')}
+                  className="group flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg cursor-pointer"
                 >
-                  SHOP ALL
-                </h2>
-                <ArrowRight className="h-5 w-5 text-black" />
+                  <h2
+                    className="font-bold text-black uppercase group-hover:text-gray-600 transition-colors duration-300"
+                    style={{
+                      fontSize: '28px',
+                      lineHeight: '28px',
+                      letterSpacing: '-1.5px',
+                      fontWeight: '700',
+                    }}
+                  >
+                    ALL PRODUCTS
+                  </h2>
+                  <ArrowRight className="h-5 w-5 text-black group-hover:translate-x-1 transition-transform duration-300" />
+                </button>
               </div>
             </div>
 
@@ -426,6 +518,17 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Scroll to Top Arrow */}
+      {showScrollToTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 bg-[#0D1B2A] text-white p-3 rounded-full shadow-lg hover:bg-gray-800 transition-all duration-300 z-50 group"
+          aria-label="Scroll to top"
+        >
+          <ChevronUp className="h-6 w-6 group-hover:scale-110 transition-transform duration-300" />
+        </button>
       )}
     </>
   );
