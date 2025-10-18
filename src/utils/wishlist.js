@@ -50,7 +50,7 @@ export function addToWishlist(product) {
   }
 }
 
-export function removeFromWishlist(productId) {
+export function RemoveFromWishlist(productId) {
   if (!productId) return false;
   try {
     const current = getWishlist();
@@ -69,7 +69,7 @@ export function toggleWishlist(product) {
   const isCurrentlyInWishlist = isInWishlist(productId);
 
   if (isCurrentlyInWishlist) {
-    removeFromWishlist(productId);
+    RemoveFromWishlist(productId);
     return false; // Removed from wishlist
   } else {
     addToWishlist(product);
@@ -81,6 +81,6 @@ export default {
   getWishlist,
   isInWishlist,
   addToWishlist,
-  removeFromWishlist,
+  RemoveFromWishlist,
   toggleWishlist,
 };
