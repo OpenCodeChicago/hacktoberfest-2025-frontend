@@ -7,10 +7,12 @@ import TopFooter from '../components/TopFooter';
 import MainHeader from '../components/Header';
 import Loader from '../components/Loader';
 import BottomFooter from '../components/BottomFooter';
+import ScrollToTop from '../components/ScrollToTop/ScrollToTop';
 
 function RootLayout() {
   return (
     <>
+      <ScrollToTop />
       <MainHeader />
       <main className="mt-[84px] min-h-screen">
         <SEO
