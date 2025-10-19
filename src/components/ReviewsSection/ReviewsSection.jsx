@@ -27,6 +27,7 @@ const Button = ({ children, onClick, variant = 'default', className = '', ...pro
   
   return (
     <button 
+      type="button"
       onClick={onClick}
       className={`${variants[variant]} ${className}`}
       {...props}
@@ -199,13 +200,13 @@ const ReviewsSection = () => {
             onClick={handlePrevious}
             aria-label="Previous reviews"
           >
-            <ChevronLeft className="w-6 h-6 text-gray-600" />
+            <ChevronLeft className="w-6 h-6 text-gray-600" aria-hidden="true" />
           </Button>
           <Button 
             onClick={handleNext}
             aria-label="Next reviews"
           >
-            <ChevronRight className="w-6 h-6 text-gray-600" />
+            <ChevronRight className="w-6 h-6 text-gray-600" aria-hidden="true" />
           </Button>
         </div>
 
