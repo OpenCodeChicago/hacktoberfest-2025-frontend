@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
-import { Outlet } from 'react-router-dom';
+// Import ScrollRestoration along with Outlet
+import { Outlet, ScrollRestoration } from 'react-router-dom'; 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SEO from '../components/SEO';
@@ -11,6 +12,12 @@ import BottomFooter from '../components/BottomFooter';
 function RootLayout() {
   return (
     <>
+      {/*  FIX THE SCROLL BUG HERE  */}
+      {/* ScrollRestoration automatically scrolls to top on new route, 
+          and restores position on back/forward navigation. 
+      */}
+      <ScrollRestoration /> 
+
       <MainHeader />
       <main className="mt-[84px] min-h-screen">
         <SEO
