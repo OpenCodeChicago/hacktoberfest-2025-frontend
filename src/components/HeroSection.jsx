@@ -48,18 +48,25 @@ function HeroSection() {
                 {slides.map((slide, index) => (
                     <div key={index}>
                         <img
-                            src={slide.image}
-                            alt={slide.alt}
-                            className="w-full h-auto block"
-                            tabIndex={-1}
-                        />
+                        src={slide.image}
+                        alt={slide.alt}
+                        className="w-full h-auto block transform transition-transform duration-500 hover:scale-105"
+                        tabIndex={-1}
+/>
+
 
                         <LinkButton
                             href={slide.href}
-                            className="absolute bottom-10 right-8 md:bottom-21 md:right-21"
+                            className="
+                                     absolute bottom-10 right-8 md:bottom-21 md:right-21
+                                     bg-indigo-600 text-white px-5 py-2 rounded-lg font-medium
+                                    shadow-md hover:shadow-xl hover:scale-105 transition-transform duration-300
+                                    focus:ring-2 focus:ring-offset-2 focus:ring-indigo-400
+                                    "
                         >
                             {slide.buttonLabel}
                         </LinkButton>
+
                     </div>
                 ))}
             </Slider>
