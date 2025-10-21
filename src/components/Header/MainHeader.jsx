@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import WishListScreen from '../WishList/WishListScreen';
 import CartIcon from '../CartComponent/CartIcon';
 import CartDrawer from '../CartComponent/CartDrawer';
-
+import { NavLink } from 'react-router-dom';
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [shopOpen, setShopOpen] = useState(false);
@@ -62,30 +62,47 @@ export default function Header() {
                 />
               </div>
               {/* Garage Sale */}
-              <Link
-                to="/garage-sale"
-                className="px-5 py-2 rounded-full font-medium text-gray-700 transition-all duration-300 hover:bg-[#0D1B2A] hover:text-white"
-              >
-                GARAGE SALE
-              </Link>
+             <NavLink
+  to="/garage-sale"
+  className={({ isActive }) =>
+    `px-5 py-2 rounded-full font-medium transition-all duration-300 ${
+      isActive
+        ? "bg-[#0D1B2A] text-white"
+        : "text-gray-700 hover:bg-[#0D1B2A] hover:text-white"
+    }`
+  }
+>
+  GARAGE SALE
+</NavLink>
 
-              {/* All Products */}
-              <Link
-                to="/products"
-                className="px-5 py-2 rounded-full font-medium text-gray-700 transition-all duration-300 hover:bg-[#0D1B2A] hover:text-white"
-              >
-                ALL PRODUCTS
-              </Link>
-              {/* About CoreX */}
-              <Link
-                to="/about-corex"
-                className="group px-5 py-2 rounded-full font-medium text-gray-700 transition-all duration-300 hover:bg-[#0D1B2A] hover:text-white"
-              >
-                ABOUT CORE
-                <span className="text-red-600 group-hover:text-red-600 transition-colors duration-300">
-                  X
-                </span>
-              </Link>
+<NavLink
+  to="/products"
+  className={({ isActive }) =>
+    `px-5 py-2 rounded-full font-medium transition-all duration-300 ${
+      isActive
+        ? "bg-[#0D1B2A] text-white"
+        : "text-gray-700 hover:bg-[#0D1B2A] hover:text-white"
+    }`
+  }
+>
+  ALL PRODUCTS
+</NavLink>
+
+<NavLink
+  to="/about-corex"
+  className={({ isActive }) =>
+    `group px-5 py-2 rounded-full font-medium transition-all duration-300 ${
+      isActive
+        ? "bg-[#0D1B2A] text-white"
+        : "text-gray-700 hover:bg-[#0D1B2A] hover:text-white"
+    }`
+  }
+>
+  ABOUT CORE
+  <span className="text-red-600 group-hover:text-red-600 transition-colors duration-300">
+    X
+  </span>
+</NavLink>
             </nav>
 
             {/* Right: Icons (desktop) + Mobile Hamburger */}
@@ -240,66 +257,91 @@ export default function Header() {
 
         {/* Mobile Menu Items */}
         <nav className="flex-1 px-6 py-4 flex flex-col space-y-4">
-          <div>
-            <button
-              onClick={() => setShopOpen(!shopOpen)}
-              className="flex items-center justify-between w-full text-gray-700 hover:text-black font-medium"
-            >
-              Shop
-              <ChevronDown
-                className={`h-4 w-4 transition-transform duration-200 ${
-                  shopOpen ? 'rotate-180' : ''
-                }`}
-              />
-            </button>
-            {shopOpen && (
-              <div className="mt-2 pl-4 space-y-2">
-                <Link
-                  to="/category1"
-                  className="block text-gray-600 hover:text-black"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  Category 1
-                </Link>
-                <Link
-                  to="/category2"
-                  className="block text-gray-600 hover:text-black"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  Category 2
-                </Link>
-                <Link
-                  to="/category3"
-                  className="block text-gray-600 hover:text-black"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  Category 3
-                </Link>
-              </div>
-            )}
-          </div>
-          <Link
-            to="/garage-sale"
-            className="text-gray-700 hover:text-black font-medium"
+  {/* Shop dropdown */}
+  <div>
+    <button
+  onClick={() => setShopOpen(!shopOpen)}
+  className="flex items-center justify-between w-full px-3 py-2.5 rounded-lg 
+             text-gray-700 font-medium 
+             hover:bg-gray-100 hover:text-[#0D1B2A] 
+             transition-all duration-300"
+>
+  <span className="tracking-wide">Shop</span>
+  <ChevronDown
+    className={`h-5 w-5 text-gray-500 transition-transform duration-300 ${
+      shopOpen ? "rotate-180" : "rotate-0"
+    }`}
+  />
+</button>
+
+    {shopOpen && (
+      <div className="mt-2 pl-4 space-y-2">
+        {["category1", "category2", "category3"].map((cat) => (
+          <NavLink
+            key={cat}
+            to={`/${cat}`}
+            className={({ isActive }) =>
+              `block px-3 py-2 rounded-md font-medium transition-all duration-300 ${
+                isActive
+                  ? "bg-[#0D1B2A] text-white shadow-sm"
+                  : "text-gray-600 hover:bg-gray-100 hover:text-[#0D1B2A]"
+              }`
+            }
             onClick={() => setMobileOpen(false)}
           >
-            Garage Sale
-          </Link>
-          <Link
-            to="/products"
-            className="text-gray-700 hover:text-black font-medium"
-            onClick={() => setMobileOpen(false)}
-          >
-            All Products
-          </Link>
-          <Link
-            to="/about-corex"
-            className="text-gray-700 hover:text-black font-medium"
-            onClick={() => setMobileOpen(false)}
-          >
-            About CoreX
-          </Link>
-        </nav>
+            {cat.replace("category", "Category ")}
+          </NavLink>
+        ))}
+      </div>
+    )}
+  </div>
+
+  {/* Garage Sale */}
+  <NavLink
+    to="/garage-sale"
+    className={({ isActive }) =>
+      `block px-3 py-2 rounded-md font-medium transition-all duration-300 ${
+        isActive
+          ? "bg-[#0D1B2A] text-white shadow-sm"
+          : "text-gray-700 hover:bg-gray-100 hover:text-[#0D1B2A]"
+      }`
+    }
+    onClick={() => setMobileOpen(false)}
+  >
+    Garage Sale
+  </NavLink>
+
+  {/* All Products */}
+  <NavLink
+    to="/products"
+    className={({ isActive }) =>
+      `block px-3 py-2 rounded-md font-medium transition-all duration-300 ${
+        isActive
+          ? "bg-[#0D1B2A] text-white shadow-sm"
+          : "text-gray-700 hover:bg-gray-100 hover:text-[#0D1B2A]"
+      }`
+    }
+    onClick={() => setMobileOpen(false)}
+  >
+    All Products
+  </NavLink>
+
+  {/* About CoreX */}
+  <NavLink
+    to="/about-corex"
+    className={({ isActive }) =>
+      `block px-3 py-2 rounded-md font-medium transition-all duration-300 ${
+        isActive
+          ? "bg-[#0D1B2A] text-white shadow-sm"
+          : "text-gray-700 hover:bg-gray-100 hover:text-[#0D1B2A]"
+      }`
+    }
+    onClick={() => setMobileOpen(false)}
+  >
+    About Core
+    <span className="text-red-600">X</span>
+  </NavLink>
+</nav>
 
         {/* Mobile Menu Icons */}
         <div className="px-6 py-4 border-t border-gray-200">
