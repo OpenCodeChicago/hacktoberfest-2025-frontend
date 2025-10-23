@@ -6,7 +6,7 @@ export default function NotFound() {
     // Dynamically add Google Font
     const link = document.createElement('link');
     link.href =
-      'https://fonts.googleapis.com/css2?family=Rubik+Dirt&display=swap';
+      'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fredoka:wght@413&family=Poppins:wght@600;700&display=swap';
     link.rel = 'stylesheet';
     document.head.appendChild(link);
   }, []);
@@ -18,46 +18,47 @@ export default function NotFound() {
       style={{
         backgroundImage: isMobile
           ? "url('/images/pnf-mob.png')" // mobile image
-          : "url('/images/notFoundLandscape.png')", // desktop image
+          : "url('/images/notFoundGym.jpg')", // desktop image
       }}
     >
       <div className="md:w-1/2 max-w-2xl px-12 pt-30 md:pt-0">
         {/* 404 text */}
-        <h1 className="text-9xl md:text-9xl font-extrabold tracking-widest">
-          404
-        </h1>
+        <div className='bg-black/30 backdrop-blur-md p-6 rounded-xl'>
+          <h1 className="text-9xl md:text-9xl text-red-500 font-extrabold tracking-widest" style={{ fontFamily: '"Bebas Neue", sans-serif' }}>
+            404
+          </h1>
 
-        {/* Subtitle */}
-        <h2
-          className="text-4xl md:text-7xl mt-4 "
-          style={{ fontFamily: "'Rubik Dirt', cursive" }}
-        >
-          NOT FOUND
-        </h2>
-
+          {/* Subtitle */}
+          <h2
+            className="text-4xl  text-center md:text-7xl mt-4 "
+            style={{ fontFamily: '"Fredoka", sans-serif' }}
+          >
+            NOT FOUND
+          </h2>
+        </div>
         {/* Description */}
-        <p className="uppercase mt-6  font-semibold">
+        <p className="uppercase mt-6 bg-blue-900/40 backdrop-blur-md p-6 rounded-xl text-center  font-semibold" style={{ fontFamily: '"Poppins", sans-serif', fontWeight: 700 }}>
           Oops! This page wandered off the workout plan.
         </p>
 
-        <p className="mt-3 text-gray-400 leading-relaxed">
+        <p className="mt-3 bg-black-900/40 backdrop-blur-md p-6 rounded-xl text-center leading-relaxed" style={{ fontFamily: '"Poppins", sans-serif', fontWeight: 600 }}>
           Looks like the page you're looking for doesn't exist. But don't worry
           — your fitness journey doesn't stop here. Fuel your goals with CoreX
           supplements.
         </p>
 
         {/* Buttons */}
-        <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center" >
           <Link
             to="/"
-            className="bg-white text-black px-6 py-3 rounded-2xl font-semibold hover:bg-red-600 hover:text-white transition"
+            className="bg-white text-black px-6 py-3 rounded-2xl font-semibold hover:bg-red-600 hover:text-white transition" style={{ fontFamily: '"Poppins", sans-serif', fontWeight: 600 }}
           >
             GO TO HOME PAGE
           </Link>
 
           <Link
             to="/products"
-            className="border border-white px-6 py-3 rounded-2xl font-semibold hover:bg-red-600 hover:border-red-600 transition"
+            className="border border-white px-6 py-3 rounded-2xl font-semibold hover:bg-red-600 hover:border-red-600 transition" style={{ fontFamily: '"Poppins", sans-serif', fontWeight: 600 }}
           >
             CONTINUE SHOPPING
           </Link>
