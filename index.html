@@ -3,8 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- Primary Meta Tags -->
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    
     <title>Hacktoberfest 2025 | CoreX Nutrition</title>
     <meta
       name="description"
@@ -12,13 +15,14 @@
     />
     <meta
       name="keywords"
-      content="Hacktoberfest 2025, CoreX Nutrition, Open Source, Contributions, Community"
+      content="Hacktoberfest 2025, CoreX Nutrition, Open Source, Contributions, Community, Developer, Programming, GitHub"
     />
     <meta name="author" content="CoreX Nutrition" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#1e3c72" />
+    <meta name="msapplication-TileColor" content="#1e3c72" />
+    <meta name="msapplication-config" content="/browserconfig.xml" />
 
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Hacktoberfest 2025 | CoreX Nutrition" />
     <meta
@@ -26,10 +30,10 @@
       content="Join CoreX Nutrition's Hacktoberfest 2025! Contribute to exciting projects and participate in the open-source event."
     />
     <meta property="og:image" content="/images/og-image.png" />
-    <meta property="og:url" content="https://yourwebsite.com/" />
+    <meta property="og:url" content="https://corexnutrition.com/hacktoberfest-2025" />
     <meta property="og:site_name" content="CoreX Nutrition" />
+    <meta property="og:locale" content="en_US" />
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Hacktoberfest 2025 | CoreX Nutrition" />
     <meta
@@ -37,31 +41,118 @@
       content="Join CoreX Nutrition's Hacktoberfest 2025! Contribute to exciting projects and participate in the open-source event."
     />
     <meta name="twitter:image" content="/images/og-image.png" />
+    <meta name="twitter:site" content="@CoreXNutrition" />
+    <meta name="twitter:creator" content="@CoreXNutrition" />
 
-  <!-- Favicon: use uploaded PNG `faviconn.png` (primary) -->
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
-  <link rel="shortcut icon" href="/favicon.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png" />
 
-    <!-- Manifest for PWA -->
     <link rel="manifest" href="/manifest.json" />
+    <link rel="canonical" href="https://corexnutrition.com/hacktoberfest-2025" />
 
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://opencodechicago.org" />
-
-    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Optional Global Styles -->
     <link rel="stylesheet" href="/assets/css/global.css" />
+    
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background: linear-gradient(135deg, #1e3c72 0%, #2C1810 25%, #8B4513 50%, #A0522D 75%, #1e3c72 100%);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+      
+      #root {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #1e3c72 0%, #2C1810 25%, #8B4513 50%, #A0522D 75%, #1e3c72 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease-out;
+      }
+      
+      .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 3px solid rgba(218, 165, 32, 0.3);
+        border-top: 3px solid #DAA520;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      .loading-text {
+        color: #F5F5DC;
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-top: 20px;
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
+    <div class="loading-screen" id="loading-screen">
+      <div>
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading Hacktoberfest 2025...</div>
+      </div>
+    </div>
+    
     <div id="root"></div>
 
-    <!-- Main JS Module -->
     <script type="module" src="/src/main.jsx"></script>
+    
+    <script>
+      window.addEventListener('load', function() {
+        const loadingScreen = document.getElementById('loading-screen');
+        if (loadingScreen) {
+          setTimeout(() => {
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+              loadingScreen.style.display = 'none';
+            }, 500);
+          }, 1500);
+        }
+      });
+      
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js')
+            .then(function(registration) {
+              console.log('SW registered: ', registration);
+            })
+            .catch(function(registrationError) {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
   </body>
 </html>
