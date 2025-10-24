@@ -1,53 +1,57 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
-import { ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
+import { ChevronDown, ChevronUp, ArrowRight, Sparkles, Zap, Star, Heart, Flame } from 'lucide-react';
 
 const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
   const [focusedIndex, setFocusedIndex] = useState(-1);
-  const [animationState, setAnimationState] = useState('closed'); // 'closed', 'opening', 'open', 'closing'
+  const [animationState, setAnimationState] = useState('closed');
+  const [hoveredItem, setHoveredItem] = useState(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const menuItemsRef = useRef([]);
   const shopButtonRef = useRef(null);
+  const menuRef = useRef(null);
 
-  // Handle opening animation
-  const handleOpenMenu = () => {
+  // Enhanced animation states
+  const handleOpenMenu = useCallback(() => {
     setAnimationState('opening');
-    setTimeout(() => {
-      setAnimationState('open');
-    }, 500); // Match animation duration
-  };
+    setTimeout(() => setAnimationState('open'), 300);
+  }, []);
 
-  // Handle closing animation
   const handleCloseMenu = useCallback(() => {
-    if (animationState === 'closing') return; // Prevent multiple close calls
+    if (animationState === 'closing') return;
     setAnimationState('closing');
     setTimeout(() => {
       setShopOpen(false);
       setAnimationState('closed');
       setFocusedIndex(-1);
-    }, 500); // Match animation duration
+    }, 300);
   }, [animationState, setShopOpen]);
 
-  // Prevent background scrolling when menu is open
-  useEffect(() => {
-    if (
-      shopOpen ||
-      animationState === 'opening' ||
-      animationState === 'open' ||
-      animationState === 'closing'
-    ) {
-      // Add overflow-hidden to body
-      document.body.style.overflow = 'hidden';
+  // Mouse tracking for parallax effects
+  const handleMouseMove = useCallback((e) => {
+    if (menuRef.current) {
+      const rect = menuRef.current.getBoundingClientRect();
+      setMousePosition({
+        x: (e.clientX - rect.left) / rect.width,
+        y: (e.clientY - rect.top) / rect.height,
+      });
+    }
+  }, []);
 
-      // Make main content inert for screen readers
+  // Enhanced accessibility
+  useEffect(() => {
+    const isMenuVisible = shopOpen || animationState === 'opening' || animationState === 'open' || animationState === 'closing';
+    
+    if (isMenuVisible) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
       const mainContent = document.querySelector('main');
       if (mainContent) {
         mainContent.setAttribute('inert', 'true');
         mainContent.setAttribute('aria-hidden', 'true');
       }
     } else {
-      // Restore scrolling
       document.body.style.overflow = '';
-
-      // Restore main content accessibility
+      document.body.style.background = '';
       const mainContent = document.querySelector('main');
       if (mainContent) {
         mainContent.removeAttribute('inert');
@@ -55,9 +59,9 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
       }
     }
 
-    // Cleanup on unmount
     return () => {
       document.body.style.overflow = '';
+      document.body.style.background = '';
       const mainContent = document.querySelector('main');
       if (mainContent) {
         mainContent.removeAttribute('inert');
@@ -66,33 +70,26 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
     };
   }, [shopOpen, animationState]);
 
-  // Close shop menu when clicking outside
+  // Click outside handler
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        shopButtonRef.current &&
-        !shopButtonRef.current.contains(event.target) &&
-        shopOpen &&
-        animationState !== 'closing'
-      ) {
+      if (shopButtonRef.current && !shopButtonRef.current.contains(event.target) && 
+          shopOpen && animationState !== 'closing') {
         handleCloseMenu();
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [setShopOpen, shopOpen, animationState, handleCloseMenu]);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [shopOpen, animationState, handleCloseMenu]);
 
-  // Handle opening animation when shopOpen changes
+  // Opening animation
   useEffect(() => {
     if (shopOpen && animationState === 'closed') {
       handleOpenMenu();
     }
-  }, [shopOpen, animationState]);
+  }, [shopOpen, animationState, handleOpenMenu]);
 
-  // Keyboard accessibility
+  // Enhanced keyboard navigation
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (!shopOpen) return;
@@ -104,62 +101,25 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
           break;
         case 'ArrowDown':
           event.preventDefault();
-          setFocusedIndex((prev) => {
-            const nextIndex = prev + 1;
-            const totalItems = menuItemsRef.current.length;
-            return nextIndex >= totalItems ? 0 : nextIndex;
-          });
+          setFocusedIndex(prev => (prev + 1) % menuItemsRef.current.length);
           break;
         case 'ArrowUp':
           event.preventDefault();
-          setFocusedIndex((prev) => {
-            const prevIndex = prev - 1;
-            const totalItems = menuItemsRef.current.length;
-            return prevIndex < 0 ? totalItems - 1 : prevIndex;
-          });
-          break;
-        case 'ArrowRight':
-          event.preventDefault();
-          setFocusedIndex((prev) => {
-            // Move to next column (every 4 items per column)
-            const itemsPerColumn = 4;
-            const currentColumn = Math.floor(prev / itemsPerColumn);
-            const nextColumn = (currentColumn + 1) % 8; // 8 total columns
-            const nextIndex =
-              nextColumn * itemsPerColumn + (prev % itemsPerColumn);
-            return nextIndex < menuItemsRef.current.length ? nextIndex : prev;
-          });
-          break;
-        case 'ArrowLeft':
-          event.preventDefault();
-          setFocusedIndex((prev) => {
-            // Move to previous column (every 4 items per column)
-            const itemsPerColumn = 4;
-            const currentColumn = Math.floor(prev / itemsPerColumn);
-            const prevColumn = currentColumn === 0 ? 7 : currentColumn - 1; // 8 total columns
-            const prevIndex =
-              prevColumn * itemsPerColumn + (prev % itemsPerColumn);
-            return prevIndex < menuItemsRef.current.length ? prevIndex : prev;
-          });
+          setFocusedIndex(prev => prev <= 0 ? menuItemsRef.current.length - 1 : prev - 1);
           break;
         case 'Enter':
         case ' ':
           if (focusedIndex >= 0) {
             event.preventDefault();
-            const focusedItem = menuItemsRef.current[focusedIndex];
-            if (focusedItem) {
-              focusedItem.click();
-            }
+            menuItemsRef.current[focusedIndex]?.click();
           }
           break;
       }
     };
 
     document.addEventListener('keydown', handleKeyDown);
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [shopOpen, focusedIndex, setShopOpen, shopButtonRef, handleCloseMenu]);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [shopOpen, focusedIndex, handleCloseMenu]);
 
   // Focus management
   useEffect(() => {
@@ -168,348 +128,324 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
     }
   }, [focusedIndex]);
 
-  // Handle navigation to collection
-  const handleCollectionClick = (collectionName) => {
+  const handleCollectionClick = useCallback((collectionName) => {
     const encodedName = encodeURIComponent(collectionName.toLowerCase());
     const url = `https://corexshoptest.onrender.com/api/collections/${encodedName}`;
     window.open(url, '_blank');
     handleCloseMenu();
-  };
+  }, [handleCloseMenu]);
 
-  // Helper function to create menu item with accessibility
-  const createMenuItem = (collectionName, displayName, index) => (
-    <button
-      ref={(el) => (menuItemsRef.current[index] = el)}
-      onClick={() => handleCollectionClick(collectionName)}
-      className="text-black hover:text-gray-600 transition-all duration-300 ease-in-out relative group focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg px-0 py-1 cursor-pointer link-underline"
-      style={{
-        fontSize: '22px',
-        lineHeight: '26px',
-        letterSpacing: '-1.5px',
-        fontWeight: '400',
-      }}
-      role="menuitem"
-      tabIndex={focusedIndex === index ? 0 : -1}
+  // Enhanced menu item with cool effects
+  const createMenuItem = (collectionName, displayName, index, icon = null) => (
+    <div
+      key={collectionName}
+      className="relative group"
+      onMouseEnter={() => setHoveredItem(index)}
+      onMouseLeave={() => setHoveredItem(null)}
     >
-      {displayName}
-    </button>
+      <button
+        ref={(el) => (menuItemsRef.current[index] = el)}
+        onClick={() => handleCollectionClick(collectionName)}
+        className={`
+          relative w-full text-left px-4 py-3 rounded-xl transition-all duration-500 ease-out
+          ${focusedIndex === index 
+            ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-2xl scale-105' 
+            : 'text-gray-800 hover:text-white hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500'
+          }
+          ${hoveredItem === index ? 'transform scale-105 shadow-xl' : 'transform scale-100'}
+        `}
+        style={{
+          fontSize: '18px',
+          lineHeight: '22px',
+          letterSpacing: '-0.5px',
+          fontWeight: '500',
+          backdropFilter: 'blur(10px)',
+          background: focusedIndex === index 
+            ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+            : 'rgba(255, 255, 255, 0.1)',
+        }}
+        role="menuitem"
+        tabIndex={focusedIndex === index ? 0 : -1}
+      >
+        <div className="flex items-center justify-between">
+          <span className="relative z-10">{displayName}</span>
+          {icon && (
+            <div className="ml-2 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+              {icon}
+            </div>
+          )}
+        </div>
+        
+        {/* Animated background effect */}
+        <div className={`
+          absolute inset-0 rounded-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500
+          bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500
+          ${hoveredItem === index ? 'animate-pulse' : ''}
+        `} />
+        
+        {/* Glow effect */}
+        <div className={`
+          absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300
+          bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 blur-sm -z-10
+          ${hoveredItem === index ? 'animate-pulse' : ''}
+        `} />
+      </button>
+    </div>
   );
+
+  const isMenuVisible = shopOpen || animationState === 'opening' || animationState === 'open' || animationState === 'closing';
 
   return (
     <>
-      {/* Shop Button - Updated to match other navigation buttons */}
-      <button
-        ref={shopButtonRef}
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          if (
-            shopOpen ||
-            animationState === 'opening' ||
-            animationState === 'open'
-          ) {
-            handleCloseMenu();
-          } else {
-            onShopClick();
-          }
-        }}
-        onKeyDown={onShopKeyDown}
-        className={`px-5 py-2 rounded-full font-medium transition-all duration-300 cursor-pointer flex items-center ${
-          shopOpen
-            ? 'bg-[#0D1B2A] text-white'
-            : 'text-gray-700 hover:bg-[#0D1B2A] hover:text-white'
-        }`}
-        aria-expanded={shopOpen}
-        aria-haspopup="true"
-      >
-        SHOP{' '}
-        {shopOpen ? (
-          <ChevronUp className="ml-1 h-4 w-4 transition-transform duration-200" />
-        ) : (
-          <ChevronDown className="ml-1 h-4 w-4 transition-transform duration-200" />
-        )}
-      </button>
-
-      {/* Mega Menu */}
-      {(shopOpen ||
-        animationState === 'opening' ||
-        animationState === 'open' ||
-        animationState === 'closing') && (
-        <div
-          className={`fixed left-0 w-screen shadow-lg transform origin-top z-40 overflow-y-auto ${
-            animationState === 'closing'
-              ? 'animate-slide-up'
-              : 'animate-slide-down'
-          }`}
-          style={{
-            top: '104px',
-            backgroundColor: '#F7FAFF',
-            fontFamily: 'Inter, sans-serif',
-            maxHeight: 'calc(100vh - 104px)',
+      {/* Enhanced Shop Button */}
+      <div className="relative">
+        <button
+          ref={shopButtonRef}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (shopOpen || animationState === 'opening' || animationState === 'open') {
+              handleCloseMenu();
+            } else {
+              onShopClick();
+            }
           }}
+          onKeyDown={onShopKeyDown}
+          className={`
+            relative px-8 py-4 rounded-full font-bold transition-all duration-500 ease-out
+            flex items-center gap-3 overflow-hidden group
+            ${shopOpen
+              ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-2xl scale-105'
+              : 'bg-gradient-to-r from-gray-800 to-gray-900 text-white hover:from-purple-600 hover:to-pink-600 hover:shadow-xl hover:scale-105'
+            }
+          `}
+          aria-expanded={shopOpen}
+          aria-haspopup="true"
+        >
+          {/* Animated background */}
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-20 transition-opacity duration-500 rounded-full" />
+          
+          {/* Sparkle effect */}
+          <Sparkles className="h-5 w-5 animate-spin" style={{ animationDuration: '3s' }} />
+          
+          <span className="relative z-10 text-lg font-black tracking-wide">
+            SHOP
+          </span>
+          
+          <div className={`
+            relative z-10 transition-transform duration-300 ease-out
+            ${shopOpen ? 'rotate-180' : 'rotate-0'}
+          `}>
+            {shopOpen ? (
+              <ChevronUp className="h-5 w-5" />
+            ) : (
+              <ChevronDown className="h-5 w-5" />
+            )}
+          </div>
+          
+          {/* Glow effect */}
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-30 transition-opacity duration-500 rounded-full blur-lg -z-10" />
+        </button>
+      </div>
+
+      {/* Enhanced Mega Menu */}
+      {isMenuVisible && (
+        <div
+          ref={menuRef}
+          className={`
+            fixed left-0 w-screen z-50 overflow-y-auto transition-all duration-500 ease-out
+            ${animationState === 'closing' ? 'opacity-0 translate-y-[-20px]' : 'opacity-100 translate-y-0'}
+          `}
+          style={{
+            top: '120px',
+            background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%)',
+            backdropFilter: 'blur(20px)',
+            fontFamily: 'Inter, sans-serif',
+            maxHeight: 'calc(100vh - 120px)',
+            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+          }}
+          onMouseMove={handleMouseMove}
           onWheel={(e) => e.stopPropagation()}
           role="menu"
           aria-label="Shop categories"
         >
-          <div className="max-w-7xl mx-auto px-8 sm:px-12 lg:px-16 pt-8 pb-12">
-            {/* SHOP ALL Section */}
-            <div className="mb-8">
-              <div className="flex items-center justify-between mb-4">
+          {/* Animated background pattern */}
+          <div 
+            className="absolute inset-0 opacity-10"
+            style={{
+              background: `
+                radial-gradient(circle at ${mousePosition.x * 100}% ${mousePosition.y * 100}%, 
+                  rgba(255, 255, 255, 0.3) 0%, 
+                  transparent 50%
+                )
+              `,
+            }}
+          />
+          
+          <div className="relative max-w-7xl mx-auto px-8 sm:px-12 lg:px-16 pt-12 pb-16">
+            {/* Enhanced SHOP ALL Section */}
+            <div className="mb-12 text-center">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="inline-block"
+              >
                 <button
                   onClick={() => handleCollectionClick('all-products')}
-                  className="group flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg cursor-pointer"
+                  className="group relative px-8 py-4 rounded-2xl bg-gradient-to-r from-white/20 to-white/10 backdrop-blur-lg border border-white/20 hover:border-white/40 transition-all duration-500 ease-out hover:scale-105"
                 >
-                  <h2
-                    className="font-bold text-black uppercase group-hover:text-gray-600 transition-colors duration-300"
-                    style={{
-                      fontSize: '28px',
-                      lineHeight: '28px',
-                      letterSpacing: '-1.5px',
-                      fontWeight: '700',
-                    }}
-                  >
-                    ALL PRODUCTS
-                  </h2>
-                  <ArrowRight className="h-5 w-5 text-black group-hover:translate-x-1 transition-transform duration-300" />
+                  <div className="flex items-center gap-4">
+                    <Star className="h-8 w-8 text-yellow-400 animate-pulse" />
+                    <h2 className="text-4xl font-black text-white uppercase tracking-wider group-hover:text-yellow-300 transition-colors duration-300">
+                      ALL PRODUCTS
+                    </h2>
+                    <ArrowRight className="h-6 w-6 text-white group-hover:translate-x-2 transition-transform duration-300" />
+                  </div>
+                  
+                  {/* Glow effect */}
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 opacity-0 group-hover:opacity-30 transition-opacity duration-500 blur-xl -z-10" />
                 </button>
-              </div>
+              </motion.div>
             </div>
 
-            {/* Mega Menu Grid */}
-            <div className="grid grid-cols-5 gap-16 mb-8">
-              {/* Column 1: SHOP ALL */}
-              <div>
-                <h3
-                  className="font-bold text-black mb-4 uppercase"
-                  style={{
-                    fontSize: '28px',
-                    lineHeight: '28px',
-                    letterSpacing: '-1.5px',
-                    fontWeight: '700',
-                  }}
-                >
+            {/* Enhanced Mega Menu Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+              {/* SHOP ALL Column */}
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="space-y-6"
+              >
+                <h3 className="text-2xl font-black text-white uppercase tracking-wider mb-6 flex items-center gap-3">
+                  <Heart className="h-6 w-6 text-pink-400" />
                   SHOP ALL
                 </h3>
-                <ul className="space-y-4">
-                  <li>{createMenuItem('all-products', 'All products', 0)}</li>
-                  <li>{createMenuItem('best-sellers', 'Best Sellers', 1)}</li>
-                  <li>{createMenuItem('garage-sale', 'Garage Sale', 2)}</li>
-                  <li>{createMenuItem('apparel-gear', 'Apparel & Gear', 3)}</li>
-                </ul>
-              </div>
+                <div className="space-y-3">
+                  {createMenuItem('all-products', 'All Products', 0, <Star className="h-4 w-4" />)}
+                  {createMenuItem('best-sellers', 'Best Sellers', 1, <Flame className="h-4 w-4" />)}
+                  {createMenuItem('garage-sale', 'Garage Sale', 2, <Zap className="h-4 w-4" />)}
+                  {createMenuItem('apparel-gear', 'Apparel & Gear', 3, <Sparkles className="h-4 w-4" />)}
+                </div>
+              </motion.div>
 
-              {/* Column 2: SPORT NUTRITION PROTEIN */}
-              <div className="col-span-2">
-                <div className="grid grid-cols-2 gap-12">
-                  {/* SPORT NUTRITION Sub-column */}
-                  <div className="mr-4">
-                    <h3
-                      className="font-bold text-black mb-4 uppercase whitespace-nowrap"
-                      style={{
-                        fontSize: '28px',
-                        lineHeight: '28px',
-                        letterSpacing: '-1.5px',
-                        fontWeight: '700',
-                      }}
-                    >
-                      SPORT NUTRITION
-                    </h3>
-                    <ul className="space-y-4">
-                      <li>{createMenuItem('pre-workout', 'Pre-Workout', 4)}</li>
-                      <li>
-                        {createMenuItem('intra-workout', 'Intra-Workout', 5)}
-                      </li>
-                      <li>
-                        {createMenuItem(
-                          'muscle-recovery',
-                          'Muscle Recovery',
-                          6
-                        )}
-                      </li>
-                      <li>{createMenuItem('supplements', 'Supplements', 7)}</li>
-                    </ul>
-                  </div>
+              {/* SPORT NUTRITION Column */}
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="space-y-6"
+              >
+                <h3 className="text-2xl font-black text-white uppercase tracking-wider mb-6 flex items-center gap-3">
+                  <Zap className="h-6 w-6 text-yellow-400" />
+                  SPORT NUTRITION
+                </h3>
+                <div className="space-y-3">
+                  {createMenuItem('pre-workout', 'Pre-Workout', 4, <Flame className="h-4 w-4" />)}
+                  {createMenuItem('intra-workout', 'Intra-Workout', 5, <Zap className="h-4 w-4" />)}
+                  {createMenuItem('muscle-recovery', 'Muscle Recovery', 6, <Heart className="h-4 w-4" />)}
+                  {createMenuItem('supplements', 'Supplements', 7, <Star className="h-4 w-4" />)}
+                </div>
+              </motion.div>
 
-                  {/* PROTEIN Sub-column */}
-                  <div className="ml-8">
-                    <h3
-                      className="font-bold text-black mb-4 uppercase"
-                      style={{
-                        fontSize: '28px',
-                        lineHeight: '28px',
-                        letterSpacing: '-1.5px',
-                        fontWeight: '700',
-                      }}
-                    >
-                      PROTEIN
-                    </h3>
-                    <ul className="space-y-4">
-                      <li>
-                        {createMenuItem('lactose-free', 'Lactose Free', 8)}
-                      </li>
-                      <li>
-                        {createMenuItem('whey-protein', 'Whey Protein', 9)}
-                      </li>
-                      <li>
-                        {createMenuItem('iso-protein', 'ISO Protein', 10)}
-                      </li>
-                      <li>
-                        {createMenuItem('vegan-protein', 'Vegan Protein', 11)}
-                      </li>
-                    </ul>
-                  </div>
+              {/* PROTEIN Column */}
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="space-y-6"
+              >
+                <h3 className="text-2xl font-black text-white uppercase tracking-wider mb-6 flex items-center gap-3">
+                  <Star className="h-6 w-6 text-blue-400" />
+                  PROTEIN
+                </h3>
+                <div className="space-y-3">
+                  {createMenuItem('lactose-free', 'Lactose Free', 8, <Heart className="h-4 w-4" />)}
+                  {createMenuItem('whey-protein', 'Whey Protein', 9, <Zap className="h-4 w-4" />)}
+                  {createMenuItem('iso-protein', 'ISO Protein', 10, <Flame className="h-4 w-4" />)}
+                  {createMenuItem('vegan-protein', 'Vegan Protein', 11, <Sparkles className="h-4 w-4" />)}
+                </div>
+              </motion.div>
+
+              {/* AMINO ACIDS Column */}
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="space-y-6"
+              >
+                <h3 className="text-2xl font-black text-white uppercase tracking-wider mb-6 flex items-center gap-3">
+                  <Flame className="h-6 w-6 text-orange-400" />
+                  AMINO ACIDS
+                </h3>
+                <div className="space-y-3">
+                  {createMenuItem('bcaas', 'BCAAs', 12, <Zap className="h-4 w-4" />)}
+                  {createMenuItem('creatine', 'Creatine', 13, <Star className="h-4 w-4" />)}
+                  {createMenuItem('glutamine', 'Glutamine', 14, <Heart className="h-4 w-4" />)}
+                  {createMenuItem('eaas', 'EAAs', 15, <Flame className="h-4 w-4" />)}
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Enhanced Bottom Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+            >
+              {/* WEIGHT MANAGEMENT */}
+              <div className="space-y-6">
+                <h3 className="text-2xl font-black text-white uppercase tracking-wider mb-6 flex items-center gap-3">
+                  <Heart className="h-6 w-6 text-green-400" />
+                  WEIGHT MANAGEMENT
+                </h3>
+                <div className="space-y-3">
+                  {createMenuItem('meal-replacement', 'Meal Replacement', 16, <Star className="h-4 w-4" />)}
+                  {createMenuItem('fat-burner', 'Fat Burner', 17, <Flame className="h-4 w-4" />)}
+                  {createMenuItem('weight-management-supplements', 'Supplements', 18, <Zap className="h-4 w-4" />)}
                 </div>
               </div>
 
-              {/* Column 3: AMINO ACIDS */}
-              <div>
-                <h3
-                  className="font-bold text-black mb-4 uppercase"
-                  style={{
-                    fontSize: '28px',
-                    lineHeight: '28px',
-                    letterSpacing: '-1.5px',
-                    fontWeight: '700',
-                  }}
-                >
-                  AMINO ACIDS
-                </h3>
-                <ul className="space-y-4">
-                  <li>{createMenuItem('bcaas', 'BCAAs', 12)}</li>
-                  <li>{createMenuItem('creatine', 'Creatine', 13)}</li>
-                  <li>{createMenuItem('glutamine', 'Glutamine', 14)}</li>
-                  <li>{createMenuItem('eaas', 'EAAs', 15)}</li>
-                </ul>
-              </div>
-
-              {/* Column 4: HEALTH & WELLNESS */}
-              <div>
-                <h3
-                  className="font-bold text-black mb-4 uppercase"
-                  style={{
-                    fontSize: '28px',
-                    lineHeight: '28px',
-                    letterSpacing: '-1.5px',
-                    fontWeight: '700',
-                  }}
-                >
-                  HEALTH & WELLNESS
-                </h3>
-                <ul className="space-y-4">
-                  <li>
-                    {createMenuItem('multivitamins', 'Multivitamins', 16)}
-                  </li>
-                  <li>
-                    {createMenuItem('greens-and-reds', 'Greens and Reds', 17)}
-                  </li>
-                  <li>{createMenuItem('joint-health', 'Joint Health', 18)}</li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Bottom Section */}
-            <div className="grid grid-cols-4 gap-16 mt-12">
-              {/* Column 1: WEIGHT MANAGEMENT */}
-              <div>
-                <h3
-                  className="font-bold text-black mb-4 uppercase"
-                  style={{
-                    fontSize: '28px',
-                    lineHeight: '28px',
-                    letterSpacing: '-1.5px',
-                    fontWeight: '700',
-                  }}
-                >
-                  WEIGHT MANAGEMENT
-                </h3>
-                <ul className="space-y-4">
-                  <li>
-                    {createMenuItem('meal-replacement', 'Meal Replacement', 19)}
-                  </li>
-                  <li>{createMenuItem('fat-burner', 'Fat Burner', 20)}</li>
-                  <li>
-                    {createMenuItem(
-                      'weight-management-supplements',
-                      'Supplements',
-                      21
-                    )}
-                  </li>
-                </ul>
-              </div>
-
-              {/* Column 2: HORMONE HEALTH */}
-              <div>
-                <h3
-                  className="font-bold text-black mb-4 uppercase"
-                  style={{
-                    fontSize: '28px',
-                    lineHeight: '28px',
-                    letterSpacing: '-1.5px',
-                    fontWeight: '700',
-                  }}
-                >
+              {/* HORMONE HEALTH */}
+              <div className="space-y-6">
+                <h3 className="text-2xl font-black text-white uppercase tracking-wider mb-6 flex items-center gap-3">
+                  <Zap className="h-6 w-6 text-purple-400" />
                   HORMONE HEALTH
                 </h3>
-                <ul className="space-y-4">
-                  <li>
-                    {createMenuItem(
-                      'testosterone-booster',
-                      'Testosterone Booster',
-                      22
-                    )}
-                  </li>
-                </ul>
+                <div className="space-y-3">
+                  {createMenuItem('testosterone-booster', 'Testosterone Booster', 19, <Star className="h-4 w-4" />)}
+                </div>
               </div>
 
-              {/* Column 3: SHOP BY GOAL */}
-              <div>
-                <h3
-                  className="font-bold text-black mb-4 uppercase"
-                  style={{
-                    fontSize: '28px',
-                    lineHeight: '28px',
-                    letterSpacing: '-1.5px',
-                    fontWeight: '700',
-                  }}
-                >
+              {/* SHOP BY GOAL */}
+              <div className="space-y-6">
+                <h3 className="text-2xl font-black text-white uppercase tracking-wider mb-6 flex items-center gap-3">
+                  <Flame className="h-6 w-6 text-red-400" />
                   SHOP BY GOAL
                 </h3>
-                <ul className="space-y-4">
-                  <li>{createMenuItem('build-mass', 'Build Mass', 23)}</li>
-                  <li>{createMenuItem('endurance', 'Endurance', 24)}</li>
-                  <li>
-                    {createMenuItem(
-                      'athletic-performance',
-                      'Athletic Performance',
-                      25
-                    )}
-                  </li>
-                  <li>
-                    {createMenuItem('health-wellness', 'Health & Wellness', 26)}
-                  </li>
-                </ul>
+                <div className="space-y-3">
+                  {createMenuItem('build-mass', 'Build Mass', 20, <Zap className="h-4 w-4" />)}
+                  {createMenuItem('endurance', 'Endurance', 21, <Heart className="h-4 w-4" />)}
+                  {createMenuItem('athletic-performance', 'Athletic Performance', 22, <Star className="h-4 w-4" />)}
+                  {createMenuItem('health-wellness', 'Health & Wellness', 23, <Sparkles className="h-4 w-4" />)}
+                </div>
               </div>
 
-              {/* Column 4: APPAREL & GEAR */}
-              <div>
-                <h3
-                  className="font-bold text-black mb-4 uppercase"
-                  style={{
-                    fontSize: '28px',
-                    lineHeight: '28px',
-                    letterSpacing: '-1.5px',
-                    fontWeight: '700',
-                  }}
-                >
+              {/* APPAREL & GEAR */}
+              <div className="space-y-6">
+                <h3 className="text-2xl font-black text-white uppercase tracking-wider mb-6 flex items-center gap-3">
+                  <Sparkles className="h-6 w-6 text-cyan-400" />
                   APPAREL & GEAR
                 </h3>
-                <ul className="space-y-4">
-                  <li>{createMenuItem('apparel', 'Apparel', 27)}</li>
-                  <li>{createMenuItem('gear', 'Gear', 28)}</li>
-                  <li>{createMenuItem('merchandise', 'Merchandise', 29)}</li>
-                </ul>
+                <div className="space-y-3">
+                  {createMenuItem('apparel', 'Apparel', 24, <Heart className="h-4 w-4" />)}
+                  {createMenuItem('gear', 'Gear', 25, <Zap className="h-4 w-4" />)}
+                  {createMenuItem('merchandise', 'Merchandise', 26, <Star className="h-4 w-4" />)}
+                </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       )}
