@@ -14,6 +14,29 @@ const axiosInstance = axios.create({
   withCredentials: true,
 });
 
+// Refresh coalescing helpers: ensure only one refresh request is in-flight and queue other requests
+let isRefreshing = false;
+let refreshSubscribers = [];
+
+function processQueue(error, token) {
+  refreshSubscribers.forEach((prom) => {
+    if (error) {
+      prom.reject(error);
+    } else {
+      try {
+        if (token) {
+          prom.originalRequest.headers = prom.originalRequest.headers || {};
+          prom.originalRequest.headers.Authorization = `Bearer ${token}`;
+        }
+        prom.resolve(axiosInstance(prom.originalRequest));
+      } catch (e) {
+        prom.reject(e);
+      }
+    }
+  });
+  refreshSubscribers = [];
+}
+
 // Attach Authorization header only when calling our API origin and when token exists in memory
 axiosInstance.interceptors.request.use((config) => {
   try {
@@ -54,43 +77,59 @@ axiosInstance.interceptors.response.use(
 
     if (status === 401 && originalRequest && !originalRequest._retry) {
       originalRequest._retry = true;
-      // Call refresh endpoint using plain axios so this call isn't intercepted again
-      return axios
-        .post(`${API_BASE}/auth/refresh`, {}, { withCredentials: true })
-        .then((res) => {
-          const newToken = res?.data?.token || null;
-          if (newToken) {
-            // update in-memory token
-            store.dispatch(setToken(newToken));
-            // update original request Authorization and retry
-            originalRequest.headers = originalRequest.headers || {};
-            originalRequest.headers.Authorization = `Bearer ${newToken}`;
-            return axiosInstance(originalRequest);
-          }
-          // If refresh succeeded but no token, attempt to fetch /users/current to populate user
-          return axios
-            .get(`${API_BASE}/users/current`, { withCredentials: true })
-            .then((userRes) => {
-              // Dispatch user to store so Redux reflects the valid session
-              const userPayload = userRes?.data || {};
-              const user = userPayload.user || userPayload.data || null;
-              if (user) {
-                // token may be null here if server relies purely on cookies
-                store.dispatch(loginSuccess({ user, token: newToken || null }));
-              }
-              // session is valid - retry original request
-              return axiosInstance(originalRequest);
-            })
-            .catch(() => {
-              store.dispatch(logout());
-              return Promise.reject(error);
-            });
-        })
-        .catch((refreshErr) => {
-          // refresh failed -> force logout
-          store.dispatch(logout());
-          return Promise.reject(refreshErr);
-        });
+
+      return new Promise((resolve, reject) => {
+        // queue the request
+        refreshSubscribers.push({ resolve, reject, originalRequest });
+
+        // if a refresh is already in progress, queued requests will be resolved/rejected when it finishes
+        if (isRefreshing) return;
+
+        isRefreshing = true;
+
+        // Start refresh
+        axios
+          .post(`${API_BASE}/auth/refresh`, {}, { withCredentials: true })
+          .then((res) => {
+            const newToken = res?.data?.token || null;
+            if (newToken) {
+              store.dispatch(setToken(newToken));
+              processQueue(null, newToken);
+              isRefreshing = false;
+              return;
+            }
+
+            // If refresh succeeded but no token, attempt to fetch /users/current to populate user
+            axios
+              .get(`${API_BASE}/users/current`, { withCredentials: true })
+              .then((userRes) => {
+                const userPayload = userRes?.data || {};
+                const user = userPayload.user || userPayload.data || null;
+                if (user) {
+                  store.dispatch(loginSuccess({ user, token: null }));
+                }
+                processQueue(null, null);
+                isRefreshing = false;
+              })
+              .catch((err) => {
+                store.dispatch(logout());
+                processQueue(err, null);
+                isRefreshing = false;
+              });
+          })
+          .catch((refreshErr) => {
+            store.dispatch(logout());
+            processQueue(refreshErr, null);
+            isRefreshing = false;
+          });
+      });
+    }
+
+    // Suppress expected 401s from auth refresh endpoint (common when user is not logged in)
+    const reqUrl = error?.config?.url || '';
+    if (reqUrl.includes('/auth/refresh') || reqUrl.includes('/auth/logout')) {
+      // don't noisy-log refresh/logout failures (these are expected when session absent)
+      return Promise.reject(error);
     }
 
     if (import.meta.env.DEV) {

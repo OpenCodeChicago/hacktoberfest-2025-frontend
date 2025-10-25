@@ -15,7 +15,11 @@ const root = createRoot(document.getElementById('root'));
 // Flow: POST /auth/refresh (uses HttpOnly refresh cookie) -> if token returned, set in-memory token -> GET /users/current to populate user
 // Set VITE_SKIP_SESSION_CHECK=true in .env to skip this during local dev if the session endpoint is unavailable.
 const skip = import.meta.env.VITE_SKIP_SESSION_CHECK === 'true';
-if (!skip) {
+// Only attempt a refresh on startup if we previously recorded that a session exists.
+// We intentionally do NOT persist tokens; this small boolean flag only avoids noisy 401 logs
+// when no session ever existed.
+const hadSession = typeof window !== 'undefined' && localStorage.getItem('hasSession') === '1';
+if (!skip && hadSession) {
   (async () => {
     try {
       // Attempt to refresh using the server-set httpOnly cookie
