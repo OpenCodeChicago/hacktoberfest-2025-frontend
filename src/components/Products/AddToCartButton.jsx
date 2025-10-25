@@ -7,7 +7,7 @@ const CartIcon = ({ className = 'h-6 w-6' }) => (
   <img src="/images/cart-icon.svg" alt="Add to cart" className={className} />
 );
 
-const AddToCartButton = ({ product, selectedFlavor }) => {
+const AddToCartButton = ({ className, product, selectedFlavor }) => {
   const [countAnimation, setCountAnimation] = useState('');
   const animationTimeoutRef = useRef(null);
 
@@ -31,7 +31,9 @@ const AddToCartButton = ({ product, selectedFlavor }) => {
     if (animationTimeoutRef.current) {
       clearTimeout(animationTimeoutRef.current);
     }
-    setCountAnimation(direction === 'up' ? 'animate-count-up' : 'animate-count-down');
+    setCountAnimation(
+      direction === 'up' ? 'animate-count-up' : 'animate-count-down'
+    );
     animationTimeoutRef.current = setTimeout(() => {
       setCountAnimation('');
     }, 350);
@@ -51,7 +53,7 @@ const AddToCartButton = ({ product, selectedFlavor }) => {
       const ok = addItem(product, selectedFlavor, 1);
       if (ok) setLocalQuantity(1);
       // small delay to avoid immediate double clicks
-  setTimeout(() => setInFlight(false), DEBOUNCE_DELAY);
+      setTimeout(() => setInFlight(false), DEBOUNCE_DELAY);
       triggerCountAnimation('down'); // First addition animates from below
     }
   };
@@ -65,7 +67,7 @@ const AddToCartButton = ({ product, selectedFlavor }) => {
     const ok = updateItemQuantity(product, selectedFlavor, newQuantity);
     if (ok) setLocalQuantity(newQuantity);
     // small delay to avoid rapid click races
-  setTimeout(() => setInFlight(false), DEBOUNCE_DELAY);
+    setTimeout(() => setInFlight(false), DEBOUNCE_DELAY);
     triggerCountAnimation('down'); // Animation comes from below for increment
   };
 
@@ -76,13 +78,14 @@ const AddToCartButton = ({ product, selectedFlavor }) => {
     const newQuantity = Math.max(0, current - 1);
     const ok = updateItemQuantity(product, selectedFlavor, newQuantity);
     if (ok) setLocalQuantity(newQuantity);
-  setTimeout(() => setInFlight(false), DEBOUNCE_DELAY);
+    setTimeout(() => setInFlight(false), DEBOUNCE_DELAY);
     triggerCountAnimation('up'); // Animation goes up for decrement
   };
 
   useEffect(() => {
     return () => {
-      if (animationTimeoutRef.current) clearTimeout(animationTimeoutRef.current);
+      if (animationTimeoutRef.current)
+        clearTimeout(animationTimeoutRef.current);
     };
   }, []);
 
@@ -97,7 +100,7 @@ const AddToCartButton = ({ product, selectedFlavor }) => {
             -ml-px flex-grow flex items-center justify-center gap-2 font-medium 
             py-3 px-4 rounded-r-xl transition-colors duration-150 hover:shadow-lg cursor-pointer
             focus:outline-none focus:z-10
-            bg-[#023e8a] text-white hover:bg-[#1054ab]
+            bg-[#023e8a] text-white hover:bg-[#1054ab] ${className}
           `}
           aria-label="Add to cart"
         >
@@ -106,7 +109,9 @@ const AddToCartButton = ({ product, selectedFlavor }) => {
         </button>
       ) : (
         // Show counter when quantity > 0
-        <div className="-ml-px flex-grow flex items-stretch bg-[#023e8a] rounded-r-xl overflow-hidden">
+        <div
+          className={`-ml-px flex-grow flex items-stretch bg-[#023e8a] rounded-r-xl overflow-hidden ${className}`}
+        >
           {/* Decrement Button */}
           <button
             onClick={(e) => handleActionClick(e, handleDecrement)}
@@ -114,8 +119,18 @@ const AddToCartButton = ({ product, selectedFlavor }) => {
             aria-label="Decrease quantity"
             disabled={inFlight}
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M20 12H4"
+              />
             </svg>
           </button>
 
@@ -130,7 +145,7 @@ const AddToCartButton = ({ product, selectedFlavor }) => {
               {cartQuantity}
             </span>
           </div>
-          
+
           {/* Increment Button */}
           <button
             onClick={(e) => handleActionClick(e, handleIncrement)}
@@ -138,8 +153,18 @@ const AddToCartButton = ({ product, selectedFlavor }) => {
             aria-label="Increase quantity"
             disabled={inFlight}
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 4v16m8-8H4"
+              />
             </svg>
           </button>
         </div>
