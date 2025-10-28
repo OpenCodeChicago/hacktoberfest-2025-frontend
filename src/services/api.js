@@ -71,6 +71,11 @@ export const authServices = {
     // POST to /auth/refresh using cookies; server returns a new token or re-establishes session
     return api.post('/auth/refresh');
   },
+
+  getProfile: () => {
+    // GET to /auth/profile to fetch current user's profile
+    return api.get('/auth/profile');
+  },
 };
 
 export const cartServices = {

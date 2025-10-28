@@ -102,7 +102,9 @@ export default function CartDrawer({ isOpen, onClose }) {
     }
     updateItemQuantity(
       {
-        id: item.id,
+        id: item.id || item._id || item.productId,
+        _id: item._id || item.id || item.productId,
+        productId: item.productId || item._id || item.id,
         name: item.name,
         price: item.price,
         imageUrl: item.imageUrl,
