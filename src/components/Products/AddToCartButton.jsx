@@ -1,7 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
 import { useCart } from '../../context/CartContext';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
 const DEBOUNCE_DELAY = 180; // ms: short in-flight guard to avoid rapid-click races
 
@@ -12,9 +10,6 @@ const CartIcon = ({ className = 'h-6 w-6' }) => (
 const AddToCartButton = ({ className, product, selectedFlavor }) => {
   const [countAnimation, setCountAnimation] = useState('');
   const animationTimeoutRef = useRef(null);
-  const navigate = useNavigate();
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const cartItems = useSelector((state) => state.cart.items);
 
   // Cart context
   const { getItemQuantity, addItem, updateItemQuantity } = useCart();
@@ -28,7 +23,7 @@ const AddToCartButton = ({ className, product, selectedFlavor }) => {
   // Keep local quantity synced whenever cart context changes
   useEffect(() => {
     setLocalQuantity(getItemQuantity(product, selectedFlavor));
-  }, [cartItems, getItemQuantity, product, selectedFlavor]);
+  }, [getItemQuantity, product, selectedFlavor]);
 
   const cartQuantity = localQuantity || 0;
 
@@ -49,54 +44,39 @@ const AddToCartButton = ({ className, product, selectedFlavor }) => {
     action();
   };
 
-  const handleAddToCart = async () => {
-    if (!isAuthenticated) {
-      alert('Please log in to add items to your cart');
-      navigate('/login');
-      return;
-    }
-
+  const handleAddToCart = () => {
+    // If not in cart, add first item - read latest value from context
     if (inFlight) return;
     const current = getItemQuantity(product, selectedFlavor) || 0;
     if (current === 0) {
       setInFlight(true);
-      const ok = await addItem(product, selectedFlavor, 1);
-      if (ok) {
-        setLocalQuantity(1);
-        triggerCountAnimation('down');
-      }
+      const ok = addItem(product, selectedFlavor, 1);
+      if (ok) setLocalQuantity(1);
+      // small delay to avoid immediate double clicks
       setTimeout(() => setInFlight(false), DEBOUNCE_DELAY);
+      triggerCountAnimation('down'); // First addition animates from below
     }
   };
 
-  const handleIncrement = async () => {
-    if (!isAuthenticated) {
-      alert('Please log in to modify your cart');
-      navigate('/login');
-      return;
-    }
+  const handleIncrement = () => {
     if (inFlight) return;
     setInFlight(true);
+    // Read newest quantity from context to avoid stale closure issues
     const current = getItemQuantity(product, selectedFlavor) || 0;
     const newQuantity = current + 1;
-    const ok =await updateItemQuantity(product, selectedFlavor, newQuantity);
-    if (ok){ setLocalQuantity(newQuantity);
-      triggerCountAnimation('down');
-    }
+    const ok = updateItemQuantity(product, selectedFlavor, newQuantity);
+    if (ok) setLocalQuantity(newQuantity);
+    // small delay to avoid rapid click races
     setTimeout(() => setInFlight(false), DEBOUNCE_DELAY);
+    triggerCountAnimation('down'); // Animation comes from below for increment
   };
 
-  const handleDecrement = async () => {
-    if (!isAuthenticated) {
-      alert('Please log in to modify your cart');
-      navigate('/login');
-      return;
-    }
+  const handleDecrement = () => {
     if (inFlight) return;
     setInFlight(true);
     const current = getItemQuantity(product, selectedFlavor) || 0;
     const newQuantity = Math.max(0, current - 1);
-    const ok = await updateItemQuantity(product, selectedFlavor, newQuantity);
+    const ok = updateItemQuantity(product, selectedFlavor, newQuantity);
     if (ok) setLocalQuantity(newQuantity);
     setTimeout(() => setInFlight(false), DEBOUNCE_DELAY);
     triggerCountAnimation('up'); // Animation goes up for decrement

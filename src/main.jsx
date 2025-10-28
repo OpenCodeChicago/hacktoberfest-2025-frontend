@@ -4,10 +4,8 @@ import { Provider } from 'react-redux';
 import App from './components/App';
 import store from './store';
 import { loginSuccess, setToken } from './store/authSlice';
-import axiosInstance,{setStoreCache} from './api/axiosInstance';
+import axiosInstance from './api/axiosInstance';
 import './index.css';
-// Initialize store cache for axios interceptors
-setStoreCache(store);
 
 // Create a root container for React 18+
 const root = createRoot(document.getElementById('root'));
@@ -31,7 +29,7 @@ if (!skip) {
       }
 
       // Fetch current user info (server should validate using refresh cookie or the newly set token)
-      const userResp = await axiosInstance.get('/auth/profile');
+      const userResp = await axiosInstance.get('/users/current');
       const userPayload = userResp?.data || {};
       const user = userPayload.user || userPayload.data || null;
 

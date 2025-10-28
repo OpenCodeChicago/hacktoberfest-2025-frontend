@@ -1,15 +1,25 @@
-import React, { createContext, useContext, useEffect, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  fetchCart,
-  addToCartAsync,
-  removeFromCartAsync,
-  updateQuantityAsync,
-  clearCartAsync,
-  resetCart,
-} from '../store/cartSlice';
+import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 
-// Helper function to generate cart item key
+// Small, local helpers kept inside the context to centralize cart logic.
+function getCart() {
+  try {
+    const raw = localStorage.getItem('cart');
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+function persistCart(nextItems) {
+  try {
+    localStorage.setItem('cart', JSON.stringify(nextItems));
+  } catch {
+    // ignore localStorage errors
+  }
+}
+
 function makeCartItemKey(product, selectedFlavor = null) {
   if (!product) return null;
   const productId = product.id ?? product._id ?? product.productId;
@@ -20,158 +30,144 @@ function makeCartItemKey(product, selectedFlavor = null) {
 const CartContext = createContext(null);
 
 export function CartProvider({ children }) {
-  const dispatch = useDispatch();
-  const { items, loading, error, synced } = useSelector((state) => state.cart);
-  const { isAuthenticated, user } = useSelector((state) => state.auth);
-
-  // Fetch cart when user logs in
-  useEffect(() => {
-    if (isAuthenticated && user && !synced) {
-      dispatch(fetchCart());
-    }
-  }, [isAuthenticated, user, synced, dispatch]);
-
-  // Reset cart when user logs out
-  useEffect(() => {
-    if (!isAuthenticated) {
-      dispatch(resetCart());
-    }
-  }, [isAuthenticated, dispatch]);
-
-  // Add item to cart
-  const addItem = useCallback(
-    async (product, selectedFlavor = null, quantity = 1) => {
-      if (!product || quantity <= 0) {
-        console.warn('Invalid product or quantity');
-        return false;
-      }
-
-      if (!isAuthenticated) {
-        console.warn('User must be authenticated to add items to cart');
-        return false;
-      }
-
-      try {
-        const productId = product.id ?? product._id ?? product.productId;
-        await dispatch(
-          addToCartAsync({
-            productId,
-            quantity,
-            selectedFlavor,
-          })
-        ).unwrap();
-        return true;
-      } catch (err) {
-        console.error('Failed to add item to cart:', err);
-        return false;
-      }
-    },
-    [dispatch, isAuthenticated]
-  );
-
-  // Update item quantity
-  const updateItemQuantity = useCallback(
-    async (product, selectedFlavor = null, newQuantity) => {
-      if (!product || newQuantity < 0) {
-        console.warn('Invalid product or quantity');
-        return false;
-      }
-
-      if (!isAuthenticated) {
-        console.warn('User must be authenticated to update cart');
-        return false;
-      }
-
-      try {
-        const productId = product.id ?? product._id ?? product.productId;
-        
-        if (newQuantity === 0) {
-          // Remove item if quantity is 0
-          await dispatch(removeFromCartAsync(productId)).unwrap();
-        } else {
-          await dispatch(
-            updateQuantityAsync({
-              productId,
-              quantity: newQuantity,
-            })
-          ).unwrap();
-        }
-        return true;
-      } catch (err) {
-        console.error('Failed to update cart item quantity:', err);
-        return false;
-      }
-    },
-    [dispatch, isAuthenticated]
-  );
-
-  // Remove item from cart
-  const removeItem = useCallback(
-    async (cartItemKey) => {
-      if (!cartItemKey) {
-        console.warn('Invalid cart item key');
-        return false;
-      }
-
-      if (!isAuthenticated) {
-        console.warn('User must be authenticated to remove items from cart');
-        return false;
-      }
-
-      try {
-        // Extract productId from cartItemKey (format: "productId" or "productId_flavor")
-        const productId = cartItemKey.split('_')[0];
-        await dispatch(removeFromCartAsync(productId)).unwrap();
-        return true;
-      } catch (err) {
-        console.error('Failed to remove item from cart:', err);
-        return false;
-      }
-    },
-    [dispatch, isAuthenticated]
-  );
-
-  // Clear entire cart
-  const clearCart = useCallback(async () => {
-    if (!isAuthenticated) {
-      console.warn('User must be authenticated to clear cart');
-      return false;
-    }
-
+  const [items, setItems] = useState(() => {
     try {
-      await dispatch(clearCartAsync()).unwrap();
-      return true;
-    } catch (err) {
-      console.error('Failed to clear cart:', err);
-      return false;
-    }
-  }, [dispatch, isAuthenticated]);
-
-  // Get item quantity
-  const getItemQuantity = useCallback(
-    (product, selectedFlavor = null) => {
-      if (!product) return 0;
-      const productId = String(product.id ?? product._id ?? product.productId);
-      // Match by productId only (ignore flavor for now since backend doesn't store it separately)
-      const found = items.find((it) => {
-        const itemProductId = String(it.productId ?? it._id ?? it.id);
-        return itemProductId === productId;
+      const raw = getCart() || [];
+      const map = new Map();
+      raw.forEach((it) => {
+        const rawKey = it.cartItemKey || it.id || it.productId;
+        if (!rawKey) return;
+        const key = String(rawKey);
+        map.set(key, { ...it, cartItemKey: key });
       });
-      return found ? found.quantity || 0 : 0;
-    },
-    [items]
-  );
+      return Array.from(map.values());
+    } catch {
+      return [];
+    }
+  });
 
-  // Get total item count
+  // Persist helper
+  const persist = useCallback((nextItems) => {
+    persistCart(nextItems);
+  }, []);
+
+  // Sync when other tabs or legacy utilities update the cart
+  useEffect(() => {
+    // Shallow comparison: same length and same (key, quantity) pairs in same order
+    const shallowEquals = (a = [], b = []) => {
+      if (a.length !== b.length) return false;
+      for (let i = 0; i < a.length; i++) {
+        if ((a[i].cartItemKey || a[i].id) !== (b[i].cartItemKey || b[i].id)) return false;
+        if ((a[i].quantity || 0) !== (b[i].quantity || 0)) return false;
+      }
+      return true;
+    };
+
+    const sync = () => {
+      try {
+        const external = getCart() || [];
+        const normalized = external.map((it) => {
+          const key = String(it.cartItemKey || it.id || it.productId || '');
+          return { ...it, cartItemKey: key };
+        });
+        if (!shallowEquals(normalized, items)) setItems(normalized);
+      } catch {
+        // ignore
+      }
+    };
+
+    const handleStorage = (e) => {
+      // Only react when the `cart` key changed or on generic storage
+      if (!e || e.key === null || e.key === 'cart') sync();
+    };
+
+    window.addEventListener('storage', handleStorage);
+
+    return () => {
+      window.removeEventListener('storage', handleStorage);
+    };
+  }, [items]);
+
+  // Cart helpers (use shared utils for key generation)
+  const getItemQuantity = useCallback((product, selectedFlavor = null) => {
+    if (!product) return 0;
+    const key = makeCartItemKey(product, selectedFlavor) || product.cartItemKey;
+    const found = items.find((it) => it.cartItemKey === key);
+    return found ? found.quantity || 0 : 0;
+  }, [items]);
+
   const getItemCount = useCallback(() => {
     return items.reduce((total, it) => total + (it.quantity || 0), 0);
   }, [items]);
 
+  const addItem = useCallback((product, selectedFlavor = null, quantity = 1) => {
+    if (!product || quantity <= 0) return false;
+    const key = makeCartItemKey(product, selectedFlavor) || product.cartItemKey;
+    if (!key) return false;
+    setItems((prev) => {
+      const idx = prev.findIndex((it) => it.cartItemKey === key);
+      const next = prev.slice();
+      if (idx >= 0) {
+        // set existing to provided quantity (avoid accidental double increments)
+        next[idx] = { ...next[idx], quantity: quantity };
+      } else {
+        const productId = product.id ?? product._id ?? product.productId;
+        const salePercent = product.sale ?? product.salePercentage ?? 0;
+        next.push({
+          cartItemKey: key,
+          id: productId,
+          name: product.name,
+          price: product.price,
+          imageUrl: product.imageUrl || product.image,
+          selectedFlavor: selectedFlavor,
+          quantity,
+          salePercentage: salePercent,
+          addedAt: Date.now(),
+        });
+      }
+      persist(next);
+      return next;
+    });
+    return true;
+  }, [persist]);
+
+  const updateItemQuantity = useCallback((product, selectedFlavor = null, newQuantity) => {
+    if (!product || newQuantity < 0) return false;
+    const key = makeCartItemKey(product, selectedFlavor) || product.cartItemKey;
+    setItems((prev) => {
+      const idx = prev.findIndex((it) => it.cartItemKey === key);
+      if (idx >= 0) {
+        const next = prev.slice();
+        if (newQuantity === 0) {
+          next.splice(idx, 1);
+        } else {
+          next[idx] = { ...next[idx], quantity: newQuantity };
+        }
+        persist(next);
+        return next;
+      }
+      return prev;
+    });
+    return true;
+  }, [persist]);
+
+  const removeItem = useCallback((cartItemKey) => {
+    if (!cartItemKey) return false;
+    setItems((prev) => {
+      const next = prev.filter((it) => it.cartItemKey !== cartItemKey);
+      persist(next);
+      return next;
+    });
+    return true;
+  }, [persist]);
+
+  const clearCart = useCallback(() => {
+    setItems([]);
+    persist([]);
+  }, [persist]);
+
   const value = {
     items,
-    loading,
-    error,
-    isAuthenticated,
     addItem,
     updateItemQuantity,
     removeItem,

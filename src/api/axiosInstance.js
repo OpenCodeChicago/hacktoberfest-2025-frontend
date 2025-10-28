@@ -1,26 +1,8 @@
 import axios from 'axios';
+import store from '../store';
 import { setToken, logout, loginSuccess } from '../store/authSlice';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:5000/api';
-// Lazy import store to avoid circular dependency
-let store;
-const getStore = async () => {
-  if (!store) {
-    const storeModule = await import('../store');
-    store = storeModule.default;
-  }
-  return store;
-};
-
-// Synchronous version for interceptors
-let storeCache;
-export const setStoreCache = (storeInstance) => {
-  storeCache = storeInstance;
-};
-
-const getStoreSync = () => {
-  return storeCache;
-};
 
 const axiosInstance = axios.create({
   baseURL: API_BASE,
@@ -35,8 +17,6 @@ const axiosInstance = axios.create({
 // Attach Authorization header only when calling our API origin and when token exists in memory
 axiosInstance.interceptors.request.use((config) => {
   try {
-    const store = getStoreSync();
-    if (!store) return config;
     const token = store.getState()?.auth?.token;
     // Attach Authorization header for relative URLs (not starting with 'http') or absolute URLs matching API_BASE
     const urlStr = String(config.url);
@@ -74,8 +54,6 @@ axiosInstance.interceptors.response.use(
 
     if (status === 401 && originalRequest && !originalRequest._retry) {
       originalRequest._retry = true;
-      const store = getStoreSync();
-      if (!store) return Promise.reject(error);
       // Call refresh endpoint using plain axios so this call isn't intercepted again
       return axios
         .post(`${API_BASE}/auth/refresh`, {}, { withCredentials: true })
@@ -89,12 +67,9 @@ axiosInstance.interceptors.response.use(
             originalRequest.headers.Authorization = `Bearer ${newToken}`;
             return axiosInstance(originalRequest);
           }
-          // If refresh succeeded but no token, attempt to fetch /auth/profile to populate user
+          // If refresh succeeded but no token, attempt to fetch /users/current to populate user
           return axios
-            .get(`${API_BASE}/auth/profile`, {
-              withCredentials: true,
-              headers: { Authorization: `Bearer ${newToken}` },
-            })
+            .get(`${API_BASE}/users/current`, { withCredentials: true })
             .then((userRes) => {
               // Dispatch user to store so Redux reflects the valid session
               const userPayload = userRes?.data || {};
