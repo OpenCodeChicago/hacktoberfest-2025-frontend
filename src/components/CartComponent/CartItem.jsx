@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const DEBOUNCE_DELAY = 180; // ms: short in-flight guard to avoid rapid-click races
@@ -17,9 +17,9 @@ export default function CartItem({ item, onQuantityChange, onRemove, onClose }) 
   };
 
   return (
-    <div className="flex gap-3 border-b border-gray-200 pb-4 group">
+    <div className="flex gap-4 border-b border-gray-200 pb-4 group">
       {/* Image with SVG fallback (same as ProductCard) */}
-      <div className="relative h-20 w-20 flex-shrink-0">
+      <div className="relative h-20 w-20 flex-shrink-0 min-w-[5rem]">
         {!imageError && (item.imageUrl || item.image) ? (
           <img
             src={item.imageUrl || item.image || ''}
@@ -49,8 +49,8 @@ export default function CartItem({ item, onQuantityChange, onRemove, onClose }) 
       </div>
 
       {/* Details */}
-      <div className="flex-1 min-w-0">
-        <h4 className="font-semibold text-gray-900 text-sm line-clamp-2">
+      <div className="flex-1 min-w-0 overflow-hidden">
+        <h4 className="font-semibold text-gray-900 text-sm line-clamp-2 break-words">
           <Link to={`/products/${item.id}`} onClick={handleTitleClick} tabIndex={0} className="hover:underline">
             {item.name}
           </Link>

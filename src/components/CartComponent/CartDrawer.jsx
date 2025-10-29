@@ -102,7 +102,9 @@ export default function CartDrawer({ isOpen, onClose }) {
     }
     updateItemQuantity(
       {
-        id: item.id,
+        id: item.id || item._id || item.productId,
+        _id: item._id || item.id || item.productId,
+        productId: item.productId || item._id || item.id,
         name: item.name,
         price: item.price,
         imageUrl: item.imageUrl,
@@ -189,25 +191,33 @@ export default function CartDrawer({ isOpen, onClose }) {
               {/* Cart Items */}
               {/* Cart items list */}
               <div
-                className="space-y-4 max-h-96 overflow-y-auto"
+                className="space-y-4 max-h-96 overflow-y-auto pr-4"
                 aria-label="Cart items list"
               >
-                {orderedItems.map((item) => (
-                  <CartItem
-                    key={item.cartItemKey}
-                    item={{
-                      ...item,
-                      imageUrl:
-                        item.imageUrl ||
-                        item.image ||
-                        item.img ||
-                        '/images/product-default-image.jpg',
-                    }}
-                    onQuantityChange={handleQuantityChange}
-                    onRemove={handleRemove}
-                    onClose={onClose}
-                  />
-                ))}
+                {orderedItems.map((item) => {
+                  console.log('Cart item image check:', {
+                    name: item.name,
+                    image: item.image,
+                    imageUrl: item.imageUrl,
+                    hasImage: !!(item.image || item.imageUrl),
+                  });
+                  return (
+                    <CartItem
+                      key={item.cartItemKey}
+                      item={{
+                        ...item,
+                        imageUrl:
+                          item.imageUrl ||
+                          item.image ||
+                          item.img ||
+                          '/images/product-default-image.jpg',
+                      }}
+                      onQuantityChange={handleQuantityChange}
+                      onRemove={handleRemove}
+                      onClose={onClose}
+                    />
+                  );
+                })}
               </div>
 
               {/* Suggestions */}
