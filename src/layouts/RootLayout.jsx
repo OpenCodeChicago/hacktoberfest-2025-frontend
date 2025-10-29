@@ -10,6 +10,7 @@ import Loader from '../components/Loader';
 import BottomFooter from '../components/BottomFooter';
 import BackToTop from '../components/ui/BackToTopButton/BackToTopButton';
 import { CartProvider } from '../context/CartContext';
+import WhatsAppWidget from '../components/WhatsAppWidget'; // Added WhatsApp Widget
 
 function RootLayout() {
   return (
@@ -42,6 +43,7 @@ function RootLayout() {
         pauseOnHover
       />
       <BackToTop showAfter={250} />
+      <WhatsAppWidget /> {/* Added WhatsApp Widget */}
     </CartProvider>
   );
 }
