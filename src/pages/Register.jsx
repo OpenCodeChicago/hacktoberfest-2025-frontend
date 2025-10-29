@@ -4,6 +4,7 @@ import * as yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { authServices } from '../services/api';
 import {
   registerStart,
@@ -11,26 +12,43 @@ import {
   registerFailure,
 } from '../store/authSlice';
 import { extractToken, normalizeUser } from '../utils/authHelpers';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
-// Validation schema
+// Enhanced validation schema with stronger regex patterns
 const registerSchema = yup.object({
   name: yup
     .string()
     .min(2, 'Name must be at least 2 characters.')
+    .max(50, 'Name must be less than 50 characters.')
+    .matches(
+      /^[a-zA-Z\s\-']+$/,
+      'Name can only contain letters, spaces, hyphens, and apostrophes.'
+    )
     .required('Name is required.'),
   email: yup
     .string()
     .email('Please enter a valid email address.')
+    .matches(
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+      'Please enter a valid email address.'
+    )
     .required('Email is required.'),
   password: yup
     .string()
-    .min(8, 'Password must be at least 8 characters.')
+    .min(12, 'Password must be at least 12 characters.')
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/,
+      'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.'
+    )
     .required('Password is required.'),
   confirmPassword: yup
     .string()
     .oneOf([yup.ref('password')], 'Passwords must match.')
     .required('Please confirm your password.'),
+  // Honeypot field for spam prevention
+  website: yup
+    .string()
+    .test('is-empty', 'Invalid submission', (value) => !value || value.length === 0),
 });
 
 const Register = () => {
@@ -42,6 +60,8 @@ const Register = () => {
     password: false,
     confirmPassword: false,
   });
+  const [submissionTimestamp, setSubmissionTimestamp] = useState(null);
+  const honeypotRef = useRef(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -53,6 +73,7 @@ const Register = () => {
     formState: { errors, isValid, isDirty },
     trigger,
     setError,
+    reset,
   } = useForm({
     resolver: yupResolver(registerSchema),
     mode: 'onTouched',
@@ -61,6 +82,7 @@ const Register = () => {
       email: '',
       password: '',
       confirmPassword: '',
+      website: '', // Honeypot field
     },
   });
 
@@ -68,6 +90,11 @@ const Register = () => {
   const handleBlur = (fieldName) => {
     setTouchedFields((prev) => ({ ...prev, [fieldName]: true }));
     trigger(fieldName);
+    
+    // Show real-time validation feedback
+    if (errors[fieldName]) {
+      toast.error(errors[fieldName].message);
+    }
   };
 
   // Custom onChange to validate only if field was previously touched/had error
@@ -77,8 +104,29 @@ const Register = () => {
     }
   };
 
+  // Spam prevention: Check submission timing
+  useEffect(() => {
+    setSubmissionTimestamp(Date.now());
+  }, []);
+
   const onSubmit = async (data) => {
     try {
+      // Spam prevention checks
+      const currentTime = Date.now();
+      const timeElapsed = currentTime - submissionTimestamp;
+      
+      // If form submitted too quickly, likely a bot
+      if (timeElapsed < 2000) {
+        toast.error('Form submitted too quickly. Please take your time.');
+        return;
+      }
+      
+      // Check honeypot field
+      if (data.website) {
+        toast.error('Spam detected.');
+        return;
+      }
+      
       dispatch(registerStart());
       const response = await authServices.register({
         name: data.name,
@@ -102,12 +150,17 @@ const Register = () => {
         // ignore storage errors
       }
       if (import.meta.env.DEV) console.debug('registerSuccess dispatched:', { user, token });
+      
+      // Reset form and show success message
+      reset();
+      toast.success('Account created successfully!');
       navigate('/');
     } catch (err) {
       const message =
         err?.response?.data?.message || err.message || 'Registration failed';
       dispatch(registerFailure(message));
       setError('email', { type: 'server', message });
+      toast.error(message);
     }
   };
 
@@ -183,6 +236,17 @@ const Register = () => {
           <hr className="border-t bg-[#B4C2CF] w-full" />
         </div>
 
+        {/* Security Tips Section */}
+        <div className="mb-6 p-4 bg-blue-50 rounded-md border border-blue-200">
+          <h3 className="font-semibold text-blue-800 mb-2">Create a Secure Profile</h3>
+          <ul className="text-xs text-blue-700 list-disc pl-5 space-y-1">
+            <li>Use a strong password with mixed characters</li>
+            <li>Enable two-factor authentication when available</li>
+            <li>Use a unique password for each account</li>
+            <li>Never share your password with anyone</li>
+          </ul>
+        </div>
+
         {/* Form */}
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -190,6 +254,19 @@ const Register = () => {
           style={{ fontFamily: 'var(--font-inter)' }}
           noValidate
         >
+          {/* Honeypot field for spam prevention (hidden) */}
+          <div className="hidden">
+            <label htmlFor="website">Website</label>
+            <input
+              id="website"
+              type="text"
+              {...register('website')}
+              ref={honeypotRef}
+              tabIndex={-1}
+              autoComplete="off"
+            />
+          </div>
+
           <div>
             <input
               type="text"
@@ -197,12 +274,13 @@ const Register = () => {
                 onChange: () => handleChange('name'),
               })}
               onBlur={() => handleBlur('name')}
-              placeholder="Name"
+              placeholder="Full Name"
               autoComplete="name"
-              className={`w-full px-4 py-2.5 border rounded-md text-base placeholder:text-[#767676] focus:outline-none focus:ring-2 ${errors.name
+              className={`w-full px-4 py-2.5 border rounded-md text-base placeholder:text-[#767676] focus:outline-none focus:ring-2 ${
+                errors.name
                   ? 'border-red-500 focus:ring-red-500'
                   : 'border-[#D7DDE9] focus:ring-[#CBD5E1]'
-                }`}
+              }`}
             />
             {errors.name && (
               <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>
@@ -216,12 +294,13 @@ const Register = () => {
                 onChange: () => handleChange('email'),
               })}
               onBlur={() => handleBlur('email')}
-              placeholder="Email"
+              placeholder="Email Address"
               autoComplete="email"
-              className={`w-full px-4 py-2.5 border rounded-md text-base placeholder:text-[#767676] focus:outline-none focus:ring-2 ${errors.email
+              className={`w-full px-4 py-2.5 border rounded-md text-base placeholder:text-[#767676] focus:outline-none focus:ring-2 ${
+                errors.email
                   ? 'border-red-500 focus:ring-red-500'
                   : 'border-[#D7DDE9] focus:ring-[#CBD5E1]'
-                }`}
+              }`}
             />
             {errors.email && (
               <p className="text-red-500 text-xs mt-1">
@@ -239,12 +318,13 @@ const Register = () => {
                   onChange: () => handleChange('password'),
                 })}
                 onBlur={() => handleBlur('password')}
-                placeholder="Password"
+                placeholder="Password (min. 12 characters)"
                 autoComplete="new-password"
-                className={`w-full px-4 py-2.5 pr-12 border rounded-md text-base placeholder:text-[#767676] focus:outline-none focus:ring-2 ${errors.password
+                className={`w-full px-4 py-2.5 pr-12 border rounded-md text-base placeholder:text-[#767676] focus:outline-none focus:ring-2 ${
+                  errors.password
                     ? 'border-red-500 focus:ring-red-500'
                     : 'border-[#D7DDE9] focus:ring-[#CBD5E1]'
-                  }`}
+                }`}
               />
               <button
                 type="button"
@@ -273,10 +353,11 @@ const Register = () => {
                 onBlur={() => handleBlur('confirmPassword')}
                 placeholder="Confirm Password"
                 autoComplete="new-password"
-                className={`w-full px-4 py-2.5 pr-12 border rounded-md text-base placeholder:text-[#767676] focus:outline-none focus:ring-2 ${errors.confirmPassword
+                className={`w-full px-4 py-2.5 pr-12 border rounded-md text-base placeholder:text-[#767676] focus:outline-none focus:ring-2 ${
+                  errors.confirmPassword
                     ? 'border-red-500 focus:ring-red-500'
                     : 'border-[#D7DDE9] focus:ring-[#CBD5E1]'
-                  }`}
+                }`}
               />
               <button
                 type="button"
@@ -298,13 +379,14 @@ const Register = () => {
 
           <button
             type="submit"
-            className={`w-full px-4 py-2.5 text-base text-white rounded-md font-medium transition ${isValid && isDirty && !loading
+            className={`w-full px-4 py-2.5 text-base text-white rounded-md font-medium transition ${
+              isValid && isDirty && !loading
                 ? 'bg-[#023e8a] hover:bg-[#1054ab] cursor-pointer'
                 : 'bg-gray-300 cursor-not-allowed'
-              }`}
+            }`}
             disabled={!isValid || !isDirty || loading}
           >
-            {loading ? 'Creating account...' : 'Continue'}
+            {loading ? 'Creating account...' : 'Create Account'}
           </button>
         </form>
 
