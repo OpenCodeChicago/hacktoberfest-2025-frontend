@@ -4,6 +4,36 @@ import { addRecentlyViewed } from '../../utils/recentlyViewed';
 import { addToWishList, removeFromWishList } from '../../store/wishListSlice';
 import { useDispatch } from 'react-redux';
 import AddToCartButton from './AddToCartButton';
+import QuickViewModal from './QuickViewModal'; // Added QuickViewModal import
+
+const EyeIcon = ({ className = 'h-5 w-5' }) => (
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path
+      d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 const HeartIcon = ({
   isWishlisted = false,
   animate = false,
@@ -39,6 +69,7 @@ const ProductCard = forwardRef(
     );
     const [isWishlisted, setIsWishlisted] = useState(initialWishlisted);
     const [animateLike, setAnimateLike] = useState(false);
+    const [showQuickView, setShowQuickView] = useState(false); // Added state for Quick View
     const likeTimeoutRef = useRef(null);
     const dispatch = useDispatch();
 
@@ -96,222 +127,243 @@ const ProductCard = forwardRef(
     }
 
     return (
-      <div
-        ref={ref}
-        className="bg-white rounded-2xl p-4 transition-all duration-300 shadow-[0_8px_30px_rgb(0,0,0,0.15)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.25)] flex flex-col select-none"
-      >
-        {/* --- IMAGE CONTAINER --- */}
+      <>
         <div
-          className="relative aspect-square overflow-hidden rounded-xl mb-4 bg-gray-100 group cursor-pointer"
-          role="button"
-          tabIndex={0}
-          aria-label={`View details for ${product.name}`}
-          onClick={handleProductClick}
-          onKeyDown={(e) =>
-            (e.key === 'Enter' || e.key === ' ') && handleProductClick()
-          }
+          ref={ref}
+          className="bg-white rounded-2xl p-4 transition-all duration-300 shadow-[0_8px_30px_rgb(0,0,0,0.15)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.25)] flex flex-col select-none"
         >
-          {/* Badges for NEW and SALE */}
-          <div className="absolute top-3 left-3 z-10 flex flex-col gap-2">
-            {product.isNew && (
-              <span className="bg-green-500 text-white text-xs font-bold px-4 py-1 rounded-md">
-                NEW
-              </span>
-            )}
-            {product.onSale && product.salePercentage > 0 && (
-              <span className="bg-red-500 text-white text-xs font-bold px-4 py-1 rounded-md">
-                -{product.salePercentage}%
-              </span>
-            )}
-          </div>
-
-          {/* State 1: Image is loading */}
-          {!imageLoaded && !imageError && (
-            <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 animate-pulse flex items-center justify-center">
-              <svg
-                className="w-12 h-12 text-gray-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1}
-                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
-            </div>
-          )}
-
-          {/* State 2: Image failed to load - render SVG frame fallback */}
-          {imageError && (
-            <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">
-              <svg
-                className="w-24 h-24 text-gray-400"
-                viewBox="0 0 64 64"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-              >
-                <rect width="64" height="64" rx="8" fill="#F3F4F6" />
-                <path
-                  d="M10 44L26 28l12 12 18-22"
-                  stroke="#CBD5E1"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-          )}
-
-          {/* State 3: Image successfully loaded or attempt to load */}
-          {!imageError && (product.imageUrl || product.image || true) && (
-            <img
-              src={
-                product.imageUrl ||
-                product.image ||
-                '/images/product-default-image.jpg'
-              }
-              alt={product.name || 'Product image'}
-              width="512"
-              height="512"
-              loading="lazy"
-              decoding="async"
-              className={`w-full h-full object-contain transition-opacity duration-500 ${imageLoaded && !imageError ? 'opacity-100' : 'opacity-0'}`}
-              onLoad={() => setImageLoaded(true)}
-              onError={(e) => {
-                const img = e.currentTarget;
-                if (!img.dataset.fallbackTried) {
-                  img.dataset.fallbackTried = '1';
-                  img.src = '/images/product-default-image.jpg';
-                  return;
-                }
-                // default failed too -> switch to SVG fallback
-                setImageError(true);
-              }}
-            />
-          )}
-
-          {/* "VIEW PRODUCT" Overlay */}
-          <div className="absolute inset-0 bg-transparent transition-all duration-300 flex items-center justify-center">
-            <button
-              onClick={(e) => handleActionClick(e, handleProductClick)}
-              className="opacity-0 group-hover:opacity-80 group-focus-within:opacity-80 bg-blue-800 text-white px-6 py-3 rounded-lg font-semibold transform translate-y-4 group-hover:translate-y-0 group-focus-within:translate-y-0 transition-all duration-300 text-md shadow-lg cursor-pointer pointer-events-none group-hover:pointer-events-auto"
-            >
-              VIEW PRODUCT
-            </button>
-          </div>
-        </div>
-
-        <div className="flex flex-col flex-grow">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-2">
-              <div className="flex">
-                {[...Array(5)].map((_, i) => (
-                  <svg
-                    key={i}
-                    className={`w-4 h-4 ${i < Math.floor(product.rating || 0) ? 'text-yellow-400' : 'text-gray-300'}`}
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-              <span className="text-xs text-gray-500">
-                ({product.reviewCount || 0})
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              {product.originalPrice && (
-                <span className="text-sm text-gray-500 line-through">
-                  {formatPrice(product.originalPrice)}
+          {/* --- IMAGE CONTAINER --- */}
+          <div
+            className="relative aspect-square overflow-hidden rounded-xl mb-4 bg-gray-100 group cursor-pointer"
+            role="button"
+            tabIndex={0}
+            aria-label={`View details for ${product.name}`}
+            onClick={handleProductClick}
+            onKeyDown={(e) =>
+              (e.key === 'Enter' || e.key === ' ') && handleProductClick()
+            }
+          >
+            {/* Badges for NEW and SALE */}
+            <div className="absolute top-3 left-3 z-10 flex flex-col gap-2">
+              {product.isNew && (
+                <span className="bg-green-500 text-white text-xs font-bold px-4 py-1 rounded-md">
+                  NEW
                 </span>
               )}
-              <span className="font-bold text-lg text-gray-800">
-                {formatPrice(product.price)}
-              </span>
+              {product.onSale && product.salePercentage > 0 && (
+                <span className="bg-red-500 text-white text-xs font-bold px-4 py-1 rounded-md">
+                  -{product.salePercentage}%
+                </span>
+              )}
+            </div>
+
+            {/* State 1: Image is loading */}
+            {!imageLoaded && !imageError && (
+              <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 animate-pulse flex items-center justify-center">
+                <svg
+                  className="w-12 h-12 text-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1}
+                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+              </div>
+            )}
+
+            {/* State 2: Image failed to load - render SVG frame fallback */}
+            {imageError && (
+              <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">
+                <svg
+                  className="w-24 h-24 text-gray-400"
+                  viewBox="0 0 64 64"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <rect width="64" height="64" rx="8" fill="#F3F4F6" />
+                  <path
+                    d="M10 44L26 28l12 12 18-22"
+                    stroke="#CBD5E1"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+            )}
+
+            {/* State 3: Image successfully loaded or attempt to load */}
+            {!imageError && (product.imageUrl || product.image || true) && (
+              <img
+                src={
+                  product.imageUrl ||
+                  product.image ||
+                  '/images/product-default-image.jpg'
+                }
+                alt={product.name || 'Product image'}
+                width="512"
+                height="512"
+                loading="lazy"
+                decoding="async"
+                className={`w-full h-full object-contain transition-opacity duration-500 ${imageLoaded && !imageError ? 'opacity-100' : 'opacity-0'}`}
+                onLoad={() => setImageLoaded(true)}
+                onError={(e) => {
+                  const img = e.currentTarget;
+                  if (!img.dataset.fallbackTried) {
+                    img.dataset.fallbackTried = '1';
+                    img.src = '/images/product-default-image.jpg';
+                    return;
+                  }
+                  // default failed too -> switch to SVG fallback
+                  setImageError(true);
+                }}
+              />
+            )}
+
+            {/* Quick View Button */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowQuickView(true);
+              }}
+              className="absolute top-3 right-3 z-10 bg-white p-2 rounded-full shadow-lg hover:bg-gray-100 transition-all opacity-0 group-hover:opacity-100"
+              aria-label="Quick view"
+            >
+              <EyeIcon />
+            </button>
+
+            {/* "VIEW PRODUCT" Overlay */}
+            <div className="absolute inset-0 bg-transparent transition-all duration-300 flex items-center justify-center">
+              <button
+                onClick={(e) => handleActionClick(e, handleProductClick)}
+                className="opacity-0 group-hover:opacity-80 group-focus-within:opacity-80 bg-blue-800 text-white px-6 py-3 rounded-lg font-semibold transform translate-y-4 group-hover:translate-y-0 group-focus-within:translate-y-0 transition-all duration-300 text-md shadow-lg cursor-pointer pointer-events-none group-hover:pointer-events-auto"
+              >
+                VIEW PRODUCT
+              </button>
             </div>
           </div>
 
-          <div className="mb-2">
-            <h3 className="font-bold text-2xl text-gray-800 leading-tight line-clamp-2">
-              {product.name}
-            </h3>
-          </div>
-
-          <div className="mb-2">
-            <p className="text-md text-blue-500">
-              {product.flavors && product.flavors.length > 0
-                ? `Available in flavours: ${product.flavors.length}`
-                : 'No flavors available'}
-            </p>
-          </div>
-
-          <div className="mb-3">
-            {product.flavors && product.flavors.length > 0 && (
-              <div className="relative">
-                <select
-                  value={selectedFlavor}
-                  onChange={(e) => setSelectedFlavor(e.target.value)}
-                  onClick={(e) => e.stopPropagation()}
-                  className="w-full appearance-none bg-gray-200 border border-gray-300 rounded-lg py-2.5 px-3 pr-8 text-md uppercase text-bold text-gray-800 focus:outline-none focus:border-blue-500 transition-all duration-200 hover:border-gray-400"
-                  aria-label="Select flavor"
-                >
-                  {product.flavors.map((flavor) => (
-                    <option key={flavor} value={flavor} className="py-2">
-                      {flavor}
-                    </option>
+          <div className="flex flex-col flex-grow">
+            <div className="flex justify-between items-center">
+              <div className="flex items-center gap-2">
+                <div className="flex">
+                  {[...Array(5)].map((_, i) => (
+                    <svg
+                      key={i}
+                      className={`w-4 h-4 ${i < Math.floor(product.rating || 0) ? 'text-yellow-400' : 'text-gray-300'}`}
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
                   ))}
-                </select>
-                <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                  <svg
-                    className="w-4 h-4 text-gray-500"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
                 </div>
+                <span className="text-xs text-gray-500">
+                  ({product.reviewCount || 0})
+                </span>
               </div>
-            )}
-          </div>
+              <div className="flex items-center gap-2">
+                {product.originalPrice && (
+                  <span className="text-sm text-gray-500 line-through">
+                    {formatPrice(product.originalPrice)}
+                  </span>
+                )}
+                <span className="font-bold text-lg text-gray-800">
+                  {formatPrice(product.price)}
+                </span>
+              </div>
+            </div>
 
-          <div className="flex items-center gap-3 mt-auto">
-            <button
-              onClick={(e) => handleActionClick(e, handleWishlistToggle)}
-              className={`
+            <div className="mb-2">
+              <h3 className="font-bold text-2xl text-gray-800 leading-tight line-clamp-2">
+                {product.name}
+              </h3>
+            </div>
+
+            <div className="mb-2">
+              <p className="text-md text-blue-500">
+                {product.flavors && product.flavors.length > 0
+                  ? `Available in flavours: ${product.flavors.length}`
+                  : 'No flavors available'}
+              </p>
+            </div>
+
+            <div className="mb-3">
+              {product.flavors && product.flavors.length > 0 && (
+                <div className="relative">
+                  <select
+                    value={selectedFlavor}
+                    onChange={(e) => setSelectedFlavor(e.target.value)}
+                    onClick={(e) => e.stopPropagation()}
+                    className="w-full appearance-none bg-gray-200 border border-gray-300 rounded-lg py-2.5 px-3 pr-8 text-md uppercase text-bold text-gray-800 focus:outline-none focus:border-blue-500 transition-all duration-200 hover:border-gray-400"
+                    aria-label="Select flavor"
+                  >
+                    {product.flavors.map((flavor) => (
+                      <option key={flavor} value={flavor} className="py-2">
+                        {flavor}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                    <svg
+                      className="w-4 h-4 text-gray-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="flex items-center gap-3 mt-auto">
+              <button
+                onClick={(e) => handleActionClick(e, handleWishlistToggle)}
+                className={`
               flex items-center justify-center px-4 py-3 rounded-l-xl border-2 transition-colors duration-150 hover:shadow-lg cursor-pointer focus:outline-none
               ${isWishlisted ? 'bg-[#023e8a] border-[#023e8a] text-white hover:bg-[#1054ab] hover:border-[#1054ab]' : 'bg-white border-[#023e8a] text-[#023e8a] hover:text-[#1054ab] hover:border-[#1054ab]'}
             `}
-              aria-label={
-                isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'
-              }
-              aria-pressed={isWishlisted}
-            >
-              <HeartIcon
-                isWishlisted={isWishlisted}
-                animate={animateLike}
-                className="h-5 w-5"
-              />
-            </button>
+                aria-label={
+                  isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'
+                }
+                aria-pressed={isWishlisted}
+              >
+                <HeartIcon
+                  isWishlisted={isWishlisted}
+                  animate={animateLike}
+                  className="h-5 w-5"
+                />
+              </button>
 
-            {/* Add to Cart component */}
-            <AddToCartButton
-              product={product}
-              selectedFlavor={selectedFlavor}
-            />
+              {/* Add to Cart component */}
+              <AddToCartButton
+                product={product}
+                selectedFlavor={selectedFlavor}
+              />
+            </div>
           </div>
         </div>
-      </div>
+
+        {/* Quick View Modal */}
+        <QuickViewModal
+          product={product}
+          isOpen={showQuickView}
+          onClose={() => setShowQuickView(false)}
+        />
+      </>
     );
   }
 );
