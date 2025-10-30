@@ -14,6 +14,17 @@ import {
 import { extractToken, normalizeUser } from '../utils/authHelpers';
 import { useState, useEffect, useRef } from 'react';
 
+// Error message sanitization function
+const sanitizeErrorMessage = (message) => {
+  if (typeof message !== 'string') return 'An error occurred';
+  
+  // Remove potential HTML/script tags and limit length
+  return message
+    .replace(/<[^>]*>/g, '')
+    .replace(/[<>]/g, '')
+    .substring(0, 200);
+};
+
 // Enhanced validation schema with stronger regex patterns
 const registerSchema = yup.object({
   name: yup
@@ -37,7 +48,7 @@ const registerSchema = yup.object({
     .string()
     .min(12, 'Password must be at least 12 characters.')
     .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/,
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@!/$%^&*])[A-Za-z\d@!/$%^&*]{12,}$/,
       'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.'
     )
     .required('Password is required.'),
@@ -90,11 +101,6 @@ const Register = () => {
   const handleBlur = (fieldName) => {
     setTouchedFields((prev) => ({ ...prev, [fieldName]: true }));
     trigger(fieldName);
-    
-    // Show real-time validation feedback
-    if (errors[fieldName]) {
-      toast.error(errors[fieldName].message);
-    }
   };
 
   // Custom onChange to validate only if field was previously touched/had error
@@ -149,7 +155,6 @@ const Register = () => {
       } catch {
         // ignore storage errors
       }
-      if (import.meta.env.DEV) console.debug('registerSuccess dispatched:', { user, token });
       
       // Reset form and show success message
       reset();
@@ -158,9 +163,10 @@ const Register = () => {
     } catch (err) {
       const message =
         err?.response?.data?.message || err.message || 'Registration failed';
-      dispatch(registerFailure(message));
-      setError('email', { type: 'server', message });
-      toast.error(message);
+      const sanitizedMessage = sanitizeErrorMessage(message);
+      dispatch(registerFailure(sanitizedMessage));
+      setError('email', { type: 'server', message: sanitizedMessage });
+      toast.error(sanitizedMessage);
     }
   };
 
@@ -255,13 +261,12 @@ const Register = () => {
           noValidate
         >
           {/* Honeypot field for spam prevention (hidden) */}
-          <div className="hidden">
+          <div className="hidden" aria-hidden="true">
             <label htmlFor="website">Website</label>
             <input
               id="website"
               type="text"
               {...register('website')}
-              ref={honeypotRef}
               tabIndex={-1}
               autoComplete="off"
             />
