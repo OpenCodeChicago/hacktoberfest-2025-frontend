@@ -257,7 +257,7 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
             </div>
             <div className="border border-gray mb-11 mt-8" />
 
-            <div className="grid grid-cols-5 gap-x-16 gap-y-20">
+            <div className="grid grid-cols-5 gap-y-20 gap-x-18">
               {menuColumns.map((column) => (
                 <MenuColumn
                   key={column.id}

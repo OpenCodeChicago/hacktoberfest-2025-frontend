@@ -11,8 +11,8 @@ const MenuItem = ({
     onClick={() => handleCollectionClick(collectionName)}
     className="text-black text-left hover:text-gray-600 transition-all duration-300 ease-in-out relative group focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg px-0 cursor-pointer link-underline"
     style={{
-      fontSize: '22px',
-      lineHeight: '26px',
+      fontSize: '20px',
+      lineHeight: '20px',
       letterSpacing: '-1.5px',
       fontWeight: '400',
     }}
@@ -31,12 +31,12 @@ const MenuColumn = ({
   handleCollectionClick,
 }) => {
   return (
-    <div className="flex justify-between flex-col gap-4">
+    <div className="flex justify-between flex-col gap-8">
       <h3
         className="font-bold text-black uppercase"
         style={{
-          fontSize: '22px',
-          lineHeight: '24px',
+          fontSize: '20px',
+          lineHeight: '20px',
           letterSpacing: '-1.5px',
         }}
       >
