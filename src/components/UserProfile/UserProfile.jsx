@@ -22,8 +22,8 @@ const UserProfile = () => {
             fetchUser();
     }, [token]);
 
-    // if (!freshUser) 
-    //     return <Loader />;
+    if (!freshUser) 
+        return <Loader />;
     return (
         <div className=' w-full min-h-screen flex flex-col items-center justify-normal gap-y-10 py-7 px-20 sm:px-50 '>
             <div className='w-full flex items-center justify-between gap-2'>
@@ -31,11 +31,11 @@ const UserProfile = () => {
                 <button className=' px-3 sm:px-15 py-3 border-2 border-gray-400 rounded-xl cursor-pointer hover:bg-gray-200 font-inter'>Logout</button>
             </div>
             <div className='w-full border-2 border-gray-300 rounded-xl py-3 px-5'>
-                <h2 className='font-medium text-center sm:text-left text-xl mb-4 font-montserrat'>name</h2>
+                <h2 className='font-medium text-center sm:text-left text-xl mb-4 font-montserrat'>{user.name}</h2>
                 <div className='flex flex-col sm:flex-row gap-5 sm:gap-40 justify-center items-center sm:items-start sm:justify-start mb-2'>
                     <div>
                         <p className='text-gray-400 font-montserrat '>Email:</p>
-                        <p className='font-montserrat'>email</p>
+                        <p className='font-montserrat'>{user.email}</p>
                     </div>
                     <div>
                         <p className='text-gray-400 font-montserrat text-center'>Phone Number:</p>
@@ -47,7 +47,7 @@ const UserProfile = () => {
                 <h2 className='font-medium text-xl mb-4 font-montserrat text-center sm:text-left'>Address</h2>
                 <div className='flex flex-col gap-1 mb-2 items-center justify-center sm:items-start sm:justify-start'>
                     <p className='text-gray-400 font-montserrat'>Default Address</p>
-                    <p className='font-montserrat'>name</p>
+                    <p className='font-montserrat'>{user.name}</p>
                     <p className='font-montserrat text-center sm:text-left'>1234 N Main St.</p>
                     <p className='font-montserrat text-center sm:text-left'>Chicago, Il 60607</p>
                     <p className='font-montserrat'>United States</p>
