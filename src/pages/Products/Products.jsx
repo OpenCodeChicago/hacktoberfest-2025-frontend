@@ -1,4 +1,5 @@
 import ProductList from '../../components/Products/ProductList';
+import allProductsBanner from '/images/all-products-banner.jpg';
 
 export default function Products() {
   return (
@@ -11,7 +12,7 @@ export default function Products() {
         keywords:
           'sports nutrition, supplements, protein powder, pre-workout, fitness products, CoreX Nutrition',
       }}
-      bannerImage={null}
+      bannerImage={allProductsBanner}
       bannerAlt="All products banner"
     />
   );

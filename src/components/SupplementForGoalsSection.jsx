@@ -9,21 +9,34 @@ import {
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import './SupplementForGoalsSection.css';
 
-const goalCards = [
+export const goalCards = [
   {
     label: 'protein powder',
+    id: 'protein-powder',
     image: proteinPowder,
     href: '/collections/protein-powder',
   },
-  { label: 'pre-workout', image: preWorkout, href: '/collections/pre-workout' },
+  {
+    label: 'pre-workout',
+    id: 'pre-workout',
+    image: preWorkout,
+    href: '/collections/pre-workout',
+  },
   {
     label: 'intra-workout',
+    id: 'intra-workout',
     image: intraWorkout,
     href: '/collections/intra-workout',
   },
-  { label: 'amino acids', image: aminoAcids, href: '/collections/amino-acids' },
+  {
+    label: 'amino acids',
+    id: 'amino-acids',
+    image: aminoAcids,
+    href: '/collections/amino-acids',
+  },
   {
     label: 'weight management',
+    id: 'weight-management',
     image: weightManagement,
     href: '/collections/weight-management',
   },
@@ -48,11 +61,11 @@ export default function SupplementForGoalsSection() {
     >
       <h2 id="goals-heading" className="section-title">
         <span className="text-[#000]">Supplements for </span>
-        <span className="text-[#f7faff]">every</span>{' '}
+        <span className="text-[#f7faff] stroke-title">every</span>{' '}
         <span className="text-[#000]">goal</span>
       </h2>
 
-      <div className="space-y-10">
+      <div className="space-y-10 md:py-0 md:px-16">
         <div className="flex justify-center flex-col md:flex-row gap-10">
           {goalCards.slice(0, 2).map((goalCard, index) => (
             <GoalCard
@@ -100,7 +113,6 @@ function GoalCard({ item, delayIndex = 0, size }) {
       className="block card-reveal card-elevate"
       style={{ animationDelay: `${delayIndex * 120}ms` }}
       aria-labelledby={labelId}
-      role="group"
     >
       <div className="relative overflow-hidden rounded card-inner">
         <GoalCardImage item={item} dimensions={dimensions} />
@@ -119,7 +131,7 @@ function GoalCardImage({ item, dimensions }) {
   return (
     <img
       src={item.image}
-      alt={item.label}
+      alt=""
       loading="lazy"
       decoding="async"
       width={dimensions.width}

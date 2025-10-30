@@ -8,40 +8,76 @@
   --font-inter: 'Inter', sans-serif;
 
   /* Font Sizes */
-  --text-heading-xxl: 4rem; /* 64px */
+  --text-heading-xxl: 4rem;
+  /* 64px */
 
   /* Colors */
   --color-white-light: #fafaf9;
   --color-main: #023e8a;
   --color-white-back: #f7faff;
   --color-black: #010409;
+
+  --animate-fade-slide-up: fade-slide-up 0.8s ease-out 0.3s both;
+
+  @keyframes fade-slide-up {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
 
 /* ==========================
    COMPONENTS
 ========================== */
 @layer components {
+
   /* Section Title */
   .section-title {
     @apply text-4xl lg:text-heading-xxl font-montserrat font-bold leading-none uppercase text-center tracking-tight;
   }
 
-  .section-title span {
+  /* .section-title span {
     color: var(--color-white-light);
     -webkit-text-stroke: 3px var(--color-black);
     paint-order: stroke fill;
-  }
+  } */
+}
+
+.stroke-title {
+  color: var(--color-white-back);
+  -webkit-text-stroke: 3px var(--color-black);
+  paint-order: stroke fill;
 }
 
 /* ==========================
    BUTTON ANIMATIONS
 ========================== */
 @keyframes double-pop {
-  0% { transform: scale(1); }
-  30% { transform: scale(1.18); }
-  55% { transform: scale(0.96); }
-  80% { transform: scale(1.06); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+
+  30% {
+    transform: scale(1.18);
+  }
+
+  55% {
+    transform: scale(0.96);
+  }
+
+  80% {
+    transform: scale(1.06);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 .animate-double-pop {
@@ -49,26 +85,73 @@
   animation: double-pop 520ms cubic-bezier(.22, 1, .36, 1) both;
 }
 
+/* ==========================================
+   COUNTER ANIMATIONS FOR ADD TO CART BUTTON
+============================================= */
+@keyframes count-up {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.8);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: translateY(-10px) scale(1.1);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes count-down {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: translateY(10px) scale(1.1);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-count-up {
+  animation: count-up 150ms cubic-bezier(0.23, 1, 0.320, 1) both;
+}
+
+.animate-count-down {
+  animation: count-down 150ms cubic-bezier(0.23, 1, 0.320, 1) both;
+}
+
 /* ==========================
    SHOP MENU ANIMATIONS
 ========================== */
 @keyframes slide-down {
-  0% { 
+  0% {
     opacity: 0;
     transform: translateY(-20px) scaleY(0.95);
   }
-  100% { 
+
+  100% {
     opacity: 1;
     transform: translateY(0) scaleY(1);
   }
 }
 
 @keyframes slide-up {
-  0% { 
+  0% {
     opacity: 1;
     transform: translateY(0) scaleY(1);
   }
-  100% { 
+
+  100% {
     opacity: 0;
     transform: translateY(-20px) scaleY(0.95);
   }
@@ -141,6 +224,7 @@
    ACCESSIBILITY
 ========================== */
 @media (prefers-reduced-motion: reduce) {
+
   .link-underline::after,
   .link-underline-inverse::after,
   .animate-double-pop,
@@ -149,17 +233,4 @@
     animation: none !important;
     transition: none !important;
   }
-}
-.hide-scrollbar {
-  /* Hides scrollbar for IE and Edge */
-  -ms-overflow-style: none;  
-  /* Hides scrollbar for Firefox */
-  scrollbar-width: none;     
-}
-
-/* Hides scrollbar for Chrome, Safari, and Opera (Webkit browsers) */
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;
-  width: 0;
-  height: 0;
 }

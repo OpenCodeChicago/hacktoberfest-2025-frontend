@@ -25,7 +25,10 @@ export default function Home() {
         keywords="Hacktoberfest 2025, CoreX Nutrition, Open Source, Contributions"
       />
 
-      <main id="main-content" className="min-h-screen bg-gray-50 -mt-16 pt-16">
+      <main
+        id="main-content"
+        className="min-h-screen bg-[#F7FAFF] -mt-16 pt-16"
+      >
         <HeroSection />
         <WhyChoose />
         <SupplementForGoalsSection />

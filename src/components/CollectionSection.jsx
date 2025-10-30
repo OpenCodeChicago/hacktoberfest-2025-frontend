@@ -6,7 +6,7 @@ import weightManagementImg from '/images/weight-management.png';
 import healthWellnessImg from '/images/health-wellness.png';
 import './collection.css';
 
-const collections = [
+export const collections = [
   { id: 'pre-workout', title: 'PRE-WORKOUT', image: preWorkoutImg },
   { id: 'build-muscle', title: 'BUILD MUSCLE', image: buildMuscleImg },
   {
@@ -55,15 +55,17 @@ const CollectionSection = () => {
     };
   }, []);
 
-  const handleCardClick = () => {
-    navigate('/collections');
+  const handleCardClick = (collection) => {
+    navigate(`/collections/${encodeURIComponent(collection.id)}`, {
+      state: { imageUrl: collection.image },
+    });
   };
 
   return (
     <section className="shop-by-collection">
       <h2 className="section-title mb-12">
         <span className="text-[#000]">SHOP </span>
-        <span>BY </span>
+        <span className="stroke-title">BY </span>
         <span className="text-[#000]">COLLECTION</span>
       </h2>
 
@@ -73,7 +75,7 @@ const CollectionSection = () => {
             key={collection.id}
             ref={(el) => (cardsRef.current[index] = el)}
             className="collection-card"
-            onClick={handleCardClick}
+            onClick={() => handleCardClick(collection)}
           >
             <div className="collection-image-wrapper">
               <img

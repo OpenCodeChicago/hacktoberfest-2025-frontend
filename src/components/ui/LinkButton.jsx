@@ -2,8 +2,8 @@ export default function LinkButton({ className, children, ...rest }) {
     return (
         <a
             className={`
-                px-6 py-3 md:px-12 md:py-5 gap-2 
-                bg-main text-white-light 
+                px-6 py-3 lg:px-12 min-w-[163px] min-h-[48px] md:min-w-[212px] md:min-h-[63px] text-center flex justify-center items-center
+                border-1 border-white-light sm:border-none sm:bg-main text-white-light 
                 uppercase font-bold text-sm md:text-lg 
                 cursor-pointer rounded-[100px] no-underline tracking-wider
                 transition-all duration-300 ease-out

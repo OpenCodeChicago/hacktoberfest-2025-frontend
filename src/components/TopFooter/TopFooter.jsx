@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router';
 import { toast } from 'react-toastify';
-import { FaXTwitter } from 'react-icons/fa6';
-import { FaFacebook, FaYoutube, FaLinkedin } from 'react-icons/fa';
+import SocialIcons from '../ui/SocialIcons/SocialIcons';
 
 const customerCare = [
   { name: 'My Account', href: '/login' },
@@ -61,68 +60,19 @@ export default function TopFooter() {
     <footer className="bg-neutral-900 text-neutral-200 px-6 py-12">
       <div className="max-w-7xl mx-auto grid gap-12 md:grid-cols-3">
         {/* Logo + Address */}
-        <div>
+        <div className="flex flex-col gap-[24px]">
           <Link
             to="/"
-            className="inline-block mb-4"
+            className="inline-block"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
             <img
               src="/icons/official-logo-core-x-footer.svg"
               alt="CoreX"
-              className="mb-4 w-32"
+              className="w-32"
             />
           </Link>
-          <ul className="flex items-center space-x-6 mb-4">
-            <li className="transform transition-transform duration-200 hover:scale-110">
-              <a
-                href="https://www.youtube.com/@AlexSmaginDev"
-                aria-label="YouTube"
-                className="hover:text-gray-300 transition-colors"
-              >
-                <FaYoutube size={18} />
-              </a>
-            </li>
-            <li className="transform transition-transform duration-200 hover:scale-110">
-              <a
-                href="https://www.linkedin.com/company/104436074"
-                aria-label="LinkedIn"
-                className="hover:text-gray-300 transition-colors"
-              >
-                <FaLinkedin
-                  size={18}
-                  className="fill-current text-white hover:text-gray-300"
-                  stroke="none"
-                />
-              </a>
-            </li>
-            <li className="transform transition-transform duration-200 hover:scale-110">
-              <a
-                href="https://x.com/alexsmagin29"
-                aria-label="Twitter"
-                className="hover:text-gray-300 transition-colors"
-              >
-                <FaXTwitter
-                  size={18}
-                  className="fill-current text-white hover:text-gray-300"
-                  stroke="none"
-                />
-              </a>
-            </li>
-            <li className="transform transition-transform duration-200 hover:scale-110">
-              <a
-                href="https://www.facebook.com/profile.php?id=61580367112591"
-                aria-label="Facebook"
-                className="hover:text-gray-300 transition-colors"
-              >
-                <FaFacebook
-                  size={18}
-                  className="fill-current text-white hover:text-gray-300"
-                  stroke="none"
-                />
-              </a>
-            </li>
-          </ul>
+          <SocialIcons />
           <address className="hover:underline cursor-pointer not-italic text-sm leading-relaxed">
             1234 N Main St,
             <br /> Chicago, IL 60607
@@ -171,6 +121,7 @@ export default function TopFooter() {
           <div className="flex bg-neutral-800 rounded-lg overflow-hidden hover:bg-neutral-700 transition relative">
             <div className="relative flex-grow">
               <input
+                id="newsletter-email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -178,7 +129,10 @@ export default function TopFooter() {
                 className="w-full p-3 bg-transparent text-neutral-200 outline-none transition duration-200 ease-in-out peer pt-4"
                 required
               />
-              <label className="absolute left-3 top-1 text-neutral-400 transition-all duration-200 ease-in-out pointer-events-none peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-neutral-400 peer-focus:top-1 peer-focus:text-xs peer-focus:text-neutral-400 peer-[:not(:placeholder-shown)]:top-1 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-neutral-400">
+              <label
+                htmlFor="newsletter-email"
+                className="absolute left-3 top-1 text-neutral-400 transition-all duration-200 ease-in-out pointer-events-none peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-neutral-400 peer-focus:top-1 peer-focus:text-xs peer-focus:text-neutral-400 peer-[:not(:placeholder-shown)]:top-1 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-neutral-400"
+              >
                 Enter your email
               </label>
             </div>

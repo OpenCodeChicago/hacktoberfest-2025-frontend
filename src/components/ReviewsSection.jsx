@@ -124,7 +124,7 @@ const ReviewsSection = () => {
         className="text-4xl lg:text-heading-xxl uppercase py-16 section-title"
       >
         <span className="text-[#000]">THOUSANDS</span>
-        <span>{'  '} LOVE</span>
+        <span className="stroke-title">{'  '} LOVE</span>
         <span className="capitalize text-[#000]"> Core</span>
         <span className="text-red-500">X</span>
         <br />

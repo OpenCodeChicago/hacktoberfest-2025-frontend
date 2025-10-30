@@ -10,6 +10,7 @@ import {
   registerSuccess,
   registerFailure,
 } from '../store/authSlice';
+import { extractToken, normalizeUser } from '../utils/authHelpers';
 import { useState } from 'react';
 
 // Validation schema
@@ -86,18 +87,21 @@ const Register = () => {
       });
 
       const payload = response?.data ?? {};
-      const token = payload.token || payload?.data?.token;
-      const user = payload.user ||
-        payload?.data?.user || {
-          email: data.email,
-          name: data.name,
-        };
+      const token = extractToken(payload);
+      const user = normalizeUser(payload, { email: data.email, name: data.name });
 
       if (!token) {
         throw new Error('No token returned from server');
       }
 
       dispatch(registerSuccess({ user, token }));
+      try {
+        // mark that a session exists so startup can attempt a silent refresh
+        localStorage.setItem('hasSession', '1');
+      } catch {
+        // ignore storage errors
+      }
+      if (import.meta.env.DEV) console.debug('registerSuccess dispatched:', { user, token });
       navigate('/');
     } catch (err) {
       const message =
@@ -195,11 +199,10 @@ const Register = () => {
               onBlur={() => handleBlur('name')}
               placeholder="Name"
               autoComplete="name"
-              className={`w-full px-4 py-2.5 border rounded-md text-base placeholder:text-[#767676] focus:outline-none focus:ring-2 ${
-                errors.name
+              className={`w-full px-4 py-2.5 border rounded-md text-base placeholder:text-[#767676] focus:outline-none focus:ring-2 ${errors.name
                   ? 'border-red-500 focus:ring-red-500'
                   : 'border-[#D7DDE9] focus:ring-[#CBD5E1]'
-              }`}
+                }`}
             />
             {errors.name && (
               <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>
@@ -215,11 +218,10 @@ const Register = () => {
               onBlur={() => handleBlur('email')}
               placeholder="Email"
               autoComplete="email"
-              className={`w-full px-4 py-2.5 border rounded-md text-base placeholder:text-[#767676] focus:outline-none focus:ring-2 ${
-                errors.email
+              className={`w-full px-4 py-2.5 border rounded-md text-base placeholder:text-[#767676] focus:outline-none focus:ring-2 ${errors.email
                   ? 'border-red-500 focus:ring-red-500'
                   : 'border-[#D7DDE9] focus:ring-[#CBD5E1]'
-              }`}
+                }`}
             />
             {errors.email && (
               <p className="text-red-500 text-xs mt-1">
@@ -239,11 +241,10 @@ const Register = () => {
                 onBlur={() => handleBlur('password')}
                 placeholder="Password"
                 autoComplete="new-password"
-                className={`w-full px-4 py-2.5 pr-12 border rounded-md text-base placeholder:text-[#767676] focus:outline-none focus:ring-2 ${
-                  errors.password
+                className={`w-full px-4 py-2.5 pr-12 border rounded-md text-base placeholder:text-[#767676] focus:outline-none focus:ring-2 ${errors.password
                     ? 'border-red-500 focus:ring-red-500'
                     : 'border-[#D7DDE9] focus:ring-[#CBD5E1]'
-                }`}
+                  }`}
               />
               <button
                 type="button"
@@ -272,11 +273,10 @@ const Register = () => {
                 onBlur={() => handleBlur('confirmPassword')}
                 placeholder="Confirm Password"
                 autoComplete="new-password"
-                className={`w-full px-4 py-2.5 pr-12 border rounded-md text-base placeholder:text-[#767676] focus:outline-none focus:ring-2 ${
-                  errors.confirmPassword
+                className={`w-full px-4 py-2.5 pr-12 border rounded-md text-base placeholder:text-[#767676] focus:outline-none focus:ring-2 ${errors.confirmPassword
                     ? 'border-red-500 focus:ring-red-500'
                     : 'border-[#D7DDE9] focus:ring-[#CBD5E1]'
-                }`}
+                  }`}
               />
               <button
                 type="button"
@@ -298,11 +298,10 @@ const Register = () => {
 
           <button
             type="submit"
-            className={`w-full px-4 py-2.5 text-base text-white rounded-md font-medium transition ${
-              isValid && isDirty && !loading
+            className={`w-full px-4 py-2.5 text-base text-white rounded-md font-medium transition ${isValid && isDirty && !loading
                 ? 'bg-[#023e8a] hover:bg-[#1054ab] cursor-pointer'
                 : 'bg-gray-300 cursor-not-allowed'
-            }`}
+              }`}
             disabled={!isValid || !isDirty || loading}
           >
             {loading ? 'Creating account...' : 'Continue'}

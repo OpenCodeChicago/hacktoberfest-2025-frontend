@@ -202,6 +202,44 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Aryan0512398",
+      "name": "Aryan gupta",
+      "avatar_url": "https://avatars.githubusercontent.com/u/174240048?v=4",
+      "profile": "https://portfolio-mu-gules-67.vercel.app/",
+      "contributions": [
+        "code",
+        "ideas"
+      ]
+    },
+    {
+      "login": "yashseth391",
+      "name": "Yash Seth",
+      "avatar_url": "https://avatars.githubusercontent.com/u/115554024?v=4",
+      "profile": "https://github.com/yashseth391",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "PranavTamada",
+      "name": "Pranav Tamada",
+      "avatar_url": "https://avatars.githubusercontent.com/u/68816381?v=4",
+      "profile": "https://github.com/PranavTamada",
+      "contributions": [
+        "code",
+        "ideas"
+      ]
+    },
+    {
+      "login": "anya-xcode",
+      "name": "Ananya Gupta",
+      "avatar_url": "https://avatars.githubusercontent.com/u/184568333?v=4",
+      "profile": "https://github.com/anya-xcode",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitType": "docs",

@@ -1,9 +1,8 @@
 const PageIndicator = ({ totalPages, currentPage, onSelect }) => {
   if (totalPages <= 1) return null;
   return (
-    <div
+    <nav
       className=" reviews-page-viewer w-full mt-2 flex gap-2 items-center justify-center flex-row"
-      role="tablist"
       aria-label="Reviews pages"
     >
       {Array.from({ length: totalPages }).map((_, idx) => (
@@ -20,7 +19,7 @@ const PageIndicator = ({ totalPages, currentPage, onSelect }) => {
           }`}
         />
       ))}
-    </div>
+    </nav>
   );
 };
 

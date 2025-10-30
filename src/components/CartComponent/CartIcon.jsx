@@ -1,36 +1,26 @@
 import { ShoppingCart } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { getCartItemCount } from '../../utils/cart';
+import { useCart } from '../../context/CartContext';
 
 export default function CartIcon({ onOpen }) {
-  const [count, setCount] = useState(0);
-
-  const updateCount = () => {
-    setCount(getCartItemCount());
-  };
+  const { getItemCount } = useCart();
+  const [count, setCount] = useState(() => getItemCount());
 
   useEffect(() => {
-    // Initial count on mount
-    updateCount();
+    setCount(getItemCount());
+  }, [getItemCount]);
 
-    // Listen for storage changes from other tabs
-    const handleStorageChange = () => updateCount();
+  useEffect(() => {
+    // Keep cross-tab fallback to trigger a full sync in provider
+    const handleStorageChange = () => setCount(getItemCount());
     window.addEventListener('storage', handleStorageChange);
-
-    // Listen for custom cart update events in the same tab
-    const handleCartUpdate = () => updateCount();
-    window.addEventListener('cartUpdated', handleCartUpdate);
-
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-      window.removeEventListener('cartUpdated', handleCartUpdate);
-    };
-  }, []);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, [getItemCount]);
 
   const displayCount = count > 99 ? '99+' : count;
 
   const handleClick = () => {
-    updateCount(); // Refresh count when opening drawer
+    setCount(getItemCount());
     onOpen();
   };
 
@@ -42,7 +32,7 @@ export default function CartIcon({ onOpen }) {
     >
       <ShoppingCart className="h-5 w-5" />
       {count > 0 && (
-        <span className="absolute -top-2 -right-2 bg-blue-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+        <span className={`absolute bg-blue-600 text-white font-bold rounded-full flex items-center justify-center ${count > 99 ? 'h-6 w-6 text-[10px] -top-3 -right-3' : 'h-5 w-5 text-xs -top-2 -right-2'}`}>
           {displayCount}
         </span>
       )}

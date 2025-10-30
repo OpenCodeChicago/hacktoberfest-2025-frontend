@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FaXTwitter } from 'react-icons/fa6';
-import { FaFacebook, FaYoutube, FaLinkedin } from 'react-icons/fa';
+import SocialIcons from '../ui/SocialIcons/SocialIcons';
 
 export default function TopHeader() {
   const messages = [
@@ -28,8 +27,8 @@ export default function TopHeader() {
   }, [messages.length]);
 
   return (
-    <header className="w-full bg-[#0D1B2A] py-3 text-white text-sm fixed top-0 left-0 right-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <header className="w-full bg-[#0D1B2A] text-white text-sm fixed top-0 left-0 right-0 z-50 h-[48px]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative h-full">
         <div className="flex items-center h-full">
           {/* Promo Message - Centered across full viewport */}
           <div
@@ -46,47 +45,8 @@ export default function TopHeader() {
           </div>
 
           {/* Right Side Icons - Aligned with main header icons */}
-          <div className="ml-auto flex items-center space-x-6 relative z-10 pointer-events-auto">
-            <a
-              href="https://www.youtube.com/@AlexSmaginDev"
-              aria-label="YouTube"
-              className="transform transition-transform duration-200 hover:scale-110 hover:text-gray-300"
-            >
-              <FaYoutube size={18} />
-            </a>
-            <a
-              href="https://www.linkedin.com/company/104436074"
-              aria-label="LinkedIn"
-              className="transform transition-transform duration-200 hover:scale-110 hover:text-gray-300"
-            >
-              <FaLinkedin
-                size={18}
-                className="fill-current text-white hover:text-gray-300"
-                stroke="none"
-              />
-            </a>
-            <a
-              href="https://x.com/alexsmagin29"
-              aria-label="Twitter"
-              className="transform transition-transform duration-200 hover:scale-110 hover:text-gray-300"
-            >
-              <FaXTwitter
-                size={18}
-                className="fill-current text-white hover:text-gray-300"
-                stroke="none"
-              />
-            </a>
-            <a
-              href="https://www.facebook.com/profile.php?id=61580367112591"
-              aria-label="Facebook"
-              className="transform transition-transform duration-200 hover:scale-110 hover:text-gray-300"
-            >
-              <FaFacebook
-                size={18}
-                className="fill-current text-white hover:text-gray-300"
-                stroke="none"
-              />
-            </a>
+          <div className="ml-auto">
+            <SocialIcons />
           </div>
         </div>
       </div>

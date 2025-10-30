@@ -1,6 +1,5 @@
 import ProductCard from './ProductCard';
-import { toggleWishlist, isInWishlist } from '../../utils/wishlist';
-import { toggleCart, isInCart } from '../../utils/cart';
+import { isInWishlist } from '../../utils/wishlist';
 
 export default function ProductGrid({ products, lastProductElementRef }) {
   if (!products || products.length === 0) {
@@ -22,10 +21,7 @@ export default function ProductGrid({ products, lastProductElementRef }) {
                 ? lastProductElementRef
                 : null
             }
-            onAddToWishlist={(prod) => toggleWishlist(prod)}
-            onAddToCart={(prod, flavor) => toggleCart(prod, flavor)}
             isWishlisted={isInWishlist(product.id || product._id)}
-            isInCart={(flavor) => isInCart(product, flavor)}
           />
         );
       })}

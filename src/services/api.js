@@ -53,23 +53,23 @@ export const productServices = {
 // Auth services can be removed if not implemented
 export const authServices = {
   login: (credentials) => {
-    console.warn('⚠️  authServices not yet implemented. Use new API services from @/api when available.');
-    return api.post('/api/auth/login', credentials);
+    // POST to /auth/login; server is expected to set HttpOnly cookie and optionally return user/token
+    return api.post('/auth/login', credentials);
   },
-  
+
   register: (userData) => {
-    console.warn('⚠️  authServices not yet implemented. Use new API services from @/api when available.');
-    return api.post('/api/auth/register', userData);
+    // POST to /auth/register; server should set cookie and return user/token as appropriate
+    return api.post('/auth/register', userData);
   },
-  
+
   logout: () => {
-    console.warn('⚠️  authServices not yet implemented. Use new API services from @/api when available.');
-    return api.post('/api/auth/logout');
+    // POST to /auth/logout to clear server-side cookie/session
+    return api.post('/auth/logout');
   },
-  
+
   refreshToken: () => {
-    console.warn('⚠️  authServices not yet implemented. Use new API services from @/api when available.');
-    return api.post('/api/auth/refresh');
+    // POST to /auth/refresh using cookies; server returns a new token or re-establishes session
+    return api.post('/auth/refresh');
   },
 };
 

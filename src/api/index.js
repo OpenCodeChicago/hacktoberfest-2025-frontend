@@ -18,5 +18,8 @@ export {
   clearCart,
 } from './cartService.js';
 
+export { getCollectionById } from './collectionService.js';
+
 export * from './productService.js';
 export * from './cartService.js';
+export * from './collectionService.js';

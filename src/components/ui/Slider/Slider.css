@@ -12,11 +12,10 @@
   --dot-gap: 0.75rem;
   --animation-duration: 12s;
   --dot-color: white;
-  --dot-bottom-min: 1rem;
-  --dot-bottom-max: 4.5rem;
+  --dot-bottom-min: 2.5rem;
+  --dot-bottom-max: 3.5rem;
   
-  height: auto;
-  max-height: calc(100vh - 4rem);
+  height: 100%;
   container-type: inline-size;
 }
 
@@ -25,8 +24,7 @@
 .hero-slider .slick-slide,
 .hero-slider .slick-slide > div,
 .hero-slider .slick-slide > div > div {
-  height: auto;
-  max-height: calc(100vh - 4rem);
+  height: 100%;
 }
 
 .hero-slider .slick-dots {

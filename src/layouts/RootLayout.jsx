@@ -3,16 +3,20 @@ import { Outlet } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SEO from '../components/SEO';
+import ScrollToTop from '../components/ui/ScrollToTop/ScrollToTop';
 import TopFooter from '../components/TopFooter';
 import MainHeader from '../components/Header';
 import Loader from '../components/Loader';
 import BottomFooter from '../components/BottomFooter';
+import BackToTop from '../components/ui/BackToTopButton/BackToTopButton';
+import { CartProvider } from '../context/CartContext';
 
 function RootLayout() {
   return (
-    <>
+    <CartProvider>
+      <ScrollToTop />
       <MainHeader />
-      <main className="mt-[84px] min-h-screen">
+      <main className="mt-[112px] min-h-screen bg-[#F7FAFF]">
         <SEO
           title="CoreX Nutrition"
           description="CoreX Nutrition official site — explore accessibility, policies, and open-source projects."
@@ -37,7 +41,8 @@ function RootLayout() {
         draggable
         pauseOnHover
       />
-    </>
+      <BackToTop showAfter={250} />
+    </CartProvider>
   );
 }
 

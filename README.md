@@ -317,6 +317,12 @@ Thanks goes to these wonderful people:
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/fudailzafar"><img src="https://avatars.githubusercontent.com/u/142711828?v=4?s=100" width="100px;" alt="Fudail Mohammed Zafar"/><br /><sub><b>Fudail Mohammed Zafar</b></sub></a><br /><a href="https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/commits?author=fudailzafar" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://sabarishvs.codes"><img src="https://avatars.githubusercontent.com/u/135982365?v=4?s=100" width="100px;" alt="Sabarish V S"/><br /><sub><b>Sabarish V S</b></sub></a><br /><a href="https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/commits?author=Sabarish2317" title="Code">💻</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://portfolio-mu-gules-67.vercel.app/"><img src="https://avatars.githubusercontent.com/u/174240048?v=4?s=100" width="100px;" alt="Aryan gupta"/><br /><sub><b>Aryan gupta</b></sub></a><br /><a href="https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/commits?author=Aryan0512398" title="Code">💻</a> <a href="#ideas-Aryan0512398" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/yashseth391"><img src="https://avatars.githubusercontent.com/u/115554024?v=4?s=100" width="100px;" alt="Yash Seth"/><br /><sub><b>Yash Seth</b></sub></a><br /><a href="https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/commits?author=yashseth391" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/PranavTamada"><img src="https://avatars.githubusercontent.com/u/68816381?v=4?s=100" width="100px;" alt="Pranav Tamada"/><br /><sub><b>Pranav Tamada</b></sub></a><br /><a href="https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/commits?author=PranavTamada" title="Code">💻</a> <a href="#ideas-PranavTamada" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/anya-xcode"><img src="https://avatars.githubusercontent.com/u/184568333?v=4?s=100" width="100px;" alt="Ananya Gupta"/><br /><sub><b>Ananya Gupta</b></sub></a><br /><a href="https://github.com/OpenCodeChicago/hacktoberfest-2025-frontend/commits?author=anya-xcode" title="Code">💻</a></td>
+    </tr>
   </tbody>
 </table>
 

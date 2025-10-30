@@ -13,19 +13,21 @@ export default function FeaturedProductImage({
   const finalSrc = imageUrl || placeholder;
 
   return (
-    <Link
-      to={`/product/${productId}`}
-      aria-label={`View product ${alt}`}
-      className={'group w-full' + className}
-    >
-      <img
-        src={finalSrc}
-        alt={alt}
-        loading="lazy"
-        onLoad={onLoad}
-        onError={onError}
-        className="w-full h-full object-contain transition-transform duration-300 transform group-hover:scale-95 cursor-pointer"
-      />
-    </Link>
+    <section>
+      <Link
+        to={`/product/${productId}`}
+        aria-label={`View product ${alt}`}
+        className={`group w-full ${className}`}
+      >
+        <img
+          src={finalSrc}
+          alt={alt}
+          loading="lazy"
+          onLoad={onLoad}
+          onError={onError}
+          className="w-full h-full object-contain cursor-pointer block"
+        />
+      </Link>
+    </section>
   );
 }

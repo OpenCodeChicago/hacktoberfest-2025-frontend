@@ -1,7 +1,9 @@
 import { useState, forwardRef, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { addRecentlyViewed } from '../../utils/recentlyViewed';
-
+import { addToWishList, removeFromWishList } from '../../store/wishListSlice';
+import { useDispatch } from 'react-redux';
+import AddToCartButton from './AddToCartButton';
 const HeartIcon = ({
   isWishlisted = false,
   animate = false,
@@ -27,21 +29,8 @@ const HeartIcon = ({
   </svg>
 );
 
-const CartIcon = ({ className = 'h-6 w-6' }) => (
-  <img src="/images/cart-icon.svg" alt="Add to cart" className={className} />
-);
-
 const ProductCard = forwardRef(
-  (
-    {
-      product,
-      onAddToWishlist,
-      onAddToCart,
-      isWishlisted: initialWishlisted = false,
-      isInCart,
-    },
-    ref
-  ) => {
+  ({ product, isWishlisted: initialWishlisted = false }, ref) => {
     const navigate = useNavigate();
     const [imageLoaded, setImageLoaded] = useState(false);
     const [imageError, setImageError] = useState(false);
@@ -51,13 +40,7 @@ const ProductCard = forwardRef(
     const [isWishlisted, setIsWishlisted] = useState(initialWishlisted);
     const [animateLike, setAnimateLike] = useState(false);
     const likeTimeoutRef = useRef(null);
-    const [cartLoading, setCartLoading] = useState(false);
-    const [cartAdded, setCartAdded] = useState(false);
-    const cartLoadingTimeoutRef = useRef(null);
-    const cartAddedTimeoutRef = useRef(null);
-
-    // Check if current product+flavor is in cart
-    const itemIsInCart = isInCart ? isInCart(selectedFlavor) : false;
+    const dispatch = useDispatch();
 
     const handleProductClick = () => {
       // add to recently viewed list (stored in localStorage) before navigating
@@ -66,7 +49,11 @@ const ProductCard = forwardRef(
       } catch {
         // ignore errors (localStorage not available)
       }
-      navigate(`/products/${product.id}`);
+
+      const productId = product.id || product._id;
+      if (productId) {
+        navigate(`/products/${encodeURIComponent(productId)}`);
+      }
     };
 
     const formatPrice = (price) => {
@@ -78,28 +65,6 @@ const ProductCard = forwardRef(
       action();
     };
 
-    const handleAddToCart = () => {
-      // visual feedback: show a small loading indicator, then show ADDED for a short time
-      setCartLoading(true);
-      if (cartLoadingTimeoutRef.current)
-        clearTimeout(cartLoadingTimeoutRef.current);
-      cartLoadingTimeoutRef.current = setTimeout(() => {
-        setCartLoading(false);
-        setCartAdded(true);
-        // Call the toggle cart function
-        if (onAddToCart) {
-          onAddToCart(product, selectedFlavor);
-        }
-        // keep the ADDED state visible for ~1.5s
-        if (cartAddedTimeoutRef.current)
-          clearTimeout(cartAddedTimeoutRef.current);
-        cartAddedTimeoutRef.current = setTimeout(
-          () => setCartAdded(false),
-          1500
-        );
-      }, 700);
-    };
-
     const handleWishlistToggle = () => {
       const next = !isWishlisted;
       setIsWishlisted(next);
@@ -108,8 +73,10 @@ const ProductCard = forwardRef(
       if (likeTimeoutRef.current) clearTimeout(likeTimeoutRef.current);
       likeTimeoutRef.current = setTimeout(() => setAnimateLike(false), 520);
       // Call the toggle wishlist function
-      if (onAddToWishlist) {
-        onAddToWishlist(product);
+      if (isWishlisted) {
+        dispatch(removeFromWishList(product));
+      } else {
+        dispatch(addToWishList(product));
       }
     };
 
@@ -121,10 +88,6 @@ const ProductCard = forwardRef(
     useEffect(() => {
       return () => {
         if (likeTimeoutRef.current) clearTimeout(likeTimeoutRef.current);
-        if (cartLoadingTimeoutRef.current)
-          clearTimeout(cartLoadingTimeoutRef.current);
-        if (cartAddedTimeoutRef.current)
-          clearTimeout(cartAddedTimeoutRef.current);
       };
     }, []);
 
@@ -204,26 +167,38 @@ const ProductCard = forwardRef(
           )}
 
           {/* State 3: Image successfully loaded or attempt to load */}
-          {!imageError && (product.imageUrl || product.image) && (
+          {!imageError && (product.imageUrl || product.image || true) && (
             <img
-              src={product.imageUrl || product.image || null}
-              alt={product.name}
-              className={`w-full h-full object-contain transition-opacity duration-500 ${imageLoaded && !imageError ? 'opacity-100' : 'opacity-0'}`}
-              onLoad={() => setImageLoaded(true)}
-              onError={() => {
-                setImageLoaded(true);
-                setImageError(true);
-              }}
+              src={
+                product.imageUrl ||
+                product.image ||
+                '/images/product-default-image.jpg'
+              }
+              alt={product.name || 'Product image'}
+              width="512"
+              height="512"
               loading="lazy"
               decoding="async"
+              className={`w-full h-full object-contain transition-opacity duration-500 ${imageLoaded && !imageError ? 'opacity-100' : 'opacity-0'}`}
+              onLoad={() => setImageLoaded(true)}
+              onError={(e) => {
+                const img = e.currentTarget;
+                if (!img.dataset.fallbackTried) {
+                  img.dataset.fallbackTried = '1';
+                  img.src = '/images/product-default-image.jpg';
+                  return;
+                }
+                // default failed too -> switch to SVG fallback
+                setImageError(true);
+              }}
             />
           )}
 
           {/* "VIEW PRODUCT" Overlay */}
-          <div className="absolute inset-0 bg-transparent group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
+          <div className="absolute inset-0 bg-transparent transition-all duration-300 flex items-center justify-center">
             <button
               onClick={(e) => handleActionClick(e, handleProductClick)}
-              className="opacity-0 group-hover:opacity-80 bg-blue-800 text-white px-6 py-3 rounded-lg font-semibold transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 text-md shadow-lg cursor-pointer group-hover:pointer-events-auto"
+              className="opacity-0 group-hover:opacity-80 group-focus-within:opacity-80 bg-blue-800 text-white px-6 py-3 rounded-lg font-semibold transform translate-y-4 group-hover:translate-y-0 group-focus-within:translate-y-0 transition-all duration-300 text-md shadow-lg cursor-pointer pointer-events-none group-hover:pointer-events-auto"
             >
               VIEW PRODUCT
             </button>
@@ -329,86 +304,11 @@ const ProductCard = forwardRef(
               />
             </button>
 
-            {/* --- Add to Cart Button --- */}
-            <button
-              onClick={(e) => handleActionClick(e, handleAddToCart)}
-              className={`
-          -ml-px flex-grow flex items-center justify-center gap-2 font-medium 
-          py-3 px-4 rounded-r-xl transition-colors duration-150 hover:shadow-lg cursor-pointer
-          focus:outline-none focus:z-10
-          bg-[#023e8a] text-white hover:bg-[#1054ab]
-        `}
-              aria-live="polite"
-            >
-              {cartLoading ? (
-                <span className="ml-2 flex items-center gap-2 font-semibold">
-                  <svg
-                    className="w-5 h-5 animate-spin"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      strokeWidth="3"
-                      stroke="currentColor"
-                      opacity="0.25"
-                    />
-                    <path
-                      d="M22 12a10 10 0 00-10-10"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  <span>ADDING...</span>
-                </span>
-              ) : cartAdded ? (
-                <span className="ml-2 flex items-center gap-2 font-semibold">
-                  <svg
-                    className="w-5 h-5 text-white"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                  <span>ADDED</span>
-                </span>
-              ) : itemIsInCart ? (
-                <span className="ml-2 flex items-center gap-2 font-semibold">
-                  <svg
-                    className="w-5 h-5 text-white"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                  <span>ADDED</span>
-                </span>
-              ) : (
-                <>
-                  <CartIcon />
-                  <span className="ml-2">ADD TO CART</span>
-                </>
-              )}
-            </button>
+            {/* Add to Cart component */}
+            <AddToCartButton
+              product={product}
+              selectedFlavor={selectedFlavor}
+            />
           </div>
         </div>
       </div>

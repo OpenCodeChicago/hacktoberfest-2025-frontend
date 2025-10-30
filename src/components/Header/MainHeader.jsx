@@ -3,9 +3,13 @@ import { Link } from 'react-router-dom';
 import SearchBox from '../Search/SearchBox';
 import TopHeader from '../TopHeader/TopHeader';
 import ShopMenu from '../ShopMenu';
+import { Menu, X, ChevronDown, Search, Heart, User } from 'lucide-react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import WishListScreen from '../WishList/WishListScreen';
 import CartIcon from '../CartComponent/CartIcon';
 import CartDrawer from '../CartComponent/CartDrawer';
-import { Menu, X, ChevronDown, Search, Heart, User } from 'lucide-react';
+import ProfileMenu from './ProfileMenu/ProfileMenu';
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -13,6 +17,11 @@ export default function Header() {
   const [search, setSearch] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const mobileMenuRef = useRef(null);
+  const [wishListOpen, setWishListOpen] = useState(false);
+
+  const wishListData = useSelector((state) => state.wishList);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const navigate = useNavigate();
 
   // Handle shop button click
   const handleShopClick = () => {
@@ -32,7 +41,7 @@ export default function Header() {
       <TopHeader />
 
       {/* Main Header */}
-      <header className="bg-white shadow-md w-full fixed top-10 left-0 z-50">
+      <header className="bg-[#F7FAFF] shadow-md w-full fixed top-[48px] left-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
@@ -95,21 +104,20 @@ export default function Header() {
                   <Search className="h-5 w-5" />
                 </button>
 
-                <a
-                  href="#"
+                <button
                   aria-label="Wishlist"
-                  className="transform transition-transform duration-200 hover:scale-110 hover:text-black"
+                  onClick={() => setWishListOpen(true)}
+                  className="relative transform transition-transform duration-200 hover:scale-110 hover:text-black cursor-pointer"
                 >
                   <Heart className="h-5 w-5" />
-                </a>
+                  {wishListData.items.length > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center">
+                      {wishListData.items.length}
+                    </span>
+                  )}
+                </button>
 
-                <Link
-                  to="/login"
-                  aria-label="User Account"
-                  className="transform transition-transform duration-200 hover:scale-110 hover:text-black"
-                >
-                  <User className="h-5 w-5" />
-                </Link>
+                <ProfileMenu />
 
                 <CartIcon onOpen={() => setCartOpen(true)} />
               </div>
@@ -141,7 +149,7 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {mobileOpen && (
-          <div className="md:hidden bg-white shadow-md animate-fadeIn">
+          <div className="md:hidden bg-[#F7FAFF] shadow-md animate-fadeIn">
             <nav className="flex flex-col space-y-2 p-4">
               <button
                 onClick={() => setShopOpen(!shopOpen)}
@@ -298,28 +306,48 @@ export default function Header() {
               <Heart className="h-5 w-5" />
               <span>Wishlist</span>
             </a>
-            <a
-              href="#"
+            <button
               className="flex items-center space-x-2 text-gray-700 hover:text-black"
-              onClick={() => setMobileOpen(false)}
+              onClick={() => {
+                setMobileOpen(false);
+                if (!isAuthenticated) navigate('/login');
+                else navigate('/profile');
+              }}
             >
               <User className="h-5 w-5" />
               <span>Account</span>
-            </a>
-            <a
-              href="#"
-              className="flex items-center space-x-2 text-gray-700 hover:text-black"
-              onClick={() => setMobileOpen(false)}
+            </button>
+            <div
+              role="button"
+              tabIndex={0}
+              className="flex items-center space-x-2 text-gray-700 hover:text-black cursor-pointer"
+              onClick={() => {
+                setMobileOpen(false);
+                setCartOpen(true);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  setMobileOpen(false);
+                  setCartOpen(true);
+                }
+              }}
             >
               <CartIcon onOpen={() => setCartOpen(true)} />
               <span>Cart</span>
-            </a>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Search Drawer */}
-       <SearchBox isOpen={search} onClose={() => setSearch(false)} />
+      {wishListOpen && (
+        <WishListScreen
+          setWishListOpen={setWishListOpen}
+          wishListData={wishListData}
+        />
+      )}
+      {search && <SearchBox isOpen={search} onClose={() => setSearch(false)} />}
 
       {/* Cart Drawer */}
       <CartDrawer isOpen={cartOpen} onClose={() => setCartOpen(false)} />

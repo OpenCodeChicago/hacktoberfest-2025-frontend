@@ -182,7 +182,9 @@ export const getRecommendedProducts = async (id, limit = 3) => {
       throw new Error('Product ID is required');
     }
 
-    const response = await axiosInstance.get(`/products/recommended/${id}?limit=${limit}`);
+    // const response = await axiosInstance.get(`/products/recommended/${id}?limit=${limit}`);
+    const response = await axiosInstance.get(`/products/${id}/recommended?limit=${limit}`);
+
 
     return {
       success: true,

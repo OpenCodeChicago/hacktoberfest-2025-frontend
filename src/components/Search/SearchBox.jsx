@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { X, Loader2 } from 'lucide-react';
 import notfound from '../../assets/Not-found.svg';
 import { Link } from 'react-router-dom';
-import missingimg from '../../assets/missing-picture-product.jpg';
+import missingImg from '/images/product-default-image.jpg';
 
 export default function SearchBox({ onClose, isOpen }) {
   const [searchQuery, setSearchQuery] = useState('');
@@ -146,10 +146,10 @@ export default function SearchBox({ onClose, isOpen }) {
             </h2>
             <button
               onClick={onClose}
-              className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 cursor-pointer"
-              aria-label="Close search"
+              className="p-2 hover:bg-gray-100 rounded-full cursor-pointer transition group"
+              aria-label="Close cart"
             >
-              <X className="w-5 h-5 text-gray-600" />
+              <X className="h-5 w-5 text-gray-700 transform transition-transform duration-200 ease-in-out group-hover:scale-110 group-hover:rotate-90" />
             </button>
           </div>
 
@@ -219,14 +219,16 @@ export default function SearchBox({ onClose, isOpen }) {
                       >
                         <div className="w-16 h-16 flex justify-center items-center overflow-hidden">
                           <img
-                            src={product.image || missingimg}
+                            src={
+                              product.image || product.imageUrl || missingImg
+                            }
                             alt={product.name || 'Product image'}
                             loading="lazy"
                             decoding="async"
                             width="64"
                             height="64"
                             className="w-16 h-16 object-contain transition-transform duration-300"
-                            onError={(e) => (e.currentTarget.src = missingimg)}
+                            onError={(e) => (e.currentTarget.src = missingImg)}
                           />
                         </div>
                         <div>
@@ -234,10 +236,8 @@ export default function SearchBox({ onClose, isOpen }) {
                             {product.brand}
                           </p>
                           <h4
-                            className="text-sm font-medium text-[#023E8A] relative inline-block
-                                     after:content-[''] after:absolute after:left-0 after:bottom-0 
-                                     after:h-[2px] after:bg-[#023E8A] after:w-0 
-                                     group-hover:after:w-full after:transition-[width] after:duration-300 after:ease-out"
+                            className="text-sm font-medium relative inline-block link-underline"
+                            style={{ color: '#023E8A' }}
                           >
                             {product.name}
                           </h4>

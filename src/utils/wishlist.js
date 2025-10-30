@@ -24,7 +24,7 @@ export function isInWishlist(productId) {
 }
 
 export function addToWishlist(product) {
-  if (!product || !product.id && !product._id) return false; // Ensure product has an ID
+  if (!product || (!product.id && !product._id)) return false; // Ensure product has an ID
   try {
     const current = getWishlist();
     const productId = product.id || product._id;
@@ -63,7 +63,7 @@ export function removeFromWishlist(productId) {
 }
 
 export function toggleWishlist(product) {
-  if (!product || !product.id && !product._id) return false; // Ensure product has an ID
+  if (!product || (!product.id && !product._id)) return false; // Ensure product has an ID
 
   const productId = product.id || product._id;
   const isCurrentlyInWishlist = isInWishlist(productId);
