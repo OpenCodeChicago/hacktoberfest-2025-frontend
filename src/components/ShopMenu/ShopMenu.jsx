@@ -255,7 +255,7 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
                 <ArrowRight className="h-5 w-5 text-black group-hover:translate-x-1 transition-transform duration-300" />
               </button>
             </div>
-            <div className="border border-gray mb-11 mt-8" />
+            <div className="border border-gray-300 mb-11 mt-8" />
 
             <div className="grid grid-cols-5 gap-y-20 gap-x-18">
               {menuColumns.map((column) => (
