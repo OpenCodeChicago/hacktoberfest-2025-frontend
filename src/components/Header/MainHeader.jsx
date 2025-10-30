@@ -208,13 +208,13 @@ export default function Header() {
           mobileOpen
             ? 'opacity-100 pointer-events-auto'
             : 'opacity-0 pointer-events-none'
-        } z-[998]`}
+        } z-998`}
       />
 
       {/* Mobile Menu Drawer */}
       <div
         ref={mobileMenuRef}
-        className={`fixed top-0 right-0 w-full sm:w-[280px] h-full bg-white shadow-2xl border-l border-gray-200 z-[999] transform transition-all duration-300 ease-in-out ${
+        className={`fixed top-0 right-0 w-full sm:w-[280px] h-full bg-white shadow-2xl border-l border-gray-200 z-999 transform transition-all duration-300 ease-in-out ${
           mobileOpen ? 'translate-x-0 scale-100' : 'translate-x-full scale-95'
         } flex flex-col`}
       >
