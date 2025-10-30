@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
+import { NavLink } from 'react-router-dom';
 import MenuColumn from './MenuColumn';
 import { menuColumns } from './menuData';
 
@@ -170,11 +171,8 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
     }
   }, [focusedIndex]);
 
-  // Handle navigation to collection
-  const handleCollectionClick = (collectionName) => {
-    const encodedName = encodeURIComponent(collectionName.toLowerCase());
-    const url = `https://corexshoptest.onrender.com/api/collections/${encodedName}`;
-    window.open(url, '_blank');
+  // Handle navigation to collection - just close the menu
+  const handleCollectionClick = () => {
     handleCloseMenu();
   };
 
@@ -237,8 +235,9 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
           <div className="max-w-7xl mx-auto px-8 sm:px-12 lg:px-16 pt-8 pb-12">
             {/* SHOP ALL Section */}
             <div className="flex items-center justify-between">
-              <button
-                onClick={() => handleCollectionClick('all-products')}
+              <NavLink
+                to="/collections/all-products"
+                onClick={handleCollectionClick}
                 className="group w-full flex justify-between items-center gap-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg cursor-pointer"
               >
                 <h2
@@ -253,7 +252,7 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
                   ALL PRODUCTS
                 </h2>
                 <ArrowRight className="h-5 w-5 text-black group-hover:translate-x-1 transition-transform duration-300" />
-              </button>
+              </NavLink>
             </div>
             <div className="border border-gray-300 mb-11 mt-8" />
 
