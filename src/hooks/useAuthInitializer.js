@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../store/authSlice";
 
-export default function authInitializer() {
+export function useAuthInitializer() {
     const dispatch = useDispatch();
 
     useEffect(() => {

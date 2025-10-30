@@ -1,10 +1,10 @@
 import router from '../routes/router';
 import { RouterProvider } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import authInitializer from '../utils/authinitializer';
+import {useAuthInitializer} from '../hooks/useAuthInitializer';
 
 export default function App() {
-  authInitializer()
+  useAuthInitializer()
   return (
     <HelmetProvider>
       <RouterProvider router={router} />
