@@ -208,7 +208,7 @@ export default function Header() {
           mobileOpen
             ? 'opacity-100 pointer-events-auto'
             : 'opacity-0 pointer-events-none'
-        } z-998`}
+        } z-[998]`}
       />
 
       {/* Mobile Menu Drawer */}
