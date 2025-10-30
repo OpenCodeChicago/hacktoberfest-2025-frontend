@@ -9,6 +9,7 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
   const [animationState, setAnimationState] = useState('closed'); // 'closed', 'opening', 'open', 'closing'
   const menuItemsRef = useRef([]);
   const shopButtonRef = useRef(null);
+  const menuRef = useRef(null);
 
   // Handle opening animation
   const handleOpenMenu = () => {
@@ -73,10 +74,12 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        shopButtonRef.current &&
-        !shopButtonRef.current.contains(event.target) &&
         shopOpen &&
-        animationState !== 'closing'
+        animationState !== 'closing' &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        shopButtonRef.current &&
+        !shopButtonRef.current.contains(event.target)
       ) {
         handleCloseMenu();
       }
@@ -86,7 +89,7 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [setShopOpen, shopOpen, animationState, handleCloseMenu]);
+  }, [shopOpen, animationState, handleCloseMenu]);
 
   // Handle opening animation when shopOpen changes
   useEffect(() => {
@@ -216,20 +219,20 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
         animationState === 'opening' ||
         animationState === 'open' ||
         animationState === 'closing') && (
-        <div
-          className={`fixed left-0 w-screen shadow-lg transform origin-top z-40 overflow-y-auto h-screen ${
+        <nav
+          ref={menuRef}
+          className={`fixed left-0 w-screen shadow-lg transform origin-top z-40 overflow-y-auto ${
             animationState === 'closing'
               ? 'animate-slide-up'
               : 'animate-slide-down'
           }`}
           style={{
             top: '104px',
+            height: 'calc(100vh - 104px)',
             backgroundColor: '#F7FAFF',
             fontFamily: 'Inter, sans-serif',
-            maxHeight: 'calc(100vh - 104px)',
           }}
           onWheel={(e) => e.stopPropagation()}
-          role="menu"
           aria-label="Shop categories"
         >
           <div className="max-w-7xl mx-auto px-8 sm:px-12 lg:px-16 pt-8 pb-12">
@@ -269,7 +272,7 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
               ))}
             </div>
           </div>
-        </div>
+        </nav>
       )}
     </>
   );
