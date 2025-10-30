@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
 import MenuColumn from './MenuColumn';
-import { topRowColumns, bottomRowColumns } from './menuData';
+import { menuColumns } from './menuData';
 
 const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
   const [focusedIndex, setFocusedIndex] = useState(-1);
@@ -178,25 +178,6 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
     handleCloseMenu();
   };
 
-  // Helper function to create menu item with accessibility
-  const createMenuItem = (collectionName, displayName, index) => (
-    <button
-      ref={(el) => (menuItemsRef.current[index] = el)}
-      onClick={() => handleCollectionClick(collectionName)}
-      className="text-black text-left hover:text-gray-600 transition-all duration-300 ease-in-out relative group focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg px-0 cursor-pointer link-underline"
-      style={{
-        fontSize: '22px',
-        lineHeight: '26px',
-        letterSpacing: '-1.5px',
-        fontWeight: '400',
-      }}
-      role="menuitem"
-      tabIndex={focusedIndex === index ? 0 : -1}
-    >
-      {displayName}
-    </button>
-  );
-
   return (
     <>
       {/* Shop Button - Updated to match other navigation buttons */}
@@ -253,7 +234,7 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
           role="menu"
           aria-label="Shop categories"
         >
-          <div className="max-w-7xl mx-auto px-8 sm:px-12 lg:px-16 pt-8 pb-12 space-y-8">
+          <div className="max-w-7xl mx-auto px-8 sm:px-12 lg:px-16 pt-8 pb-12">
             {/* SHOP ALL Section */}
             <div className="flex items-center justify-between">
               <button
@@ -274,31 +255,19 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
                 <ArrowRight className="h-5 w-5 text-black group-hover:translate-x-1 transition-transform duration-300" />
               </button>
             </div>
-            <div className="border border-gray" />
+            <div className="border border-gray mb-11 mt-8" />
 
-            {/* Mega Menu Grid */}
-            <div className="space-y-20">
-              <div className="grid grid-cols-5 gap-16">
-                {topRowColumns.map((column) => (
-                  <MenuColumn
-                    key={column.id}
-                    title={column.title}
-                    items={column.items}
-                    createMenuItem={createMenuItem}
-                  />
-                ))}
-              </div>
-              {/* Bottom Section */}
-              <div className="grid grid-cols-4 gap-16">
-                {bottomRowColumns.map((column) => (
-                  <MenuColumn
-                    key={column.id}
-                    title={column.title}
-                    items={column.items}
-                    createMenuItem={createMenuItem}
-                  />
-                ))}
-              </div>
+            <div className="grid grid-cols-5 gap-x-16 gap-y-20">
+              {menuColumns.map((column) => (
+                <MenuColumn
+                  key={column.id}
+                  title={column.title}
+                  items={column.items}
+                  menuItemsRef={menuItemsRef}
+                  focusedIndex={focusedIndex}
+                  handleCollectionClick={handleCollectionClick}
+                />
+              ))}
             </div>
           </div>
         </div>
