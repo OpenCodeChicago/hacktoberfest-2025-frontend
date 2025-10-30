@@ -236,7 +236,7 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
         animationState === 'open' ||
         animationState === 'closing') && (
         <div
-          className={`fixed left-0 w-screen shadow-lg transform origin-top z-40 overflow-y-auto ${
+          className={`fixed left-0 w-screen shadow-lg transform origin-top z-40 overflow-y-auto h-screen ${
             animationState === 'closing'
               ? 'animate-slide-up'
               : 'animate-slide-down'
