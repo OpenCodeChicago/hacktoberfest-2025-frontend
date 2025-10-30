@@ -116,12 +116,12 @@ const ReviewsSection = () => {
 
   return (
     <section
-      className="reviews-section p-[16px] place-self-center md:p-[85px] lg:p-[80px] "
+      className="reviews-section p-[0 16px] place-self-center md:p-[0 85px] lg:p-[0 80px] flex flex-col gap-[64px] pb-24"
       aria-labelledby="reviews"
     >
       <h2
         id="reviews"
-        className="text-4xl lg:text-heading-xxl uppercase py-16 section-title"
+        className=" text-[32px] lg:text-[48px] uppercase section-title"
       >
         <span className="text-[#000]">THOUSANDS</span>
         <span className="stroke-title">{'  '} LOVE</span>
