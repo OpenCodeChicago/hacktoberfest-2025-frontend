@@ -3,18 +3,21 @@ import SocialIcons from '../ui/SocialIcons/SocialIcons';
 
 export default function TopHeader() {
   const messages = [
-    <>
+    <p>
       Buy 1 get 1{' '}
-      <span className="underline decoration-red-500 decoration-2 underline-offset-4 text-white">
+      <span className=" text-white relative">
         50% off
+        <span className="absolute bottom-[-4px] left-0 right-0 w-full">
+          <img src="/icons/discount-line.svg" alt="" />
+        </span>
       </span>
-    </>,
-    <>
+    </p>,
+    <p>
       <span className="underline decoration-red-500 decoration-2 underline-offset-4 text-white">
         Free shipping
       </span>{' '}
       on orders over $110
-    </>,
+    </p>,
   ];
 
   const [index, setIndex] = useState(0);
