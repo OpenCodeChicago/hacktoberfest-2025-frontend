@@ -13,8 +13,11 @@ export default function TopHeader() {
       </span>
     </p>,
     <p>
-      <span className="underline decoration-red-500 decoration-2 underline-offset-4 text-white">
+      <span className=" text-white relative">
         Free shipping
+        <span className="absolute bottom-[-9px] left-1/2 -translate-x-1/2 w-[80%] flex justify-center">
+          <img src="/icons/free-shipping-line.svg" alt="" />
+        </span>
       </span>{' '}
       on orders over $110
     </p>,
