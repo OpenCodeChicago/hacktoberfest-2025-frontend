@@ -174,7 +174,6 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
     }
   }, [focusedIndex]);
 
-  // Handle navigation to collection - just close the menu
   const handleCollectionClick = () => {
     handleCloseMenu();
   };
