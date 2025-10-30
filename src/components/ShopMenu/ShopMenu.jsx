@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
+import { NavLink } from 'react-router-dom';
 import MenuColumn from './MenuColumn';
 import { menuColumns } from './menuData';
 
@@ -8,6 +9,7 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
   const [animationState, setAnimationState] = useState('closed'); // 'closed', 'opening', 'open', 'closing'
   const menuItemsRef = useRef([]);
   const shopButtonRef = useRef(null);
+  const menuRef = useRef(null);
 
   // Handle opening animation
   const handleOpenMenu = () => {
@@ -72,10 +74,12 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        shopButtonRef.current &&
-        !shopButtonRef.current.contains(event.target) &&
         shopOpen &&
-        animationState !== 'closing'
+        animationState !== 'closing' &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        shopButtonRef.current &&
+        !shopButtonRef.current.contains(event.target)
       ) {
         handleCloseMenu();
       }
@@ -85,7 +89,7 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [setShopOpen, shopOpen, animationState, handleCloseMenu]);
+  }, [shopOpen, animationState, handleCloseMenu]);
 
   // Handle opening animation when shopOpen changes
   useEffect(() => {
@@ -170,11 +174,8 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
     }
   }, [focusedIndex]);
 
-  // Handle navigation to collection
-  const handleCollectionClick = (collectionName) => {
-    const encodedName = encodeURIComponent(collectionName.toLowerCase());
-    const url = `https://corexshoptest.onrender.com/api/collections/${encodedName}`;
-    window.open(url, '_blank');
+  // Handle navigation to collection - just close the menu
+  const handleCollectionClick = () => {
     handleCloseMenu();
   };
 
@@ -218,27 +219,28 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
         animationState === 'opening' ||
         animationState === 'open' ||
         animationState === 'closing') && (
-        <div
-          className={`fixed left-0 w-screen shadow-lg transform origin-top z-40 overflow-y-auto h-screen ${
+        <nav
+          ref={menuRef}
+          className={`fixed left-0 w-screen shadow-lg transform origin-top z-40 overflow-y-auto ${
             animationState === 'closing'
               ? 'animate-slide-up'
               : 'animate-slide-down'
           }`}
           style={{
             top: '104px',
+            height: 'calc(100vh - 104px)',
             backgroundColor: '#F7FAFF',
             fontFamily: 'Inter, sans-serif',
-            maxHeight: 'calc(100vh - 104px)',
           }}
           onWheel={(e) => e.stopPropagation()}
-          role="menu"
           aria-label="Shop categories"
         >
           <div className="max-w-7xl mx-auto px-8 sm:px-12 lg:px-16 pt-8 pb-12">
             {/* SHOP ALL Section */}
             <div className="flex items-center justify-between">
-              <button
-                onClick={() => handleCollectionClick('all-products')}
+              <NavLink
+                to="/collections/all-products"
+                onClick={handleCollectionClick}
                 className="group w-full flex justify-between items-center gap-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg cursor-pointer"
               >
                 <h2
@@ -253,7 +255,7 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
                   ALL PRODUCTS
                 </h2>
                 <ArrowRight className="h-5 w-5 text-black group-hover:translate-x-1 transition-transform duration-300" />
-              </button>
+              </NavLink>
             </div>
             <div className="border border-gray-300 mb-11 mt-8" />
 
@@ -270,7 +272,7 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
               ))}
             </div>
           </div>
-        </div>
+        </nav>
       )}
     </>
   );
