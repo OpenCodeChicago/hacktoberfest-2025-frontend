@@ -251,13 +251,12 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
           role="menu"
           aria-label="Shop categories"
         >
-          <div className="max-w-7xl mx-auto px-8 sm:px-12 lg:px-16 pt-8 pb-12">
+          <div className="max-w-7xl mx-auto px-8 sm:px-12 lg:px-16 pt-8 pb-12 space-y-8">
             {/* SHOP ALL Section */}
-            <div className="mb-8">
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between">
                 <button
                   onClick={() => handleCollectionClick('all-products')}
-                  className="group flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg cursor-pointer"
+                  className="group w-full flex justify-between items-center gap-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg cursor-pointer"
                 >
                   <h2
                     className="font-bold text-black uppercase group-hover:text-gray-600 transition-colors duration-300"
@@ -273,7 +272,7 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
                   <ArrowRight className="h-5 w-5 text-black group-hover:translate-x-1 transition-transform duration-300" />
                 </button>
               </div>
-            </div>
+              <div className='border border-gray' />
 
             {/* Mega Menu Grid */}
             <div className="grid grid-cols-5 gap-16 mb-8">
