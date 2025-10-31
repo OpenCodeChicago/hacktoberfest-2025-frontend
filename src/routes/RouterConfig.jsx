@@ -31,10 +31,11 @@ const CollectionsPage = lazy(
 
 const Register = lazy(() => import('../pages/Register'));
 const Login = lazy(() => import('../pages/Login'));
-const Profile = lazy(() => import('../pages/Profile'));
 const Checkout = lazy(() => import('../pages/Checkout'));
 
 const NotFound = lazy(() => import('../pages/PageNotFound/NotFound'));
+
+const UserProfile=lazy(()=>import('../components/UserProfile/UserProfile'))
 
 // Router configuration
 export const RouterConfig = () =>
@@ -51,7 +52,7 @@ export const RouterConfig = () =>
         <Route path="products/:id" element={<ProductPage />} />
         
         {/* Example protected routes */}
-        <Route path="profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+        <Route path="profile" element={<PrivateRoute><UserProfile /></PrivateRoute>} />
         <Route path="checkout" element={<PrivateRoute><Checkout /></PrivateRoute>} />
 
         <Route path="garage-sale" element={<GarageSale />} />
