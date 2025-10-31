@@ -1,4 +1,3 @@
-import { useEffect, useState, useCallback, useRef, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../../store/productSlice';
 import ProductGrid from './ProductGrid';
@@ -7,6 +6,7 @@ import ProductSkeleton from './ProductSkeleton';
 import FilterPanel from './FilterPanel/FilterPanel';
 import RecentlyViewed from '../RecentlyViewed';
 import SEO from '../SEO';
+import { useEffect, useState, useCallback, useRef, useMemo } from 'react';
 
 /**
  * ProductList - reusable component to render product lists
