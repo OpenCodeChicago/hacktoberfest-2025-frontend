@@ -1,9 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 import { logout } from '../../store/authSlice';
 import Loader from '../../components/Loader';
 import { getDisplayName, getDisplayEmail } from '../../utils/authHelpers';
-// import { logout } from '../../store/authSlice';
 
 const UserProfile = () => {
   const dispatch = useDispatch();
@@ -12,7 +12,9 @@ const UserProfile = () => {
   const email = getDisplayEmail(user);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-  if (!isAuthenticated) return <Loader />;
+  // redirect if not authenticated
+  if (!isAuthenticated) return <Navigate to="/login" replace />;
+
   return (
     <div className=" w-full min-h-screen flex flex-col items-center justify-normal gap-y-10 py-7 px-20 sm:px-50 ">
       <div className="w-full flex items-center justify-between gap-2">

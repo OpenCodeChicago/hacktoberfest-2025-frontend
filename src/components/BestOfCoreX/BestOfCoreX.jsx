@@ -1,8 +1,8 @@
 // src/components/BestOfCoreX.jsx
-import { useEffect, useState, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchCollectionById } from "../../store/CollectionSlice";
-import ProductCard from "../Products/ProductCard";
+import { useEffect, useState, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCollectionById } from '../../store/CollectionSlice';
+import ProductCard from '../Products/ProductCard';
 
 // Reused Chevron icons (same as RecentlyViewed)
 const ChevronLeftIcon = (props) => (
@@ -14,7 +14,11 @@ const ChevronLeftIcon = (props) => (
     stroke="currentColor"
     {...props}
   >
-    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M15.75 19.5L8.25 12l7.5-7.5"
+    />
   </svg>
 );
 
@@ -27,23 +31,29 @@ const ChevronRightIcon = (props) => (
     stroke="currentColor"
     {...props}
   >
-    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M8.25 4.5l7.5 7.5-7.5 7.5"
+    />
   </svg>
 );
 
 export default function BestOfCoreX() {
   const dispatch = useDispatch();
-  const { products, loading, error } = useSelector((state) => state.collections);
+  const { products, loading, error } = useSelector(
+    (state) => state.collections
+  );
 
-  const [activeTab, setActiveTab] = useState("best-sellers");
+  const [activeTab, setActiveTab] = useState('best-sellers');
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsPerPage = 4;
 
   const tabs = [
-    { id: "best-sellers", label: "BEST SELLERS" },
-    { id: "protein-powder", label: "PROTEIN POWDER" },
-    { id: "weight-management", label: "WEIGHT MANAGEMENT" },
-    { id: "health-wellness", label: "HEALTH & WELLNESS SUPPLEMENTS" },
+    { id: 'best-sellers', label: 'BEST SELLERS' },
+    { id: 'protein-powder', label: 'PROTEIN POWDER' },
+    { id: 'weight-management', label: 'WEIGHT MANAGEMENT' },
+    { id: 'health-wellness', label: 'HEALTH & WELLNESS SUPPLEMENTS' },
   ];
 
   // Fetch products for active tab
@@ -53,7 +63,7 @@ export default function BestOfCoreX() {
         await dispatch(fetchCollectionById(activeTab)).unwrap();
         setCurrentIndex(0);
       } catch (err) {
-        console.error("Error fetching collection:", err);
+        console.error('Error fetching collection:', err);
       }
     };
     fetchData();
@@ -72,7 +82,10 @@ export default function BestOfCoreX() {
   const canGoNext = currentIndex < products.length - itemsPerPage;
   const canGoPrev = currentIndex > 0;
 
-  const visibleProducts = products.slice(currentIndex, currentIndex + itemsPerPage);
+  const visibleProducts = products.slice(
+    currentIndex,
+    currentIndex + itemsPerPage
+  );
 
   if (error) {
     return (
@@ -85,9 +98,9 @@ export default function BestOfCoreX() {
   }
 
   return (
-    <section className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 flex flex-col gap-10">
+    <section className="max-w-7xl mx-auto flex flex-col gap-[40px]">
       {/* Header */}
-      <h2 className="bg-[#F7FAFF] text-[32px] lg:text-[48px] uppercase text-center font-medium">
+      <h2 className="bg-[#F7FAFF] text-[32px] lg:text-[48px] uppercase section-title">
         <span className="text-[#000]">BEST </span>
         <span className="stroke-title">of</span>
         <span className="capitalize text-[#000]"> Core</span>
@@ -106,8 +119,8 @@ export default function BestOfCoreX() {
               className={`px-5 py-2 rounded-lg font-semibold uppercase tracking-wide transition-all duration-300
                 ${
                   activeTab === tab.id
-                    ? "bg-[#171717] text-white"
-                    : "bg-[#17171706] text-[#171717] hover:bg-[#17171710]"
+                    ? 'bg-[#171717] text-white'
+                    : 'bg-[#17171706] text-[#171717] hover:bg-[#17171710]'
                 }`}
             >
               {tab.label}
@@ -148,7 +161,9 @@ export default function BestOfCoreX() {
           <p className="text-gray-600">Loading products...</p>
         </div>
       ) : products.length === 0 ? (
-        <div className="text-center text-gray-700">No products found in this collection.</div>
+        <div className="text-center text-gray-700">
+          No products found in this collection.
+        </div>
       ) : (
         <div className="transition-all duration-500 ease-in-out">
           {/* Product Grid (reused RecentlyViewed style) */}

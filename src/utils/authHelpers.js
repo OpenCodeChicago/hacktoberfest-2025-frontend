@@ -30,7 +30,7 @@ export function getDisplayName(user) {
 }
 
 export function getDisplayEmail(user) {
-  if (!user) return 'User';
+  if (!user) return 'email not provided';
 
   return user?.email || 'email not provided';
 }
