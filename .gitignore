@@ -146,3 +146,4 @@ vite.config.ts.timestamp-*
 *.key
 *.crt
 
+package-lock.json
