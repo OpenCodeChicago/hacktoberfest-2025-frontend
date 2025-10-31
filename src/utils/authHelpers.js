@@ -25,11 +25,19 @@ export function normalizeUser(payload, fallback = {}) {
 
 export function getDisplayName(user) {
   if (!user) return 'User';
-  return user.name || user.fullName || user.username || 'User';
+
+  return user?.name || user?.fullName || user?.username || 'User';
+}
+
+export function getDisplayEmail(user) {
+  if (!user) return 'User';
+
+  return user?.email || 'email not provided';
 }
 
 export default {
   extractToken,
   normalizeUser,
   getDisplayName,
+  getDisplayEmail
 };
