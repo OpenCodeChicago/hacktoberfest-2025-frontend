@@ -1,6 +1,6 @@
 function WhyChoose() {
   return (
-    <section aria-labelledby="why-choose" className=" flex flex-col gap-[64px]">
+    <section aria-labelledby="why-choose" className="flex flex-col gap-[64px]">
       <h2
         id="why-choose"
         className="bg-[#F7FAFF] text-[32px] lg:text-[48px] uppercase section-title"

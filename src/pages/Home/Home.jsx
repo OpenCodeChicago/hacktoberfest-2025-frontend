@@ -1,4 +1,5 @@
 import ReviewsSection from '../../components/ReviewsSection';
+import BestOfCoreX from '../../components/BestOfCoreX/BestOfCoreX';
 import FeaturedProductImage from '../../components/NewProductsBanner/NewProductsBanner';
 import {
   CollectionSection,
@@ -33,6 +34,7 @@ export default function Home() {
         <WhyChoose />
         <SupplementForGoalsSection />
         <LogoCarousel />
+        <BestOfCoreX />
         <FeaturedProductImage
           imageUrl="/images/test-product-image.jpg"
           productId="69027765586b66c3d63ad0df"

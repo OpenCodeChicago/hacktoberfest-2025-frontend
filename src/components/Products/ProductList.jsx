@@ -22,11 +22,14 @@ export default function ProductList({
   seo = {},
   bannerImage = null,
   bannerAlt = '',
+  bannerImageMobile = null,
 }) {
   const dispatch = useDispatch();
-  const { products: allProducts, loading, error } = useSelector(
-    (state) => state.products
-  );
+  const {
+    products: allProducts,
+    loading,
+    error,
+  } = useSelector((state) => state.products);
 
   const observer = useRef();
   const [displayedCount, setDisplayedCount] = useState(12);
@@ -117,7 +120,9 @@ export default function ProductList({
         keywords={seo.keywords || 'products, supplements, corex'}
       />
 
-      <main className={`min-h-screen bg-[#F7FAFF] ${isFilterOpen ? 'relative' : ''}`}>
+      <main
+        className={`min-h-screen bg-[#F7FAFF] ${isFilterOpen ? 'relative' : ''}`}
+      >
         {isFilterOpen && (
           <div
             className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300"
@@ -130,6 +135,11 @@ export default function ProductList({
         {bannerImage && !bannerImageError ? (
           <div className="w-full mt-24">
             <picture>
+              {/* mobile-first source: use mobile banner for small viewports if provided */}
+              {bannerImageMobile && (
+                <source media="(max-width: 640px)" srcSet={bannerImageMobile} />
+              )}
+
               {String(bannerImage).toLowerCase().endsWith('.webp') && (
                 <source srcSet={bannerImage} type="image/webp" />
               )}
@@ -139,7 +149,7 @@ export default function ProductList({
                 alt={bannerAlt || `${title} banner`}
                 loading="lazy"
                 decoding="async"
-                className="w-full h-64 sm:h-96 object-cover"
+                className="w-full object-cover"
                 onError={() => setBannerImageError(true)}
               />
             </picture>
@@ -168,8 +178,18 @@ export default function ProductList({
             >
               <span className="hidden sm:inline">All Filters</span>
               <span className="sm:hidden">Filters</span>
-              <svg width="19" height="15" viewBox="0 0 19 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0.863281 10.7949H3.13601M3.13601 10.7949C3.13601 12.3012 4.35705 13.5222 5.86328 13.5222C7.36951 13.5222 8.59055 12.3012 8.59055 10.7949C8.59055 9.28865 7.36951 8.06765 5.86328 8.06765C4.35705 8.06765 3.13601 9.28865 3.13601 10.7949ZM15.8633 3.52219H18.136M15.8633 3.52219C15.8633 5.02842 14.6423 6.24947 13.136 6.24947C11.6297 6.24947 10.4087 5.02842 10.4087 3.52219C10.4087 2.01597 11.6297 0.794922 13.136 0.794922C14.6423 0.794922 15.8633 2.01597 15.8633 3.52219ZM11.3178 10.7949H18.136M0.863281 3.52219H7.68146" stroke="#0D1B2A" strokeLinecap="round" />
+              <svg
+                width="19"
+                height="15"
+                viewBox="0 0 19 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0.863281 10.7949H3.13601M3.13601 10.7949C3.13601 12.3012 4.35705 13.5222 5.86328 13.5222C7.36951 13.5222 8.59055 12.3012 8.59055 10.7949C8.59055 9.28865 7.36951 8.06765 5.86328 8.06765C4.35705 8.06765 3.13601 9.28865 3.13601 10.7949ZM15.8633 3.52219H18.136M15.8633 3.52219C15.8633 5.02842 14.6423 6.24947 13.136 6.24947C11.6297 6.24947 10.4087 5.02842 10.4087 3.52219C10.4087 2.01597 11.6297 0.794922 13.136 0.794922C14.6423 0.794922 15.8633 2.01597 15.8633 3.52219ZM11.3178 10.7949H18.136M0.863281 3.52219H7.68146"
+                  stroke="#0D1B2A"
+                  strokeLinecap="round"
+                />
               </svg>
             </button>
 
@@ -185,14 +205,21 @@ export default function ProductList({
 
                   let sortKey = 'feature';
                   if (field === 'title' && order === 'asc') sortKey = 'a-z';
-                  else if (field === 'title' && order === 'desc') sortKey = 'z-a';
-                  else if (field === 'price' && order === 'asc') sortKey = 'price_asc';
-                  else if (field === 'price' && order === 'desc') sortKey = 'price_desc';
-                  else if (field === 'rating' && order === 'asc') sortKey = 'rating_asc';
-                  else if (field === 'rating' && order === 'desc') sortKey = 'rating_desc';
+                  else if (field === 'title' && order === 'desc')
+                    sortKey = 'z-a';
+                  else if (field === 'price' && order === 'asc')
+                    sortKey = 'price_asc';
+                  else if (field === 'price' && order === 'desc')
+                    sortKey = 'price_desc';
+                  else if (field === 'rating' && order === 'asc')
+                    sortKey = 'rating_asc';
+                  else if (field === 'rating' && order === 'desc')
+                    sortKey = 'rating_desc';
                   else sortKey = 'feature';
 
-                  dispatch(fetchProducts({ page: 1, limit: 1000, sort: sortKey }));
+                  dispatch(
+                    fetchProducts({ page: 1, limit: 1000, sort: sortKey })
+                  );
                 }}
               />
             </div>
@@ -206,13 +233,32 @@ export default function ProductList({
               {error && (
                 <div className="bg-red-50 border border-red-200 rounded-2xl p-8 text-center">
                   <div className="text-red-600 mb-4">
-                    <svg className="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.728-.833-2.498 0L4.316 15.5c-.77.833.192 2.5 1.732 2.5z" />
+                    <svg
+                      className="w-16 h-16 mx-auto mb-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.728-.833-2.498 0L4.316 15.5c-.77.833.192 2.5 1.732 2.5z"
+                      />
                     </svg>
                   </div>
-                  <h3 className="text-xl font-bold text-red-800 mb-3">Unable to Load Products</h3>
+                  <h3 className="text-xl font-bold text-red-800 mb-3">
+                    Unable to Load Products
+                  </h3>
                   <p className="text-red-600 mb-6">{error}</p>
-                  <button onClick={() => dispatch(fetchProducts({ page: 1, limit: 1000 }))} className="bg-red-600 text-white px-8 py-3 rounded-full hover:bg-red-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105">Try Again</button>
+                  <button
+                    onClick={() =>
+                      dispatch(fetchProducts({ page: 1, limit: 1000 }))
+                    }
+                    className="bg-red-600 text-white px-8 py-3 rounded-full hover:bg-red-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:scale-105"
+                  >
+                    Try Again
+                  </button>
                 </div>
               )}
 
@@ -220,7 +266,10 @@ export default function ProductList({
 
               {!loading && !error && displayedProducts.length > 0 && (
                 <>
-                  <ProductGrid products={displayedProducts} lastProductElementRef={lastProductElementRef} />
+                  <ProductGrid
+                    products={displayedProducts}
+                    lastProductElementRef={lastProductElementRef}
+                  />
                   {hasMoreProducts && (
                     <div className="flex justify-center mt-8">
                       <div className="text-gray-500">Loading more...</div>
@@ -232,12 +281,26 @@ export default function ProductList({
               {!loading && !error && displayedProducts.length === 0 && (
                 <div className="bg-white rounded-2xl shadow-sm p-16 text-center border border-gray-100">
                   <div className="text-gray-400 mb-6">
-                    <svg className="w-20 h-20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                    <svg
+                      className="w-20 h-20 mx-auto"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.5}
+                        d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
+                      />
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-800 mb-3">No Products Found</h3>
-                  <p className="text-gray-600 mb-8 max-w-md mx-auto">We couldn't find any products matching your filters.</p>
+                  <h3 className="text-2xl font-bold text-gray-800 mb-3">
+                    No Products Found
+                  </h3>
+                  <p className="text-gray-600 mb-8 max-w-md mx-auto">
+                    We couldn't find any products matching your filters.
+                  </p>
                 </div>
               )}
             </div>
