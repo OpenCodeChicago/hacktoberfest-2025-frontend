@@ -1,12 +1,13 @@
 export const menuColumns = [
   {
     id: 'shop-all',
-    title: 'SHOP ALL',
+    title: 'Shop All',
     items: [
       {
         id: 'all-products',
         slug: 'all-products',
         displayName: 'All products',
+        link: '/products',
         index: 0,
       },
       {
@@ -19,6 +20,7 @@ export const menuColumns = [
         id: 'garage-sale',
         slug: 'garage-sale',
         displayName: 'Garage Sale',
+        link: '/garage-sale',
         index: 2,
       },
       {
@@ -31,7 +33,7 @@ export const menuColumns = [
   },
   {
     id: 'sport-nutrition',
-    title: 'SPORT NUTRITION',
+    title: 'Sport Nutrition',
     items: [
       {
         id: 'pre-workout',
@@ -61,7 +63,7 @@ export const menuColumns = [
   },
   {
     id: 'protein',
-    title: 'PROTEIN',
+    title: 'Protein',
     items: [
       {
         id: 'lactose-free',
@@ -91,7 +93,7 @@ export const menuColumns = [
   },
   {
     id: 'amino-acids',
-    title: 'AMINO ACIDS',
+    title: 'Amino Acids',
     items: [
       { id: 'bcaas', slug: 'bcaas', displayName: 'BCAAs', index: 12 },
       { id: 'creatine', slug: 'creatine', displayName: 'Creatine', index: 13 },
@@ -106,7 +108,7 @@ export const menuColumns = [
   },
   {
     id: 'health-wellness',
-    title: 'HEALTH & WELLNESS',
+    title: 'Health & Wellness',
     items: [
       {
         id: 'multivitamins',
@@ -130,7 +132,7 @@ export const menuColumns = [
   },
   {
     id: 'weight-management',
-    title: 'WEIGHT MANAGEMENT',
+    title: 'Weight Management',
     items: [
       {
         id: 'meal-replacement',
@@ -154,7 +156,7 @@ export const menuColumns = [
   },
   {
     id: 'hormone-health',
-    title: 'HORMONE HEALTH',
+    title: 'Hormone Health',
     items: [
       {
         id: 'testosterone-booster',
@@ -166,7 +168,7 @@ export const menuColumns = [
   },
   {
     id: 'shop-by-goal',
-    title: 'SHOP BY GOAL',
+    title: 'Shop by Goal',
     items: [
       {
         id: 'build-mass',
@@ -196,7 +198,7 @@ export const menuColumns = [
   },
   {
     id: 'apparel-gear-bottom',
-    title: 'APPAREL & GEAR',
+    title: 'Apparel & Gear',
     items: [
       { id: 'apparel', slug: 'apparel', displayName: 'Apparel', index: 27 },
       { id: 'gear', slug: 'gear', displayName: 'Gear', index: 28 },
