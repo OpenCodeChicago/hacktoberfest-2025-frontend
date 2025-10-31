@@ -1,4 +1,5 @@
 import ReviewsSection from '../../components/ReviewsSection';
+import BestOfCoreX from '../../components/BestOfCoreX/BestOfCoreX';
 import FeaturedProductImage from '../../components/NewProductsBanner/NewProductsBanner';
 import {
   CollectionSection,
@@ -8,7 +9,6 @@ import {
   WhyChoose,
   SupplementForGoalsSection,
 } from '../../components';
-import BestOfCoreX from '../../components/BestOfCoreX';
 
 export default function Home() {
   return (

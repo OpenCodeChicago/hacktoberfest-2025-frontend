@@ -3,8 +3,8 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion';
-import { fetchCollectionById } from '../store/CollectionSlice';
-import CoreProductCard from './CoreProductCard';
+import { fetchCollectionById } from '../../store/CollectionSlice';
+import CoreProductCard from '../CoreProductCard';
 
 const BestOfCoreX = () => {
   const dispatch = useDispatch();
@@ -108,30 +108,19 @@ const BestOfCoreX = () => {
   }
 
   return (
-    <section className="px-4 py-16 max-w-7xl mx-auto">
+    <section className="max-w-7xl mx-auto flex flex-col gap-[40px]">
       {/* Header */}
-      <div className="text-center mb-12">
-        <h2 className="text-4xl  sm:text-5xl md:text-7xl font-bold font-montserrat text-[#010409] uppercase tracking-wide mb-6 md:mb-8">
-          <div className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-4 md:gap-x-4 gap-y-2">
-            <span>BEST</span>
-            <span className="text-[#f7faff] [text-shadow:-0.5px_-0.5px_0_#010409,0.5px_-0.5px_0_#010409,-0.5px_0.5px_0_#010409,0.5px_0.5px_0_#010409] md:[text-shadow:-1px_-1px_0_#010409,1px_-1px_0_#010409,-1px_1px_0_#010409,1px_1px_0_#010409] mx-2 sm:mx-3 md:mx-4">
-              OF
-            </span>
-            <span className="inline-flex items-baseline">
-              C<span className="lowercase">ORE</span>
-              <span className="relative text-[#f31f22] ml-0.5 sm:ml-0.5 md:ml-1">
-                <span className="absolute inset-0 text-transparent [text-shadow:-0.5px_-0.5px_0_#010409,0.5px_-0.5px_0_#010409,-0.5px_0.5px_0_#010409,0.5px_0.5px_0_#010409] md:[text-shadow:-1px_-1px_0_#010409,1px_-1px_0_#010409,-1px_1px_0_#010409,1px_1px_0_#010409]">
-                  X
-                </span>
-                <span className="relative">X</span>
-              </span>
-            </span>
-            <span className="normal-case ml-2 sm:ml-3 md:ml-5">Nutrition</span>
-          </div>
+      <div className="flex flex-col gap-[40px]">
+        <h2 className="bg-[#F7FAFF] text-[32px] lg:text-[48px] uppercase section-title">
+          <span className="text-[#000]">BEST </span>
+          <span className="stroke-title">of</span>
+          <span className="capitalize text-[#000]"> Core</span>
+          <span className="text-red-500">X</span>
+          <span className="text-[#000]"> Nutrition</span>
         </h2>
 
         {/* Navigation Tabs and Arrows */}
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex justify-between items-center">
           {/* Navigation Tabs */}
           <nav className="flex px-4 md:px-0 w-full justify-start">
             <div className="w-full max-w-6xl">
@@ -160,7 +149,7 @@ const BestOfCoreX = () => {
                 {tabs.map((tab) => (
                   <button
                     key={tab.id}
-                    className={`px-4 py-3 text-sm font-semibold uppercase tracking-wide transition-all duration-300 rounded-lg whitespace-nowrap flex-1 text-center ${
+                    className={`px-4 py-3 text-sm font-semibold uppercase tracking-wide transition-all duration-300 rounded-lg whitespace-nowrap text-center ${
                       activeTab === tab.id
                         ? 'bg-[#171717] text-white'
                         : 'bg-[#17171706] text-[#171717] hover:bg-[#1717170F]'
