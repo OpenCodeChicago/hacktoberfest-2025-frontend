@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 const MenuItem = ({
   collectionName,
   displayName,
+  link,
   index,
   menuItemsRef,
   focusedIndex,
@@ -10,7 +11,7 @@ const MenuItem = ({
 }) => (
   <NavLink
     ref={(el) => (menuItemsRef.current[index] = el)}
-    to={`/collections/${collectionName}`}
+    to={link || `/collections/${collectionName}`}
     onClick={handleCollectionClick}
     className="text-black text-left hover:text-gray-600 transition-all duration-300 ease-in-out relative group focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg px-0 cursor-pointer link-underline block"
     style={{
@@ -51,6 +52,7 @@ const MenuColumn = ({
             <MenuItem
               collectionName={item.slug}
               displayName={item.displayName}
+              link={item.link}
               index={item.index}
               menuItemsRef={menuItemsRef}
               focusedIndex={focusedIndex}

@@ -238,7 +238,7 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
             {/* SHOP ALL Section */}
             <div className="flex items-center justify-between">
               <NavLink
-                to="/collections/all-products"
+                to="/products"
                 onClick={handleCollectionClick}
                 className="group w-full flex justify-between items-center gap-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg cursor-pointer"
               >

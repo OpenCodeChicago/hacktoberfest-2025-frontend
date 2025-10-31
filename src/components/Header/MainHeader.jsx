@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import SearchBox from '../Search/SearchBox';
 import TopHeader from '../TopHeader/TopHeader';
 import ShopMenu from '../ShopMenu';
-import { Menu, X, ChevronDown, Search, Heart, User } from 'lucide-react';
+import MobileMenu from './MobileMenu';
+import { Menu, X, Search, Heart } from 'lucide-react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import WishListScreen from '../WishList/WishListScreen';
 import CartIcon from '../CartComponent/CartIcon';
 import CartDrawer from '../CartComponent/CartDrawer';
@@ -20,8 +20,6 @@ export default function Header() {
   const [wishListOpen, setWishListOpen] = useState(false);
 
   const wishListData = useSelector((state) => state.wishList);
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const navigate = useNavigate();
 
   // Handle shop button click
   const handleShopClick = () => {
@@ -45,7 +43,7 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               <Link to="/">
                 <img
                   src="/icons/official-logo-core-x.svg"
@@ -146,199 +144,13 @@ export default function Header() {
             </div>
           </div>
         </div>
-
-        {/* Mobile Menu */}
-        {mobileOpen && (
-          <div className="md:hidden bg-[#F7FAFF] shadow-md animate-fadeIn">
-            <nav className="flex flex-col space-y-2 p-4">
-              <button
-                onClick={() => setShopOpen(!shopOpen)}
-                className="flex items-center justify-between text-gray-700 hover:text-black transition"
-              >
-                <span>Shop</span>
-                <ChevronDown
-                  className={`h-4 w-4 transition-transform duration-300 ${
-                    shopOpen ? 'rotate-180' : 'rotate-0'
-                  }`}
-                />
-              </button>
-
-              {shopOpen && (
-                <div className="flex flex-col space-y-2 pl-4">
-                  {['Category 1', 'Category 2', 'Category 3'].map((cat) => (
-                    <a
-                      key={cat}
-                      href="#"
-                      className="text-gray-600 hover:text-black transition"
-                    >
-                      {cat}
-                    </a>
-                  ))}
-                </div>
-              )}
-
-              <Link
-                to="/garage-sale"
-                className="text-gray-700 hover:text-black transition"
-              >
-                Garage Sale
-              </Link>
-
-              <Link
-                to="/products"
-                className="text-gray-700 hover:text-black transition"
-              >
-                All Products
-              </Link>
-
-              <Link
-                to="/about-corex"
-                className="text-gray-700 hover:text-black transition"
-              >
-                About CoreX
-              </Link>
-            </nav>
-          </div>
-        )}
       </header>
 
-      {/* Overlay for Mobile Menu */}
-      <div
-        className={`fixed inset-0 bg-black/30 backdrop-blur-sm transition-opacity duration-300 ${
-          mobileOpen
-            ? 'opacity-100 pointer-events-auto'
-            : 'opacity-0 pointer-events-none'
-        } z-998`}
+      <MobileMenu
+        mobileOpen={mobileOpen}
+        setMobileOpen={setMobileOpen}
+        mobileMenuRef={mobileMenuRef}
       />
-
-      {/* Mobile Menu Drawer */}
-      <div
-        ref={mobileMenuRef}
-        className={`fixed top-0 right-0 w-full sm:w-[280px] h-full bg-white shadow-2xl border-l border-gray-200 z-999 transform transition-all duration-300 ease-in-out ${
-          mobileOpen ? 'translate-x-0 scale-100' : 'translate-x-full scale-95'
-        } flex flex-col`}
-      >
-        {/* Mobile Menu Header */}
-        <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
-          <h2 className="font-bold text-lg text-[#023E8A] tracking-wide">
-            MENU
-          </h2>
-          <button
-            onClick={() => setMobileOpen(false)}
-            className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 cursor-pointer"
-            aria-label="Close menu"
-          >
-            <X className="w-5 h-5 text-gray-600" />
-          </button>
-        </div>
-
-        {/* Mobile Menu Items */}
-        <nav className="flex-1 px-6 py-4 flex flex-col space-y-4">
-          <div>
-            <button
-              onClick={() => setShopOpen(!shopOpen)}
-              className="flex items-center justify-between w-full text-gray-700 hover:text-black font-medium"
-            >
-              Shop
-              <ChevronDown
-                className={`h-4 w-4 transition-transform duration-200 ${
-                  shopOpen ? 'rotate-180' : ''
-                }`}
-              />
-            </button>
-            {shopOpen && (
-              <div className="mt-2 pl-4 space-y-2">
-                <Link
-                  to="/category1"
-                  className="block text-gray-600 hover:text-black"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  Category 1
-                </Link>
-                <Link
-                  to="/category2"
-                  className="block text-gray-600 hover:text-black"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  Category 2
-                </Link>
-                <Link
-                  to="/category3"
-                  className="block text-gray-600 hover:text-black"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  Category 3
-                </Link>
-              </div>
-            )}
-          </div>
-          <Link
-            to="/garage-sale"
-            className="text-gray-700 hover:text-black font-medium"
-            onClick={() => setMobileOpen(false)}
-          >
-            Garage Sale
-          </Link>
-          <Link
-            to="/products"
-            className="text-gray-700 hover:text-black font-medium"
-            onClick={() => setMobileOpen(false)}
-          >
-            All Products
-          </Link>
-          <Link
-            to="/about-corex"
-            className="text-gray-700 hover:text-black font-medium"
-            onClick={() => setMobileOpen(false)}
-          >
-            About CoreX
-          </Link>
-        </nav>
-
-        {/* Mobile Menu Icons */}
-        <div className="px-6 py-4 border-t border-gray-200">
-          <div className="flex flex-col space-y-4">
-            <a
-              href="#"
-              className="flex items-center space-x-2 text-gray-700 hover:text-black"
-              onClick={() => setMobileOpen(false)}
-            >
-              <Heart className="h-5 w-5" />
-              <span>Wishlist</span>
-            </a>
-            <button
-              className="flex items-center space-x-2 text-gray-700 hover:text-black"
-              onClick={() => {
-                setMobileOpen(false);
-                if (!isAuthenticated) navigate('/login');
-                else navigate('/profile');
-              }}
-            >
-              <User className="h-5 w-5" />
-              <span>Account</span>
-            </button>
-            <div
-              role="button"
-              tabIndex={0}
-              className="flex items-center space-x-2 text-gray-700 hover:text-black cursor-pointer"
-              onClick={() => {
-                setMobileOpen(false);
-                setCartOpen(true);
-              }}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  setMobileOpen(false);
-                  setCartOpen(true);
-                }
-              }}
-            >
-              <CartIcon onOpen={() => setCartOpen(true)} />
-              <span>Cart</span>
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* Search Drawer */}
       {wishListOpen && (

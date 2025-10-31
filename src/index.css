@@ -17,6 +17,8 @@
   --color-white-back: #f7faff;
   --color-black: #010409;
   --color-gray: #89949f;
+  --color-dark-blue-text: #042650;
+  --color-hover: #1054ab;
 
   --animate-fade-slide-up: fade-slide-up 0.8s ease-out 0.3s both;
 
@@ -167,6 +169,22 @@
   animation: slide-up 0.5s ease-in forwards;
   opacity: 1;
   transform: translateY(0) scaleY(1);
+}
+
+@keyframes slide-in-right {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slideInRight {
+  animation: slide-in-right 0.3s ease-out;
 }
 
 /* ==========================
