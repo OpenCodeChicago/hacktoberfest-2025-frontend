@@ -85,20 +85,20 @@ const MobileMenu = ({ mobileOpen, setMobileOpen, mobileMenuRef }) => {
         {/* Mobile Menu Icons */}
         <div className="px-6 py-4 border-t border-gray-200">
           <div className="flex flex-col space-y-4">
-            <a
-              href="#"
+            <Link
+              to="/wishlist"
               className="flex items-center space-x-2 text-gray-700 hover:text-black cursor-pointer"
               onClick={handleCloseMenu}
             >
               <span>Wishlist</span>
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/account"
               className="flex items-center space-x-2 text-gray-700 hover:text-black cursor-pointer"
               onClick={handleCloseMenu}
             >
               <span>Account</span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
