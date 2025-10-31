@@ -3,7 +3,7 @@ import SocialIcons from '../ui/SocialIcons/SocialIcons';
 
 export default function TopHeader() {
   const messages = [
-    <p>
+    <>
       Buy 1 get 1{' '}
       <span className=" text-white relative">
         50% off
@@ -11,8 +11,8 @@ export default function TopHeader() {
           <img src="/icons/discount-line.svg" alt="" />
         </span>
       </span>
-    </p>,
-    <p>
+    </>,
+    <>
       <span className=" text-white relative">
         Free shipping
         <span className="absolute bottom-[-9px] left-1/2 -translate-x-1/2 w-[80%] flex justify-center">
@@ -20,7 +20,7 @@ export default function TopHeader() {
         </span>
       </span>{' '}
       on orders over $110
-    </p>,
+    </>,
   ];
 
   const [index, setIndex] = useState(0);
