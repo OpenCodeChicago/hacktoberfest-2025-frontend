@@ -226,8 +226,8 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
               : 'animate-slide-down'
           }`}
           style={{
-            top: '104px',
-            height: 'calc(100vh - 104px)',
+            top: '106px',
+            height: 'calc(100vh - 106px)',
             backgroundColor: '#F7FAFF',
             fontFamily: 'Inter, sans-serif',
           }}

@@ -20,6 +20,11 @@
   --color-dark-blue-text: #042650;
   --color-hover: #1054ab;
 
+  /* Animation Variables */
+  --slide-distance: -10px;
+  --slide-duration: 0.3s;
+  --slide-timing: ease-out;
+
   --animate-fade-slide-up: fade-slide-up 0.8s ease-out 0.3s both;
 
   @keyframes fade-slide-up {
@@ -138,37 +143,37 @@
 @keyframes slide-down {
   0% {
     opacity: 0;
-    transform: translateY(-20px) scaleY(0.95);
+    transform: translateY(var(--slide-distance));
   }
 
   100% {
     opacity: 1;
-    transform: translateY(0) scaleY(1);
+    transform: translateY(0);
   }
 }
 
 @keyframes slide-up {
   0% {
     opacity: 1;
-    transform: translateY(0) scaleY(1);
+    transform: translateY(0);
   }
 
   100% {
     opacity: 0;
-    transform: translateY(-20px) scaleY(0.95);
+    transform: translateY(var(--slide-distance));
   }
 }
 
 .animate-slide-down {
-  animation: slide-down 0.5s ease-out forwards;
+  animation: slide-down var(--slide-duration) var(--slide-timing) forwards;
   opacity: 0;
-  transform: translateY(-20px) scaleY(0.95);
+  transform: translateY(var(--slide-distance));
 }
 
 .animate-slide-up {
-  animation: slide-up 0.5s ease-in forwards;
+  animation: slide-up var(--slide-duration) ease-in forwards;
   opacity: 1;
-  transform: translateY(0) scaleY(1);
+  transform: translateY(0);
 }
 
 @keyframes slide-in-right {
