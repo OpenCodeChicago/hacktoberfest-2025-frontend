@@ -1,3 +1,5 @@
+import ReviewsSection from '../../components/ReviewsSection';
+import BestOfCoreX from '../../components/BestOfCoreX/BestOfCoreX';
 import FeaturedProductImage from '../../components/NewProductsBanner/NewProductsBanner';
 import {
   CollectionSection,
@@ -7,7 +9,6 @@ import {
   WhyChoose,
   SupplementForGoalsSection,
 } from '../../components';
-import ReviewsSection from '../../components/ReviewsSection';
 
 export default function Home() {
   return (
@@ -25,14 +26,18 @@ export default function Home() {
         keywords="Hacktoberfest 2025, CoreX Nutrition, Open Source, Contributions"
       />
 
-      <main id="main-content" className="min-h-screen bg-gray-50 -mt-16 pt-16">
+      <main
+        id="main-content"
+        className="min-h-screen bg-[#F7FAFF] -mt-16 pt-16 flex flex-col gap-[96px]"
+      >
         <HeroSection />
         <WhyChoose />
         <SupplementForGoalsSection />
         <LogoCarousel />
+        <BestOfCoreX />
         <FeaturedProductImage
           imageUrl="/images/test-product-image.jpg"
-          productId="68e7dc29bdf0349b226db12a"
+          productId="69027765586b66c3d63ad0df"
           alt="Featured Product - CoreX Whey Protein"
         />
         <CollectionSection />

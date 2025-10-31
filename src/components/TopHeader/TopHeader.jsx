@@ -5,13 +5,19 @@ export default function TopHeader() {
   const messages = [
     <>
       Buy 1 get 1{' '}
-      <span className="underline decoration-red-500 decoration-2 underline-offset-4 text-white">
+      <span className=" text-white relative">
         50% off
+        <span className="absolute bottom-[-4px] left-0 right-0 w-full">
+          <img src="/icons/discount-line.svg" alt="" />
+        </span>
       </span>
     </>,
     <>
-      <span className="underline decoration-red-500 decoration-2 underline-offset-4 text-white">
+      <span className=" text-white relative">
         Free shipping
+        <span className="absolute bottom-[-9px] left-1/2 -translate-x-1/2 w-[80%] flex justify-center">
+          <img src="/icons/free-shipping-line.svg" alt="" />
+        </span>
       </span>{' '}
       on orders over $110
     </>,

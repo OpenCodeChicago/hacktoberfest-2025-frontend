@@ -1,5 +1,5 @@
 import ProductList from '../../components/Products/ProductList';
-import garageSaleImage from '../../assets/garagesale/garagesale-banner.webp';
+import garageSaleBanner from '/images/garage-sale-banner.png';
 
 export default function GarageSale() {
   // filterFn returns true when product is on sale
@@ -18,7 +18,7 @@ export default function GarageSale() {
           keywords:
             'garage sale, deals, supplements, CoreX, discount, sale, protein powder, pre-workout, fitness products',
         }}
-        bannerImage={garageSaleImage}
+        bannerImage={garageSaleBanner}
         bannerAlt="Garage Sale promotional banner"
       />
     </>

@@ -1,68 +1,88 @@
-import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { Link } from "react-router-dom";
 
 export default function NotFound() {
-  useEffect(() => {
-    // Dynamically add Google Font
-    const link = document.createElement('link');
-    link.href =
-      'https://fonts.googleapis.com/css2?family=Rubik+Dirt&display=swap';
-    link.rel = 'stylesheet';
-    document.head.appendChild(link);
-  }, []);
-  const isMobile = window.innerWidth < 768;
-
   return (
-    <div
-      className="relative min-h-screen bg-cover bg-center md:flex justify-center items-center text-white text-center px-4"
-      style={{
-        backgroundImage: isMobile
-          ? "url('/images/pnf-mob.png')" // mobile image
-          : "url('/images/notFoundLandscape.png')", // desktop image
-      }}
-    >
-      <div className="md:w-1/2 max-w-2xl px-12 pt-30 md:pt-0">
-        {/* 404 text */}
-        <h1 className="text-9xl md:text-9xl font-extrabold tracking-widest">
-          404
-        </h1>
+    <main className="relative min-h-screen flex md:items-start md:justify-start justify-center items-center px-10 md:py-5 bg-cover bg-center text-white">
 
-        {/* Subtitle */}
-        <h2
-          className="text-4xl md:text-7xl mt-4 "
-          style={{ fontFamily: "'Rubik Dirt', cursive" }}
+      {/* Background Images */}
+      <picture>
+        {/* Desktop Background */}
+        <source media="(min-width: 768px)" srcSet="/images/notFoundLandscape.png" />
+        {/* Mobile Background */}
+        <img
+          src="/images/pnf-mob.png"
+          alt="Background"
+          className="absolute inset-0 w-full h-full object-cover"
+          loading="lazy"
+        />
+      </picture>
+
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/40"></div>
+
+      {/* Main Content */}
+      <section className="relative z-10 flex flex-col justify-center items-center text-center px-6 md:px-12 py-6 max-w-3xl">
+
+        {/* 404 SVG */}
+        <picture>
+          <source media="(min-width: 768px)" srcSet="/assets/404-desktop.svg" />
+          <img
+            src="/assets/404-mobile.svg"
+            alt="404 Illustration"
+            className="w-[280px] md:w-[400px] mb-4"
+            loading="lazy"
+          />
+        </picture>
+
+        {/* Not Found SVG */}
+        <picture>
+          <source media="(min-width: 768px)" srcSet="/assets/notfound-desktop.svg" />
+          <img
+            src="/assets/notfound-mobile.svg"
+            alt="Not Found Text"
+            className="w-[200px] md:w-[300px] mb-6"
+            loading="lazy"
+          />
+        </picture>
+
+        {/* Text */}
+        <p
+          className="uppercase text-base md:text-lg font-bold tracking-wide text-white"
+          style={{ fontFamily: "var(--font-inter)" }}
         >
-          NOT FOUND
-        </h2>
-
-        {/* Description */}
-        <p className="uppercase mt-6  font-semibold">
           Oops! This page wandered off the workout plan.
         </p>
 
-        <p className="mt-3 text-gray-400 leading-relaxed">
-          Looks like the page you're looking for doesn't exist. But don't worry
-          — your fitness journey doesn't stop here. Fuel your goals with CoreX
-          supplements.
+        <p
+          className="mt-4 md:text-sm text-xs leading-relaxed max-w-xl text-white"
+          style={{ fontFamily: "var(--font-inter)" }}
+        >
+          Looks like the page you’re looking for doesn’t exist. But don’t worry — your fitness journey doesn’t stop here.
+          Fuel your goals with{" "}
+          <span className="text-red-500 font-semibold">CoreX</span> supplements.
         </p>
 
         {/* Buttons */}
-        <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="mt-10 flex flex-col sm:flex-row gap-4 text-base">
+          {/* Filled → bordered on hover */}
           <Link
             to="/"
-            className="bg-white text-black px-6 py-3 rounded-2xl font-semibold hover:bg-red-600 hover:text-white transition"
+            className="bg-[#F7FAFF] text-[#010409] font-medium uppercase text-sm md:text-base px-10 py-3 rounded-xl border border-[#F7FAFF] transition-all duration-300 hover:bg-transparent hover:text-white shadow-md"
+            style={{ fontFamily: "var(--font-inter)" }}
           >
             GO TO HOME PAGE
           </Link>
 
+          {/* Bordered → filled on hover */}
           <Link
             to="/products"
-            className="border border-white px-6 py-3 rounded-2xl font-semibold hover:bg-red-600 hover:border-red-600 transition"
+            className="border border-[#F7FAFF] text-white font-medium uppercase text-sm md:text-base px-10 py-3 rounded-xl transition-all duration-300 hover:bg-[#F7FAFF] hover:text-[#010409] shadow-md"
+            style={{ fontFamily: "var(--font-inter)" }}
           >
             CONTINUE SHOPPING
           </Link>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

@@ -178,7 +178,8 @@ export default function CollectionPage() {
     return collection?.image || null;
   };
 
-  const imageUrl = getValidatedImageUrl();
+  // Ensure a default banner image from public/ is used when no collection image exists
+  const imageUrl = getValidatedImageUrl() || '/images/collections-default.jpg';
 
   if (error) {
     return (
@@ -243,23 +244,15 @@ export default function CollectionPage() {
 
         {/* Collection Banner */}
         <section
-          className={`collections-banner-div text-white py-20 ${
-            imageUrl
-              ? ''
-              : 'bg-gradient-to-br from-blue-900 via-blue-800 to-purple-900'
-          }`}
-          style={
-            imageUrl
-              ? {
-                  '--bg-image': `url(${imageUrl})`,
-                  backgroundImage: `url(${imageUrl})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundColor: '#1e293b',
-                }
-              : undefined
-          }
+          className="collections-banner-div text-white py-20"
+          style={{
+            '--bg-image': `url(${imageUrl})`,
+            backgroundImage: `url(${imageUrl})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            backgroundColor: '#1e293b',
+          }}
         >
           <motion.div
             initial={{ opacity: 0, y: 20 }}

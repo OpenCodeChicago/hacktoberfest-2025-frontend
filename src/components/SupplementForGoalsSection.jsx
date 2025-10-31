@@ -1,4 +1,6 @@
 import { useRef } from 'react';
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
+import './SupplementForGoalsSection.css';
 import {
   aminoAcids,
   intraWorkout,
@@ -6,8 +8,6 @@ import {
   proteinPowder,
   weightManagement,
 } from '../assets';
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
-import './SupplementForGoalsSection.css';
 
 export const goalCards = [
   {
@@ -56,10 +56,13 @@ export default function SupplementForGoalsSection() {
     <section
       id="goals"
       ref={goalsRef}
-      className="px-10 py-24 flex flex-col gap-16"
+      className="px-10  flex flex-col gap-16"
       aria-labelledby="goals-heading"
     >
-      <h2 id="goals-heading" className="section-title">
+      <h2
+        id="goals-heading"
+        className="section-title text-[32px] lg:text-[48px]"
+      >
         <span className="text-[#000]">Supplements for </span>
         <span className="text-[#f7faff] stroke-title">every</span>{' '}
         <span className="text-[#000]">goal</span>

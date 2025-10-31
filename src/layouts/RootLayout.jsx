@@ -16,7 +16,7 @@ function RootLayout() {
     <CartProvider>
       <ScrollToTop />
       <MainHeader />
-      <main className="mt-[112px] min-h-screen">
+      <div className="mt-[112px] min-h-screen bg-[#F7FAFF]">
         <SEO
           title="CoreX Nutrition"
           description="CoreX Nutrition official site — explore accessibility, policies, and open-source projects."
@@ -26,7 +26,7 @@ function RootLayout() {
         <Suspense fallback={<Loader />}>
           <Outlet />
         </Suspense>
-      </main>
+      </div>
       <TopFooter />
       <BottomFooter />
 

@@ -16,6 +16,7 @@
   --color-main: #023e8a;
   --color-white-back: #f7faff;
   --color-black: #010409;
+  --color-gray: #89949f;
 
   --animate-fade-slide-up: fade-slide-up 0.8s ease-out 0.3s both;
 
@@ -36,7 +37,6 @@
    COMPONENTS
 ========================== */
 @layer components {
-
   /* Section Title */
   .section-title {
     @apply text-4xl lg:text-heading-xxl font-montserrat font-bold leading-none uppercase text-center tracking-tight;
@@ -50,7 +50,7 @@
 }
 
 .stroke-title {
-  color: var(--color-white-light);
+  color: var(--color-white-back);
   -webkit-text-stroke: 3px var(--color-black);
   paint-order: stroke fill;
 }
@@ -82,7 +82,7 @@
 
 .animate-double-pop {
   transform-origin: center;
-  animation: double-pop 520ms cubic-bezier(.22, 1, .36, 1) both;
+  animation: double-pop 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 /* ==========================================
@@ -123,11 +123,11 @@
 }
 
 .animate-count-up {
-  animation: count-up 150ms cubic-bezier(0.23, 1, 0.320, 1) both;
+  animation: count-up 150ms cubic-bezier(0.23, 1, 0.32, 1) both;
 }
 
 .animate-count-down {
-  animation: count-down 150ms cubic-bezier(0.23, 1, 0.320, 1) both;
+  animation: count-down 150ms cubic-bezier(0.23, 1, 0.32, 1) both;
 }
 
 /* ==========================
@@ -224,7 +224,6 @@
    ACCESSIBILITY
 ========================== */
 @media (prefers-reduced-motion: reduce) {
-
   .link-underline::after,
   .link-underline-inverse::after,
   .animate-double-pop,
@@ -250,4 +249,12 @@
 .close-icon:focus {
   transform: rotate(90deg) scale(1.1);
   /* color: #ef4444; */
+}
+
+/* Global page background and base text color */
+html,
+body {
+  height: 100%;
+  background-color: var(--color-white-back);
+  color: var(--color-black);
 }
