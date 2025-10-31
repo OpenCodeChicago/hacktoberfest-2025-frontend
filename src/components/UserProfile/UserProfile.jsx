@@ -1,49 +1,12 @@
 import React from 'react'
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState, useCallback } from "react";
-import axiosInstance from "../../api/axiosInstance";
+import { dispatch } from "react-redux";
 import Loader from '../Loader';
-import { logError } from '../../utils/logger';
 import { logout } from '../../store/authSlice';
 
 const UserProfile = () => {
-    const dispatch = useDispatch();
-    const { user, token } = useSelector((state) => state.auth);
+    const freshUser={name:"andy", email:"andy123@gmail.com"}
 
-    const [freshUser, setFreshUser] = useState(user);
-    const [error, setError] = useState("");
-
-    const fetchUser = useCallback(async () => {
-        setError("")
-        try {
-            const res = await axiosInstance.get("/auth/profile");
-            setFreshUser(res.data.user || res.data);
-        } catch (error) {
-            logError("Failed to fetch user profile", error);
-            setError("Unable to load your profile. Please try again.");
-            if (error?.response?.status === 401) {
-                setError("Session expired. Please login again.");
-                dispatch(logout());
-            }
-        }
-    },[dispatch])
-
-    useEffect(() => {
-        if (token) fetchUser();
-    }, [token, fetchUser]);
-
-    if (!freshUser && !error) return <Loader />;
-
-    if (error) {
-        return (
-        <div className="flex flex-col items-center justify-center min-h-screen text-center px-5">
-            <h2 className="text-xl font-semibold mb-4">{error}</h2>
-            <button onClick={fetchUser} className="px-6 py-2 bg-blue-600 text-white rounded-lg">
-            Try Again
-            </button>
-        </div>
-        );
-    }
+    if (!freshUser) return <Loader />;
     return (
         <div className=' w-full min-h-screen flex flex-col items-center justify-normal gap-y-10 py-7 px-20 sm:px-50 '>
             <div className='w-full flex items-center justify-between gap-2'>
