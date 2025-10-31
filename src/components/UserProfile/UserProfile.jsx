@@ -1,45 +1,65 @@
 import React from 'react'
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState, useCallback } from "react";
 import axiosInstance from "../../api/axiosInstance";
 import Loader from '../Loader';
+import { logError } from '../../utils/logger';
+import { logout } from '../../store/authSlice';
 
 const UserProfile = () => {
+    const dispatch = useDispatch();
     const { user, token } = useSelector((state) => state.auth);
-    const [freshUser, setFreshUser] = useState(user);
 
-    useEffect(() => {
-        async function fetchUser() {
+    const [freshUser, setFreshUser] = useState(user);
+    const [error, setError] = useState("");
+
+    const fetchUser = useCallback(async () => {
+        setError("")
         try {
             const res = await axiosInstance.get("/auth/profile");
             setFreshUser(res.data.user || res.data);
-        } catch (error){
-            console.log("Failed to fetch user:", error);
+        } catch (error) {
+            logError("Failed to fetch user profile", error);
+            setError("Unable to load your profile. Please try again.");
+            if (error?.response?.status === 401) {
+                setError("Session expired. Please login again.");
+                dispatch(logout());
+            }
         }
+    },[dispatch])
+
+    useEffect(() => {
+        if (token) fetchUser();
+    }, [token, fetchUser]);
+
+    if (!freshUser && !error) return <Loader />;
+
+    if (error) {
+        return (
+        <div className="flex flex-col items-center justify-center min-h-screen text-center px-5">
+            <h2 className="text-xl font-semibold mb-4">{error}</h2>
+            <button onClick={fetchUser} className="px-6 py-2 bg-blue-600 text-white rounded-lg">
+            Try Again
+            </button>
+        </div>
+        );
     }
-
-        if (token) 
-            fetchUser();
-    }, [token]);
-
-    if (!freshUser) 
-        return <Loader />;
     return (
         <div className=' w-full min-h-screen flex flex-col items-center justify-normal gap-y-10 py-7 px-20 sm:px-50 '>
             <div className='w-full flex items-center justify-between gap-2'>
                 <h1 className='text-3xl font-[600] font-inter'>Profile</h1>
-                <button className=' px-3 sm:px-15 py-3 border-2 border-gray-400 rounded-xl cursor-pointer hover:bg-gray-200 font-inter'>Logout</button>
+                <button className=' px-3 sm:px-15 py-3 border-2 border-gray-400 rounded-xl cursor-pointer hover:bg-gray-200 font-inter' onClick={()=>dispatch(logout())}>Logout</button>
             </div>
             <div className='w-full border-2 border-gray-300 rounded-xl py-3 px-5'>
-                <h2 className='font-medium text-center sm:text-left text-xl mb-4 font-montserrat'>{user.name}</h2>
+                <h2 className='font-medium text-center sm:text-left text-xl mb-4 font-montserrat'>{freshUser.name}</h2>
                 <div className='flex flex-col sm:flex-row gap-5 sm:gap-40 justify-center items-center sm:items-start sm:justify-start mb-2'>
                     <div>
                         <p className='text-gray-400 font-montserrat '>Email:</p>
-                        <p className='font-montserrat'>{user.email}</p>
+                        <p className='font-montserrat'>{freshUser.email}</p>
                     </div>
                     <div>
                         <p className='text-gray-400 font-montserrat text-center'>Phone Number:</p>
-                        <p>+1 123-456-7788</p>
+                        <p>{freshUser?.phonenumber||`Not Provided`}</p>
                     </div>
                 </div>
             </div>
@@ -47,11 +67,11 @@ const UserProfile = () => {
                 <h2 className='font-medium text-xl mb-4 font-montserrat text-center sm:text-left'>Address</h2>
                 <div className='flex flex-col gap-1 mb-2 items-center justify-center sm:items-start sm:justify-start'>
                     <p className='text-gray-400 font-montserrat'>Default Address</p>
-                    <p className='font-montserrat'>{user.name}</p>
-                    <p className='font-montserrat text-center sm:text-left'>1234 N Main St.</p>
-                    <p className='font-montserrat text-center sm:text-left'>Chicago, Il 60607</p>
-                    <p className='font-montserrat'>United States</p>
-                    <p>+1 123-456-7788</p>
+                    <p className='font-montserrat'>{freshUser.name}</p>
+                    <p className='font-montserrat text-center sm:text-left'>{freshUser?.firstline||`Not Provided`}</p>
+                    <p className='font-montserrat text-center sm:text-left'>{freshUser?.secondline||`Not Provided`}</p>
+                    <p className='font-montserrat'>{freshUser?.country||`Not Provided`}</p>
+                    <p>{freshUser?.phonenumber||`Not Provided`}</p>
                 </div>
             </div>
             <div className='w-full border-2 border-gray-300 rounded-xl py-3 px-5 '>
