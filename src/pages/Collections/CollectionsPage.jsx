@@ -263,13 +263,13 @@ export default function CollectionPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 "
+              className="w-[90%] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 "
             >
-              <div className="text-center">
-                <h1 className="text-5xl md:text-6xl font-bold mb-6  font-montserrat text-white mt-6">
+              <div className="text-center flex flex-col gap-6">
+                <h1 className="text-5xl md:text-6xl font-bold  font-montserrat text-white capitalize">
                   {collectionTitleCapitalized}
                 </h1>
-                <p className="text-xl mb-8 text-slate-100 max-w-2xl mx-auto">
+                <p className="text-xl  text-slate-100 max-w-2xl mx-auto">
                   Browse our {collectionTitle} collection and find premium
                   supplements that support your fitness goals.
                 </p>
