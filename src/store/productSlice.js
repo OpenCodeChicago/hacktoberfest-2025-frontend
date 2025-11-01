@@ -30,7 +30,6 @@ export const fetchProductById = createAsyncThunk(
       if (!result || result.success === false) {
         throw new Error(result?.error || 'Failed to fetch product');
       }
-
       return result.data;
     } catch (error) {
       return rejectWithValue(error.message || 'Failed to fetch product');

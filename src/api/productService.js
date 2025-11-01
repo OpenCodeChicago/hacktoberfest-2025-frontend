@@ -5,46 +5,65 @@ import axiosInstance from './axiosInstance.js';
  * @param {Object} apiProduct - The product object from the API.
  * @returns {Object} Transformed product object.
  */
-const transformProduct = (apiProduct) => {
-  const originalPrice = apiProduct.sale > 0
-    ? Number((apiProduct.price / (1 - apiProduct.sale / 100)).toFixed(2))
-    : null;
+const transformProduct = (apiProduct = {}) => {
+  if (!apiProduct || typeof apiProduct !== 'object') return null;
+
+  const price = Number(apiProduct.price ?? 0);
+  const sale = Number(apiProduct.sale ?? 0);
+  const originalPrice = sale > 0 ? Number((price / (1 - sale / 100)).toFixed(2)) : null;
 
   return {
-    id: apiProduct._id,
-    name: apiProduct.name,
-    description: apiProduct.description || apiProduct.shortDescription,
-    price: apiProduct.price,
-    originalPrice: originalPrice,
-    category: apiProduct.category,
-    imageUrl: apiProduct.image,
-    rating: apiProduct.rating,
-    reviewCount: apiProduct.reviewsCount,
-    stock: 15, // Consider fetching stock from the API if available
-    isNew: apiProduct.new,
-    onSale: apiProduct.sale > 0,
-    flavors: apiProduct.flavors || [],
-    features: apiProduct.quality || [],
-    goals: apiProduct.goals || [],
-    sizes: apiProduct.sizes || [],
-    salePercentage: apiProduct.sale,
-    longDescription: apiProduct.longDescription,
-    usageTips: apiProduct.usageTips || []
+    id: apiProduct._id ?? apiProduct.id ?? null,
+    name: apiProduct.name ?? apiProduct.title ?? 'Unnamed Product',
+    description: apiProduct.description ?? apiProduct.shortDescription ?? '',
+    shortDescription: apiProduct.shortDescription ?? apiProduct.description ?? '',
+    longDescription: apiProduct.longDescription ?? '',
+    price,
+    originalPrice,
+    category: apiProduct.category ?? null,
+    imageUrl: apiProduct.image ?? apiProduct.imageUrl ?? '/images/product-default-image.jpg',
+    imageGallery: Array.isArray(apiProduct.images) ? apiProduct.images : Array.isArray(apiProduct.gallery) ? apiProduct.gallery : [],
+    rating: Number(apiProduct.rating ?? 0),
+    reviewCount: Number(apiProduct.reviewsCount ?? apiProduct.reviewCount ?? 0),
+    stock: Number(apiProduct.stock ?? apiProduct.inventory ?? 0),
+    isNew: Boolean(apiProduct.new),
+    onSale: sale > 0,
+    salePercentage: sale,
+    flavors: Array.isArray(apiProduct.flavors) ? apiProduct.flavors : [],
+    sizes: Array.isArray(apiProduct.sizes) ? apiProduct.sizes : [],
+    quality: Array.isArray(apiProduct.quality) ? apiProduct.quality : [],
+    goals: Array.isArray(apiProduct.goals) ? apiProduct.goals : [],
+    collections: Array.isArray(apiProduct.collections) ? apiProduct.collections : [],
+    usageTips: typeof apiProduct.usageTips === 'object' ? apiProduct.usageTips : {},
+    createdAt: apiProduct.createdAt ? new Date(apiProduct.createdAt).toISOString() : null,
+    updatedAt: apiProduct.updatedAt ? new Date(apiProduct.updatedAt).toISOString() : null,
+    raw: apiProduct, // keep original object for debugging if needed
   };
 };
 
 /**
  * Transforms the API response containing multiple products.
+ * Accepts several shapes returned by different backends.
  * @param {Object} apiResponse - The response object from the API.
  * @returns {Object} Transformed response object.
  */
-const transformApiResponse = (apiResponse) => {
+const transformApiResponse = (apiResponse = {}) => {
+  // apiResponse may be { products: [...], total, page, pages } or { data: { products: [...] } }
+  const payload = apiResponse.products ?? apiResponse.data?.products ?? apiResponse.data ?? apiResponse;
+  const productsArray = Array.isArray(payload) ? payload : Array.isArray(payload.products) ? payload.products : [];
+
+  const mapped = productsArray.map(transformProduct).filter(Boolean);
+
+  const total = Number(apiResponse.total ?? apiResponse.data?.total ?? payload.total ?? mapped.length);
+  const page = Number(apiResponse.page ?? apiResponse.data?.page ?? payload.page ?? 1);
+  const pages = Number(apiResponse.pages ?? apiResponse.data?.pages ?? payload.pages ?? 1);
+
   return {
-    products: apiResponse.products.map(transformProduct),
-    totalCount: apiResponse.total,
-    currentPage: apiResponse.page,
-    hasNextPage: apiResponse.page < apiResponse.pages,
-    totalPages: apiResponse.pages
+    products: mapped,
+    totalCount: total,
+    currentPage: page,
+    hasNextPage: page < pages,
+    totalPages: pages,
   };
 };
 
@@ -73,20 +92,39 @@ export const getProducts = async (params = {}) => {
 
     const data = response.data;
 
+    // support multiple payload shapes
+    if (Array.isArray(data)) {
+      return {
+        success: true,
+        data: {
+          products: data.map(transformProduct).filter(Boolean),
+          total: data.length,
+          page: 1,
+          pages: 1,
+        },
+        status: response.status,
+      };
+    }
+
+    // If API returns wrapper like { products: [...], total, page, pages }
+    if (data.products || data.data?.products) {
+      return {
+        success: true,
+        data: transformApiResponse(data),
+        status: response.status,
+      };
+    }
+
+    // If API returns nested data or other shapes, attempt to transform generically
     return {
       success: true,
-      data: Array.isArray(data) ? {
-        products: data,
-        total: data.length,
-        page: 1,
-        pages: 1,
-      } : transformApiResponse(data),
+      data: transformApiResponse(data),
       status: response.status,
     };
   } catch (error) {
     return {
       success: false,
-      error: error.response?.data?.message || 'Failed to fetch products',
+      error: error.response?.data?.message || error.message || 'Failed to fetch products',
       status: error.response?.status || 500,
     };
   }
@@ -104,16 +142,20 @@ export const getProductById = async (id) => {
     }
 
     const response = await axiosInstance.get(`/products/${id}`);
+    const data = response.data;
+
+    // Accept shapes: { ...product }, { product: {...} }, { data: { product: {...} } }
+    const productPayload = data.product ?? data.data?.product ?? data.data ?? data;
 
     return {
       success: true,
-      data: transformProduct(response.data),
+      data: transformProduct(productPayload),
       status: response.status,
     };
   } catch (error) {
     return {
       success: false,
-      error: error.response?.data?.message || 'Failed to fetch product',
+      error: error.response?.data?.message || error.message || 'Failed to fetch product',
       status: error.response?.status || 500,
     };
   }
@@ -134,15 +176,30 @@ export const searchProducts = async (query, params = {}) => {
       },
     });
 
+    const data = response.data;
+
+    if (Array.isArray(data)) {
+      return {
+        success: true,
+        data: {
+          products: data.map(transformProduct).filter(Boolean),
+          total: data.length,
+          page: 1,
+          pages: 1,
+        },
+        status: response.status,
+      };
+    }
+
     return {
       success: true,
-      data: response.data,
+      data: transformApiResponse(data),
       status: response.status,
     };
   } catch (error) {
     return {
       success: false,
-      error: error.response?.data?.message || 'Failed to search products',
+      error: error.response?.data?.message || error.message || 'Failed to search products',
       status: error.response?.status || 500,
     };
   }
@@ -164,7 +221,7 @@ export const getProductCategories = async () => {
   } catch (error) {
     return {
       success: false,
-      error: error.response?.data?.message || 'Failed to fetch categories',
+      error: error.response?.data?.message || error.message || 'Failed to fetch categories',
       status: error.response?.status || 500,
     };
   }
@@ -182,19 +239,25 @@ export const getRecommendedProducts = async (id, limit = 3) => {
       throw new Error('Product ID is required');
     }
 
-    // const response = await axiosInstance.get(`/products/recommended/${id}?limit=${limit}`);
     const response = await axiosInstance.get(`/products/${id}/recommended?limit=${limit}`);
+    const data = response.data;
 
+    // data may be { products: [...] } or an array
+    const productsArray = Array.isArray(data)
+      ? data
+      : Array.isArray(data.products)
+      ? data.products
+      : data.data?.products ?? [];
 
     return {
       success: true,
-      data: response.data.products.map(transformProduct),
+      data: productsArray.map(transformProduct).filter(Boolean),
       status: response.status,
     };
   } catch (error) {
     return {
       success: false,
-      error: error.response?.data?.message || 'Failed to fetch recommended products',
+      error: error.response?.data?.message || error.message || 'Failed to fetch recommended products',
       status: error.response?.status || 500,
     };
   }

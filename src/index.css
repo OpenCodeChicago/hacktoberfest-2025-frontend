@@ -44,6 +44,7 @@
    COMPONENTS
 ========================== */
 @layer components {
+
   /* Section Title */
   .section-title {
     @apply text-4xl lg:text-heading-xxl font-montserrat font-bold leading-none uppercase text-center tracking-tight;
@@ -247,6 +248,7 @@
    ACCESSIBILITY
 ========================== */
 @media (prefers-reduced-motion: reduce) {
+
   .link-underline::after,
   .link-underline-inverse::after,
   .animate-double-pop,
@@ -280,4 +282,5 @@ body {
   height: 100%;
   background-color: var(--color-white-back);
   color: var(--color-black);
+  overflow-x: hidden;
 }
