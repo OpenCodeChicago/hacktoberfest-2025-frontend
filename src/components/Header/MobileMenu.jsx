@@ -105,9 +105,9 @@ const MobileMenu = ({
             >
               <div className="relative">
                 <Heart className="h-5 w-5" />
-                {wishListData.items.length > 0 && (
+                {wishListData?.items?.length > 0 && (
                   <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center">
-                    {wishListData.items.length}
+                    {wishListData?.items?.length}
                   </span>
                 )}
               </div>
