@@ -1,11 +1,22 @@
 import { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { X } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { X, Heart, User } from 'lucide-react';
+import { useSelector } from 'react-redux';
 import MobileShopMenu from './MobileShopMenu';
+import CartIcon from '../CartComponent/CartIcon';
 
-const MobileMenu = ({ mobileOpen, setMobileOpen, mobileMenuRef }) => {
+const MobileMenu = ({
+  mobileOpen,
+  setMobileOpen,
+  mobileMenuRef,
+  setCartOpen,
+  setWishListOpen,
+}) => {
   const [isInShopNavigation, setIsInShopNavigation] = useState(false);
   const shopMenuRef = useRef(null);
+  const navigate = useNavigate();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const wishListData = useSelector((state) => state.wishList);
 
   const handleCloseMenu = () => {
     setMobileOpen(false);
@@ -85,20 +96,47 @@ const MobileMenu = ({ mobileOpen, setMobileOpen, mobileMenuRef }) => {
         {/* Mobile Menu Icons */}
         <div className="px-6 py-4 border-t border-gray-200">
           <div className="flex flex-col space-y-4">
-            <a
-              href="#"
+            <button
               className="flex items-center space-x-2 text-gray-700 hover:text-black cursor-pointer"
-              onClick={handleCloseMenu}
+              onClick={() => {
+                handleCloseMenu();
+                setWishListOpen(true);
+              }}
             >
+              <div className="relative">
+                <Heart className="h-5 w-5" />
+                {wishListData.items.length > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center">
+                    {wishListData.items.length}
+                  </span>
+                )}
+              </div>
               <span>Wishlist</span>
-            </a>
-            <a
-              href="#"
+            </button>
+            <button
               className="flex items-center space-x-2 text-gray-700 hover:text-black cursor-pointer"
-              onClick={handleCloseMenu}
+              onClick={() => {
+                handleCloseMenu();
+                if (!isAuthenticated) {
+                  navigate('/login');
+                } else {
+                  navigate('/profile');
+                }
+              }}
             >
+              <User className="h-5 w-5" />
               <span>Account</span>
-            </a>
+            </button>
+            <button
+              className="flex items-center space-x-2 text-gray-700 hover:text-black cursor-pointer"
+              onClick={() => {
+                handleCloseMenu();
+                setCartOpen(true);
+              }}
+            >
+              <CartIcon />
+              <span>Cart</span>
+            </button>
           </div>
         </div>
       </div>

@@ -150,6 +150,8 @@ export default function Header() {
         mobileOpen={mobileOpen}
         setMobileOpen={setMobileOpen}
         mobileMenuRef={mobileMenuRef}
+        setCartOpen={setCartOpen}
+        setWishListOpen={setWishListOpen}
       />
 
       {/* Search Drawer */}
