@@ -14,7 +14,6 @@ import ProductSkeleton from '../../components/Products/ProductSkeleton';
 import FilterPanel from '../../components/Products/FilterPanel/FilterPanel';
 import RecentlyViewed from '../../components/RecentlyViewed';
 import SEO from '../../components/SEO';
-import { collections } from '../../components/CollectionSection';
 
 export default function CollectionPage() {
   const { name } = useParams();
