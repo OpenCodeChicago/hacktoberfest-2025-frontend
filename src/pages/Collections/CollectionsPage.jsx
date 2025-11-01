@@ -165,21 +165,9 @@ export default function CollectionPage() {
   const collectionTitleCapitalized =
     collectionTitle.charAt(0).toUpperCase() + collectionTitle.slice(1);
 
-  const getValidatedImageUrl = () => {
-    const stateImage = window.history.state?.usr?.imageUrl;
-    if (stateImage && typeof stateImage === 'string') {
-      if (stateImage.startsWith('/') || stateImage.startsWith('./')) {
-        return stateImage;
-      }
-    }
-
-    // Fallback to collection lookup from allowlisted collections
-    const collection = collections.find((col) => col.id === name);
-    return collection?.image || null;
-  };
-
-  // Ensure a default banner image from public/ is used when no collection image exists
-  const imageUrl = getValidatedImageUrl() || '/images/collections-default.jpg';
+  // Always use project default collection banners (do not use data-provided images)
+  const imageUrl = '/images/collections-banner.jpg';
+  const imageMobileUrl = '/images/collections-banner-mobile.jpg';
 
   if (error) {
     return (
@@ -243,39 +231,47 @@ export default function CollectionPage() {
         )}
 
         {/* Collection Banner */}
-        <section
-          className="collections-banner-div text-white py-20"
-          style={{
-            '--bg-image': `url(${imageUrl})`,
-            backgroundImage: `url(${imageUrl})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            backgroundColor: '#1e293b',
-          }}
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"
-          >
-            <div className="text-center">
-              <h1 className="text-5xl md:text-6xl font-bold mb-6  font-montserrat text-white mt-6">
-                {collectionTitleCapitalized}
-              </h1>
-              <p className="text-xl mb-8 text-slate-100 max-w-2xl mx-auto">
-                Browse our {collectionTitle} collection and find premium
-                supplements that support your fitness goals.
-              </p>
+        <section className="collections-banner-div text-white">
+          <div className="w-full relative">
+            <picture>
+              {imageMobileUrl && (
+                <source media="(max-width: 640px)" srcSet={imageMobileUrl} />
+              )}
 
-              <motion.p
-                className={`${sortedProducts.length > 0 ? '' : 'opacity-0 '} transition-all duration-150 ease-in-out text-slate-200`}
-              >
-                {pagination?.total || sortedProducts.length} products available
-              </motion.p>
-            </div>
-          </motion.div>
+              <source srcSet={imageUrl} type="image/webp" />
+
+              <img
+                src={imageUrl}
+                alt={`${collectionTitleCapitalized} Collection Banner`}
+                loading="lazy"
+                decoding="async"
+                className="w-full object-cover"
+              />
+            </picture>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 "
+            >
+              <div className="text-center">
+                <h1 className="text-5xl md:text-6xl font-bold mb-6  font-montserrat text-white mt-6">
+                  {collectionTitleCapitalized}
+                </h1>
+                <p className="text-xl mb-8 text-slate-100 max-w-2xl mx-auto">
+                  Browse our {collectionTitle} collection and find premium
+                  supplements that support your fitness goals.
+                </p>
+
+                <motion.p
+                  className={`${sortedProducts.length > 0 ? '' : 'opacity-0 '} transition-all duration-150 ease-in-out text-slate-200`}
+                >
+                  {pagination?.total || sortedProducts.length} products
+                  available
+                </motion.p>
+              </div>
+            </motion.div>
+          </div>
         </section>
 
         {/* Toolbar */}
