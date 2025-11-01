@@ -1,5 +1,6 @@
 import ProductList from '../../components/Products/ProductList';
 import garageSaleBanner from '/images/garage-sale-banner.png';
+import garageSaleBannerMobile from '/images/garage-sale-banner-mobile.png';
 
 export default function GarageSale() {
   // filterFn returns true when product is on sale
@@ -19,6 +20,7 @@ export default function GarageSale() {
             'garage sale, deals, supplements, CoreX, discount, sale, protein powder, pre-workout, fitness products',
         }}
         bannerImage={garageSaleBanner}
+        bannerImageMobile={garageSaleBannerMobile}
         bannerAlt="Garage Sale promotional banner"
       />
     </>

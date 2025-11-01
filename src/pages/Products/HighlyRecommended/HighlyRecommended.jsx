@@ -90,10 +90,10 @@ function HighlyRecommended() {
   return (
     <>
       {recommendedProducts?.length > 0 && (
-        <section className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 py-8">
+        <section className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 py-8 flex flex-col gap-6">
           {/* Header section with title and navigation arrows */}
-          <div className="flex items-center justify-between mb-6 flex-col sm:flex-row gap-4 sm:gap-0">
-            <h2 className="section-title text-center w-full sm:w-auto mb-0">
+          <div className="flex items-center justify-between  flex-col sm:flex-row gap-4 sm:gap-0">
+            <h2 className="section-title text-left md:text-center w-full sm:w-auto mb-0">
               <span className="text-[#000]">HIGHLY </span>
               <span className="stroke-title" style={{ color: '#f7faff' }}>
                 RECOMMENDED
@@ -101,7 +101,7 @@ function HighlyRecommended() {
             </h2>
 
             {/* Navigation Buttons */}
-            <div className="flex items-center gap-3">
+            <div className="hidden sm:flex items-center gap-3">
               <button
                 onClick={prevSlide}
                 disabled={!canGoPrev}

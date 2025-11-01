@@ -146,12 +146,6 @@ export const menuColumns = [
         displayName: 'Fat Burner',
         index: 20,
       },
-      {
-        id: 'weight-management-supplements',
-        slug: 'weight-management-supplements',
-        displayName: 'Supplements',
-        index: 21,
-      },
     ],
   },
   {

@@ -30,6 +30,8 @@ export default function ProductPage() {
     };
   }, [dispatch, id]);
 
+  // console.log(currentProduct);
+
   // Normalize possible payload wrapper
   const product = currentProduct?.product || currentProduct;
 
@@ -64,7 +66,7 @@ export default function ProductPage() {
   if (product)
     return (
       <main className="max-w-6xl mx-auto p-6">
-        <section className="flex flex-row w-full mt-4 max-w-[70vw] gap-8">
+        <section className="flex flex-col md:flex-row w-full md:align-center mt-4 md:max-w-[70vw] gap-8">
           {/* Left side section */}
           <div className="Left-side flex-4 images-section">
             {/* Hero Image section */}
@@ -106,7 +108,7 @@ export default function ProductPage() {
               </button>
             </div>
             {/* Additional image section */}
-            <section className="additional-images-grid grid grid-cols-4 gap-4 px-4 mt-4">
+            <div className="additional-images-grid grid grid-cols-4 gap-4 px-4 mt-4">
               <img
                 className="w-full h-auto object-cover rounded-lg cursor-pointer"
                 src="/images/products/nova-whey-vanilla-protein.jpg"
@@ -127,7 +129,7 @@ export default function ProductPage() {
                 src="/images/products/nova-whey-vanilla-protein.jpg"
                 alt={product.name}
               />
-            </section>
+            </div>
           </div>
           {/* Right Side Section */}
           <div className="right-side flex-5 product-detail-section flex-col flex gap-3">
@@ -141,15 +143,15 @@ export default function ProductPage() {
             <h1 className="text-4xl font-bold mb-2">{product.name}</h1>
             <p className="text-gray-700">{product.longDescription}</p>
             {/* Flavour and size selection */}
-            <section className="flavours-size-section flex flex-col gap-4 ">
+            <div className="flavours-size-section flex flex-col gap-4 ">
               {/* flavour selection */}
-              <div className="flavours-selection items-center justify-start flex flex-row gap-4 ">
-                <h3 className="text-gray-800 font-semibold ">Flavors :</h3>
-                <div className="flavours-selection flex flex-row gap-4 ">
+              <div className="flavours-selection md:items-center justify-start flex flex-row gap-4 ">
+                <h3 className="text-gray-800 font-semibold ">Flavors:</h3>
+                <div className="flavours-selection flex flex-row  gap-4 flex-wrap md:flex-nowrap">
                   {product.flavors.map((flavor) => (
                     <div
                       key={flavor}
-                      className="flavor-option border border-gray-300 px-4 py-2 rounded-md cursor-pointer hover:bg-gray-100"
+                      className="flavor-option border border-gray-300 px-4 py-2 rounded-md cursor-pointer hover:bg-gray-100 "
                     >
                       {flavor}
                     </div>
@@ -168,8 +170,8 @@ export default function ProductPage() {
                   </div>
                 ))}
               </div>
-            </section>
-            <section className="actions-section flex flex-col gap-4 mt-4">
+            </div>
+            <div className="actions-section flex flex-col gap-4 mt-4">
               <div className="product-count flex flex-row items-center gap-2">
                 {/* <button className="cursor-pointer text-gray-600 px-3 py-3 rounded-md hover:bg-gray-50 transition">
                   -
@@ -200,8 +202,8 @@ export default function ProductPage() {
               >
                 {isInWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'}
               </button>
-            </section>
-            <section className="shipping-info flex-col gap-2 text-sm text-gray-600 mt-4">
+            </div>
+            <div className="shipping-info flex-col gap-2 text-sm text-gray-600 mt-4">
               <h4 className="font-semibold text-xs text-gray-800">
                 Secure checkout. Satisfaction guaranteed.
               </h4>
@@ -215,7 +217,7 @@ export default function ProductPage() {
                   Delivery in 1-3 Days on average.
                 </div>
               </div>
-            </section>
+            </div>
           </div>
         </section>
         {/* Additional Product Information */}

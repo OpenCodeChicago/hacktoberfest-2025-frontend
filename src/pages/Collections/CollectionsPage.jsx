@@ -14,7 +14,6 @@ import ProductSkeleton from '../../components/Products/ProductSkeleton';
 import FilterPanel from '../../components/Products/FilterPanel/FilterPanel';
 import RecentlyViewed from '../../components/RecentlyViewed';
 import SEO from '../../components/SEO';
-import { collections } from '../../components/CollectionSection';
 
 export default function CollectionPage() {
   const { name } = useParams();
@@ -165,20 +164,11 @@ export default function CollectionPage() {
   const collectionTitleCapitalized =
     collectionTitle.charAt(0).toUpperCase() + collectionTitle.slice(1);
 
-  const getValidatedImageUrl = () => {
-    const stateImage = window.history.state?.usr?.imageUrl;
-    if (stateImage && typeof stateImage === 'string') {
-      if (stateImage.startsWith('/') || stateImage.startsWith('./')) {
-        return stateImage;
-      }
-    }
-
-    // Fallback to collection lookup from allowlisted collections
-    const collection = collections.find((col) => col.id === name);
-    return collection?.image || null;
-  };
-
-  const imageUrl = getValidatedImageUrl();
+  // Always use project default collection banners (do not use data-provided images)
+  const imageUrl = '/images/collections-banner.jpg';
+  const imageUrlWebp = '/images/collections-banner.webp';
+  const imageMobileUrl = '/images/collections-banner-mobile.jpg';
+  const imageMobileUrlWebp = '/images/collections-banner-mobile.webp';
 
   if (error) {
     return (
@@ -242,47 +232,57 @@ export default function CollectionPage() {
         )}
 
         {/* Collection Banner */}
-        <section
-          className={`collections-banner-div text-white py-20 ${
-            imageUrl
-              ? ''
-              : 'bg-gradient-to-br from-blue-900 via-blue-800 to-purple-900'
-          }`}
-          style={
-            imageUrl
-              ? {
-                  '--bg-image': `url(${imageUrl})`,
-                  backgroundImage: `url(${imageUrl})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundColor: '#1e293b',
-                }
-              : undefined
-          }
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"
-          >
-            <div className="text-center">
-              <h1 className="text-5xl md:text-6xl font-bold mb-6  font-montserrat text-white mt-6">
-                {collectionTitleCapitalized}
-              </h1>
-              <p className="text-xl mb-8 text-slate-100 max-w-2xl mx-auto">
-                Browse our {collectionTitle} collection and find premium
-                supplements that support your fitness goals.
-              </p>
+        <section className="collections-banner-div text-white">
+          <div className="w-full relative">
+            <picture>
+              {/* mobile: webp first, then jpeg */}
+              <source
+                media="(max-width: 640px)"
+                srcSet={imageMobileUrlWebp}
+                type="image/webp"
+              />
+              <source
+                media="(max-width: 640px)"
+                srcSet={imageMobileUrl}
+                type="image/jpeg"
+              />
 
-              <motion.p
-                className={`${sortedProducts.length > 0 ? '' : 'opacity-0 '} transition-all duration-150 ease-in-out text-slate-200`}
-              >
-                {pagination?.total || sortedProducts.length} products available
-              </motion.p>
-            </div>
-          </motion.div>
+              {/* desktop: webp first, then jpeg */}
+              <source srcSet={imageUrlWebp} type="image/webp" />
+              <source srcSet={imageUrl} type="image/jpeg" />
+
+              <img
+                src={imageUrl}
+                alt={`${collectionTitleCapitalized} Collection Banner`}
+                loading="lazy"
+                decoding="async"
+                className="w-full object-cover"
+              />
+            </picture>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="w-[90%] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 "
+            >
+              <div className="text-center flex flex-col gap-6">
+                <h1 className="text-5xl md:text-6xl font-bold  font-montserrat text-white capitalize">
+                  {collectionTitleCapitalized}
+                </h1>
+                <p className="text-xl  text-slate-100 max-w-2xl mx-auto">
+                  Browse our {collectionTitle} collection and find premium
+                  supplements that support your fitness goals.
+                </p>
+
+                <motion.p
+                  className={`${sortedProducts.length > 0 ? '' : 'opacity-0 '} transition-all duration-150 ease-in-out text-slate-200`}
+                >
+                  {pagination?.total || sortedProducts.length} products
+                  available
+                </motion.p>
+              </div>
+            </motion.div>
+          </div>
         </section>
 
         {/* Toolbar */}

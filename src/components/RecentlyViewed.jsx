@@ -71,11 +71,9 @@ export default function RecentlyViewed({ saleOnly = false }) {
     <section className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 py-8">
       {/* Header section with title and navigation arrows */}
       <div className="flex items-center justify-between mb-6 flex-col sm:flex-row gap-4 sm:gap-0">
-        <h2 className="section-title text-center w-full sm:w-auto mb-0">
+        <h2 className="section-title text-[32px] lg:text-[48px]">
           <span className="text-[#000]">RECENTLY </span>
-          <span className="stroke-title" style={{ color: '#f7faff' }}>
-            VIEWED
-          </span>
+          <span className="text-[#f7faff] stroke-title">VIEWED</span>
         </h2>
 
         {/* Navigation Buttons */}
