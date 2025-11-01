@@ -166,7 +166,9 @@ export default function CollectionPage() {
 
   // Always use project default collection banners (do not use data-provided images)
   const imageUrl = '/images/collections-banner.jpg';
+  const imageUrlWebp = '/images/collections-banner.webp';
   const imageMobileUrl = '/images/collections-banner-mobile.jpg';
+  const imageMobileUrlWebp = '/images/collections-banner-mobile.webp';
 
   if (error) {
     return (
@@ -233,11 +235,21 @@ export default function CollectionPage() {
         <section className="collections-banner-div text-white">
           <div className="w-full relative">
             <picture>
-              {imageMobileUrl && (
-                <source media="(max-width: 640px)" srcSet={imageMobileUrl} />
-              )}
+              {/* mobile: webp first, then jpeg */}
+              <source
+                media="(max-width: 640px)"
+                srcSet={imageMobileUrlWebp}
+                type="image/webp"
+              />
+              <source
+                media="(max-width: 640px)"
+                srcSet={imageMobileUrl}
+                type="image/jpeg"
+              />
 
-              <source srcSet={imageUrl} type="image/webp" />
+              {/* desktop: webp first, then jpeg */}
+              <source srcSet={imageUrlWebp} type="image/webp" />
+              <source srcSet={imageUrl} type="image/jpeg" />
 
               <img
                 src={imageUrl}
