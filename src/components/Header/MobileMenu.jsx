@@ -127,7 +127,7 @@ const MobileMenu = ({
               <User className="h-5 w-5" />
               <span>Account</span>
             </button>
-            <button
+            <div
               className="flex items-center space-x-2 text-gray-700 hover:text-black cursor-pointer"
               onClick={() => {
                 handleCloseMenu();
@@ -136,7 +136,7 @@ const MobileMenu = ({
             >
               <CartIcon />
               <span>Cart</span>
-            </button>
+            </div>
           </div>
         </div>
       </div>

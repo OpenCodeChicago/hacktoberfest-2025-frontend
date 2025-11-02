@@ -98,7 +98,7 @@ export default function BestOfCoreX() {
   }
 
   return (
-    <section className="max-w-7xl mx-auto flex flex-col gap-[40px]">
+    <section className="px-10 w-full max-w-7xl mx-auto flex flex-col gap-[40px]">
       {/* Header */}
       <h2 className="bg-[#F7FAFF] text-[32px] lg:text-[48px] uppercase section-title">
         <span className="text-[#000]">BEST </span>
@@ -109,14 +109,14 @@ export default function BestOfCoreX() {
       </h2>
 
       {/* Tabs + Navigation in same row */}
-      <div className="flex flex-wrap justify-between items-center mb-6 gap-4">
-        {/* Tabs */}
-        <div className="flex flex-wrap gap-3">
+      <div className="flex flex-wrap justify-between items-center  sm:gap-4">
+        {/* Tabs: horizontally scrollable on mobile, hidden scrollbar */}
+        <div className="tabs-scroll-container  px-4 sm:mx-0 sm:px-0 overflow-x-auto whitespace-nowrap snap-x snap-mandatory sm:overflow-visible">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-5 py-2 rounded-lg font-semibold uppercase tracking-wide transition-all duration-300
+              className={`inline-block mr-3 last:mr-0 snap-start px-5 py-2 rounded-lg font-semibold uppercase tracking-wide transition-all duration-300
                 ${
                   activeTab === tab.id
                     ? 'bg-[#171717] text-white'
@@ -130,7 +130,7 @@ export default function BestOfCoreX() {
 
         {/* Navigation Buttons (inline beside tabs) */}
         {products.length > itemsPerPage && (
-          <div className="flex items-center gap-3 ml-auto">
+          <div className="hidden sm:flex items-center gap-3 ml-auto">
             <button
               onClick={prevSlide}
               disabled={!canGoPrev}

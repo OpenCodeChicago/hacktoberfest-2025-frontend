@@ -284,3 +284,21 @@ body {
   color: var(--color-black);
   overflow-x: hidden;
 }
+
+/* hide native scrollbars but keep scrolling functional */
+.tabs-scroll-container {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.tabs-scroll-container::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari */
+}
+
+/* optional: smoother snap start alignment */
+.tabs-scroll-container>button {
+  scroll-snap-align: start;
+}
