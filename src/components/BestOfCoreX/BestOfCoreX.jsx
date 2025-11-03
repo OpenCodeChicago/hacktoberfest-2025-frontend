@@ -47,7 +47,7 @@ export default function BestOfCoreX() {
 
   const [activeTab, setActiveTab] = useState('best-sellers');
   const [currentIndex, setCurrentIndex] = useState(0);
-  const itemsPerPage = 4;
+  const itemsPerPage = 3;
 
   const tabs = [
     { id: 'best-sellers', label: 'BEST SELLERS' },
@@ -167,7 +167,7 @@ export default function BestOfCoreX() {
       ) : (
         <div className="transition-all duration-500 ease-in-out">
           {/* Product Grid (reused RecentlyViewed style) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {visibleProducts.map((product) => (
               <div key={product._id || product.id} className="opacity-100">
                 <ProductCard product={product} />
