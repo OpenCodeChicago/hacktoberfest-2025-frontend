@@ -101,7 +101,7 @@
 
 @media (max-width: 640px) {
   .shop-by-collection {
-    padding: 60px 16px;
+    padding: 0 20px;
   }
 
   .collection-grid {
@@ -115,6 +115,10 @@
 
   .collection-content {
     padding: 20px 16px;
+  }
+
+  .section-title {
+    text-align: center;
   }
 }
 

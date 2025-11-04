@@ -69,7 +69,7 @@ export default function SocialIcons() {
     <ul
       role="list"
       aria-label="Social links"
-      className="flex items-center space-x-6 relative z-10 pointer-events-auto"
+      className="flex items-center space-x-4 md:space-x-6 relative z-10 pointer-events-auto"
     >
       {ICONS.map((item, idx) => {
         const { id, Icon: IconComponent, href, label } = item;

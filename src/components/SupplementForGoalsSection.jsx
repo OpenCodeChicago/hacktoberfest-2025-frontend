@@ -56,7 +56,7 @@ export default function SupplementForGoalsSection() {
     <section
       id="goals"
       ref={goalsRef}
-      className="px-10  flex flex-col gap-16"
+      className="px-5 md:px-0  flex flex-col gap-16"
       aria-labelledby="goals-heading"
     >
       <h2

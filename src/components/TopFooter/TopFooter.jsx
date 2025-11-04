@@ -57,7 +57,7 @@ export default function TopFooter() {
   };
 
   return (
-    <footer className="bg-neutral-900 text-neutral-200 px-6 py-12">
+    <footer className="bg-neutral-900 text-neutral-200 px-5 md:px-0 py-12">
       <div className="max-w-7xl mx-auto grid gap-12 md:grid-cols-3">
         {/* Logo + Address */}
         <div className="flex flex-col gap-[24px]">

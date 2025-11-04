@@ -130,8 +130,9 @@ export default function SearchBox({ onClose, isOpen }) {
       <div
         ref={boxRef}
         className={`fixed top-0 right-0 w-full sm:w-[40%] h-full bg-white shadow-2xl border-l border-gray-200 z-[999]
-          transform transition-transform duration-300 ease-in-out
+          transform-gpu will-change-transform transition-all duration-300 ease-in-out
           ${isOpen ? 'translate-x-0' : 'translate-x-full'} flex flex-col`}
+        aria-hidden={!isOpen}
       >
         {/* Drawer Content */}
         <div

@@ -62,7 +62,7 @@ const CollectionSection = () => {
   };
 
   return (
-    <section className="shop-by-collection">
+    <section className="shop-by-collection ">
       <h2 className="section-title text-[32px] lg:text-[48px]">
         <span className="text-[#000]">SHOP </span>
         <span className="stroke-title">BY </span>

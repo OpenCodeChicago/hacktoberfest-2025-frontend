@@ -29,7 +29,7 @@ function RootLayout() {
       </div>
       <TopFooter />
       <BottomFooter />
-
+      <BackToTop showAfter={250} />
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -41,7 +41,6 @@ function RootLayout() {
         draggable
         pauseOnHover
       />
-      <BackToTop showAfter={250} />
     </CartProvider>
   );
 }

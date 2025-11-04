@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ChevronUp } from 'lucide-react';
 
 /**
@@ -41,7 +41,7 @@ export default function BackToTopButton({ showAfter = 250 }) {
       onKeyDown={onKeyDown}
       title="Back to Top"
       aria-label="Back to Top"
-      className={`fixed right-6 sm:right-6 bottom-12 sm:bottom-8 z-[99999] w-11 h-11 sm:w-12 sm:h-12 rounded-full cursor-pointer flex items-center justify-center text-white bg-[#1E3A8A] border border-white/5 shadow-lg transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-[#0B1724]/20 hover:scale-105
+      className={`fixed right-6 sm:right-6 bottom-12 sm:bottom-8 z-9999 w-11 h-11 sm:w-12 sm:h-12 rounded-full cursor-pointer flex items-center justify-center text-white bg-[#1E3A8A] border border-white/5 shadow-lg transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-[#0B1724]/20 hover:scale-105
         ${visible ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-2 pointer-events-none'}`}
       style={{
         // Respect device safe area insets (iOS) so button is not flush to device edges

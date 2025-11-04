@@ -277,7 +277,6 @@
 }
 
 /* Global page background and base text color */
-html,
 body {
   height: 100%;
   background-color: var(--color-white-back);

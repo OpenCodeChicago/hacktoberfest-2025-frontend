@@ -121,13 +121,12 @@ const ReviewsSection = () => {
     >
       <h2
         id="reviews"
-        className=" text-[32px] lg:text-[48px] uppercase section-title"
+        className=" text-[32px] lg:text-[48px] uppercase section-title  px-5 md:px-0 align-center"
       >
         <span className="text-[#000]">THOUSANDS</span>
         <span className="stroke-title">{'  '} LOVE</span>
         <span className="capitalize text-[#000]"> Core</span>
         <span className="text-red-500">X</span>
-        <br />
         <span className="text-[#000]"> Nutrition</span>
       </h2>
 

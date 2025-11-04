@@ -3,7 +3,7 @@ function WhyChoose() {
     <section aria-labelledby="why-choose" className="flex flex-col gap-[64px]">
       <h2
         id="why-choose"
-        className="bg-[#F7FAFF] text-[32px] lg:text-[48px] uppercase section-title"
+        className="bg-[#F7FAFF] text-[32px] lg:text-[48px] uppercase section-title px-5 md:px-0"
       >
         <span className="text-[#000]">Why </span>
         <span className="stroke-title">Choose</span>

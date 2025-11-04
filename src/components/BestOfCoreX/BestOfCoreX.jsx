@@ -98,7 +98,7 @@ export default function BestOfCoreX() {
   }
 
   return (
-    <section className="px-10 w-full max-w-7xl mx-auto flex flex-col gap-[40px]">
+    <section className="px-5 md:px-0 w-full max-w-7xl mx-auto flex flex-col gap-[40px]">
       {/* Header */}
       <h2 className="bg-[#F7FAFF] text-[32px] lg:text-[48px] uppercase section-title">
         <span className="text-[#000]">BEST </span>
@@ -111,12 +111,12 @@ export default function BestOfCoreX() {
       {/* Tabs + Navigation in same row */}
       <div className="flex flex-wrap justify-between items-center  sm:gap-4">
         {/* Tabs: horizontally scrollable on mobile, hidden scrollbar */}
-        <div className="tabs-scroll-container  px-4 sm:mx-0 sm:px-0 overflow-x-auto whitespace-nowrap snap-x snap-mandatory sm:overflow-visible">
+        <div className="tabs-scroll-container sm:mx-0 sm:px-0 overflow-x-auto whitespace-nowrap snap-x snap-mandatory sm:overflow-visible flex gap-3">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`inline-block mr-3 last:mr-0 snap-start px-5 py-2 rounded-lg font-semibold uppercase tracking-wide transition-all duration-300
+              className={`px-4 md:px-5 py-2 md:py-3 rounded-lg uppercase text-[12px] md:text-[16px] cursor-pointer tracking-wide transition-all duration-300
                 ${
                   activeTab === tab.id
                     ? 'bg-[#171717] text-white'
@@ -134,7 +134,7 @@ export default function BestOfCoreX() {
             <button
               onClick={prevSlide}
               disabled={!canGoPrev}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 text-gray-500 hover:bg-gray-100
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 text-gray-500 hover:bg-gray-100 cursor-pointer
               disabled:cursor-not-allowed disabled:opacity-40 transition-all duration-200"
               aria-label="Previous"
             >
@@ -144,7 +144,7 @@ export default function BestOfCoreX() {
             <button
               onClick={nextSlide}
               disabled={!canGoNext}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 text-gray-500 hover:bg-gray-100
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 text-gray-500 hover:bg-gray-100 cursor-pointer
               disabled:cursor-not-allowed disabled:opacity-40 transition-all duration-200"
               aria-label="Next"
             >
