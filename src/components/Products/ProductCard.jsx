@@ -222,7 +222,7 @@ const ProductCard = forwardRef(
                 ))}
               </div>
               <span className="text-xs text-gray-500">
-                ({product.reviewCount || 0})
+                ({product.reviewCount || product.reviewsCount || 0})
               </span>
             </div>
             <div className="flex items-center gap-2">
