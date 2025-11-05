@@ -33,8 +33,6 @@ export default function ProductDetails({ product }) {
   // Defensive normalization
   const qualities = Array.isArray(product?.quality) ? product.quality : [];
 
-  console.log(qualities);
-
   const usage = product?.usageTips || {
     when: 'Best used post-workout for muscle recovery or anytime during the day to support lean muscle growth.',
     blend:

@@ -4,6 +4,7 @@ import { addRecentlyViewed } from '../../utils/recentlyViewed';
 import { addToWishList, removeFromWishList } from '../../store/wishListSlice';
 import { useDispatch } from 'react-redux';
 import AddToCartButton from './AddToCartButton';
+
 const HeartIcon = ({
   isWishlisted = false,
   animate = false,

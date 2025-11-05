@@ -84,8 +84,9 @@ export default function ProductPage() {
                 <img
                   className="object-cover "
                   src={
+                    product.imageUrl ||
                     product.image ||
-                    '/images/products/nova-whey-vanilla-protein.jpg'
+                    '/images/product-default-image.jpg'
                   }
                   alt={product.name}
                 />
@@ -111,22 +112,38 @@ export default function ProductPage() {
             <div className="additional-images-grid grid grid-cols-4 gap-4 px-4 mt-4">
               <img
                 className="w-full h-auto object-cover rounded-lg cursor-pointer"
-                src="/images/products/nova-whey-vanilla-protein.jpg"
+                src={
+                  product.imageUrl ||
+                  product.image ||
+                  '/images/product-default-image.jpg'
+                }
                 alt={product.name}
               />
               <img
                 className="w-full h-auto object-cover rounded-lg cursor-pointer"
-                src="/images/products/nova-whey-vanilla-protein.jpg"
+                src={
+                  product.imageUrl ||
+                  product.image ||
+                  '/images/product-default-image.jpg'
+                }
                 alt={product.name}
               />
               <img
                 className="w-full h-auto object-cover rounded-lg cursor-pointer"
-                src="/images/products/nova-whey-vanilla-protein.jpg"
+                src={
+                  product.imageUrl ||
+                  product.image ||
+                  '/images/product-default-image.jpg'
+                }
                 alt={product.name}
               />
               <img
                 className="w-full h-auto object-cover rounded-lg cursor-pointer"
-                src="/images/products/nova-whey-vanilla-protein.jpg"
+                src={
+                  product.imageUrl ||
+                  product.image ||
+                  '/images/product-default-image.jpg'
+                }
                 alt={product.name}
               />
             </div>
