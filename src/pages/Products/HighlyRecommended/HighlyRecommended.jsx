@@ -93,11 +93,9 @@ function HighlyRecommended() {
         <section className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 py-8 flex flex-col gap-6">
           {/* Header section with title and navigation arrows */}
           <div className="flex items-center justify-between  flex-col sm:flex-row gap-4 sm:gap-0">
-            <h2 className="section-title text-left md:text-center w-full sm:w-auto mb-0">
+            <h2 className="section-title text-[32px] lg:text-[48px]">
               <span className="text-[#000]">HIGHLY </span>
-              <span className="stroke-title" style={{ color: '#f7faff' }}>
-                RECOMMENDED
-              </span>
+              <span className="stroke-title">RECOMMENDED</span>
             </h2>
 
             {/* Navigation Buttons */}
@@ -105,7 +103,7 @@ function HighlyRecommended() {
               <button
                 onClick={prevSlide}
                 disabled={!canGoPrev}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 text-gray-500 hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40 transition-all duration-200"
+                className="flex h-10 w-10 items-center justify-center cursor-pointer rounded-full border border-gray-300 text-gray-500 hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40 transition-all duration-200"
                 aria-label="Previous"
               >
                 <ChevronLeftIcon className="h-5 w-5" />
@@ -114,7 +112,7 @@ function HighlyRecommended() {
               <button
                 onClick={nextSlide}
                 disabled={!canGoNext}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 text-gray-500 hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40 transition-all duration-200"
+                className="flex h-10 w-10 items-center justify-center cursor-pointer rounded-full border border-gray-300 text-gray-500 hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40 transition-all duration-200"
                 aria-label="Next"
               >
                 <ChevronRightIcon className="h-5 w-5" />
