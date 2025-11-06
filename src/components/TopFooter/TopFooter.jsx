@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router';
 import { toast } from 'react-toastify';
@@ -22,6 +24,8 @@ const information = [
 export default function TopFooter() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState('idle'); // 'idle' | 'loading' | 'success'
+  const isAuthenticated = useSelector((s) => s.auth?.isAuthenticated);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -86,12 +90,26 @@ export default function TopFooter() {
             <ul className="space-y-2">
               {customerCare.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-neutral-300 link-underline transition"
-                  >
-                    {link.name}
-                  </a>
+                  {link.name === 'My Account' ? (
+                    <a
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (isAuthenticated) navigate('/profile');
+                        else navigate('/login');
+                      }}
+                      className="text-neutral-300 link-underline transition"
+                    >
+                      {link.name}
+                    </a>
+                  ) : (
+                    <a
+                      href={link.href}
+                      className="text-neutral-300 link-underline transition"
+                    >
+                      {link.name}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>

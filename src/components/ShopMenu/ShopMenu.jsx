@@ -240,10 +240,10 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
               <NavLink
                 to="/products"
                 onClick={handleCollectionClick}
-                className="group w-full flex justify-between items-center gap-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg cursor-pointer"
+                className="group w-full flex justify-between items-center gap-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg cursor-pointer "
               >
                 <h2
-                  className="font-bold text-black uppercase group-hover:text-gray-600 transition-colors duration-300"
+                  className="font-bold text-black uppercase group-hover:text-gray-600  transition-colors duration-300 link-underline"
                   style={{
                     fontSize: '28px',
                     lineHeight: '28px',
@@ -253,7 +253,7 @@ const ShopMenu = ({ shopOpen, setShopOpen, onShopClick, onShopKeyDown }) => {
                 >
                   ALL PRODUCTS
                 </h2>
-                <ArrowRight className="h-5 w-5 text-black group-hover:translate-x-1 transition-transform duration-300" />
+                <ArrowRight className="h-5 w-5 text-black group-hover:rotate-90 transition-transform duration-300" />
               </NavLink>
             </div>
             <div className="border border-gray-300 mb-11 mt-8" />
