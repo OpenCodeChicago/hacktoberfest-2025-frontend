@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 export default function FeaturedProductImage({
   productId = '',
   imageUrl = '',
+  imageMobileUrl = '',
   alt = 'Featured product image',
-  placeholder = '/images/test-product-image.jpg',
+  placeholder = '/images/promo-banner.jpg',
   className = '',
   onLoad,
   onError,
@@ -15,18 +16,24 @@ export default function FeaturedProductImage({
   return (
     <section>
       <Link
-        to={`/product/${productId}`}
+        to={`/products/${productId}`}
         aria-label={`View product ${alt}`}
         className={`group w-full ${className}`}
       >
-        <img
-          src={finalSrc}
-          alt={alt}
-          loading="lazy"
-          onLoad={onLoad}
-          onError={onError}
-          className="w-full h-full object-contain cursor-pointer block"
-        />
+        <picture>
+          {imageMobileUrl && (
+            <source srcSet={imageMobileUrl} media="(max-width: 767px)" />
+          )}
+          <source srcSet={imageUrl} />
+          <img
+            src={finalSrc}
+            alt={alt}
+            loading="lazy"
+            onLoad={onLoad}
+            onError={onError}
+            className="w-full h-full object-contain cursor-pointer block"
+          />
+        </picture>
       </Link>
     </section>
   );

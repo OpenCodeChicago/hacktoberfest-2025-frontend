@@ -36,9 +36,10 @@ export default function Home() {
         <LogoCarousel />
         <BestOfCoreX />
         <FeaturedProductImage
-          imageUrl="/images/test-product-image.jpg"
-          productId="69027765586b66c3d63ad0df"
-          alt="Featured Product - CoreX Whey Protein"
+          imageUrl="/images/promo-banner.jpg"
+          imageMobileUrl="/images/promo-banner-mobile.jpg"
+          productId="690b8692a60e83c734939790"
+          alt="Featured Product - CoreX Premium Isolate"
         />
         <CollectionSection />
         <ReviewsSection />
