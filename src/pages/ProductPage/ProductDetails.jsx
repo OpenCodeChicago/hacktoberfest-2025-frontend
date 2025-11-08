@@ -42,14 +42,14 @@ export default function ProductDetails({ product }) {
   };
 
   return (
-    <section className="w-full py-12 mt-12">
+    <section className="w-full flex flex-col gap-16">
       {/* Section Title */}
-      <h2 className="text-center text-[#010409] text-2xl md:text-3xl font-bold font-montserrat mb-10">
+      <h2 className="text-center text-[#010409] text-2xl md:text-3xl font-bold font-montserrat">
         {title}
       </h2>
 
       {/* Quality Icons with Dynamic Labels */}
-      <div className="flex flex-col sm:flex-row justify-center items-center md:gap-48 gap-14 my-16">
+      <div className="flex flex-col sm:flex-row justify-center items-center md:gap-48 gap-14">
         {qualities.map((label, idx) => {
           const icon = ICONS[idx % ICONS.length]; // rotate icons safely
           return (
@@ -80,7 +80,7 @@ export default function ProductDetails({ product }) {
       </div>
 
       {/* Banner & Usage Tips (Full-width, no background) */}
-      <div className="w-full grid md:grid-cols-2 gap-10 items-center px-4 md:px-8">
+      <div className="w-full grid md:grid-cols-2 gap-10 items-center">
         {/* Left - Product Image */}
         <div className="flex justify-center">
           <picture>

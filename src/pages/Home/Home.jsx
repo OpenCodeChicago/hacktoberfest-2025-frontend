@@ -28,7 +28,7 @@ export default function Home() {
 
       <main
         id="main-content"
-        className="min-h-screen bg-[#F7FAFF] -mt-16 pt-16 flex flex-col gap-[96px]"
+        className="min-h-screen bg-[#F7FAFF] flex flex-col gap-[96px]"
       >
         <HeroSection />
         <WhyChoose />

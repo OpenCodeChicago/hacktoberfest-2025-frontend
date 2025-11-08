@@ -3,7 +3,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Clock, PackageIcon } from 'lucide-react';
 import HighlyRecommended from './HighlyRecommended/HighlyRecommended';
-import ProductDetails from '../../components/ProductDetails';
+import ProductDetails from './ProductDetails';
 import { renderStars } from '../../components/common/ReviewStars';
 import AddToCartButton from '../../components/Products/AddToCartButton';
 import { addToWishList, removeFromWishList } from '../../store/wishListSlice';
@@ -65,7 +65,7 @@ export default function ProductPage() {
 
   if (product)
     return (
-      <main className="max-w-6xl mx-auto p-6">
+      <main className="max-w-6xl mx-auto px-5 md:px-0 py-6 pb-[64px] flex flex-col gap-[96px]">
         <section className="flex flex-col md:flex-row w-full md:align-center mt-4 md:max-w-[70vw] gap-8">
           {/* Left side section */}
           <div className="Left-side flex-4 images-section">
