@@ -1,6 +1,8 @@
 import ProductList from '../../components/Products/ProductList';
 import allProductsBanner from '/images/all-products-banner.jpg';
+import allProductsBannerWebP from '/images/all-products-banner.webp';
 import allProductsBannerMobile from '/images/all-products-banner-mobile.jpg';
+import allProductsBannerMobileWebP from '/images/all-products-banner-mobile.webp';
 
 export default function Products() {
   return (
@@ -14,7 +16,9 @@ export default function Products() {
           'sports nutrition, supplements, protein powder, pre-workout, fitness products, CoreX Nutrition',
       }}
       bannerImage={allProductsBanner}
+      bannerImageWebP={allProductsBannerWebP}
       bannerImageMobile={allProductsBannerMobile}
+      bannerImageMobileWebP={allProductsBannerMobileWebP}
       bannerAlt="All products banner"
     />
   );

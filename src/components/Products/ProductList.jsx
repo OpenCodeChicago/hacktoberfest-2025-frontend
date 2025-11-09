@@ -21,8 +21,10 @@ export default function ProductList({
   saleOnly = false,
   seo = {},
   bannerImage = null,
+  bannerImageWebP = null,
   bannerAlt = '',
   bannerImageMobile = null,
+  bannerImageMobileWebP = null,
 }) {
   const dispatch = useDispatch();
   const {
@@ -135,21 +137,34 @@ export default function ProductList({
         {bannerImage && !bannerImageError ? (
           <div className="w-full mt-24">
             <picture>
-              {/* mobile-first source: use mobile banner for small viewports if provided */}
+              {/* mobile: prefer webp then jpeg */}
+              {bannerImageMobileWebP && (
+                <source
+                  media="(max-width: 640px)"
+                  srcSet={bannerImageMobileWebP}
+                  type="image/webp"
+                />
+              )}
               {bannerImageMobile && (
-                <source media="(max-width: 640px)" srcSet={bannerImageMobile} />
+                <source
+                  media="(max-width: 640px)"
+                  srcSet={bannerImageMobile}
+                  type="image/jpeg"
+                />
               )}
 
-              {String(bannerImage).toLowerCase().endsWith('.webp') && (
-                <source srcSet={bannerImage} type="image/webp" />
+              {/* desktop: prefer webp then jpeg */}
+              {bannerImageWebP && (
+                <source srcSet={bannerImageWebP} type="image/webp" />
               )}
+              {bannerImage && <source srcSet={bannerImage} type="image/jpeg" />}
 
               <img
-                src={bannerImage}
+                src={bannerImage || ''}
                 alt={bannerAlt || `${title} banner`}
                 loading="lazy"
                 decoding="async"
-                className="w-full object-cover min-h-[550px]"
+                className="w-full object-cover min-h-[550px] md:min-h-[384px]"
                 onError={() => setBannerImageError(true)}
               />
             </picture>
