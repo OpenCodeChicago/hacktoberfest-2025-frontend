@@ -149,7 +149,7 @@ export default function ProductList({
                 alt={bannerAlt || `${title} banner`}
                 loading="lazy"
                 decoding="async"
-                className="w-full object-cover"
+                className="w-full object-cover min-h-[550px]"
                 onError={() => setBannerImageError(true)}
               />
             </picture>

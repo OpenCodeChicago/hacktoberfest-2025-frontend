@@ -256,7 +256,7 @@ export default function CollectionPage() {
                 alt={`${collectionTitleCapitalized} Collection Banner`}
                 loading="lazy"
                 decoding="async"
-                className="w-full object-cover"
+                className="w-full object-cover min-h-[550px]"
               />
             </picture>
             <motion.div
