@@ -25,6 +25,7 @@ export default function ProductList({
   bannerAlt = '',
   bannerImageMobile = null,
   bannerImageMobileWebP = null,
+  bannerImageType = 'image/jpeg',
 }) {
   const dispatch = useDispatch();
   const {
@@ -149,7 +150,7 @@ export default function ProductList({
                 <source
                   media="(max-width: 640px)"
                   srcSet={bannerImageMobile}
-                  type="image/jpeg"
+                  type={bannerImageType}
                 />
               )}
 
@@ -157,7 +158,9 @@ export default function ProductList({
               {bannerImageWebP && (
                 <source srcSet={bannerImageWebP} type="image/webp" />
               )}
-              {bannerImage && <source srcSet={bannerImage} type="image/jpeg" />}
+              {bannerImage && (
+                <source srcSet={bannerImage} type={bannerImageType} />
+              )}
 
               <img
                 src={bannerImage || ''}

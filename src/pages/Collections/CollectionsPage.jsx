@@ -14,6 +14,10 @@ import ProductSkeleton from '../../components/Products/ProductSkeleton';
 import FilterPanel from '../../components/Products/FilterPanel/FilterPanel';
 import RecentlyViewed from '../../components/RecentlyViewed';
 import SEO from '../../components/SEO';
+import imageUrl from '/images/collections-banner.jpg';
+import imageUrlWebp from '/images/collections-banner.webp';
+import imageMobileUrl from '/images/collections-banner-mobile.jpg';
+import imageMobileUrlWebp from '/images/collections-banner-mobile.webp';
 
 export default function CollectionPage() {
   const { name } = useParams();
@@ -164,12 +168,6 @@ export default function CollectionPage() {
   const collectionTitleCapitalized =
     collectionTitle.charAt(0).toUpperCase() + collectionTitle.slice(1);
 
-  // Always use project default collection banners (do not use data-provided images)
-  const imageUrl = '/images/collections-banner.jpg';
-  const imageUrlWebp = '/images/collections-banner.webp';
-  const imageMobileUrl = '/images/collections-banner-mobile.jpg';
-  const imageMobileUrlWebp = '/images/collections-banner-mobile.webp';
-
   if (error) {
     return (
       <>
@@ -256,7 +254,7 @@ export default function CollectionPage() {
                 alt={`${collectionTitleCapitalized} Collection Banner`}
                 loading="lazy"
                 decoding="async"
-                className="w-full object-cover min-h-[550px]"
+                className="w-full object-cover min-h-[550px] md:min-h-[384px]"
               />
             </picture>
             <motion.div

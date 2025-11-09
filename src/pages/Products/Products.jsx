@@ -20,6 +20,7 @@ export default function Products() {
       bannerImageMobile={allProductsBannerMobile}
       bannerImageMobileWebP={allProductsBannerMobileWebP}
       bannerAlt="All products banner"
+      bannerImageType="image/jpeg"
     />
   );
 }
