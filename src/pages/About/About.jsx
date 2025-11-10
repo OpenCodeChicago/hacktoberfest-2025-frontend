@@ -17,73 +17,73 @@ export default function AboutPage() {
         aria-labelledby="about-title"
       >
         <div className="max-w-4xl mx-auto">
-          <header className="mb-8">
-            <h1 className="text-4xl font-semibold mb-16" id="about-title">
-              About Core<span className="text-red-600">X</span>
-            </h1>
-          </header>
+          <h1 className="text-4xl font-semibold mb-16" id="about-title">
+            About Core<span className="text-red-600">X</span>
+          </h1>
 
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold mb-6">
-              BORN IN CHICAGO, BUILT FOR PERFORMANCE
-            </h2>
-            <p className="text-base mb-6 uppercase">
-              CoreX was founded in the heart of Chicago with a clear mission: to
-              create premium supplements backed by real-world experience and
-              science. We're not just another supplement brand — we're athletes,
-              trainers, and health professionals who know exactly what the body
-              needs to perform, recover, and grow stronger.
-            </p>
-          </section>
+          <div className="flex flex-col gap-14">
+            <section className="flex flex-col gap-6">
+              <h2 className="text-2xl font-bold">
+                BORN IN CHICAGO, BUILT FOR PERFORMANCE
+              </h2>
+              <p className="text-base">
+                CoreX was founded in the heart of Chicago with a clear mission:
+                to create premium supplements backed by real-world experience
+                and science. We're not just another supplement brand — we're
+                athletes, trainers, and health professionals who know exactly
+                what the body needs to perform, recover, and grow stronger.
+              </p>
+            </section>
 
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold mb-6">
-              FROM GLOBAL EXPERIENCE TO LOCAL ROOTS
-            </h2>
-            <p className="text-base mb-6 uppercase">
-              Our founder has spent years working as a personal trainer,
-              physical therapist, and strength coach across 10 different
-              countries. With a background as a competitive bodybuilder,
-              gymnast, and trainer for professional fighters, he's seen
-              firsthand what separates good supplements from the great ones.
-              That journey, combined with a deep understanding of movement
-              science and rehavilitation, inspired CoreX: a company that truly
-              puts health and performance first.
-            </p>
-          </section>
+            <section className="flex flex-col gap-6">
+              <h2 className="text-2xl font-bold">
+                FROM GLOBAL EXPERIENCE TO LOCAL ROOTS
+              </h2>
+              <p className="text-base">
+                Our founder has spent years working as a personal trainer,
+                physical therapist, and strength coach across 10 different
+                countries. With a background as a competitive bodybuilder,
+                gymnast, and trainer for professional fighters, he's seen
+                firsthand what separates good supplements from the great ones.
+                That journey, combined with a deep understanding of movement
+                science and rehavilitation, inspired CoreX: a company that truly
+                puts health and performance first.
+              </p>
+            </section>
 
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold mb-6">
-              CHICAGO STRONG, GLOBALLY INSPIRED
-            </h2>
-            <p className="text-base mb-6 uppercase">
-              Though our knowledge spans the globe, our roots run deep in
-              Chicago and the Chicagoland area. We carry the city's spirit of
-              resilience, hard work, and innovation into every product we
-              create. Whether you're training for your first 5k, competing at
-              the highest levels, or just looking to live a healthier life —
-              CoreX is here to fuel your journey.
-            </p>
-          </section>
+            <section className="flex flex-col gap-6">
+              <h2 className="text-2xl font-bold ">
+                CHICAGO STRONG, GLOBALLY INSPIRED
+              </h2>
+              <p className="text-base">
+                Though our knowledge spans the globe, our roots run deep in
+                Chicago and the Chicagoland area. We carry the city's spirit of
+                resilience, hard work, and innovation into every product we
+                create. Whether you're training for your first 5k, competing at
+                the highest levels, or just looking to live a healthier life —
+                CoreX is here to fuel your journey.
+              </p>
+            </section>
 
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold mb-6">OUR MISSION</h2>
-            <p className="text-base font-500 mb-6 uppercase">
-              To deliver supplements that don't just promise results but are
-              crafted with precision, integrity, and science — designed to help
-              you push past limits, recover smarter, and perform at your best.
-              At CoreX, we believe every athlete, from weekend warriors to
-              professionals, deserves supplements they can trust.
-            </p>
-          </section>
+            <section className="flex flex-col gap-6">
+              <h2 className="text-2xl font-bold ">OUR MISSION</h2>
+              <p className="text-base font-500 ">
+                To deliver supplements that don't just promise results but are
+                crafted with precision, integrity, and science — designed to
+                help you push past limits, recover smarter, and perform at your
+                best. At CoreX, we believe every athlete, from weekend warriors
+                to professionals, deserves supplements they can trust.
+              </p>
+            </section>
 
-          <section className="mb-8">
-            <p className="text-sm text-gray-900 mb-6">
-              Please take a moment to read through all the steps below. Once
-              you're ready, feel free to follow them at your own pace.
-            </p>
-            <AboutAccordion />
-          </section>
+            <section className="flex flex-col gap-6">
+              <p className="text-sm text-gray-900 ">
+                Please take a moment to read through all the steps below. Once
+                you're ready, feel free to follow them at your own pace.
+              </p>
+              <AboutAccordion />
+            </section>
+          </div>
         </div>
       </main>
     </>
@@ -99,7 +99,7 @@ const AboutAccordion = () => {
       type="multiple"
       value={openItems}
       onValueChange={setOpenItems}
-      className="rounded-2xl border border-gray-200 px-12 py-6"
+      className="rounded-2xl border border-gray-200 px-6 md:px-12 py-6"
     >
       <Accordion.Item className="AccordionItem" value="item-1">
         <Accordion.Header>
@@ -192,7 +192,7 @@ const AboutAccordion = () => {
 
       <Accordion.Item className="AccordionItem" value="item-5">
         <Accordion.Header>
-          <Accordion.Trigger className="flex w-full justify-between text-xl uppercase data-[state=open]:text-blue-800 data-[state=closed]:text-blue-950 data-[state=open]:opacity-80 cursor-pointer">
+          <Accordion.Trigger className="flex w-full justify-between text-xl uppercase data-[state=open]:text-blue-800 data-[state=closed]:text-blue-950 data-[state=open]:opacity-80 cursor-pointer align-left">
             <span>5. Contribute & Collaborate</span>
             {isOpen('item-5') ? (
               <X className="h-5 w-5" />
