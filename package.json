@@ -63,7 +63,7 @@
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@reduxjs/toolkit": "^2.9.0",
-    "axios": "^1.13.0",
+    "axios": "^1.13.2",
     "framer-motion": "^12.23.24",
     "lucide-react": "^0.553.0",
     "radix-ui": "^1.4.3",

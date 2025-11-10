@@ -62,7 +62,7 @@ function HeroSection() {
 
   return (
     <section
-      className="hero-section h-[calc(100vh-4rem)] sm:h-auto xl:h-[calc(100vh-4rem)] overflow-hidden"
+      className="hero-section overflow-hidden"
       aria-label="Hero carousel"
       id="hero-section"
     >
@@ -85,11 +85,7 @@ function HeroSection() {
                 type="image/webp"
                 srcSet={slide.mobile}
               />
-              <source
-                type="image/webp"
-                srcSet={slide.srcSet}
-                sizes="100vw"
-              />
+              <source type="image/webp" srcSet={slide.srcSet} sizes="100vw" />
               <img
                 src={slide.fallback}
                 alt={slide.alt}
