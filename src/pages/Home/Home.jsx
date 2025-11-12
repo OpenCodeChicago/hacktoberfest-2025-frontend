@@ -1,13 +1,13 @@
 import ReviewsSection from '../../components/ReviewsSection';
 import BestOfCoreX from '../../components/BestOfCoreX/BestOfCoreX';
 import FeaturedProductImage from '../../components/NewProductsBanner/NewProductsBanner';
+import SupplementForGoalsSection from '../../components/SupplementForGoalsSection/SupplementForGoalsSection';
 import {
   CollectionSection,
   HeroSection,
   LogoCarousel,
   SEO,
   WhyChoose,
-  SupplementForGoalsSection,
 } from '../../components';
 
 export default function Home() {

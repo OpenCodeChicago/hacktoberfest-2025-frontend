@@ -162,7 +162,7 @@ export default function ProductPage() {
             {/* Flavour and size selection */}
             <div className="flavours-size-section flex flex-col gap-4 ">
               {/* flavour selection */}
-              <div className="flavours-selection md:items-center justify-start flex flex-row gap-4 ">
+              <div className="flavours-selection items-center justify-start flex flex-row gap-4 ">
                 <h3 className="text-gray-800 font-semibold ">Flavors:</h3>
                 <div className="flavours-selection flex flex-row  gap-4 flex-wrap md:flex-nowrap">
                   {product.flavors.map((flavor) => (

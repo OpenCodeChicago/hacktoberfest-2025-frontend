@@ -93,7 +93,7 @@ function HeroSection() {
                 loading={index === 0 ? 'eager' : 'lazy'}
                 decoding="async"
                 fetchPriority={index === 0 ? 'high' : 'low'}
-                className="w-full h-full object-cover object-top md:object-contain md:object-center xl:object-cover xl:object-center"
+                className="w-full h-full object-cover object-top md:object-contain md:object-center xl:object-cover xl:object-center min-h-[550px]"
               />
             </picture>
 

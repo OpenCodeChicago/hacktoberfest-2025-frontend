@@ -1,7 +1,7 @@
 .carousel-section {
   background-color: #f7faff;
-  padding: 5rem 0;
-  overflow: hidden;
+  /* padding: 5rem 0; */
+  /* overflow: hidden; */
 }
 
 .carousel-ribbon-wrapper {
@@ -10,10 +10,14 @@
 
 .carousel-ribbon {
   background-color: #0b61cd;
-  padding: 1rem 0;
+  padding: 1.2rem 0;
   width: 100%;
   position: relative;
   overflow: hidden;
+
+  @media (min-width: 640px) {
+    padding: 2rem 0;
+  }
 }
 
 .main-ribbon:hover .carousel-track,
@@ -22,12 +26,12 @@
 }
 
 .main-ribbon {
-  transform: scale(1.1) rotate(-2deg);
+  transform: scale(1.1) rotate(-3deg);
   z-index: 2;
 }
 
 .reflection-ribbon {
-  transform: scale(1.1) rotate(2deg);
+  transform: scale(1.1) rotate(3deg);
   opacity: 0.4;
   margin-top: 0.75rem;
   z-index: 1;
@@ -40,30 +44,30 @@
 }
 
 .track-forward {
-  animation: scroll-forward 60s linear infinite;
+  animation: scroll-forward 25s linear infinite;
 }
 
 .track-reverse {
-  animation: scroll-reverse 60s linear infinite;
+  animation: scroll-reverse 25s linear infinite;
 }
 
 @keyframes scroll-forward {
   from {
-    transform: translateX(0);
+    transform: translateX(-50%);
   }
 
   to {
-    transform: translateX(-50%);
+    transform: translateX(0);
   }
 }
 
 @keyframes scroll-reverse {
   from {
-    transform: translateX(-50%);
+    transform: translateX(0);
   }
 
   to {
-    transform: translateX(0);
+    transform: translateX(-50%);
   }
 }
 
@@ -77,6 +81,6 @@
 }
 
 .logo-image {
-  height: 64px;
+  height: 100%;
   width: auto;
 }

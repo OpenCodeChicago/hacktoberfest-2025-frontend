@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
+import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import './SupplementForGoalsSection.css';
 import {
   aminoAcids,
@@ -7,7 +7,7 @@ import {
   preWorkout,
   proteinPowder,
   weightManagement,
-} from '../assets';
+} from '../../assets';
 
 export const goalCards = [
   {
@@ -68,7 +68,7 @@ export default function SupplementForGoalsSection() {
         <span className="text-[#000]">goal</span>
       </h2>
 
-      <div className="space-y-10 md:py-0 md:px-16">
+      <div className="space-y-10 md:py-0 md:px-32">
         <div className="flex justify-center flex-col md:flex-row gap-10">
           {goalCards.slice(0, 2).map((goalCard, index) => (
             <GoalCard
