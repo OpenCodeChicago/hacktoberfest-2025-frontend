@@ -1,7 +1,5 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import SEO from '../components/SEO';
 import ScrollToTop from '../components/ui/ScrollToTop/ScrollToTop';
 import TopFooter from '../components/TopFooter';
@@ -30,17 +28,6 @@ function RootLayout() {
       <TopFooter />
       <BottomFooter />
       <BackToTop showAfter={250} />
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
     </CartProvider>
   );
 }

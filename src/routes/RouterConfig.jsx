@@ -29,7 +29,7 @@ const CollectionsPage = lazy(
   () => import('../pages/Collections/CollectionsPage')
 );
 
-const Register = lazy(() => import('../pages/Register'));
+const Register = lazy(() => import('../pages/Register/Register'));
 const Login = lazy(() => import('../pages/Login'));
 const Checkout = lazy(() => import('../pages/Checkout'));
 

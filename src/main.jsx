@@ -18,7 +18,8 @@ const skip = import.meta.env.VITE_SKIP_SESSION_CHECK === 'true';
 // Only attempt a refresh on startup if we previously recorded that a session exists.
 // We intentionally do NOT persist tokens; this small boolean flag only avoids noisy 401 logs
 // when no session ever existed.
-const hadSession = typeof window !== 'undefined' && localStorage.getItem('hasSession') === '1';
+const hadSession =
+  typeof window !== 'undefined' && localStorage.getItem('hasSession') === '1';
 if (!skip && hadSession) {
   (async () => {
     try {
@@ -42,7 +43,8 @@ if (!skip && hadSession) {
       }
     } catch (err) {
       // silent: user not logged in or session check failed
-      if (import.meta.env.DEV) console.debug('Session check / refresh failed:', err?.message || err);
+      if (import.meta.env.DEV)
+        console.debug('Session check / refresh failed:', err?.message || err);
     }
   })();
 }

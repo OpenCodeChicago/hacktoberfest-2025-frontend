@@ -301,3 +301,17 @@ body {
 .tabs-scroll-container>button {
   scroll-snap-align: start;
 }
+
+.visually-hidden {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+  border: 0;
+  padding: 0;
+  margin: -1px;
+  left: -10000px;
+  top: auto;
+}
