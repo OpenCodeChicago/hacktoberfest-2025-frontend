@@ -181,7 +181,7 @@ const Register = () => {
       <div className="flex justify-center mb-6">
         <button
           onClick={() => navigate('/')}
-          className="focus:outline-none focus:ring-2 focus:ring-[#CBD5E1] rounded"
+          className="focus:outline-none focus:ring-2 focus:ring-[#CBD5E1] rounded cursor-pointer"
           aria-label="Go to home page"
         >
           <img
@@ -218,7 +218,7 @@ const Register = () => {
         {/* Google Sign In */}
         <button
           type="button"
-          className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[#B4C2CF] text-[#0B1A2C] text-sm font-medium rounded-md mb-6 hover:bg-[#c1d0dd] transition"
+          className="w-full flex items-center justify-center gap-2 px-4 py-2 text-[#0B1A2C] bg-[#f1f3f5] text-sm font-medium mb-6  border border-gray-300 rounded-md cursor-pointer hover:bg-gray-200 transition-all duration-300"
           disabled={loading}
         >
           <img
@@ -226,7 +226,6 @@ const Register = () => {
             alt="Google Icon"
             className="w-5 h-5"
           />
-          Sign in with Google
         </button>
 
         {/* Divider */}

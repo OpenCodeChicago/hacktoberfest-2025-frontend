@@ -30,7 +30,7 @@ const CollectionsPage = lazy(
 );
 
 const Register = lazy(() => import('../pages/Register/Register'));
-const Login = lazy(() => import('../pages/Login'));
+const Login = lazy(() => import('../pages/Login/Login'));
 const Checkout = lazy(() => import('../pages/Checkout'));
 
 const NotFound = lazy(() => import('../pages/PageNotFound/NotFound'));

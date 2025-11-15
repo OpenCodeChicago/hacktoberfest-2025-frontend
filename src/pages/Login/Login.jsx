@@ -4,10 +4,20 @@ import * as yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
-import { authServices } from '../services/api';
-import { loginStart, loginSuccess, loginFailure } from '../store/authSlice';
-import { extractToken, normalizeUser } from '../utils/authHelpers';
+import { authServices } from '../../services/api';
+import { loginStart, loginSuccess, loginFailure } from '../../store/authSlice';
+import { extractToken, normalizeUser } from '../../utils/authHelpers';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
+
+// sanitize server error messages for UI
+const sanitizeErrorMessage = (message) => {
+  if (typeof message !== 'string') return 'An error occurred';
+  return message
+    .replace(/<[^>]*>/g, '')
+    .replace(/[<>]/g, '')
+    .substring(0, 200);
+};
 
 // Validation schema
 const loginSchema = yup.object({
@@ -64,7 +74,7 @@ const Login = () => {
     try {
       dispatch(loginStart());
       const response = await authServices.login({
-        email: data.email,
+        email: data.email.trim().toLowerCase(),
         password: data.password,
       });
 
@@ -83,13 +93,17 @@ const Login = () => {
       } catch {
         // ignore storage errors
       }
-      if (import.meta.env.DEV) console.debug('loginSuccess dispatched:', { user, token });
+      // show success toast (ToastContainer is global)
+      toast.success(`Welcome back${user?.name ? `, ${user.name}` : ''}!`);
+      if (import.meta.env.DEV)
+        console.debug('loginSuccess dispatched:', { user, token });
       navigate('/');
     } catch (err) {
-      const message =
-        err?.response?.data?.message || err.message || 'Login failed';
+      const raw = err?.response?.data?.message || err.message || 'Login failed';
+      const message = sanitizeErrorMessage(raw);
       dispatch(loginFailure(message));
       setError('password', { type: 'server', message });
+      toast.error(message);
     } finally {
       setShowPassword(false);
     }
@@ -109,7 +123,7 @@ const Login = () => {
       <div className="flex justify-center mb-6">
         <button
           onClick={handleLogoClick}
-          className="focus:outline-none focus:ring-2 focus:ring-[#CBD5E1] rounded"
+          className="focus:outline-none focus:ring-2 focus:ring-[#CBD5E1] rounded cursor-pointer"
           aria-label="Go to home page"
         >
           <img
@@ -149,7 +163,7 @@ const Login = () => {
         <button
           type="button"
           aria-label="Sign in with Google"
-          className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[#B4C2CF] text-[#0B1A2C] text-sm font-medium rounded-md mb-6 hover:bg-[#c1d0dd] transition"
+          className="w-full flex items-center justify-center gap-2 px-4 py-2 text-[#0B1A2C] bg-[#f1f3f5] text-sm font-medium mb-6  border border-gray-300 rounded-md cursor-pointer hover:bg-gray-200 transition-all duration-300"
         >
           <img
             src="/assets/google-icon.svg"
@@ -182,13 +196,18 @@ const Login = () => {
                 onChange: () => handleChange('email'),
               })}
               onBlur={() => handleBlur('email')}
+              name="email"
               aria-label="Email address"
+              inputMode="email"
+              maxLength={254}
+              aria-invalid={errors.email ? 'true' : 'false'}
               placeholder="Email"
               autoComplete="email"
-              className={`w-full px-4 py-2.5 border rounded-md text-base placeholder:text-[#767676] focus:outline-none focus:ring-2 ${errors.email
+              className={`w-full px-4 py-2.5 border rounded-md text-base placeholder:text-[#767676] focus:outline-none focus:ring-2 ${
+                errors.email
                   ? 'border-red-500 focus:ring-red-500'
                   : 'border-[#D7DDE9] focus:ring-[#CBD5E1]'
-                }`}
+              }`}
             />
             {errors.email && (
               <p className="text-red-500 text-xs mt-1">
@@ -206,13 +225,17 @@ const Login = () => {
                   onChange: () => handleChange('password'),
                 })}
                 onBlur={() => handleBlur('password')}
+                name="password"
+                maxLength={72}
+                aria-invalid={errors.password ? 'true' : 'false'}
                 aria-label="Password"
                 placeholder="Password"
                 autoComplete="current-password"
-                className={`w-full px-4 py-2.5 pr-12 border rounded-md text-base placeholder:text-[#767676] focus:outline-none focus:ring-2 ${errors.password
+                className={`w-full px-4 py-2.5 pr-12 border rounded-md text-base placeholder:text-[#767676] focus:outline-none focus:ring-2 ${
+                  errors.password
                     ? 'border-red-500 focus:ring-red-500'
                     : 'border-[#D7DDE9] focus:ring-[#CBD5E1]'
-                  }`}
+                }`}
               />
               <button
                 type="button"
@@ -233,10 +256,11 @@ const Login = () => {
           <button
             type="submit"
             disabled={!isValid || !isDirty || loading}
-            className={`w-full px-4 py-2.5 text-base text-white rounded-md font-medium transition ${isValid && isDirty && !loading
+            className={`w-full px-4 py-2.5 text-base text-white rounded-md font-medium transition ${
+              isValid && isDirty && !loading
                 ? 'bg-[#023e8a] hover:bg-[#1054ab] cursor-pointer'
                 : 'bg-gray-300 cursor-not-allowed'
-              }`}
+            }`}
           >
             {loading ? 'Signing in...' : 'Continue'}
           </button>

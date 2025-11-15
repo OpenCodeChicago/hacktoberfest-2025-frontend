@@ -2,7 +2,6 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { logout } from '../../store/authSlice';
-import Loader from '../../components/Loader';
 import { getDisplayName, getDisplayEmail } from '../../utils/authHelpers';
 
 const UserProfile = () => {
@@ -20,7 +19,7 @@ const UserProfile = () => {
       <div className="w-full flex items-center justify-between gap-2">
         <h1 className="text-xl font-[600] font-inter">Profile</h1>
         <button
-          className=" px-6 sm:px-15 py-1 sm:py-2 border-2 border-gray-400 rounded-xl cursor-pointer hover:bg-gray-200 transition-all duration-200"
+          className=" px-6 sm:px-15 py-1 sm:py-2 border border-gray-300 bg-[#f8f9fa] rounded-xl cursor-pointer hover:bg-[#f1f3f5] transition-all duration-300"
           onClick={() => {
             dispatch(logout());
           }}
