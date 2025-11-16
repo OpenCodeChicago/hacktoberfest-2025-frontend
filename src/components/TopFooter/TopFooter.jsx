@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router';
 import { toast } from 'react-toastify';
 import SocialIcons from '../ui/SocialIcons/SocialIcons';
@@ -27,6 +27,10 @@ export default function TopFooter() {
   const isAuthenticated = useSelector((s) => s.auth?.isAuthenticated);
   const navigate = useNavigate();
 
+  // Mobile accordion state — default to opened
+  const [customerOpen, setCustomerOpen] = useState(true);
+  const [infoOpen, setInfoOpen] = useState(true);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -43,7 +47,6 @@ export default function TopFooter() {
       // Simulate API call
       await new Promise((res) => setTimeout(res, 2000));
 
-      console.log('Subscribed:', email);
       toast.success(
         'Thank you for subscribing! Your email has been received. You’ll now get our latest deals and discounts.'
       );
@@ -84,10 +87,29 @@ export default function TopFooter() {
         </div>
 
         {/* Navigation Links */}
-        <nav className="grid grid-cols-2 gap-8 text-sm">
-          <div>
-            <h3 className="font-semibold text-white mb-3">Customer Care</h3>
-            <ul className="space-y-2">
+        <nav className="grid md:grid-cols-2 md:gap-8 text-m border border-neutral-700 rounded-lg md:border-0 md:rounded-none">
+          {/* Customer Care (accordion on mobile) */}
+          <div className="w-full flex flex-col gap-4 p-5">
+            <button
+              type="button"
+              onClick={() => setCustomerOpen((s) => !s)}
+              aria-expanded={customerOpen}
+              className="w-full flex items-center justify-between md:justify-start gap-3 md:cursor-default"
+            >
+              <h3 className="font-semibold text-white text-left">
+                Customer Care
+              </h3>
+              {/* chevron only visible on mobile */}
+              <ChevronDown
+                className={`md:hidden transition-transform duration-200 ${customerOpen ? 'rotate-180' : 'rotate-0'}`}
+                aria-hidden="true"
+                size={18}
+              />
+            </button>
+
+            <ul
+              className={`${customerOpen ? 'block' : 'hidden'} md:block flex flex-col gap-2`}
+            >
               {customerCare.map((link) => (
                 <li key={link.name}>
                   {link.name === 'My Account' ? (
@@ -114,9 +136,31 @@ export default function TopFooter() {
               ))}
             </ul>
           </div>
-          <div>
-            <h3 className="font-semibold text-white mb-3">Information</h3>
-            <ul className="space-y-2">
+
+          {/* Divider between the two sections on mobile */}
+          <div className="w-full md:hidden border-t border-neutral-700" />
+
+          {/* Information (accordion on mobile) */}
+          <div className="w-full flex flex-col gap-4 p-5">
+            <button
+              type="button"
+              onClick={() => setInfoOpen((s) => !s)}
+              aria-expanded={infoOpen}
+              className="w-full flex items-center justify-between md:justify-start gap-3 md:cursor-default"
+            >
+              <h3 className="font-semibold text-white text-left">
+                Information
+              </h3>
+              <ChevronDown
+                className={`md:hidden transition-transform duration-200 ${infoOpen ? 'rotate-180' : 'rotate-0'}`}
+                aria-hidden="true"
+                size={18}
+              />
+            </button>
+
+            <ul
+              className={`${infoOpen ? 'block' : 'hidden'} md:block flex flex-col gap-2 `}
+            >
               {information.map((link) => (
                 <li key={link.name}>
                   <a
