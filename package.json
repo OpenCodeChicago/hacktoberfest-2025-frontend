@@ -45,7 +45,7 @@
   "devDependencies": {
     "@eslint/js": "^9.35.0",
     "@tailwindcss/postcss": "^4.1.13",
-    "@vitejs/plugin-react": "^5.0.4",
+    "@vitejs/plugin-react": "^5.1.1",
     "autoprefixer": "^10.4.21",
     "eslint": "^9.38.0",
     "eslint-plugin-import": "^2.32.0",
@@ -65,7 +65,7 @@
     "@reduxjs/toolkit": "^2.9.0",
     "axios": "^1.13.2",
     "framer-motion": "^12.23.24",
-    "lucide-react": "^0.553.0",
+    "lucide-react": "^0.554.0",
     "radix-ui": "^1.4.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
