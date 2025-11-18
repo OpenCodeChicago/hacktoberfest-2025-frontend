@@ -3,8 +3,8 @@ import BestOfCoreX from '../../components/BestOfCoreX/BestOfCoreX';
 import FeaturedProductImage from '../../components/NewProductsBanner/NewProductsBanner';
 import SupplementForGoalsSection from '../../components/SupplementForGoalsSection/SupplementForGoalsSection';
 import {
-  CollectionSection,
   HeroSection,
+  CollectionSection,
   LogoCarousel,
   SEO,
   WhyChoose,
@@ -28,7 +28,7 @@ export default function Home() {
 
       <main
         id="main-content"
-        className="min-h-screen bg-[#F7FAFF] flex flex-col gap-[96px]"
+        className="min-h-screen overflow-hidden bg-[#F7FAFF] flex flex-col gap-[96px]"
       >
         <HeroSection />
         <WhyChoose />

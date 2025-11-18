@@ -315,3 +315,10 @@ body {
   left: -10000px;
   top: auto;
 }
+
+/* Respect device safe-area insets and improve touch handling */
+.back-to-top-safearea {
+  right: calc(env(safe-area-inset-right, 0px) + 28px);
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+  touch-action: manipulation;
+}

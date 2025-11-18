@@ -1,5 +1,5 @@
-import { LinkButton, Slider } from './ui';
-import { useSliderAutoplay } from '../hooks/useSliderAutoplay';
+import { LinkButton, Slider } from '../ui';
+import { useSliderAutoplay } from '../../hooks/useSliderAutoplay';
 import { useState } from 'react';
 
 import {
@@ -19,7 +19,7 @@ import {
   heroJoinMob640,
   heroJoin1080,
   heroJoin1920,
-} from '../assets';
+} from '../../assets';
 
 const slides = [
   {

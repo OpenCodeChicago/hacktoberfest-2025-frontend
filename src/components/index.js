@@ -1,6 +1,6 @@
 export { default as App } from './App';
 export { default as CollectionSection } from './CollectionSection';
-export { default as HeroSection } from './HeroSection';
+export { default as HeroSection } from './Hero/HeroSection.jsx';
 export { default as LogoCarousel } from './LogoCarousel';
 export { default as SEO } from './SEO';
 export { default as WhyChoose } from './WhyChoose';
