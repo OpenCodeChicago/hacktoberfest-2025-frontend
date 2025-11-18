@@ -5,6 +5,8 @@ import { ArrowRight, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router';
 import { toast } from 'react-toastify';
 import SocialIcons from '../ui/SocialIcons/SocialIcons';
+// eslint-disable-next-line no-unused-vars
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 
 const customerCare = [
   { name: 'My Account', href: '/login' },
@@ -30,6 +32,16 @@ export default function TopFooter() {
   // Mobile accordion state — default to opened
   const [customerOpen, setCustomerOpen] = useState(true);
   const [infoOpen, setInfoOpen] = useState(true);
+  // framer motion variants
+  const listVariants = {
+    open: { transition: { staggerChildren: 0.06, delayChildren: 0.04 } },
+    closed: { transition: { staggerChildren: 0.02, staggerDirection: -1 } },
+  };
+  const itemVariants = {
+    open: { opacity: 1, y: 0 },
+    closed: { opacity: 0, y: 6 },
+  };
+  const shouldReduceMotion = useReducedMotion();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -89,7 +101,7 @@ export default function TopFooter() {
         {/* Navigation Links */}
         <nav className="grid md:grid-cols-2 md:gap-8 text-m border border-neutral-700 rounded-lg md:border-0 md:rounded-none">
           {/* Customer Care (accordion on mobile) */}
-          <div className="w-full flex flex-col gap-4 p-5">
+          <div className="w-full flex flex-col p-5">
             <button
               type="button"
               onClick={() => setCustomerOpen((s) => !s)}
@@ -107,9 +119,62 @@ export default function TopFooter() {
               />
             </button>
 
-            <ul
-              className={`${customerOpen ? 'block' : 'hidden'} md:block flex flex-col gap-2`}
-            >
+            {/* Mobile animated wrapper + staggered items */}
+            <div className="md:hidden">
+              <AnimatePresence initial={false}>
+                {customerOpen && (
+                  <motion.div
+                    key="customer-wrap"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={
+                      shouldReduceMotion
+                        ? { duration: 0 }
+                        : { duration: 0.36, ease: [0.2, 0.9, 0.2, 1] }
+                    }
+                    style={{ overflow: 'hidden' }}
+                    aria-hidden={!customerOpen}
+                  >
+                    <motion.ul
+                      initial="closed"
+                      animate="open"
+                      exit="closed"
+                      variants={listVariants}
+                      className="flex flex-col gap-2 mt-4 md:mt-0"
+                    >
+                      {customerCare.map((link) => (
+                        <motion.li key={link.name} variants={itemVariants}>
+                          {link.name === 'My Account' ? (
+                            <a
+                              href="#"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                if (isAuthenticated) navigate('/profile');
+                                else navigate('/login');
+                              }}
+                              className="text-neutral-300 link-underline transition"
+                            >
+                              {link.name}
+                            </a>
+                          ) : (
+                            <a
+                              href={link.href}
+                              className="text-neutral-300 link-underline transition"
+                            >
+                              {link.name}
+                            </a>
+                          )}
+                        </motion.li>
+                      ))}
+                    </motion.ul>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Desktop static list */}
+            <ul className="hidden md:block flex flex-col gap-2 md:mt-4">
               {customerCare.map((link) => (
                 <li key={link.name}>
                   {link.name === 'My Account' ? (
@@ -141,7 +206,7 @@ export default function TopFooter() {
           <div className="w-full md:hidden border-t border-neutral-700" />
 
           {/* Information (accordion on mobile) */}
-          <div className="w-full flex flex-col gap-4 p-5">
+          <div className="w-full flex flex-col  p-5">
             <button
               type="button"
               onClick={() => setInfoOpen((s) => !s)}
@@ -158,9 +223,48 @@ export default function TopFooter() {
               />
             </button>
 
-            <ul
-              className={`${infoOpen ? 'block' : 'hidden'} md:block flex flex-col gap-2 `}
-            >
+            {/* Mobile animated wrapper + staggered items */}
+            <div className="md:hidden">
+              <AnimatePresence initial={false}>
+                {infoOpen && (
+                  <motion.div
+                    key="info-wrap"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={
+                      shouldReduceMotion
+                        ? { duration: 0 }
+                        : { duration: 0.36, ease: [0.2, 0.9, 0.2, 1] }
+                    }
+                    style={{ overflow: 'hidden' }}
+                    aria-hidden={!infoOpen}
+                  >
+                    <motion.ul
+                      initial="closed"
+                      animate="open"
+                      exit="closed"
+                      variants={listVariants}
+                      className="flex flex-col gap-2 mt-4 md:mt-0"
+                    >
+                      {information.map((link) => (
+                        <motion.li key={link.name} variants={itemVariants}>
+                          <a
+                            href={link.href}
+                            className="text-neutral-300 link-underline transition"
+                          >
+                            {link.name}
+                          </a>
+                        </motion.li>
+                      ))}
+                    </motion.ul>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Desktop static list */}
+            <ul className="hidden md:block flex flex-col gap-2 md:mt-4">
               {information.map((link) => (
                 <li key={link.name}>
                   <a
