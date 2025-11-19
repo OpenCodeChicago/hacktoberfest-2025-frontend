@@ -16,50 +16,50 @@ export default function BottomFooter() {
       <div className="max-w-7xl mx-auto px-5 md:px-0 py-12 border-t border-neutral-800">
         <div className="flex flex-col md:flex-row items-center md:items-start md:justify-between">
           {/* Left block: copyright + powered by + links */}
-          <div className="flex-1">
-            <div className="mb-6 self-center">
-              <p className="text-xl md:text-xl leading-tight font-bold flex items-center gap-2">
+          <div className="w-full flex flex-col md:flex-row md:justify-between align-bottom md:flex-1 gap-12">
+            <div className="flex flex-col gap-2 justify-center md:justify-start self-center md:self-center">
+              <p className="text-m leading-tight font-bold flex items-center justify-center md:justify-start gap-2">
                 <FaRegCopyright /> {new Date().getFullYear()}{' '}
                 <span className="font-black">
                   Core<span className="text-red-500">X</span> Nutrition
                 </span>
               </p>
               {/* Replace p with a link that uses the animated underline */}
-              Powered by:{' '}
-              <span className="font-semibold">
+              <div className="flex items-center gap-2">
+                <p>Powered by: </p>
                 <a
                   href="https://opencodechicago.org"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="link-underline-inverse mt-2 inline-block text-base md:text-lg text-neutral-300"
+                  className="link-underline-inverse inline-block text-base text-neutral-300 font-semibold"
                 >
                   Open Code Chicago
                 </a>
-              </span>
+              </div>
             </div>
 
-            <div className="flex flex-wrap align-center gap-4 text-base text-neutral-300">
+            <div className="flex flex-wrap align-center gap-4 text-base text-neutral-300 self-center md:self-auto">
               <a
                 href="/return-policy"
-                className="link-underline text-[12px] md:text-sm"
+                className="link-underline text-[10px] md:text-[12px]"
               >
                 Refund policy
               </a>
               <a
                 href="/privacy-policy"
-                className="link-underline text-[12px] md:text-sm"
+                className="link-underline text-[10px] md:text-[12px]"
               >
                 Privacy policy
               </a>
               <a
                 href="/terms-of-service"
-                className="link-underline text-[12px] md:text-sm"
+                className="link-underline text-[10px] md:text-[12px]"
               >
                 Terms of service
               </a>
               <a
                 href="/shipping-policy"
-                className="link-underline text-[12px] md:text-sm"
+                className="link-underline text-[10px] md:text-[12px]"
               >
                 Shipping policy
               </a>

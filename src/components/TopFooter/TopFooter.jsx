@@ -76,211 +76,219 @@ export default function TopFooter() {
   };
 
   return (
-    <footer className="bg-neutral-900 text-neutral-200 px-5 md:px-0 py-12">
-      <div className="max-w-7xl mx-auto grid gap-12 md:grid-cols-3">
-        {/* Logo + Address */}
-        <div className="flex flex-col gap-[24px]">
-          <Link
-            to="/"
-            className="inline-block"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          >
-            <img
-              src="/icons/official-logo-core-x-footer.svg"
-              alt="CoreX"
-              className="w-32"
-            />
-          </Link>
-          <SocialIcons />
-          <address className="hover:underline cursor-pointer not-italic text-sm leading-relaxed">
-            1234 N Main St,
-            <br /> Chicago, IL 60607
-          </address>
-        </div>
-
-        {/* Navigation Links */}
-        <nav className="grid md:grid-cols-2 md:gap-8 text-m border border-neutral-700 rounded-lg md:border-0 md:rounded-none">
-          {/* Customer Care (accordion on mobile) */}
-          <div className="w-full flex flex-col p-5">
-            <button
-              type="button"
-              onClick={() => setCustomerOpen((s) => !s)}
-              aria-expanded={customerOpen}
-              className="w-full flex items-center justify-between md:justify-start gap-3 md:cursor-default"
+    <footer className="bg-neutral-900 text-neutral-200 px-5 md:px-0 py-12 ">
+      <div className="max-w-7xl mx-auto flex flex-col gap-12 md:flex-row">
+        <div className="flex flex-col md:flex-row gap-12 md:gap-2 justify-between md:w-[50%]">
+          {/* Logo + Address */}
+          <div className="flex flex-col gap-[24px]">
+            <Link
+              to="/"
+              className="inline-block"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
-              <h3 className="font-semibold text-white text-left">
-                Customer Care
-              </h3>
-              {/* chevron only visible on mobile */}
-              <ChevronDown
-                className={`md:hidden transition-transform duration-200 ${customerOpen ? 'rotate-180' : 'rotate-0'}`}
-                aria-hidden="true"
-                size={18}
+              <img
+                src="/icons/official-logo-core-x-footer.svg"
+                alt="CoreX"
+                className="w-32"
               />
-            </button>
+            </Link>
+            <SocialIcons />
+            <address className="hover:underline cursor-pointer not-italic text-m leading-relaxed">
+              <span className="md:block">1234 N Main St,</span>
+              <span className="md:block">Chicago, IL 60607</span>
+            </address>
+          </div>
 
-            {/* Mobile animated wrapper + staggered items */}
-            <div className="md:hidden">
-              <AnimatePresence initial={false}>
-                {customerOpen && (
-                  <motion.div
-                    key="customer-wrap"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={
-                      shouldReduceMotion
-                        ? { duration: 0 }
-                        : { duration: 0.36, ease: [0.2, 0.9, 0.2, 1] }
-                    }
-                    style={{ overflow: 'hidden' }}
-                    aria-hidden={!customerOpen}
-                  >
-                    <motion.ul
-                      initial="closed"
-                      animate="open"
-                      exit="closed"
-                      variants={listVariants}
-                      className="flex flex-col gap-2 mt-4 md:mt-0"
+          {/* Navigation Links */}
+          <nav className="grid md:grid-cols-2 md:gap-12 text-m border border-neutral-700 rounded-lg md:border-0 md:rounded-none">
+            {/* Customer Care (accordion on mobile) */}
+            <div className="w-full flex flex-col p-5 md:p-0">
+              <button
+                type="button"
+                onClick={() => setCustomerOpen((s) => !s)}
+                aria-expanded={customerOpen}
+                className="w-full flex items-center justify-between md:justify-start gap-3 md:cursor-default"
+              >
+                <h3 className="font-semibold text-white text-left">
+                  Customer Care
+                </h3>
+                {/* chevron only visible on mobile */}
+                <ChevronDown
+                  className={`md:hidden transition-transform duration-200 ${customerOpen ? 'rotate-180' : 'rotate-0'}`}
+                  aria-hidden="true"
+                  size={18}
+                />
+              </button>
+
+              {/* Mobile animated wrapper + staggered items */}
+              <div className="md:hidden">
+                <AnimatePresence initial={false}>
+                  {customerOpen && (
+                    <motion.div
+                      key="customer-wrap"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={
+                        shouldReduceMotion
+                          ? { duration: 0 }
+                          : { duration: 0.36, ease: [0.2, 0.9, 0.2, 1] }
+                      }
+                      style={{ overflow: 'hidden' }}
+                      aria-hidden={!customerOpen}
                     >
-                      {customerCare.map((link) => (
-                        <motion.li key={link.name} variants={itemVariants}>
-                          {link.name === 'My Account' ? (
-                            <a
-                              href="#"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                if (isAuthenticated) navigate('/profile');
-                                else navigate('/login');
-                              }}
-                              className="text-neutral-300 link-underline transition"
-                            >
-                              {link.name}
-                            </a>
-                          ) : (
+                      <motion.ul
+                        initial="closed"
+                        animate="open"
+                        exit="closed"
+                        variants={listVariants}
+                        className="flex flex-col gap-2 mt-4 md:mt-0"
+                      >
+                        {customerCare.map((link) => (
+                          <motion.li key={link.name} variants={itemVariants}>
+                            {link.name === 'My Account' ? (
+                              <a
+                                href="#"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  if (isAuthenticated) navigate('/profile');
+                                  else navigate('/login');
+                                }}
+                                className="text-neutral-300 link-underline transition"
+                              >
+                                {link.name}
+                              </a>
+                            ) : (
+                              <a
+                                href={link.href}
+                                className="text-neutral-300 link-underline transition"
+                              >
+                                {link.name}
+                              </a>
+                            )}
+                          </motion.li>
+                        ))}
+                      </motion.ul>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* Desktop static list */}
+              <ul className="hidden md:flex flex-col gap-2 md:mt-4">
+                {customerCare.map((link) => (
+                  <li key={link.name}>
+                    {link.name === 'My Account' ? (
+                      <a
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          if (isAuthenticated) navigate('/profile');
+                          else navigate('/login');
+                        }}
+                        className="text-neutral-300 link-underline transition"
+                      >
+                        {link.name}
+                      </a>
+                    ) : (
+                      <a
+                        href={link.href}
+                        className="text-neutral-300 link-underline transition"
+                      >
+                        {link.name}
+                      </a>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Divider between the two sections on mobile */}
+            <div className="w-full md:hidden border-t border-neutral-700" />
+
+            {/* Information (accordion on mobile) */}
+            <div className="w-full flex flex-col  p-5 md:p-0">
+              <button
+                type="button"
+                onClick={() => setInfoOpen((s) => !s)}
+                aria-expanded={infoOpen}
+                className="w-full flex items-center justify-between md:justify-start gap-3 md:cursor-default"
+              >
+                <h3 className="font-semibold text-white text-left">
+                  Information
+                </h3>
+                <ChevronDown
+                  className={`md:hidden transition-transform duration-200 ${infoOpen ? 'rotate-180' : 'rotate-0'}`}
+                  aria-hidden="true"
+                  size={18}
+                />
+              </button>
+
+              {/* Mobile animated wrapper + staggered items */}
+              <div className="md:hidden">
+                <AnimatePresence initial={false}>
+                  {infoOpen && (
+                    <motion.div
+                      key="info-wrap"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={
+                        shouldReduceMotion
+                          ? { duration: 0 }
+                          : { duration: 0.36, ease: [0.2, 0.9, 0.2, 1] }
+                      }
+                      style={{ overflow: 'hidden' }}
+                      aria-hidden={!infoOpen}
+                    >
+                      <motion.ul
+                        initial="closed"
+                        animate="open"
+                        exit="closed"
+                        variants={listVariants}
+                        className="flex flex-col gap-2 mt-4 md:mt-0"
+                      >
+                        {information.map((link) => (
+                          <motion.li key={link.name} variants={itemVariants}>
                             <a
                               href={link.href}
                               className="text-neutral-300 link-underline transition"
                             >
                               {link.name}
                             </a>
-                          )}
-                        </motion.li>
-                      ))}
-                    </motion.ul>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+                          </motion.li>
+                        ))}
+                      </motion.ul>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
 
-            {/* Desktop static list */}
-            <ul className="hidden md:block flex flex-col gap-2 md:mt-4">
-              {customerCare.map((link) => (
-                <li key={link.name}>
-                  {link.name === 'My Account' ? (
-                    <a
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        if (isAuthenticated) navigate('/profile');
-                        else navigate('/login');
-                      }}
-                      className="text-neutral-300 link-underline transition"
-                    >
-                      {link.name}
-                    </a>
-                  ) : (
+              {/* Desktop static list */}
+              <ul className="hidden md:flex flex-col gap-2 md:mt-4">
+                {information.map((link) => (
+                  <li key={link.name}>
                     <a
                       href={link.href}
                       className="text-neutral-300 link-underline transition"
                     >
                       {link.name}
                     </a>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Divider between the two sections on mobile */}
-          <div className="w-full md:hidden border-t border-neutral-700" />
-
-          {/* Information (accordion on mobile) */}
-          <div className="w-full flex flex-col  p-5">
-            <button
-              type="button"
-              onClick={() => setInfoOpen((s) => !s)}
-              aria-expanded={infoOpen}
-              className="w-full flex items-center justify-between md:justify-start gap-3 md:cursor-default"
-            >
-              <h3 className="font-semibold text-white text-left">
-                Information
-              </h3>
-              <ChevronDown
-                className={`md:hidden transition-transform duration-200 ${infoOpen ? 'rotate-180' : 'rotate-0'}`}
-                aria-hidden="true"
-                size={18}
-              />
-            </button>
-
-            {/* Mobile animated wrapper + staggered items */}
-            <div className="md:hidden">
-              <AnimatePresence initial={false}>
-                {infoOpen && (
-                  <motion.div
-                    key="info-wrap"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={
-                      shouldReduceMotion
-                        ? { duration: 0 }
-                        : { duration: 0.36, ease: [0.2, 0.9, 0.2, 1] }
-                    }
-                    style={{ overflow: 'hidden' }}
-                    aria-hidden={!infoOpen}
-                  >
-                    <motion.ul
-                      initial="closed"
-                      animate="open"
-                      exit="closed"
-                      variants={listVariants}
-                      className="flex flex-col gap-2 mt-4 md:mt-0"
-                    >
-                      {information.map((link) => (
-                        <motion.li key={link.name} variants={itemVariants}>
-                          <a
-                            href={link.href}
-                            className="text-neutral-300 link-underline transition"
-                          >
-                            {link.name}
-                          </a>
-                        </motion.li>
-                      ))}
-                    </motion.ul>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                  </li>
+                ))}
+              </ul>
             </div>
+          </nav>
+        </div>
 
-            {/* Desktop static list */}
-            <ul className="hidden md:block flex flex-col gap-2 md:mt-4">
-              {information.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-neutral-300 link-underline transition"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </nav>
+        {/* Vertical divider */}
+        <div className="hidden md:block w-px bg-neutral-700 mx-4" />
 
         {/* Newsletter Form */}
-        <form onSubmit={handleSubmit} className="flex flex-col justify-center">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col justify-center  md:px-16 md:w-[50%]"
+        >
           <h3 className="text-4xl uppercase font-bold mb-4">
             Get our latest deals and discounts!
           </h3>
