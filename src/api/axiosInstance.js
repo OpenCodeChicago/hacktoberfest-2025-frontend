@@ -65,9 +65,6 @@ axiosInstance.interceptors.response.use(
       error?.message === 'canceled';
 
     if (isCanceled) {
-      if (import.meta.env.DEV) {
-        console.debug('Request was canceled/aborted:', error?.message || error);
-      }
       return Promise.reject(error);
     }
 

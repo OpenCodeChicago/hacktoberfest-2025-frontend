@@ -43,8 +43,10 @@ if (!skip && hadSession) {
       }
     } catch (err) {
       // silent: user not logged in or session check failed
-      if (import.meta.env.DEV)
-        console.debug('Session check / refresh failed:', err?.message || err);
+      console.error(
+        'Session validation failed on startup:',
+        err?.message || err
+      );
     }
   })();
 }

@@ -33,6 +33,8 @@ export default defineConfig([
       },
     },
     rules: {
+      // disallow console.log in source; allow console.error and console.warn
+      'no-console': ['error', { allow: ['warn', 'error'] }],
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',

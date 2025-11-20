@@ -38,7 +38,7 @@ export default function BottomFooter() {
               </div>
             </div>
 
-            <div className="flex flex-wrap align-center gap-4 text-base text-neutral-300 self-center md:self-auto">
+            <div className="flex flex-wrap align-center gap-4 text-base text-neutral-300 self-center md:self-end">
               <a
                 href="/return-policy"
                 className="link-underline text-[10px] md:text-[12px]"

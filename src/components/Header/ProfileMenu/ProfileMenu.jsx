@@ -4,6 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import { User } from 'lucide-react';
 import { logout as logoutAction } from '../../../store/authSlice';
 import { authServices } from '../../../services/api';
+import { toast } from 'react-toastify';
+
+// small client-side sanitizer for server-provided messages (avoid rendering HTML / long traces)
+function sanitizeErrorMessage(message) {
+  if (typeof message !== 'string') return 'An error occurred';
+  return message
+    .replace(/<[^>]*>/g, '')
+    .replace(/[<>]/g, '')
+    .substring(0, 200);
+}
 
 function ProfileMenu() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -15,15 +25,19 @@ function ProfileMenu() {
   const handleLogout = useCallback(async () => {
     try {
       await authServices.logout();
-    } catch (e) {
-      if (import.meta.env.DEV)
-        console.debug('Logout request failed', e?.message || e);
+      toast.success('You have been logged out.');
+    } catch (err) {
+      const raw =
+        err?.response?.data?.message || err?.message || 'Logout failed';
+      const message = sanitizeErrorMessage(raw);
+      console.error('Logout request failed', message);
     } finally {
       try {
         localStorage.removeItem('hasSession');
-      } catch (err) {
-        if (import.meta.env.DEV)
-          console.debug('Failed to clear hasSession flag', err?.message || err);
+      } catch (storageErr) {
+        const rawStorage = storageErr?.message || storageErr;
+        const storageMsg = sanitizeErrorMessage(rawStorage);
+        console.error('Failed to clear hasSession flag', storageMsg);
       }
       dispatch(logoutAction());
       setUserMenuOpen(false);

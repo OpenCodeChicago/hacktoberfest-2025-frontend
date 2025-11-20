@@ -27,9 +27,7 @@ export const getCart = async () => {
  * @param {number} item.quantity - Quantity to add
  * @returns {Promise<Object>} Updated cart data
  */
-export const addToCart = async (item) => {
-  console.log('addToCart called with:', item);
-  
+export const addToCart = async () => {
   return {
     success: true,
     data: {},
@@ -42,8 +40,7 @@ export const addToCart = async (item) => {
  * @param {string|number} itemId - Cart item ID to remove
  * @returns {Promise<Object>} Updated cart data
  */
-export const removeFromCart = async (itemId) => {
-  console.log('removeFromCart called with itemId:', itemId);
+export const removeFromCart = async () => {
   
   return {
     success: true,
@@ -58,8 +55,7 @@ export const removeFromCart = async (itemId) => {
  * @param {number} quantity - New quantity
  * @returns {Promise<Object>} Updated cart data
  */
-export const updateCartItemQuantity = async (itemId, quantity) => {
-  console.log('updateCartItemQuantity called with:', { itemId, quantity });
+export const updateCartItemQuantity = async () => {
   
   return {
     success: true,

@@ -95,8 +95,6 @@ const Login = () => {
       }
       // show success toast (ToastContainer is global)
       toast.success(`Welcome back${user?.name ? `, ${user.name}` : ''}!`);
-      if (import.meta.env.DEV)
-        console.debug('loginSuccess dispatched:', { user, token });
       navigate('/');
     } catch (err) {
       const raw = err?.response?.data?.message || err.message || 'Login failed';

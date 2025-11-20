@@ -14,17 +14,14 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addToCart: (state, action) => {
+    addToCart: () => {
       // TODO: Implement add to cart functionality
-      console.log('Add to cart:', action.payload);
     },
-    removeFromCart: (state, action) => {
+    removeFromCart: () => {
       // TODO: Implement remove from cart functionality
-      console.log('Remove from cart:', action.payload);
     },
-    updateQuantity: (state, action) => {
+    updateQuantity: () => {
       // TODO: Implement update quantity functionality
-      console.log('Update quantity:', action.payload);
     },
     clearCart: (state) => {
       // TODO: Implement clear cart functionality

@@ -1,15 +1,49 @@
-import React from 'react';
+import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
-import { logout } from '../../store/authSlice';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { logout as logoutAction } from '../../store/authSlice';
+import { authServices } from '../../services/api';
 import { getDisplayName, getDisplayEmail } from '../../utils/authHelpers';
+
+// small client-side sanitizer for server-provided messages (avoid rendering HTML / long traces)
+function sanitizeErrorMessage(message) {
+  if (typeof message !== 'string') return 'An error occurred';
+  return message
+    .replace(/<[^>]*>/g, '')
+    .replace(/[<>]/g, '')
+    .substring(0, 200);
+}
 
 const UserProfile = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user) || null;
   const name = getDisplayName(user);
   const email = getDisplayEmail(user);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+  const handleLogout = useCallback(async () => {
+    try {
+      await authServices.logout();
+      toast.success('You have been logged out.');
+    } catch (err) {
+      const raw =
+        err?.response?.data?.message || err?.message || 'Logout failed';
+      const message = sanitizeErrorMessage(raw);
+      console.error('Logout request failed', message);
+    } finally {
+      try {
+        localStorage.removeItem('hasSession');
+      } catch (storageErr) {
+        const rawStorage = storageErr?.message || storageErr;
+        const storageMsg = sanitizeErrorMessage(rawStorage);
+        console.error('Failed to clear hasSession flag', storageMsg);
+      }
+      dispatch(logoutAction());
+      navigate('/');
+    }
+  }, [dispatch, navigate]);
 
   // redirect if not authenticated
   if (!isAuthenticated) return <Navigate to="/login" replace />;
@@ -20,9 +54,7 @@ const UserProfile = () => {
         <h1 className="text-xl font-[600] font-inter">Profile</h1>
         <button
           className=" px-6 sm:px-15 py-1 sm:py-2 border border-gray-300 bg-[#f8f9fa] rounded-xl cursor-pointer hover:bg-[#f1f3f5] transition-all duration-300"
-          onClick={() => {
-            dispatch(logout());
-          }}
+          onClick={handleLogout}
         >
           Logout
         </button>
