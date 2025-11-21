@@ -1,23 +1,15 @@
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { Link, useNavigate } from 'react-router-dom';
-import { Eye, EyeOff } from 'lucide-react';
-import { useDispatch, useSelector } from 'react-redux';
-import { authServices } from '../../services/api';
-import { loginStart, loginSuccess, loginFailure } from '../../store/authSlice';
-import { extractToken, normalizeUser } from '../../utils/authHelpers';
 import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
 import { toast } from 'react-toastify';
-
-// sanitize server error messages for UI
-const sanitizeErrorMessage = (message) => {
-  if (typeof message !== 'string') return 'An error occurred';
-  return message
-    .replace(/<[^>]*>/g, '')
-    .replace(/[<>]/g, '')
-    .substring(0, 200);
-};
+import { Eye, EyeOff } from 'lucide-react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { authServices } from '../../services/api';
+import { extractToken, normalizeUser } from '../../utils/authHelpers';
+import { sanitizeErrorMessage } from '../../utils/sanitize';
+import { loginStart, loginSuccess, loginFailure } from '../../store/authSlice';
 
 // Validation schema
 const loginSchema = yup.object({
@@ -97,8 +89,18 @@ const Login = () => {
       toast.success(`Welcome back${user?.name ? `, ${user.name}` : ''}!`);
       navigate('/');
     } catch (err) {
-      const raw = err?.response?.data?.message || err.message || 'Login failed';
-      const message = sanitizeErrorMessage(raw);
+      const status = err?.response?.status;
+      const serverMsg = err?.response?.data?.message;
+
+      let message;
+      if (status === 429) {
+        message = 'Too many attempts. Please wait a minute and try again.';
+      } else if (serverMsg && typeof serverMsg === 'string') {
+        message = sanitizeErrorMessage(serverMsg);
+      } else {
+        message = sanitizeErrorMessage(err?.message || 'Login failed');
+      }
+
       dispatch(loginFailure(message));
       setError('password', { type: 'server', message });
       toast.error(message);

@@ -1,19 +1,10 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { logout as logoutAction } from '../../store/authSlice';
 import { authServices } from '../../services/api';
 import { getDisplayName, getDisplayEmail } from '../../utils/authHelpers';
-
-// small client-side sanitizer for server-provided messages (avoid rendering HTML / long traces)
-function sanitizeErrorMessage(message) {
-  if (typeof message !== 'string') return 'An error occurred';
-  return message
-    .replace(/<[^>]*>/g, '')
-    .replace(/[<>]/g, '')
-    .substring(0, 200);
-}
 
 const UserProfile = () => {
   const dispatch = useDispatch();
@@ -21,7 +12,6 @@ const UserProfile = () => {
   const user = useSelector((state) => state.auth.user) || null;
   const name = getDisplayName(user);
   const email = getDisplayEmail(user);
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   const handleLogout = useCallback(async () => {
     try {
@@ -30,23 +20,18 @@ const UserProfile = () => {
     } catch (err) {
       const raw =
         err?.response?.data?.message || err?.message || 'Logout failed';
-      const message = sanitizeErrorMessage(raw);
-      console.error('Logout request failed', message);
+      console.error('Logout request failed', raw);
     } finally {
       try {
         localStorage.removeItem('hasSession');
       } catch (storageErr) {
         const rawStorage = storageErr?.message || storageErr;
-        const storageMsg = sanitizeErrorMessage(rawStorage);
-        console.error('Failed to clear hasSession flag', storageMsg);
+        console.error('Failed to clear hasSession flag', rawStorage);
       }
       dispatch(logoutAction());
       navigate('/');
     }
   }, [dispatch, navigate]);
-
-  // redirect if not authenticated
-  if (!isAuthenticated) return <Navigate to="/login" replace />;
 
   return (
     <div className=" w-full min-h-screen flex flex-col items-center justify-normal gap-y-10 py-8 px-5 md:px-32  ">

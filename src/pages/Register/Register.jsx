@@ -14,15 +14,7 @@ import {
   registerFailure,
 } from '../../store/authSlice';
 import { extractToken, normalizeUser } from '../../utils/authHelpers';
-
-// sanitize server error messages for UI
-const sanitizeErrorMessage = (message) => {
-  if (typeof message !== 'string') return 'An error occurred';
-  return message
-    .replace(/<[^>]*>/g, '')
-    .replace(/[<>]/g, '')
-    .substring(0, 200);
-};
+import { sanitizeErrorMessage } from '../../utils/sanitize';
 
 // Allow unicode letters, marks, spaces and common name punctuation
 const nameRegex = /^[\p{L}\p{M}'\-. ]+$/u;
@@ -166,9 +158,23 @@ const Register = () => {
       // small delay so user sees toast before route change (optional if ToastContainer is global)
       navigate('/');
     } catch (err) {
-      const rawMessage =
-        err?.response?.data?.message || err.message || 'Registration failed';
-      const message = sanitizeErrorMessage(rawMessage);
+      const status = err?.response?.status;
+      const serverMsg = err?.response?.data?.message;
+
+      let message;
+      if (serverMsg && typeof serverMsg === 'string' && serverMsg.trim()) {
+        message = sanitizeErrorMessage(serverMsg);
+      } else if (status === 429) {
+        message = 'Too many requests. Please wait a moment and try again.';
+      } else if (status === 409) {
+        message = 'An account with this email already exists.';
+      } else if (status >= 500) {
+        message = 'Server error. Please try again later.';
+      } else {
+        message = sanitizeErrorMessage(err?.message || 'Registration failed');
+      }
+
+      if (import.meta.env.DEV) console.error('Register error (raw):', err);
       dispatch(registerFailure(message));
       setError('email', { type: 'server', message });
       toast.error(message);
