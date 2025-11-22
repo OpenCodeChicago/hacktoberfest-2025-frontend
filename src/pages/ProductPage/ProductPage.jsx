@@ -68,7 +68,7 @@ export default function ProductPage() {
       <main className="max-w-6xl mx-auto px-5 md:px-0 py-6 pb-[64px] flex flex-col gap-[96px]">
         <section className="flex flex-col md:flex-row w-full md:align-center mt-4 md:max-w-[70vw] gap-8">
           {/* Left side section */}
-          <div className="Left-side flex-4 images-section">
+          <div className="Left-side flex-4 images-section ">
             {/* Hero Image section */}
             <div className="hero-image-container relative  flex flex-row items-center justify-between ">
               {/* Previous Image */}
@@ -80,9 +80,9 @@ export default function ProductPage() {
                 <img src="/icons/left-arrow.svg" alt="Previous" />
               </button>
               {/* Hero Image */}
-              <div className="relative flex w-[400px] shadow-sm ">
+              <div className="relative flex w-[400px] h-[400px] shadow-sm rounded-md">
                 <img
-                  className="object-cover "
+                  className="object-cover rounded-md w-full h-full"
                   src={
                     product.imageUrl ||
                     product.image ||
@@ -90,7 +90,7 @@ export default function ProductPage() {
                   }
                   alt={product.name}
                 />
-                <h3 className="absolute top-0 right-0 bg-blue-500 text-white text-xs font-medium py-1 px-2 ">
+                <h3 className="absolute top-3 right-3 bg-blue-500 text-white text-xs font-medium py-1 px-2 select-none rounded-md">
                   B1G1 50% OFF
                 </h3>
               </div>

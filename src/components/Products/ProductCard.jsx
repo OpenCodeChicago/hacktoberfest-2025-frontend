@@ -115,12 +115,12 @@ const ProductCard = forwardRef(
           {/* Badges for NEW and SALE */}
           <div className="absolute top-3 left-3 z-10 flex flex-col gap-2">
             {product.isNew && (
-              <span className="bg-green-500 text-white text-xs font-bold px-4 py-1 rounded-md">
+              <span className="border border-green-500 bg-green-100 text-green-500 text-xs font-bold px-4 py-1 rounded-md">
                 NEW
               </span>
             )}
             {product.onSale && product.salePercentage > 0 && (
-              <span className="bg-red-500 text-white text-xs font-bold px-4 py-1 rounded-md">
+              <span className="border border-red-500 bg-red-100 text-red-500 text-xs font-bold px-4 py-1 rounded-md">
                 -{product.salePercentage}%
               </span>
             )}
