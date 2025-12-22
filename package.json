@@ -67,7 +67,7 @@
     "axios": "^1.13.2",
     "dompurify": "^3.3.0",
     "framer-motion": "^12.23.25",
-    "lucide-react": "^0.555.0",
+    "lucide-react": "^0.562.0",
     "radix-ui": "^1.4.3",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
