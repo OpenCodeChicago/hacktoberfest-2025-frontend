@@ -66,7 +66,7 @@
     "@sentry/react": "^10.32.1",
     "axios": "^1.13.2",
     "dompurify": "^3.3.0",
-    "framer-motion": "^12.24.0",
+    "framer-motion": "^12.27.1",
     "lucide-react": "^0.562.0",
     "radix-ui": "^1.4.3",
     "react": "^19.2.3",
