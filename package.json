@@ -64,7 +64,7 @@
     "@hookform/resolvers": "^5.2.2",
     "@reduxjs/toolkit": "^2.11.2",
     "@sentry/react": "^10.35.0",
-    "axios": "^1.13.2",
+    "axios": "^1.13.5",
     "dompurify": "^3.3.0",
     "framer-motion": "^12.27.1",
     "lucide-react": "^0.562.0",
