@@ -94,7 +94,7 @@ export default function TopFooter() {
             </Link>
             <SocialIcons />
             <address className="hover:underline cursor-pointer not-italic text-m leading-relaxed">
-              <span className="md:block">1234 N Main St,</span>
+              <span className="md:block">1234 N Main St, </span>
               <span className="md:block">Chicago, IL 60607</span>
             </address>
           </div>
