@@ -65,7 +65,7 @@
     "@reduxjs/toolkit": "^2.11.2",
     "@sentry/react": "^10.39.0",
     "axios": "^1.13.5",
-    "dompurify": "^3.3.0",
+    "dompurify": "^3.3.2",
     "framer-motion": "^12.34.4",
     "lucide-react": "^0.575.0",
     "radix-ui": "^1.4.3",
