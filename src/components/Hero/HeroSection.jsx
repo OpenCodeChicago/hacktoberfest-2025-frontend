@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { LinkButton, Slider } from '../ui';
 import { useSliderAutoplay } from '../../hooks/useSliderAutoplay';
 import heroSlides from './heroSlides';
@@ -7,12 +7,17 @@ function HeroSection() {
   const sliderRef = useSliderAutoplay(8000);
   const [activeSlide, setActiveSlide] = useState(0);
 
+  const handleSlideChange = useCallback((_, next) => setActiveSlide(next), []);
+
   return (
     <section
       className="hero-section overflow-hidden"
       aria-label="Hero carousel"
       id="hero-section"
     >
+      <span className="sr-only" aria-live="polite" aria-atomic="true">
+        Slide {activeSlide + 1} of {heroSlides.length}
+      </span>
       <Slider
         ref={sliderRef}
         className="hero-slider h-full"
@@ -22,7 +27,7 @@ function HeroSection() {
         dots
         arrows={false}
         infinite
-        beforeChange={(current, next) => setActiveSlide(next)}
+        beforeChange={handleSlideChange}
       >
         {heroSlides.map((slide, index) => (
           <div key={slide.id} className="relative w-full h-full">
