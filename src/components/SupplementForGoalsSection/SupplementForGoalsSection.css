@@ -45,8 +45,12 @@
   }
 
   .card-elevate {
-    will-change: box-shadow;
     transition: box-shadow 0.28s ease;
+  }
+
+  .card-elevate:hover,
+  .card-elevate:focus-visible {
+    will-change: box-shadow;
   }
 
   .card-inner {
@@ -75,6 +79,8 @@
   @media (prefers-reduced-motion: reduce) {
     .animate-fadeInUp {
       animation: none !important;
+      opacity: 1;
+      transform: none;
     }
 
     .card-elevate {
