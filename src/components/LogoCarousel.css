@@ -36,8 +36,10 @@
 }
 
 .carousel-track {
+  --item-width: 250px;
+  --item-count: 14; /* 7 logos × 2 for infinite loop */
   display: flex;
-  width: calc(250px * 14);
+  width: calc(var(--item-width) * var(--item-count));
   will-change: transform;
 }
 
@@ -81,4 +83,11 @@
 .logo-image {
   height: 100%;
   width: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track-forward,
+  .track-reverse {
+    animation: none;
+  }
 }
