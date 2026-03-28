@@ -1,43 +1,17 @@
-// src/components/BestOfCoreX.jsx
 import { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCollectionById } from '../../store/CollectionSlice';
 import ProductCard from '../Products/ProductCard';
+import { ChevronLeftIcon, ChevronRightIcon } from '../ui/ChevronIcons';
 
-// Reused Chevron icons (same as RecentlyViewed)
-const ChevronLeftIcon = (props) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
-    {...props}
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M15.75 19.5L8.25 12l7.5-7.5"
-    />
-  </svg>
-);
+const ITEMS_PER_PAGE = 3;
 
-const ChevronRightIcon = (props) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
-    {...props}
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M8.25 4.5l7.5 7.5-7.5 7.5"
-    />
-  </svg>
-);
+const tabs = [
+  { id: 'best-sellers', label: 'BEST SELLERS' },
+  { id: 'protein-powder', label: 'PROTEIN POWDER' },
+  { id: 'weight-management', label: 'WEIGHT MANAGEMENT' },
+  { id: 'health-wellness', label: 'HEALTH & WELLNESS SUPPLEMENTS' },
+];
 
 export default function BestOfCoreX() {
   const dispatch = useDispatch();
@@ -47,44 +21,30 @@ export default function BestOfCoreX() {
 
   const [activeTab, setActiveTab] = useState('best-sellers');
   const [currentIndex, setCurrentIndex] = useState(0);
-  const itemsPerPage = 3;
 
-  const tabs = [
-    { id: 'best-sellers', label: 'BEST SELLERS' },
-    { id: 'protein-powder', label: 'PROTEIN POWDER' },
-    { id: 'weight-management', label: 'WEIGHT MANAGEMENT' },
-    { id: 'health-wellness', label: 'HEALTH & WELLNESS SUPPLEMENTS' },
-  ];
-
-  // Fetch products for active tab
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await dispatch(fetchCollectionById(activeTab)).unwrap();
-        setCurrentIndex(0);
-      } catch (err) {
-        console.error('Error fetching collection:', err);
-      }
-    };
-    fetchData();
+    const promise = dispatch(fetchCollectionById(activeTab));
+    promise
+      .unwrap()
+      .then(() => setCurrentIndex(0))
+      .catch(() => {});
+    return () => promise.abort();
   }, [dispatch, activeTab]);
 
-  // Pagination controls (copied from RecentlyViewed)
   const nextSlide = useCallback(() => {
-    const maxStartIndex = Math.max(0, products.length - itemsPerPage);
-    setCurrentIndex((prev) => Math.min(prev + itemsPerPage, maxStartIndex));
+    const maxStartIndex = Math.max(0, products.length - ITEMS_PER_PAGE);
+    setCurrentIndex((prev) => Math.min(prev + ITEMS_PER_PAGE, maxStartIndex));
   }, [products.length]);
 
   const prevSlide = useCallback(() => {
-    setCurrentIndex((prev) => Math.max(prev - itemsPerPage, 0));
+    setCurrentIndex((prev) => Math.max(prev - ITEMS_PER_PAGE, 0));
   }, []);
 
-  const canGoNext = currentIndex < products.length - itemsPerPage;
+  const canGoNext = currentIndex < products.length - ITEMS_PER_PAGE;
   const canGoPrev = currentIndex > 0;
-
   const visibleProducts = products.slice(
     currentIndex,
-    currentIndex + itemsPerPage
+    currentIndex + ITEMS_PER_PAGE
   );
 
   if (error) {
@@ -108,13 +68,18 @@ export default function BestOfCoreX() {
         <span className="text-[#000]"> Nutrition</span>
       </h2>
 
-      {/* Tabs + Navigation in same row */}
-      <div className="flex flex-wrap justify-between items-center  sm:gap-4">
-        {/* Tabs: horizontally scrollable on mobile, hidden scrollbar */}
-        <div className="tabs-scroll-container sm:mx-0 sm:px-0 overflow-x-auto whitespace-nowrap snap-x snap-mandatory sm:overflow-visible flex gap-3">
+      {/* Tabs + Navigation */}
+      <div className="flex flex-wrap justify-between items-center sm:gap-4">
+        <div
+          role="tablist"
+          aria-label="Product categories"
+          className="tabs-scroll-container sm:mx-0 sm:px-0 overflow-x-auto whitespace-nowrap snap-x snap-mandatory sm:overflow-visible flex gap-3"
+        >
           {tabs.map((tab) => (
             <button
               key={tab.id}
+              role="tab"
+              aria-selected={activeTab === tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={`px-4 md:px-5 py-2 md:py-3 rounded-lg uppercase text-[12px] md:text-[16px] cursor-pointer tracking-wide transition-all duration-300
                 ${
@@ -128,8 +93,7 @@ export default function BestOfCoreX() {
           ))}
         </div>
 
-        {/* Navigation Buttons (inline beside tabs) */}
-        {products.length > itemsPerPage && (
+        {products.length > ITEMS_PER_PAGE && (
           <div className="hidden sm:flex items-center gap-3 ml-auto">
             <button
               onClick={prevSlide}
@@ -166,7 +130,6 @@ export default function BestOfCoreX() {
         </div>
       ) : (
         <div className="transition-all duration-500 ease-in-out">
-          {/* Product Grid (reused RecentlyViewed style) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {visibleProducts.map((product) => (
               <div key={product._id || product.id} className="opacity-100">

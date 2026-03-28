@@ -62,7 +62,9 @@ const collectionSlice = createSlice({
       })
       .addCase(fetchCollectionById.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload || 'An error occurred';
+        if (!action.meta.aborted) {
+          state.error = action.payload || 'An error occurred';
+        }
       });
   },
 });

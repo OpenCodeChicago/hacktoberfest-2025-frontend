@@ -4,41 +4,7 @@ import {
   getRecentlyViewed,
   getRecentlyViewedOnSale,
 } from '../utils/recentlyViewed';
-
-// SVG component for the navigation arrows
-const ChevronLeftIcon = (props) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
-    {...props}
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M15.75 19.5L8.25 12l7.5-7.5"
-    />
-  </svg>
-);
-
-const ChevronRightIcon = (props) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
-    {...props}
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M8.25 4.5l7.5 7.5-7.5 7.5"
-    />
-  </svg>
-);
+import { ChevronLeftIcon, ChevronRightIcon } from './ui/ChevronIcons';
 
 export default function RecentlyViewed({ saleOnly = false }) {
   const [items] = useState(() =>
