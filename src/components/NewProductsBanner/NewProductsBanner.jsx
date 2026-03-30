@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export default function FeaturedProductImage({
+export default function NewProductsBanner({
   productId = '',
   imageUrl = '',
   imageMobileUrl = '',
@@ -10,28 +10,23 @@ export default function FeaturedProductImage({
   onLoad,
   onError,
 }) {
-  // in-case src is empty during first render, use placeholder so image element always has a src
+  // Fall back to placeholder so the image element always has a src on first render
   const finalSrc = imageUrl || placeholder;
 
   return (
-    <section>
-      <Link
-        to={`/products/${productId}`}
-        aria-label={`View product ${alt}`}
-        className={`group w-full ${className}`}
-      >
+    <section aria-label={alt}>
+      <Link to={`/products/${productId}`} className={`w-full ${className}`}>
         <picture>
           {imageMobileUrl && (
             <source srcSet={imageMobileUrl} media="(max-width: 767px)" />
           )}
-          <source srcSet={imageUrl} />
           <img
             src={finalSrc}
             alt={alt}
             loading="lazy"
             onLoad={onLoad}
             onError={onError}
-            className="w-full h-full object-contain cursor-pointer block"
+            className="w-full h-full object-contain block"
           />
         </picture>
       </Link>

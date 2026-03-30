@@ -1,6 +1,6 @@
 import ReviewsSection from '../../components/ReviewsSection';
 import BestOfCoreX from '../../components/BestOfCoreX/BestOfCoreX';
-import FeaturedProductImage from '../../components/NewProductsBanner/NewProductsBanner';
+import NewProductsBanner from '../../components/NewProductsBanner/NewProductsBanner';
 import SupplementForGoalsSection from '../../components/SupplementForGoalsSection/SupplementForGoalsSection';
 import {
   HeroSection,
@@ -35,7 +35,7 @@ export default function Home() {
         <SupplementForGoalsSection />
         <LogoCarousel />
         <BestOfCoreX />
-        <FeaturedProductImage
+        <NewProductsBanner
           imageUrl="/images/promo-banner.jpg"
           imageMobileUrl="/images/promo-banner-mobile.jpg"
           productId="690b8692a60e83c734939790"
