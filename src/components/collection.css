@@ -1,9 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
-
 /* Shop by Collection Section */
 .shop-by-collection {
-  padding: 0;
   margin: 0 auto;
   background-color: var(--color-white-back);
   padding: 0 85px;
@@ -21,11 +17,14 @@
 
 /* Collection Card */
 .collection-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
   cursor: pointer;
   border-radius: 16px;
   overflow: hidden;
   background: #fff;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
   opacity: 0;
   transform: translateY(30px);
 }
@@ -122,15 +121,17 @@
   }
 }
 
-/* Animation for scroll entrance */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  to {
+/* Reduced motion: cards must not stay permanently invisible */
+@media (prefers-reduced-motion: reduce) {
+  .collection-card {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
+    transition: none !important;
+  }
+  .collection-image {
+    transition: none !important;
+  }
+  .collection-arrow {
+    transition: none !important;
   }
 }

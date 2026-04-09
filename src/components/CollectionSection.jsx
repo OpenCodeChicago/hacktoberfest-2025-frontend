@@ -1,68 +1,40 @@
 import { useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import preWorkoutImg from '/images/pre-workout.png';
-import buildMuscleImg from '/images/build-muscle.png';
-import weightManagementImg from '/images/weight-management.png';
-import healthWellnessImg from '/images/health-wellness.png';
+import { Link } from 'react-router-dom';
+import { collections } from './collectionsData';
 import './collection.css';
 
-export const collections = [
-  { id: 'pre-workout', title: 'PRE-WORKOUT', image: preWorkoutImg },
-  { id: 'build-muscle', title: 'BUILD MUSCLE', image: buildMuscleImg },
-  {
-    id: 'weight-management',
-    title: 'WEIGHT MANAGEMENT',
-    image: weightManagementImg,
-  },
-  {
-    id: 'health-wellness',
-    title: 'HEALTH & WELLNESS SUPPLEMENTS',
-    image: healthWellnessImg,
-  },
-];
-
 const CollectionSection = () => {
-  const navigate = useNavigate();
-  const cardsRef = useRef([]);
+  const sectionRef = useRef(null);
 
   useEffect(() => {
+    const cards = Array.from(
+      sectionRef.current?.querySelectorAll('.collection-card') ?? []
+    );
+    if (!cards.length) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry, index) => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            const el = entry.target;
+            const index = parseInt(el.dataset.index, 10) || 0;
             setTimeout(() => {
-              entry.target.classList.add('collection-card-visible');
+              el.classList.add('collection-card-visible');
             }, index * 150);
+            observer.unobserve(el);
           }
         });
       },
       { threshold: 0.1 }
     );
 
-    // Capture the current ref value
-    const currentCards = cardsRef.current;
+    cards.forEach((card) => observer.observe(card));
 
-    currentCards.forEach((card) => {
-      if (card) observer.observe(card);
-    });
-
-    return () => {
-      // Use the captured value in cleanup
-      currentCards.forEach((card) => {
-        if (card) observer.unobserve(card);
-      });
-      observer.disconnect();
-    };
+    return () => observer.disconnect();
   }, []);
 
-  const handleCardClick = (collection) => {
-    navigate(`/collections/${encodeURIComponent(collection.id)}`, {
-      state: { imageUrl: collection.image },
-    });
-  };
-
   return (
-    <section className="shop-by-collection ">
+    <section className="shop-by-collection" ref={sectionRef}>
       <h2 className="section-title text-[32px] lg:text-[48px]">
         <span className="text-[#000]">SHOP </span>
         <span className="stroke-title">BY </span>
@@ -71,11 +43,12 @@ const CollectionSection = () => {
 
       <div className="collection-grid">
         {collections.map((collection, index) => (
-          <div
+          <Link
             key={collection.id}
-            ref={(el) => (cardsRef.current[index] = el)}
+            to={`/collections/${encodeURIComponent(collection.id)}`}
+            state={{ imageUrl: collection.image }}
             className="collection-card"
-            onClick={() => handleCardClick(collection)}
+            data-index={index}
           >
             <div className="collection-image-wrapper">
               <img
@@ -93,6 +66,7 @@ const CollectionSection = () => {
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
               >
                 <path
                   d="M5 12H19M19 12L12 5M19 12L12 19"
@@ -103,7 +77,7 @@ const CollectionSection = () => {
                 />
               </svg>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>
