@@ -33,7 +33,7 @@ jobs:
 
       # Run Security Audit
       - name: Run npm audit
-        run: npm audit --audit-level=high
+        run: npm audit --audit-level=moderate
 
       # Build project
       - name: Build project
