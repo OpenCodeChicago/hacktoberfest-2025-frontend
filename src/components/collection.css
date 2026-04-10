@@ -82,7 +82,6 @@
 .collection-arrow {
   flex-shrink: 0;
   color: rgba(23, 23, 23, 1);
-  border: 1.71px;
   transition: transform 0.3s ease;
 }
 
