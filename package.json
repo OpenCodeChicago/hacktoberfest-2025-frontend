@@ -76,7 +76,7 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.14.1",
     "react-slick": "^0.31.0",
-    "react-toastify": "^11.0.5",
+    "react-toastify": "^11.1.0",
     "slick-carousel": "^1.8.1",
     "yup": "^1.7.1"
   }
