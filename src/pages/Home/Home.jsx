@@ -1,4 +1,4 @@
-import ReviewsSection from '../../components/ReviewsSection';
+import ReviewsSection from '../../components/Reviews';
 import BestOfCoreX from '../../components/BestOfCoreX/BestOfCoreX';
 import NewProductsBanner from '../../components/NewProductsBanner/NewProductsBanner';
 import SupplementForGoalsSection from '../../components/SupplementForGoalsSection/SupplementForGoalsSection';

@@ -1,8 +1,14 @@
-import ReactSlick from "react-slick";
+import ReactSlickImport from "react-slick";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Slider.css";
+
+// react-slick is a CommonJS package. Vite's Rolldown dep pre-bundler can hand
+// back the module's CJS `exports` object ({ __esModule, default }) instead of
+// the Slider class itself, which makes React throw "Element type is invalid".
+// Unwrap defensively so this works whether we get the object or the class.
+const ReactSlick = ReactSlickImport?.default ?? ReactSlickImport;
 
 export default function Slider({
     children,
