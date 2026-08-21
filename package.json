@@ -67,7 +67,7 @@
     "dompurify": "^3.4.13",
     "framer-motion": "^12.42.2",
     "lucide-react": "^0.577.0",
-    "radix-ui": "^1.6.4",
+    "radix-ui": "^1.6.7",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-helmet-async": "^3.0.0",
