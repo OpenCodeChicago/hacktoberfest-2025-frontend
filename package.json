@@ -62,7 +62,7 @@
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",
     "@reduxjs/toolkit": "^2.12.0",
-    "@sentry/react": "^10.70.0",
+    "@sentry/react": "^10.71.0",
     "axios": "^1.18.1",
     "dompurify": "^3.4.13",
     "framer-motion": "^12.43.0",
