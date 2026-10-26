@@ -60,7 +60,7 @@
     "vite": "^8.3.3"
   },
   "dependencies": {
-    "@hookform/resolvers": "^5.9.1",
+    "@hookform/resolvers": "^5.9.2",
     "@reduxjs/toolkit": "^2.12.0",
     "@sentry/react": "^10.76.1",
     "axios": "^1.18.1",
