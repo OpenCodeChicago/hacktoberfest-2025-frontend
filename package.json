@@ -57,7 +57,7 @@
     "postcss": "8.5.32",
     "prettier": "^3.9.9",
     "tailwindcss": "^4.3.1",
-    "vite": "^8.3.3"
+    "vite": "^8.3.5"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.2",
